@@ -1,0 +1,3069 @@
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"PortPSOC_swerve.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.InitCAN_swerve,"ax",%progbits
+  20              		.align	2
+  21              		.global	InitCAN_swerve
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	InitCAN_swerve, %function
+  25              	InitCAN_swerve:
+  26              	.LFB34:
+  27              		.file 1 "..\\CANLib\\PortFiles\\PortPSOC_swerve.c"
+   1:..\CANLib\PortFiles/PortPSOC_swerve.c **** /*
+   2:..\CANLib\PortFiles/PortPSOC_swerve.c ****  * Authors: Austin Chan
+   3:..\CANLib\PortFiles/PortPSOC_swerve.c ****  * Documentation: ClickUp
+   4:..\CANLib\PortFiles/PortPSOC_swerve.c ****  * 
+   5:..\CANLib\PortFiles/PortPSOC_swerve.c ****  * Port specific notes:
+   6:..\CANLib\PortFiles/PortPSOC_swerve.c ****  * Design must include a CAN block called CAN (not CAN0 or variation)
+   7:..\CANLib\PortFiles/PortPSOC_swerve.c ****  * Must auto generate code within PSoC IDE to use APIs
+   8:..\CANLib\PortFiles/PortPSOC_swerve.c ****  */
+   9:..\CANLib\PortFiles/PortPSOC_swerve.c **** #if CHIP_TYPE == CHIP_TYPE_PSOC_CY8C4248AZI_L485
+  10:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+  11:..\CANLib\PortFiles/PortPSOC_swerve.c **** #include "../Port_swerve.h"
+  12:..\CANLib\PortFiles/PortPSOC_swerve.c **** #include "project.h"
+  13:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  14:..\CANLib\PortFiles/PortPSOC_swerve.c **** //Flag internal to this port, 0xFF if no message waiting, doubles as mailbox number
+  15:..\CANLib\PortFiles/PortPSOC_swerve.c **** volatile uint8_t messagePresentFlag = 0xFF;
+  16:..\CANLib\PortFiles/PortPSOC_swerve.c **** volatile uint8_t messageReadFlag = 0x0;
+  17:..\CANLib\PortFiles/PortPSOC_swerve.c **** uint8_t FIFOSize(void);
+  18:..\CANLib\PortFiles/PortPSOC_swerve.c **** void countAddFIFO(void);
+  19:..\CANLib\PortFiles/PortPSOC_swerve.c **** void countRemoveFIFO(void);
+  20:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+  21:..\CANLib\PortFiles/PortPSOC_swerve.c **** #define FIFO_SIZE   16
+  22:..\CANLib\PortFiles/PortPSOC_swerve.c **** volatile CANPacket latestMessage[FIFO_SIZE];//internal to this port acts like a FIFO with 10 packet
+  23:..\CANLib\PortFiles/PortPSOC_swerve.c **** volatile uint8_t latestMessageHead = 0; //which index to read
+  24:..\CANLib\PortFiles/PortPSOC_swerve.c **** volatile uint8_t latestMessageTail = 0; //which index to write to next
+  25:..\CANLib\PortFiles/PortPSOC_swerve.c **** volatile uint8_t latestMessageFull = 0; //FIFO is full
+  26:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+  27:..\CANLib\PortFiles/PortPSOC_swerve.c **** #define STATUS_MAILBOX0 0x1
+  28:..\CANLib\PortFiles/PortPSOC_swerve.c **** #define STATUS_MAILBOX1 0x2
+  29:..\CANLib\PortFiles/PortPSOC_swerve.c **** #define STATUS_MAILBOX2 0x4
+  30:..\CANLib\PortFiles/PortPSOC_swerve.c **** #define STATUS_MAILBOX3 0x8
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 2
+
+
+  31:..\CANLib\PortFiles/PortPSOC_swerve.c **** #define STATUS_MAILBOX4 0x10
+  32:..\CANLib\PortFiles/PortPSOC_swerve.c **** #define STATUS_MAILBOX5 0x20
+  33:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+  34:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+  35:..\CANLib\PortFiles/PortPSOC_swerve.c **** CY_ISR_PROTO(CAN_FLAG_ISR);
+  36:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+  37:..\CANLib\PortFiles/PortPSOC_swerve.c **** int deviceAddressA;
+  38:..\CANLib\PortFiles/PortPSOC_swerve.c **** int deviceAddressB;
+  39:..\CANLib\PortFiles/PortPSOC_swerve.c **** int deviceGroup;
+  40:..\CANLib\PortFiles/PortPSOC_swerve.c **** CAN_RX_CFG rxMailbox;
+  41:..\CANLib\PortFiles/PortPSOC_swerve.c **** //Added two device addresses instead of 1 for simultaneous control of the two swerve motors
+  42:..\CANLib\PortFiles/PortPSOC_swerve.c **** void InitCAN_swerve(int deviceGroupInput, int deviceAddressInputA, int deviceAddressInputB)
+  43:..\CANLib\PortFiles/PortPSOC_swerve.c **** {
+  28              		.loc 1 43 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  34              		.cfi_def_cfa_offset 24
+  35              		.cfi_offset 3, -24
+  36              		.cfi_offset 4, -20
+  37              		.cfi_offset 5, -16
+  38              		.cfi_offset 6, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 4F46     		mov	r7, r9
+  42 0004 4646     		mov	r6, r8
+  43 0006 C0B4     		push	{r6, r7}
+  44              		.cfi_def_cfa_offset 32
+  45              		.cfi_offset 8, -32
+  46              		.cfi_offset 9, -28
+  47 0008 0400     		movs	r4, r0
+  48 000a 0E00     		movs	r6, r1
+  49 000c 1700     		movs	r7, r2
+  44:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_Start();//must name CAN Top Design block as "CAN"
+  50              		.loc 1 44 0
+  51 000e FFF7FEFF 		bl	CAN_Start
+  52              	.LVL1:
+  45:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  46:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //TODO: I'm sure there's a better way of doing this part
+  47:..\CANLib\PortFiles/PortPSOC_swerve.c ****     deviceGroup = deviceGroupInput & 0xF; // 4bits of ID
+  53              		.loc 1 47 0
+  54 0012 0F20     		movs	r0, #15
+  55 0014 2040     		ands	r0, r4
+  56 0016 354D     		ldr	r5, .L2
+  57 0018 2860     		str	r0, [r5]
+  48:..\CANLib\PortFiles/PortPSOC_swerve.c ****     deviceAddressA = deviceAddressInputA & (0x3f);//6bits of ID
+  58              		.loc 1 48 0
+  59 001a 3F23     		movs	r3, #63
+  60 001c 3100     		movs	r1, r6
+  61 001e 1940     		ands	r1, r3
+  62 0020 334A     		ldr	r2, .L2+4
+  63 0022 1160     		str	r1, [r2]
+  49:..\CANLib\PortFiles/PortPSOC_swerve.c ****     deviceAddressB = deviceAddressInputB & (0x3f);//6bits of ID
+  64              		.loc 1 49 0
+  65 0024 3B40     		ands	r3, r7
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 3
+
+
+  66 0026 334F     		ldr	r7, .L2+8
+  67              	.LVL2:
+  68 0028 3B60     		str	r3, [r7]
+  50:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  51:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //MOTOR 1 (DEVICE A) //////////////////////////////////////////////////////////////////////////
+  52:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //sets up inidvidual recieve mailbox (3rd priority mailbox)
+  53:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxmailbox = 0;
+  69              		.loc 1 53 0
+  70 002a 334C     		ldr	r4, .L2+12
+  71              	.LVL3:
+  72 002c 0026     		movs	r6, #0
+  73              	.LVL4:
+  74 002e 2670     		strb	r6, [r4]
+  54:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddressA)) << 21;  // first 11 bits are the CAN ID
+  75              		.loc 1 54 0
+  76 0030 8001     		lsls	r0, r0, #6
+  77 0032 0843     		orrs	r0, r1
+  78 0034 4005     		lsls	r0, r0, #21
+  79 0036 E060     		str	r0, [r4, #12]
+  55:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
+  80              		.loc 1 55 0
+  81 0038 304B     		ldr	r3, .L2+16
+  82 003a 9846     		mov	r8, r3
+  83 003c A360     		str	r3, [r4, #8]
+  56:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_0);//need to know what this is
+  84              		.loc 1 56 0
+  85 003e 304B     		ldr	r3, .L2+20
+  86 0040 1B68     		ldr	r3, [r3]
+  87 0042 6360     		str	r3, [r4, #4]
+  57:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_RxBufConfig(&rxMailbox);
+  88              		.loc 1 57 0
+  89 0044 2000     		movs	r0, r4
+  90 0046 FFF7FEFF 		bl	CAN_RxBufConfig
+  91              	.LVL5:
+  58:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  59:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //setup broadcast recieve mailbox (1st priority mailbox)
+  60:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxmailbox = 1;
+  92              		.loc 1 60 0
+  93 004a 0123     		movs	r3, #1
+  94 004c 2370     		strb	r3, [r4]
+  61:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxacr = ((0x0 << 6)|(0x0)) << 21; //0x20F<<21; // first 11 bits are the CAN ID that i
+  95              		.loc 1 61 0
+  96 004e E660     		str	r6, [r4, #12]
+  62:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
+  97              		.loc 1 62 0
+  98 0050 4346     		mov	r3, r8
+  99 0052 A360     		str	r3, [r4, #8]
+  63:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_1);//need to know what this is
+ 100              		.loc 1 63 0
+ 101 0054 2B4B     		ldr	r3, .L2+24
+ 102 0056 1B68     		ldr	r3, [r3]
+ 103 0058 6360     		str	r3, [r4, #4]
+  64:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_RxBufConfig(&rxMailbox);
+ 104              		.loc 1 64 0
+ 105 005a 2000     		movs	r0, r4
+ 106 005c FFF7FEFF 		bl	CAN_RxBufConfig
+ 107              	.LVL6:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 4
+
+
+  65:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  66:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //setup group broadcast recieve mailbox (2nd priority mailbox)
+  67:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxmailbox = 2;
+ 108              		.loc 1 67 0
+ 109 0060 0223     		movs	r3, #2
+ 110 0062 2370     		strb	r3, [r4]
+  68:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxacr = ((deviceGroup << 6)|(0x3F)) << 21; //0x20F<<21; // first 11 bits are the CAN 
+ 111              		.loc 1 68 0
+ 112 0064 2B68     		ldr	r3, [r5]
+ 113 0066 DB06     		lsls	r3, r3, #27
+ 114 0068 FC22     		movs	r2, #252
+ 115 006a D204     		lsls	r2, r2, #19
+ 116 006c 9146     		mov	r9, r2
+ 117 006e 1343     		orrs	r3, r2
+ 118 0070 E360     		str	r3, [r4, #12]
+  69:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
+ 119              		.loc 1 69 0
+ 120 0072 4346     		mov	r3, r8
+ 121 0074 A360     		str	r3, [r4, #8]
+  70:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_2);//need to know what this is
+ 122              		.loc 1 70 0
+ 123 0076 244B     		ldr	r3, .L2+28
+ 124 0078 1B68     		ldr	r3, [r3]
+ 125 007a 6360     		str	r3, [r4, #4]
+  71:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_RxBufConfig(&rxMailbox);
+ 126              		.loc 1 71 0
+ 127 007c 2000     		movs	r0, r4
+ 128 007e FFF7FEFF 		bl	CAN_RxBufConfig
+ 129              	.LVL7:
+  72:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  73:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //MOTOR 2 (DEVICE B) //////////////////////////////////////////////////////////////////////////
+  74:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxmailbox = 3;
+ 130              		.loc 1 74 0
+ 131 0082 0323     		movs	r3, #3
+ 132 0084 2370     		strb	r3, [r4]
+  75:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddressB)) << 21;  // first 11 bits are the CAN ID
+ 133              		.loc 1 75 0
+ 134 0086 2B68     		ldr	r3, [r5]
+ 135 0088 9A01     		lsls	r2, r3, #6
+ 136 008a 3B68     		ldr	r3, [r7]
+ 137 008c 1343     		orrs	r3, r2
+ 138 008e 5B05     		lsls	r3, r3, #21
+ 139 0090 E360     		str	r3, [r4, #12]
+  76:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
+ 140              		.loc 1 76 0
+ 141 0092 4346     		mov	r3, r8
+ 142 0094 A360     		str	r3, [r4, #8]
+  77:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_3);//need to know what this is
+ 143              		.loc 1 77 0
+ 144 0096 1D4B     		ldr	r3, .L2+32
+ 145 0098 1B68     		ldr	r3, [r3]
+ 146 009a 6360     		str	r3, [r4, #4]
+  78:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_RxBufConfig(&rxMailbox);
+ 147              		.loc 1 78 0
+ 148 009c 2000     		movs	r0, r4
+ 149 009e FFF7FEFF 		bl	CAN_RxBufConfig
+ 150              	.LVL8:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 5
+
+
+  79:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  80:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //setup broadcast recieve mailbox (1st priority mailbox)
+  81:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxmailbox = 4;
+ 151              		.loc 1 81 0
+ 152 00a2 0423     		movs	r3, #4
+ 153 00a4 2370     		strb	r3, [r4]
+  82:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxacr = ((0x0 << 6)|(0x0)) << 21; //0x20F<<21; // first 11 bits are the CAN ID that i
+ 154              		.loc 1 82 0
+ 155 00a6 E660     		str	r6, [r4, #12]
+  83:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
+ 156              		.loc 1 83 0
+ 157 00a8 4346     		mov	r3, r8
+ 158 00aa A360     		str	r3, [r4, #8]
+  84:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_4);//need to know what this is
+ 159              		.loc 1 84 0
+ 160 00ac 184B     		ldr	r3, .L2+36
+ 161 00ae 1B68     		ldr	r3, [r3]
+ 162 00b0 6360     		str	r3, [r4, #4]
+  85:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_RxBufConfig(&rxMailbox);
+ 163              		.loc 1 85 0
+ 164 00b2 2000     		movs	r0, r4
+ 165 00b4 FFF7FEFF 		bl	CAN_RxBufConfig
+ 166              	.LVL9:
+  86:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  87:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //setup group broadcast recieve mailbox (2nd priority mailbox)
+  88:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxmailbox = 5;
+ 167              		.loc 1 88 0
+ 168 00b8 0523     		movs	r3, #5
+ 169 00ba 2370     		strb	r3, [r4]
+  89:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxacr = ((deviceGroup << 6)|(0x3F)) << 21; //0x20F<<21; // first 11 bits are the CAN 
+ 170              		.loc 1 89 0
+ 171 00bc 2B68     		ldr	r3, [r5]
+ 172 00be DB06     		lsls	r3, r3, #27
+ 173 00c0 4A46     		mov	r2, r9
+ 174 00c2 1343     		orrs	r3, r2
+ 175 00c4 E360     		str	r3, [r4, #12]
+  90:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
+ 176              		.loc 1 90 0
+ 177 00c6 4346     		mov	r3, r8
+ 178 00c8 A360     		str	r3, [r4, #8]
+  91:..\CANLib\PortFiles/PortPSOC_swerve.c ****     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_5);//need to know what this is
+ 179              		.loc 1 91 0
+ 180 00ca 124B     		ldr	r3, .L2+40
+ 181 00cc 1B68     		ldr	r3, [r3]
+ 182 00ce 6360     		str	r3, [r4, #4]
+  92:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_RxBufConfig(&rxMailbox);
+ 183              		.loc 1 92 0
+ 184 00d0 2000     		movs	r0, r4
+ 185 00d2 FFF7FEFF 		bl	CAN_RxBufConfig
+ 186              	.LVL10:
+  93:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  94:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_GlobalIntEnable();
+ 187              		.loc 1 94 0
+ 188 00d6 FFF7FEFF 		bl	CAN_GlobalIntEnable
+ 189              	.LVL11:
+  95:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CyIntSetVector(CAN_ISR_NUMBER, CAN_FLAG_ISR);
+ 190              		.loc 1 95 0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 6
+
+
+ 191 00da 0F49     		ldr	r1, .L2+44
+ 192 00dc 1C20     		movs	r0, #28
+ 193 00de FFF7FEFF 		bl	CyIntSetVector
+ 194              	.LVL12:
+  96:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //CY_ISR_PROTO(CAN_FLAG_ISR);
+  97:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+  98:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 195              		.loc 1 98 0
+ 196              		@ sp needed
+ 197 00e2 0CBC     		pop	{r2, r3}
+ 198 00e4 9046     		mov	r8, r2
+ 199 00e6 9946     		mov	r9, r3
+ 200 00e8 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 201              	.L3:
+ 202 00ea C046     		.align	2
+ 203              	.L2:
+ 204 00ec 00000000 		.word	deviceGroup
+ 205 00f0 00000000 		.word	deviceAddressA
+ 206 00f4 00000000 		.word	deviceAddressB
+ 207 00f8 00000000 		.word	rxMailbox
+ 208 00fc FFFF1F80 		.word	-2145386497
+ 209 0100 A0002E40 		.word	1076756640
+ 210 0104 C0002E40 		.word	1076756672
+ 211 0108 E0002E40 		.word	1076756704
+ 212 010c 00012E40 		.word	1076756736
+ 213 0110 20012E40 		.word	1076756768
+ 214 0114 40012E40 		.word	1076756800
+ 215 0118 00000000 		.word	CAN_FLAG_ISR
+ 216              		.cfi_endproc
+ 217              	.LFE34:
+ 218              		.size	InitCAN_swerve, .-InitCAN_swerve
+ 219              		.section	.text.SendCANPacket,"ax",%progbits
+ 220              		.align	2
+ 221              		.global	SendCANPacket
+ 222              		.code	16
+ 223              		.thumb_func
+ 224              		.type	SendCANPacket, %function
+ 225              	SendCANPacket:
+ 226              	.LFB35:
+  99:..\CANLib\PortFiles/PortPSOC_swerve.c **** int SendCANPacket(CANPacket *packetToSend)
+ 100:..\CANLib\PortFiles/PortPSOC_swerve.c **** {
+ 227              		.loc 1 100 0
+ 228              		.cfi_startproc
+ 229              		@ args = 0, pretend = 0, frame = 24
+ 230              		@ frame_needed = 0, uses_anonymous_args = 0
+ 231              	.LVL13:
+ 232 0000 10B5     		push	{r4, lr}
+ 233              		.cfi_def_cfa_offset 8
+ 234              		.cfi_offset 4, -8
+ 235              		.cfi_offset 14, -4
+ 236 0002 86B0     		sub	sp, sp, #24
+ 237              		.cfi_def_cfa_offset 32
+ 101:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(!packetToSend) {return ERROR_NULL_POINTER;}
+ 238              		.loc 1 101 0
+ 239 0004 0028     		cmp	r0, #0
+ 240 0006 15D0     		beq	.L6
+ 102:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_TX_MSG PSoCMessage;//CAN structure
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 7
+
+
+ 103:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_DATA_BYTES_MSG PSoCData;//CAN data
+ 104:..\CANLib\PortFiles/PortPSOC_swerve.c ****     PSoCMessage.id = packetToSend->id;
+ 241              		.loc 1 104 0
+ 242 0008 0388     		ldrh	r3, [r0]
+ 243 000a 02AC     		add	r4, sp, #8
+ 244 000c 0293     		str	r3, [sp, #8]
+ 105:..\CANLib\PortFiles/PortPSOC_swerve.c ****     PSoCMessage.rtr = 0x0;
+ 245              		.loc 1 105 0
+ 246 000e 0023     		movs	r3, #0
+ 247 0010 2371     		strb	r3, [r4, #4]
+ 106:..\CANLib\PortFiles/PortPSOC_swerve.c ****     PSoCMessage.ide = 0x0;//Not extended
+ 248              		.loc 1 106 0
+ 249 0012 6371     		strb	r3, [r4, #5]
+ 107:..\CANLib\PortFiles/PortPSOC_swerve.c ****     PSoCMessage.dlc = packetToSend->dlc;
+ 250              		.loc 1 107 0
+ 251 0014 8278     		ldrb	r2, [r0, #2]
+ 252 0016 A271     		strb	r2, [r4, #6]
+ 108:..\CANLib\PortFiles/PortPSOC_swerve.c ****     PSoCMessage.irq = 0x0;
+ 253              		.loc 1 108 0
+ 254 0018 E371     		strb	r3, [r4, #7]
+ 109:..\CANLib\PortFiles/PortPSOC_swerve.c ****     PSoCMessage.msg = &PSoCData;
+ 255              		.loc 1 109 0
+ 256 001a 6B46     		mov	r3, sp
+ 257 001c 0593     		str	r3, [sp, #20]
+ 110:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+ 111:..\CANLib\PortFiles/PortPSOC_swerve.c ****     memcpy(PSoCData.byte, packetToSend->data, 8);
+ 258              		.loc 1 111 0
+ 259 001e C11C     		adds	r1, r0, #3
+ 260 0020 0822     		movs	r2, #8
+ 261 0022 6846     		mov	r0, sp
+ 262              	.LVL14:
+ 263 0024 FFF7FEFF 		bl	memcpy
+ 264              	.LVL15:
+ 112:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 113:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(CAN_SendMsg(&PSoCMessage) == CYRET_SUCCESS) {
+ 265              		.loc 1 113 0
+ 266 0028 2000     		movs	r0, r4
+ 267 002a FFF7FEFF 		bl	CAN_SendMsg
+ 268              	.LVL16:
+ 269 002e 0028     		cmp	r0, #0
+ 270 0030 02D1     		bne	.L7
+ 271 0032 02E0     		b	.L5
+ 272              	.LVL17:
+ 273              	.L6:
+ 101:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_TX_MSG PSoCMessage;//CAN structure
+ 274              		.loc 1 101 0
+ 275 0034 0220     		movs	r0, #2
+ 276              	.LVL18:
+ 277 0036 00E0     		b	.L5
+ 278              	.L7:
+ 114:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return ERROR_NONE;
+ 115:..\CANLib\PortFiles/PortPSOC_swerve.c ****     } else
+ 116:..\CANLib\PortFiles/PortPSOC_swerve.c ****     {
+ 117:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return ERROR_GENERIC_ERROR;
+ 279              		.loc 1 117 0
+ 280 0038 0120     		movs	r0, #1
+ 281              	.L5:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 8
+
+
+ 118:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 119:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 282              		.loc 1 119 0
+ 283 003a 06B0     		add	sp, sp, #24
+ 284              		@ sp needed
+ 285 003c 10BD     		pop	{r4, pc}
+ 286              		.cfi_endproc
+ 287              	.LFE35:
+ 288              		.size	SendCANPacket, .-SendCANPacket
+ 289 003e C046     		.section	.text.getLocalDeviceSerial,"ax",%progbits
+ 290              		.align	2
+ 291              		.global	getLocalDeviceSerial
+ 292              		.code	16
+ 293              		.thumb_func
+ 294              		.type	getLocalDeviceSerial, %function
+ 295              	getLocalDeviceSerial:
+ 296              	.LFB37:
+ 120:..\CANLib\PortFiles/PortPSOC_swerve.c **** //
+ 121:..\CANLib\PortFiles/PortPSOC_swerve.c **** int PollAndReceiveCANPacket(CANPacket *receivedPacket)
+ 122:..\CANLib\PortFiles/PortPSOC_swerve.c **** {
+ 123:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(!receivedPacket) {
+ 124:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return ERROR_NULL_POINTER;
+ 125:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 126:..\CANLib\PortFiles/PortPSOC_swerve.c ****     volatile uint8_t size = FIFOSize();
+ 127:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(size)
+ 128:..\CANLib\PortFiles/PortPSOC_swerve.c ****     {
+ 129:..\CANLib\PortFiles/PortPSOC_swerve.c ****         *(receivedPacket) = latestMessage[latestMessageHead];
+ 130:..\CANLib\PortFiles/PortPSOC_swerve.c ****         countRemoveFIFO();
+ 131:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return ERROR_NONE;
+ 132:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 133:..\CANLib\PortFiles/PortPSOC_swerve.c ****     return 0x02; //No message received error
+ 134:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 135:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 136:..\CANLib\PortFiles/PortPSOC_swerve.c **** // This method is not working properly on swerve board because we have 2 motors, not one.
+ 137:..\CANLib\PortFiles/PortPSOC_swerve.c **** // The method WriteSenderSerialAndPacketID from CANPacket.c uses this function
+ 138:..\CANLib\PortFiles/PortPSOC_swerve.c **** // You should be fine if you don't use WriteSenderSerialAndPacketID
+ 139:..\CANLib\PortFiles/PortPSOC_swerve.c **** uint8_t getLocalDeviceSerial()
+ 140:..\CANLib\PortFiles/PortPSOC_swerve.c **** {
+ 297              		.loc 1 140 0
+ 298              		.cfi_startproc
+ 299              		@ args = 0, pretend = 0, frame = 0
+ 300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301              		@ link register save eliminated.
+ 141:..\CANLib\PortFiles/PortPSOC_swerve.c ****     return deviceAddressA;      //talk to abhay about this, only returns the first motor's address
+ 302              		.loc 1 141 0
+ 303 0000 014B     		ldr	r3, .L9
+ 304 0002 1878     		ldrb	r0, [r3]
+ 142:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 305              		.loc 1 142 0
+ 306              		@ sp needed
+ 307 0004 7047     		bx	lr
+ 308              	.L10:
+ 309 0006 C046     		.align	2
+ 310              	.L9:
+ 311 0008 00000000 		.word	deviceAddressA
+ 312              		.cfi_endproc
+ 313              	.LFE37:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 9
+
+
+ 314              		.size	getLocalDeviceSerial, .-getLocalDeviceSerial
+ 315              		.section	.text.getLocalDeviceGroup,"ax",%progbits
+ 316              		.align	2
+ 317              		.global	getLocalDeviceGroup
+ 318              		.code	16
+ 319              		.thumb_func
+ 320              		.type	getLocalDeviceGroup, %function
+ 321              	getLocalDeviceGroup:
+ 322              	.LFB38:
+ 143:..\CANLib\PortFiles/PortPSOC_swerve.c **** uint8_t getLocalDeviceGroup()
+ 144:..\CANLib\PortFiles/PortPSOC_swerve.c **** {
+ 323              		.loc 1 144 0
+ 324              		.cfi_startproc
+ 325              		@ args = 0, pretend = 0, frame = 0
+ 326              		@ frame_needed = 0, uses_anonymous_args = 0
+ 327              		@ link register save eliminated.
+ 145:..\CANLib\PortFiles/PortPSOC_swerve.c ****     return deviceGroup;
+ 328              		.loc 1 145 0
+ 329 0000 014B     		ldr	r3, .L12
+ 330 0002 1878     		ldrb	r0, [r3]
+ 146:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 331              		.loc 1 146 0
+ 332              		@ sp needed
+ 333 0004 7047     		bx	lr
+ 334              	.L13:
+ 335 0006 C046     		.align	2
+ 336              	.L12:
+ 337 0008 00000000 		.word	deviceGroup
+ 338              		.cfi_endproc
+ 339              	.LFE38:
+ 340              		.size	getLocalDeviceGroup, .-getLocalDeviceGroup
+ 341              		.section	.text.getChipType,"ax",%progbits
+ 342              		.align	2
+ 343              		.global	getChipType
+ 344              		.code	16
+ 345              		.thumb_func
+ 346              		.type	getChipType, %function
+ 347              	getChipType:
+ 348              	.LFB39:
+ 147:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 148:..\CANLib\PortFiles/PortPSOC_swerve.c **** uint8_t getChipType()
+ 149:..\CANLib\PortFiles/PortPSOC_swerve.c **** {
+ 349              		.loc 1 149 0
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353              		@ link register save eliminated.
+ 150:..\CANLib\PortFiles/PortPSOC_swerve.c ****     return CHIP_TYPE; 
+ 151:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 354              		.loc 1 151 0
+ 355 0000 0220     		movs	r0, #2
+ 356              		@ sp needed
+ 357 0002 7047     		bx	lr
+ 358              		.cfi_endproc
+ 359              	.LFE39:
+ 360              		.size	getChipType, .-getChipType
+ 361              		.section	.text.FIFOSize,"ax",%progbits
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 10
+
+
+ 362              		.align	2
+ 363              		.global	FIFOSize
+ 364              		.code	16
+ 365              		.thumb_func
+ 366              		.type	FIFOSize, %function
+ 367              	FIFOSize:
+ 368              	.LFB40:
+ 152:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 153:..\CANLib\PortFiles/PortPSOC_swerve.c **** //helper function calculate size of Fifo
+ 154:..\CANLib\PortFiles/PortPSOC_swerve.c **** uint8_t FIFOSize(){
+ 369              		.loc 1 154 0
+ 370              		.cfi_startproc
+ 371              		@ args = 0, pretend = 0, frame = 0
+ 372              		@ frame_needed = 0, uses_anonymous_args = 0
+ 373              		@ link register save eliminated.
+ 155:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(latestMessageFull) {
+ 374              		.loc 1 155 0
+ 375 0000 104B     		ldr	r3, .L19
+ 376 0002 1878     		ldrb	r0, [r3]
+ 377 0004 C0B2     		uxtb	r0, r0
+ 378 0006 0028     		cmp	r0, #0
+ 379 0008 19D1     		bne	.L18
+ 156:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return FIFO_SIZE;
+ 157:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 158:..\CANLib\PortFiles/PortPSOC_swerve.c ****     else if(latestMessageHead < latestMessageTail) {
+ 380              		.loc 1 158 0
+ 381 000a 5A78     		ldrb	r2, [r3, #1]
+ 382 000c D2B2     		uxtb	r2, r2
+ 383 000e 9B78     		ldrb	r3, [r3, #2]
+ 384 0010 DBB2     		uxtb	r3, r3
+ 385 0012 9A42     		cmp	r2, r3
+ 386 0014 05D2     		bcs	.L17
+ 159:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return latestMessageTail - latestMessageHead;
+ 387              		.loc 1 159 0
+ 388 0016 0B4A     		ldr	r2, .L19
+ 389 0018 9378     		ldrb	r3, [r2, #2]
+ 390 001a 5078     		ldrb	r0, [r2, #1]
+ 391 001c 181A     		subs	r0, r3, r0
+ 392 001e C0B2     		uxtb	r0, r0
+ 393 0020 0EE0     		b	.L16
+ 394              	.L17:
+ 160:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 161:..\CANLib\PortFiles/PortPSOC_swerve.c ****     else if(latestMessageHead > latestMessageTail) {
+ 395              		.loc 1 161 0
+ 396 0022 084B     		ldr	r3, .L19
+ 397 0024 5A78     		ldrb	r2, [r3, #1]
+ 398 0026 D2B2     		uxtb	r2, r2
+ 399 0028 9B78     		ldrb	r3, [r3, #2]
+ 400 002a DBB2     		uxtb	r3, r3
+ 401 002c 9A42     		cmp	r2, r3
+ 402 002e 07D9     		bls	.L16
+ 162:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return (FIFO_SIZE - latestMessageHead) + latestMessageTail;
+ 403              		.loc 1 162 0
+ 404 0030 044A     		ldr	r2, .L19
+ 405 0032 9378     		ldrb	r3, [r2, #2]
+ 406 0034 5078     		ldrb	r0, [r2, #1]
+ 407 0036 181A     		subs	r0, r3, r0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 11
+
+
+ 408 0038 1030     		adds	r0, r0, #16
+ 409 003a C0B2     		uxtb	r0, r0
+ 410 003c 00E0     		b	.L16
+ 411              	.L18:
+ 156:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 412              		.loc 1 156 0
+ 413 003e 1020     		movs	r0, #16
+ 414              	.L16:
+ 163:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 164:..\CANLib\PortFiles/PortPSOC_swerve.c ****     else { // latestMessageHead == latestMessageTail && !latestMessageFull
+ 165:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return 0;
+ 166:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 167:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 415              		.loc 1 167 0
+ 416              		@ sp needed
+ 417 0040 7047     		bx	lr
+ 418              	.L20:
+ 419 0042 C046     		.align	2
+ 420              	.L19:
+ 421 0044 00000000 		.word	.LANCHOR0
+ 422              		.cfi_endproc
+ 423              	.LFE40:
+ 424              		.size	FIFOSize, .-FIFOSize
+ 425              		.section	.text.countAddFIFO,"ax",%progbits
+ 426              		.align	2
+ 427              		.global	countAddFIFO
+ 428              		.code	16
+ 429              		.thumb_func
+ 430              		.type	countAddFIFO, %function
+ 431              	countAddFIFO:
+ 432              	.LFB41:
+ 168:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 169:..\CANLib\PortFiles/PortPSOC_swerve.c **** void countAddFIFO(){ 
+ 433              		.loc 1 169 0
+ 434              		.cfi_startproc
+ 435              		@ args = 0, pretend = 0, frame = 0
+ 436              		@ frame_needed = 0, uses_anonymous_args = 0
+ 437              		@ link register save eliminated.
+ 170:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessageTail++;
+ 438              		.loc 1 170 0
+ 439 0000 124A     		ldr	r2, .L24
+ 440 0002 9378     		ldrb	r3, [r2, #2]
+ 441 0004 0133     		adds	r3, r3, #1
+ 442 0006 DBB2     		uxtb	r3, r3
+ 443 0008 9370     		strb	r3, [r2, #2]
+ 171:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(latestMessageTail >= FIFO_SIZE){
+ 444              		.loc 1 171 0
+ 445 000a 9378     		ldrb	r3, [r2, #2]
+ 446 000c DBB2     		uxtb	r3, r3
+ 447 000e 0F2B     		cmp	r3, #15
+ 448 0010 02D9     		bls	.L22
+ 172:..\CANLib\PortFiles/PortPSOC_swerve.c ****         latestMessageTail = 0;
+ 449              		.loc 1 172 0
+ 450 0012 0022     		movs	r2, #0
+ 451 0014 0D4B     		ldr	r3, .L24
+ 452 0016 9A70     		strb	r2, [r3, #2]
+ 453              	.L22:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 12
+
+
+ 173:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 174:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(latestMessageFull) {
+ 454              		.loc 1 174 0
+ 455 0018 0C4B     		ldr	r3, .L24
+ 456 001a 1B78     		ldrb	r3, [r3]
+ 457 001c 002B     		cmp	r3, #0
+ 458 001e 0BD0     		beq	.L23
+ 175:..\CANLib\PortFiles/PortPSOC_swerve.c ****         latestMessageHead++;
+ 459              		.loc 1 175 0
+ 460 0020 0A4A     		ldr	r2, .L24
+ 461 0022 5378     		ldrb	r3, [r2, #1]
+ 462 0024 0133     		adds	r3, r3, #1
+ 463 0026 DBB2     		uxtb	r3, r3
+ 464 0028 5370     		strb	r3, [r2, #1]
+ 176:..\CANLib\PortFiles/PortPSOC_swerve.c ****         if(latestMessageHead >= FIFO_SIZE) {
+ 465              		.loc 1 176 0
+ 466 002a 5378     		ldrb	r3, [r2, #1]
+ 467 002c DBB2     		uxtb	r3, r3
+ 468 002e 0F2B     		cmp	r3, #15
+ 469 0030 02D9     		bls	.L23
+ 177:..\CANLib\PortFiles/PortPSOC_swerve.c ****             latestMessageHead = 0;
+ 470              		.loc 1 177 0
+ 471 0032 0022     		movs	r2, #0
+ 472 0034 054B     		ldr	r3, .L24
+ 473 0036 5A70     		strb	r2, [r3, #1]
+ 474              	.L23:
+ 178:..\CANLib\PortFiles/PortPSOC_swerve.c ****         }
+ 179:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 180:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessageFull = (latestMessageHead == latestMessageTail);
+ 475              		.loc 1 180 0
+ 476 0038 044A     		ldr	r2, .L24
+ 477 003a 5378     		ldrb	r3, [r2, #1]
+ 478 003c 9178     		ldrb	r1, [r2, #2]
+ 479 003e 5B1A     		subs	r3, r3, r1
+ 480 0040 5942     		rsbs	r1, r3, #0
+ 481 0042 4B41     		adcs	r3, r3, r1
+ 482 0044 DBB2     		uxtb	r3, r3
+ 483 0046 1370     		strb	r3, [r2]
+ 181:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 484              		.loc 1 181 0
+ 485              		@ sp needed
+ 486 0048 7047     		bx	lr
+ 487              	.L25:
+ 488 004a C046     		.align	2
+ 489              	.L24:
+ 490 004c 00000000 		.word	.LANCHOR0
+ 491              		.cfi_endproc
+ 492              	.LFE41:
+ 493              		.size	countAddFIFO, .-countAddFIFO
+ 494              		.section	.text.CAN_FLAG_ISR,"ax",%progbits
+ 495              		.align	2
+ 496              		.global	CAN_FLAG_ISR
+ 497              		.code	16
+ 498              		.thumb_func
+ 499              		.type	CAN_FLAG_ISR, %function
+ 500              	CAN_FLAG_ISR:
+ 501              	.LFB43:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 13
+
+
+ 182:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 183:..\CANLib\PortFiles/PortPSOC_swerve.c **** void countRemoveFIFO(){
+ 184:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(FIFOSize() > 0) {
+ 185:..\CANLib\PortFiles/PortPSOC_swerve.c ****         latestMessageHead++;
+ 186:..\CANLib\PortFiles/PortPSOC_swerve.c ****         if(latestMessageHead >= FIFO_SIZE) {
+ 187:..\CANLib\PortFiles/PortPSOC_swerve.c ****             latestMessageHead = 0;
+ 188:..\CANLib\PortFiles/PortPSOC_swerve.c ****         }
+ 189:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 190:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 191:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 192:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 193:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 194:..\CANLib\PortFiles/PortPSOC_swerve.c **** CY_ISR(CAN_FLAG_ISR)
+ 195:..\CANLib\PortFiles/PortPSOC_swerve.c **** {
+ 502              		.loc 1 195 0
+ 503              		.cfi_startproc
+ 504              		@ args = 0, pretend = 0, frame = 0
+ 505              		@ frame_needed = 0, uses_anonymous_args = 0
+ 506 0000 70B5     		push	{r4, r5, r6, lr}
+ 507              		.cfi_def_cfa_offset 16
+ 508              		.cfi_offset 4, -16
+ 509              		.cfi_offset 5, -12
+ 510              		.cfi_offset 6, -8
+ 511              		.cfi_offset 14, -4
+ 196:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 197:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //*(reg32*)0x402F0000 = CAN_RX_MESSAGE_MASK & CAN_SST_FAILURE_MASK & CAN_CRC_ERROR_MASK; //Clea
+ 198:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_INT_SR_REG = CAN_RX_MESSAGE_MASK;
+ 512              		.loc 1 198 0
+ 513 0002 8022     		movs	r2, #128
+ 514 0004 5201     		lsls	r2, r2, #5
+ 515 0006 444B     		ldr	r3, .L34
+ 516 0008 1A60     		str	r2, [r3]
+ 199:..\CANLib\PortFiles/PortPSOC_swerve.c ****     uint32_t statusReg = (uint32_t) CAN_BUF_SR_REG; //Hardcoded for speed, translation from reg
+ 517              		.loc 1 199 0
+ 518 000a 444B     		ldr	r3, .L34+4
+ 519 000c 1B68     		ldr	r3, [r3]
+ 520              	.LVL19:
+ 200:..\CANLib\PortFiles/PortPSOC_swerve.c ****     uint8_t mailbox;
+ 201:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+ 202:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(statusReg & 0b1) { // mailbox0 is full (individual)
+ 521              		.loc 1 202 0
+ 522 000e DA07     		lsls	r2, r3, #31
+ 523 0010 06D4     		bmi	.L30
+ 203:..\CANLib\PortFiles/PortPSOC_swerve.c ****         mailbox = CAN_RX_MAILBOX_0;
+ 204:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 205:..\CANLib\PortFiles/PortPSOC_swerve.c ****     else if(statusReg & 0b10) { // mailbox1 is full (broadcast)
+ 524              		.loc 1 205 0
+ 525 0012 9A07     		lsls	r2, r3, #30
+ 526 0014 06D4     		bmi	.L31
+ 206:..\CANLib\PortFiles/PortPSOC_swerve.c ****         mailbox = CAN_RX_MAILBOX_1;
+ 207:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }    
+ 208:..\CANLib\PortFiles/PortPSOC_swerve.c ****     else if(statusReg & 0b100) { // mailbox2 is full (group broadcast)
+ 527              		.loc 1 208 0
+ 528 0016 5A07     		lsls	r2, r3, #29
+ 529 0018 06D4     		bmi	.L32
+ 209:..\CANLib\PortFiles/PortPSOC_swerve.c ****         mailbox = CAN_RX_MAILBOX_2;
+ 210:..\CANLib\PortFiles/PortPSOC_swerve.c ****     } 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 14
+
+
+ 211:..\CANLib\PortFiles/PortPSOC_swerve.c ****     else if(statusReg & 0b1000) { // mailbox3 is full currently recieves anything enable in top des
+ 530              		.loc 1 211 0
+ 531 001a 1B07     		lsls	r3, r3, #28
+ 532 001c 06D4     		bmi	.L33
+ 533              	.LVL20:
+ 534 001e 06E0     		b	.L27
+ 535              	.LVL21:
+ 536              	.L30:
+ 203:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 537              		.loc 1 203 0
+ 538 0020 0024     		movs	r4, #0
+ 539 0022 04E0     		b	.L27
+ 540              	.L31:
+ 206:..\CANLib\PortFiles/PortPSOC_swerve.c ****         mailbox = CAN_RX_MAILBOX_1;
+ 541              		.loc 1 206 0
+ 542 0024 0124     		movs	r4, #1
+ 543 0026 02E0     		b	.L27
+ 544              	.L32:
+ 209:..\CANLib\PortFiles/PortPSOC_swerve.c ****         mailbox = CAN_RX_MAILBOX_2;
+ 545              		.loc 1 209 0
+ 546 0028 0224     		movs	r4, #2
+ 547 002a 00E0     		b	.L27
+ 548              	.LVL22:
+ 549              	.L33:
+ 212:..\CANLib\PortFiles/PortPSOC_swerve.c ****         mailbox = CAN_RX_MAILBOX_3;
+ 550              		.loc 1 212 0
+ 551 002c 0324     		movs	r4, #3
+ 552              	.L27:
+ 553              	.LVL23:
+ 213:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 214:..\CANLib\PortFiles/PortPSOC_swerve.c ****     
+ 215:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].id = CAN_GET_RX_ID(mailbox);
+ 554              		.loc 1 215 0
+ 555 002e 3C4B     		ldr	r3, .L34+8
+ 556 0030 9A78     		ldrb	r2, [r3, #2]
+ 557 0032 D2B2     		uxtb	r2, r2
+ 558 0034 6401     		lsls	r4, r4, #5
+ 559              	.LVL24:
+ 560 0036 3B4B     		ldr	r3, .L34+12
+ 561 0038 9C46     		mov	ip, r3
+ 562 003a 6444     		add	r4, r4, ip
+ 563 003c 2368     		ldr	r3, [r4]
+ 564 003e DB02     		lsls	r3, r3, #11
+ 565 0040 02D4     		bmi	.L28
+ 566              		.loc 1 215 0 is_stmt 0 discriminator 1
+ 567 0042 6168     		ldr	r1, [r4, #4]
+ 568 0044 490D     		lsrs	r1, r1, #21
+ 569 0046 02E0     		b	.L29
+ 570              	.L28:
+ 571              		.loc 1 215 0 discriminator 2
+ 572 0048 6168     		ldr	r1, [r4, #4]
+ 573 004a C908     		lsrs	r1, r1, #3
+ 574 004c 89B2     		uxth	r1, r1
+ 575              	.L29:
+ 576              		.loc 1 215 0 discriminator 4
+ 577 004e 364B     		ldr	r3, .L34+16
+ 578 0050 5000     		lsls	r0, r2, #1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 15
+
+
+ 579 0052 8218     		adds	r2, r0, r2
+ 580 0054 9000     		lsls	r0, r2, #2
+ 581 0056 C152     		strh	r1, [r0, r3]
+ 216:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].dlc = CAN_GET_DLC(mailbox);
+ 582              		.loc 1 216 0 is_stmt 1 discriminator 4
+ 583 0058 314A     		ldr	r2, .L34+8
+ 584 005a 9178     		ldrb	r1, [r2, #2]
+ 585 005c C9B2     		uxtb	r1, r1
+ 586 005e 2068     		ldr	r0, [r4]
+ 587 0060 000C     		lsrs	r0, r0, #16
+ 588 0062 0F25     		movs	r5, #15
+ 589 0064 2840     		ands	r0, r5
+ 590 0066 4D00     		lsls	r5, r1, #1
+ 591 0068 6918     		adds	r1, r5, r1
+ 592 006a 8D00     		lsls	r5, r1, #2
+ 593 006c 5D19     		adds	r5, r3, r5
+ 594 006e A870     		strb	r0, [r5, #2]
+ 217:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].data[0] = CAN_RX_DATA_BYTE1(mailbox);
+ 595              		.loc 1 217 0 discriminator 4
+ 596 0070 9178     		ldrb	r1, [r2, #2]
+ 597 0072 C9B2     		uxtb	r1, r1
+ 598 0074 A568     		ldr	r5, [r4, #8]
+ 599 0076 2D0E     		lsrs	r5, r5, #24
+ 600 0078 4800     		lsls	r0, r1, #1
+ 601 007a 4118     		adds	r1, r0, r1
+ 602 007c 8800     		lsls	r0, r1, #2
+ 603 007e 1818     		adds	r0, r3, r0
+ 604 0080 C570     		strb	r5, [r0, #3]
+ 218:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].data[1] = CAN_RX_DATA_BYTE2(mailbox);
+ 605              		.loc 1 218 0 discriminator 4
+ 606 0082 9178     		ldrb	r1, [r2, #2]
+ 607 0084 C9B2     		uxtb	r1, r1
+ 608 0086 A068     		ldr	r0, [r4, #8]
+ 609 0088 000C     		lsrs	r0, r0, #16
+ 610 008a C0B2     		uxtb	r0, r0
+ 611 008c 4D00     		lsls	r5, r1, #1
+ 612 008e 6918     		adds	r1, r5, r1
+ 613 0090 8D00     		lsls	r5, r1, #2
+ 614 0092 5D19     		adds	r5, r3, r5
+ 615 0094 2871     		strb	r0, [r5, #4]
+ 219:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].data[2] = CAN_RX_DATA_BYTE3(mailbox);
+ 616              		.loc 1 219 0 discriminator 4
+ 617 0096 9178     		ldrb	r1, [r2, #2]
+ 618 0098 C9B2     		uxtb	r1, r1
+ 619 009a A068     		ldr	r0, [r4, #8]
+ 620 009c 000A     		lsrs	r0, r0, #8
+ 621 009e C0B2     		uxtb	r0, r0
+ 622 00a0 4D00     		lsls	r5, r1, #1
+ 623 00a2 6918     		adds	r1, r5, r1
+ 624 00a4 8D00     		lsls	r5, r1, #2
+ 625 00a6 5D19     		adds	r5, r3, r5
+ 626 00a8 6871     		strb	r0, [r5, #5]
+ 220:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].data[3] = CAN_RX_DATA_BYTE4(mailbox);
+ 627              		.loc 1 220 0 discriminator 4
+ 628 00aa 9178     		ldrb	r1, [r2, #2]
+ 629 00ac C9B2     		uxtb	r1, r1
+ 630 00ae A568     		ldr	r5, [r4, #8]
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 16
+
+
+ 631 00b0 EDB2     		uxtb	r5, r5
+ 632 00b2 4800     		lsls	r0, r1, #1
+ 633 00b4 4118     		adds	r1, r0, r1
+ 634 00b6 8800     		lsls	r0, r1, #2
+ 635 00b8 1818     		adds	r0, r3, r0
+ 636 00ba 8571     		strb	r5, [r0, #6]
+ 221:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].data[4] = CAN_RX_DATA_BYTE5(mailbox);
+ 637              		.loc 1 221 0 discriminator 4
+ 638 00bc 9178     		ldrb	r1, [r2, #2]
+ 639 00be C9B2     		uxtb	r1, r1
+ 640 00c0 E568     		ldr	r5, [r4, #12]
+ 641 00c2 2D0E     		lsrs	r5, r5, #24
+ 642 00c4 4800     		lsls	r0, r1, #1
+ 643 00c6 4118     		adds	r1, r0, r1
+ 644 00c8 8800     		lsls	r0, r1, #2
+ 645 00ca 1818     		adds	r0, r3, r0
+ 646 00cc C571     		strb	r5, [r0, #7]
+ 222:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].data[5] = CAN_RX_DATA_BYTE6(mailbox);
+ 647              		.loc 1 222 0 discriminator 4
+ 648 00ce 9178     		ldrb	r1, [r2, #2]
+ 649 00d0 C9B2     		uxtb	r1, r1
+ 650 00d2 E068     		ldr	r0, [r4, #12]
+ 651 00d4 000C     		lsrs	r0, r0, #16
+ 652 00d6 C0B2     		uxtb	r0, r0
+ 653 00d8 4D00     		lsls	r5, r1, #1
+ 654 00da 6918     		adds	r1, r5, r1
+ 655 00dc 8D00     		lsls	r5, r1, #2
+ 656 00de 5D19     		adds	r5, r3, r5
+ 657 00e0 2872     		strb	r0, [r5, #8]
+ 223:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].data[6] = CAN_RX_DATA_BYTE7(mailbox);
+ 658              		.loc 1 223 0 discriminator 4
+ 659 00e2 9178     		ldrb	r1, [r2, #2]
+ 660 00e4 C9B2     		uxtb	r1, r1
+ 661 00e6 E068     		ldr	r0, [r4, #12]
+ 662 00e8 000A     		lsrs	r0, r0, #8
+ 663 00ea C0B2     		uxtb	r0, r0
+ 664 00ec 4D00     		lsls	r5, r1, #1
+ 665 00ee 6918     		adds	r1, r5, r1
+ 666 00f0 8D00     		lsls	r5, r1, #2
+ 667 00f2 5D19     		adds	r5, r3, r5
+ 668 00f4 6872     		strb	r0, [r5, #9]
+ 224:..\CANLib\PortFiles/PortPSOC_swerve.c ****     latestMessage[latestMessageTail].data[7] = CAN_RX_DATA_BYTE8(mailbox);
+ 669              		.loc 1 224 0 discriminator 4
+ 670 00f6 9278     		ldrb	r2, [r2, #2]
+ 671 00f8 D2B2     		uxtb	r2, r2
+ 672 00fa E068     		ldr	r0, [r4, #12]
+ 673 00fc C0B2     		uxtb	r0, r0
+ 674 00fe 5100     		lsls	r1, r2, #1
+ 675 0100 8A18     		adds	r2, r1, r2
+ 676 0102 9100     		lsls	r1, r2, #2
+ 677 0104 5B18     		adds	r3, r3, r1
+ 678 0106 9872     		strb	r0, [r3, #10]
+ 225:..\CANLib\PortFiles/PortPSOC_swerve.c ****     countAddFIFO();
+ 679              		.loc 1 225 0 discriminator 4
+ 680 0108 FFF7FEFF 		bl	countAddFIFO
+ 681              	.LVL25:
+ 226:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 17
+
+
+ 227:..\CANLib\PortFiles/PortPSOC_swerve.c ****     //CAN_ReceiveMsg(messagePresentFlag);
+ 228:..\CANLib\PortFiles/PortPSOC_swerve.c ****     CAN_RX_ACK_MESSAGE(mailbox);
+ 682              		.loc 1 228 0 discriminator 4
+ 683 010c 2268     		ldr	r2, [r4]
+ 684 010e 0123     		movs	r3, #1
+ 685 0110 1343     		orrs	r3, r2
+ 686 0112 2360     		str	r3, [r4]
+ 229:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 687              		.loc 1 229 0 discriminator 4
+ 688              		@ sp needed
+ 689 0114 70BD     		pop	{r4, r5, r6, pc}
+ 690              	.L35:
+ 691 0116 C046     		.align	2
+ 692              	.L34:
+ 693 0118 00002E40 		.word	1076756480
+ 694 011c 08002E40 		.word	1076756488
+ 695 0120 00000000 		.word	.LANCHOR0
+ 696 0124 A0002E40 		.word	1076756640
+ 697 0128 00000000 		.word	latestMessage
+ 698              		.cfi_endproc
+ 699              	.LFE43:
+ 700              		.size	CAN_FLAG_ISR, .-CAN_FLAG_ISR
+ 701              		.section	.text.countRemoveFIFO,"ax",%progbits
+ 702              		.align	2
+ 703              		.global	countRemoveFIFO
+ 704              		.code	16
+ 705              		.thumb_func
+ 706              		.type	countRemoveFIFO, %function
+ 707              	countRemoveFIFO:
+ 708              	.LFB42:
+ 183:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(FIFOSize() > 0) {
+ 709              		.loc 1 183 0
+ 710              		.cfi_startproc
+ 711              		@ args = 0, pretend = 0, frame = 0
+ 712              		@ frame_needed = 0, uses_anonymous_args = 0
+ 713 0000 10B5     		push	{r4, lr}
+ 714              		.cfi_def_cfa_offset 8
+ 715              		.cfi_offset 4, -8
+ 716              		.cfi_offset 14, -4
+ 184:..\CANLib\PortFiles/PortPSOC_swerve.c ****         latestMessageHead++;
+ 717              		.loc 1 184 0
+ 718 0002 FFF7FEFF 		bl	FIFOSize
+ 719              	.LVL26:
+ 720 0006 0028     		cmp	r0, #0
+ 721 0008 0BD0     		beq	.L36
+ 185:..\CANLib\PortFiles/PortPSOC_swerve.c ****         if(latestMessageHead >= FIFO_SIZE) {
+ 722              		.loc 1 185 0
+ 723 000a 064A     		ldr	r2, .L38
+ 724 000c 5378     		ldrb	r3, [r2, #1]
+ 725 000e 0133     		adds	r3, r3, #1
+ 726 0010 DBB2     		uxtb	r3, r3
+ 727 0012 5370     		strb	r3, [r2, #1]
+ 186:..\CANLib\PortFiles/PortPSOC_swerve.c ****             latestMessageHead = 0;
+ 728              		.loc 1 186 0
+ 729 0014 5378     		ldrb	r3, [r2, #1]
+ 730 0016 DBB2     		uxtb	r3, r3
+ 731 0018 0F2B     		cmp	r3, #15
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 18
+
+
+ 732 001a 02D9     		bls	.L36
+ 187:..\CANLib\PortFiles/PortPSOC_swerve.c ****         }
+ 733              		.loc 1 187 0
+ 734 001c 0022     		movs	r2, #0
+ 735 001e 014B     		ldr	r3, .L38
+ 736 0020 5A70     		strb	r2, [r3, #1]
+ 737              	.L36:
+ 190:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 738              		.loc 1 190 0
+ 739              		@ sp needed
+ 740 0022 10BD     		pop	{r4, pc}
+ 741              	.L39:
+ 742              		.align	2
+ 743              	.L38:
+ 744 0024 00000000 		.word	.LANCHOR0
+ 745              		.cfi_endproc
+ 746              	.LFE42:
+ 747              		.size	countRemoveFIFO, .-countRemoveFIFO
+ 748              		.section	.text.PollAndReceiveCANPacket,"ax",%progbits
+ 749              		.align	2
+ 750              		.global	PollAndReceiveCANPacket
+ 751              		.code	16
+ 752              		.thumb_func
+ 753              		.type	PollAndReceiveCANPacket, %function
+ 754              	PollAndReceiveCANPacket:
+ 755              	.LFB36:
+ 122:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(!receivedPacket) {
+ 756              		.loc 1 122 0
+ 757              		.cfi_startproc
+ 758              		@ args = 0, pretend = 0, frame = 8
+ 759              		@ frame_needed = 0, uses_anonymous_args = 0
+ 760              	.LVL27:
+ 761 0000 10B5     		push	{r4, lr}
+ 762              		.cfi_def_cfa_offset 8
+ 763              		.cfi_offset 4, -8
+ 764              		.cfi_offset 14, -4
+ 765 0002 82B0     		sub	sp, sp, #8
+ 766              		.cfi_def_cfa_offset 16
+ 767 0004 041E     		subs	r4, r0, #0
+ 123:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return ERROR_NULL_POINTER;
+ 768              		.loc 1 123 0
+ 769 0006 17D0     		beq	.L42
+ 126:..\CANLib\PortFiles/PortPSOC_swerve.c ****     if(size)
+ 770              		.loc 1 126 0
+ 771 0008 FFF7FEFF 		bl	FIFOSize
+ 772              	.LVL28:
+ 773 000c 6B46     		mov	r3, sp
+ 774 000e D871     		strb	r0, [r3, #7]
+ 775 0010 0733     		adds	r3, r3, #7
+ 127:..\CANLib\PortFiles/PortPSOC_swerve.c ****     {
+ 776              		.loc 1 127 0
+ 777 0012 1B78     		ldrb	r3, [r3]
+ 778 0014 002B     		cmp	r3, #0
+ 779 0016 11D0     		beq	.L43
+ 129:..\CANLib\PortFiles/PortPSOC_swerve.c ****         countRemoveFIFO();
+ 780              		.loc 1 129 0
+ 781 0018 0A4B     		ldr	r3, .L44
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 19
+
+
+ 782 001a 5B78     		ldrb	r3, [r3, #1]
+ 783 001c DBB2     		uxtb	r3, r3
+ 784 001e 5A00     		lsls	r2, r3, #1
+ 785 0020 D318     		adds	r3, r2, r3
+ 786 0022 9900     		lsls	r1, r3, #2
+ 787 0024 084B     		ldr	r3, .L44+4
+ 788 0026 5918     		adds	r1, r3, r1
+ 789 0028 0C22     		movs	r2, #12
+ 790 002a 2000     		movs	r0, r4
+ 791 002c FFF7FEFF 		bl	memcpy
+ 792              	.LVL29:
+ 130:..\CANLib\PortFiles/PortPSOC_swerve.c ****         return ERROR_NONE;
+ 793              		.loc 1 130 0
+ 794 0030 FFF7FEFF 		bl	countRemoveFIFO
+ 795              	.LVL30:
+ 131:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 796              		.loc 1 131 0
+ 797 0034 0020     		movs	r0, #0
+ 798 0036 02E0     		b	.L41
+ 799              	.LVL31:
+ 800              	.L42:
+ 124:..\CANLib\PortFiles/PortPSOC_swerve.c ****     }
+ 801              		.loc 1 124 0
+ 802 0038 0220     		movs	r0, #2
+ 803              	.LVL32:
+ 804 003a 00E0     		b	.L41
+ 805              	.L43:
+ 133:..\CANLib\PortFiles/PortPSOC_swerve.c **** }
+ 806              		.loc 1 133 0
+ 807 003c 0220     		movs	r0, #2
+ 808              	.L41:
+ 134:..\CANLib\PortFiles/PortPSOC_swerve.c **** 
+ 809              		.loc 1 134 0
+ 810 003e 02B0     		add	sp, sp, #8
+ 811              		@ sp needed
+ 812              	.LVL33:
+ 813 0040 10BD     		pop	{r4, pc}
+ 814              	.L45:
+ 815 0042 C046     		.align	2
+ 816              	.L44:
+ 817 0044 00000000 		.word	.LANCHOR0
+ 818 0048 00000000 		.word	latestMessage
+ 819              		.cfi_endproc
+ 820              	.LFE36:
+ 821              		.size	PollAndReceiveCANPacket, .-PollAndReceiveCANPacket
+ 822              		.comm	rxMailbox,16,4
+ 823              		.comm	deviceGroup,4,4
+ 824              		.comm	deviceAddressB,4,4
+ 825              		.comm	deviceAddressA,4,4
+ 826              		.global	latestMessageFull
+ 827              		.global	latestMessageTail
+ 828              		.global	latestMessageHead
+ 829              		.comm	latestMessage,192,4
+ 830              		.global	messageReadFlag
+ 831              		.global	messagePresentFlag
+ 832              		.data
+ 833              		.type	messagePresentFlag, %object
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 20
+
+
+ 834              		.size	messagePresentFlag, 1
+ 835              	messagePresentFlag:
+ 836 0000 FF       		.byte	-1
+ 837              		.bss
+ 838              		.set	.LANCHOR0,. + 0
+ 839              		.type	latestMessageFull, %object
+ 840              		.size	latestMessageFull, 1
+ 841              	latestMessageFull:
+ 842 0000 00       		.space	1
+ 843              		.type	latestMessageHead, %object
+ 844              		.size	latestMessageHead, 1
+ 845              	latestMessageHead:
+ 846 0001 00       		.space	1
+ 847              		.type	latestMessageTail, %object
+ 848              		.size	latestMessageTail, 1
+ 849              	latestMessageTail:
+ 850 0002 00       		.space	1
+ 851              		.type	messageReadFlag, %object
+ 852              		.size	messageReadFlag, 1
+ 853              	messageReadFlag:
+ 854 0003 00       		.space	1
+ 855              		.text
+ 856              	.Letext0:
+ 857              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 858              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 859              		.file 4 "..\\CANLib\\PortFiles\\../CANPacket.h"
+ 860              		.file 5 "Generated_Source\\PSoC4/cytypes.h"
+ 861              		.file 6 "Generated_Source\\PSoC4/CAN.h"
+ 862              		.file 7 "Generated_Source\\PSoC4/CyLib.h"
+ 863              		.section	.debug_info,"",%progbits
+ 864              	.Ldebug_info0:
+ 865 0000 91060000 		.4byte	0x691
+ 866 0004 0400     		.2byte	0x4
+ 867 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 868 000a 04       		.byte	0x4
+ 869 000b 01       		.uleb128 0x1
+ 870 000c E6000000 		.4byte	.LASF75
+ 871 0010 0C       		.byte	0xc
+ 872 0011 23040000 		.4byte	.LASF76
+ 873 0015 A9010000 		.4byte	.LASF77
+ 874 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 875 001d 00000000 		.4byte	0
+ 876 0021 00000000 		.4byte	.Ldebug_line0
+ 877 0025 02       		.uleb128 0x2
+ 878 0026 01       		.byte	0x1
+ 879 0027 06       		.byte	0x6
+ 880 0028 10020000 		.4byte	.LASF0
+ 881 002c 03       		.uleb128 0x3
+ 882 002d 75020000 		.4byte	.LASF3
+ 883 0031 02       		.byte	0x2
+ 884 0032 1D       		.byte	0x1d
+ 885 0033 37000000 		.4byte	0x37
+ 886 0037 02       		.uleb128 0x2
+ 887 0038 01       		.byte	0x1
+ 888 0039 08       		.byte	0x8
+ 889 003a BC020000 		.4byte	.LASF1
+ 890 003e 02       		.uleb128 0x2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 21
+
+
+ 891 003f 02       		.byte	0x2
+ 892 0040 05       		.byte	0x5
+ 893 0041 3B000000 		.4byte	.LASF2
+ 894 0045 03       		.uleb128 0x3
+ 895 0046 9D000000 		.4byte	.LASF4
+ 896 004a 02       		.byte	0x2
+ 897 004b 2B       		.byte	0x2b
+ 898 004c 50000000 		.4byte	0x50
+ 899 0050 02       		.uleb128 0x2
+ 900 0051 02       		.byte	0x2
+ 901 0052 07       		.byte	0x7
+ 902 0053 39030000 		.4byte	.LASF5
+ 903 0057 02       		.uleb128 0x2
+ 904 0058 04       		.byte	0x4
+ 905 0059 05       		.byte	0x5
+ 906 005a 5D020000 		.4byte	.LASF6
+ 907 005e 03       		.uleb128 0x3
+ 908 005f 7F020000 		.4byte	.LASF7
+ 909 0063 02       		.byte	0x2
+ 910 0064 41       		.byte	0x41
+ 911 0065 69000000 		.4byte	0x69
+ 912 0069 02       		.uleb128 0x2
+ 913 006a 04       		.byte	0x4
+ 914 006b 07       		.byte	0x7
+ 915 006c CC030000 		.4byte	.LASF8
+ 916 0070 02       		.uleb128 0x2
+ 917 0071 08       		.byte	0x8
+ 918 0072 05       		.byte	0x5
+ 919 0073 22020000 		.4byte	.LASF9
+ 920 0077 02       		.uleb128 0x2
+ 921 0078 08       		.byte	0x8
+ 922 0079 07       		.byte	0x7
+ 923 007a EA020000 		.4byte	.LASF10
+ 924 007e 04       		.uleb128 0x4
+ 925 007f 04       		.byte	0x4
+ 926 0080 05       		.byte	0x5
+ 927 0081 696E7400 		.ascii	"int\000"
+ 928 0085 02       		.uleb128 0x2
+ 929 0086 04       		.byte	0x4
+ 930 0087 07       		.byte	0x7
+ 931 0088 0A030000 		.4byte	.LASF11
+ 932 008c 03       		.uleb128 0x3
+ 933 008d 74010000 		.4byte	.LASF12
+ 934 0091 03       		.byte	0x3
+ 935 0092 18       		.byte	0x18
+ 936 0093 2C000000 		.4byte	0x2c
+ 937 0097 03       		.uleb128 0x3
+ 938 0098 17030000 		.4byte	.LASF13
+ 939 009c 03       		.byte	0x3
+ 940 009d 24       		.byte	0x24
+ 941 009e 45000000 		.4byte	0x45
+ 942 00a2 03       		.uleb128 0x3
+ 943 00a3 01030000 		.4byte	.LASF14
+ 944 00a7 03       		.byte	0x3
+ 945 00a8 30       		.byte	0x30
+ 946 00a9 5E000000 		.4byte	0x5e
+ 947 00ad 05       		.uleb128 0x5
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 22
+
+
+ 948 00ae 0C       		.byte	0xc
+ 949 00af 04       		.byte	0x4
+ 950 00b0 0F       		.byte	0xf
+ 951 00b1 D9000000 		.4byte	0xd9
+ 952 00b5 06       		.uleb128 0x6
+ 953 00b6 696400   		.ascii	"id\000"
+ 954 00b9 04       		.byte	0x4
+ 955 00ba 11       		.byte	0x11
+ 956 00bb 97000000 		.4byte	0x97
+ 957 00bf 00       		.byte	0
+ 958 00c0 06       		.uleb128 0x6
+ 959 00c1 646C6300 		.ascii	"dlc\000"
+ 960 00c5 04       		.byte	0x4
+ 961 00c6 12       		.byte	0x12
+ 962 00c7 8C000000 		.4byte	0x8c
+ 963 00cb 02       		.byte	0x2
+ 964 00cc 07       		.uleb128 0x7
+ 965 00cd BB030000 		.4byte	.LASF15
+ 966 00d1 04       		.byte	0x4
+ 967 00d2 13       		.byte	0x13
+ 968 00d3 D9000000 		.4byte	0xd9
+ 969 00d7 03       		.byte	0x3
+ 970 00d8 00       		.byte	0
+ 971 00d9 08       		.uleb128 0x8
+ 972 00da 8C000000 		.4byte	0x8c
+ 973 00de E9000000 		.4byte	0xe9
+ 974 00e2 09       		.uleb128 0x9
+ 975 00e3 E9000000 		.4byte	0xe9
+ 976 00e7 07       		.byte	0x7
+ 977 00e8 00       		.byte	0
+ 978 00e9 02       		.uleb128 0x2
+ 979 00ea 04       		.byte	0x4
+ 980 00eb 07       		.byte	0x7
+ 981 00ec 45000000 		.4byte	.LASF16
+ 982 00f0 03       		.uleb128 0x3
+ 983 00f1 3B020000 		.4byte	.LASF17
+ 984 00f5 04       		.byte	0x4
+ 985 00f6 14       		.byte	0x14
+ 986 00f7 AD000000 		.4byte	0xad
+ 987 00fb 0A       		.uleb128 0xa
+ 988 00fc 7C010000 		.4byte	.LASF18
+ 989 0100 05       		.byte	0x5
+ 990 0101 FC01     		.2byte	0x1fc
+ 991 0103 37000000 		.4byte	0x37
+ 992 0107 0A       		.uleb128 0xa
+ 993 0108 C0030000 		.4byte	.LASF19
+ 994 010c 05       		.byte	0x5
+ 995 010d FE01     		.2byte	0x1fe
+ 996 010f 69000000 		.4byte	0x69
+ 997 0113 02       		.uleb128 0x2
+ 998 0114 04       		.byte	0x4
+ 999 0115 04       		.byte	0x4
+ 1000 0116 1C020000 		.4byte	.LASF20
+ 1001 011a 02       		.uleb128 0x2
+ 1002 011b 08       		.byte	0x8
+ 1003 011c 04       		.byte	0x4
+ 1004 011d 61040000 		.4byte	.LASF21
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 23
+
+
+ 1005 0121 02       		.uleb128 0x2
+ 1006 0122 01       		.byte	0x1
+ 1007 0123 08       		.byte	0x8
+ 1008 0124 60030000 		.4byte	.LASF22
+ 1009 0128 0A       		.uleb128 0xa
+ 1010 0129 C7030000 		.4byte	.LASF23
+ 1011 012d 05       		.byte	0x5
+ 1012 012e A602     		.2byte	0x2a6
+ 1013 0130 34010000 		.4byte	0x134
+ 1014 0134 0B       		.uleb128 0xb
+ 1015 0135 FB000000 		.4byte	0xfb
+ 1016 0139 0A       		.uleb128 0xa
+ 1017 013a 33030000 		.4byte	.LASF24
+ 1018 013e 05       		.byte	0x5
+ 1019 013f A802     		.2byte	0x2a8
+ 1020 0141 45010000 		.4byte	0x145
+ 1021 0145 0B       		.uleb128 0xb
+ 1022 0146 07010000 		.4byte	0x107
+ 1023 014a 02       		.uleb128 0x2
+ 1024 014b 08       		.byte	0x8
+ 1025 014c 04       		.byte	0x4
+ 1026 014d 9A020000 		.4byte	.LASF25
+ 1027 0151 05       		.uleb128 0x5
+ 1028 0152 08       		.byte	0x8
+ 1029 0153 06       		.byte	0x6
+ 1030 0154 6F       		.byte	0x6f
+ 1031 0155 66010000 		.4byte	0x166
+ 1032 0159 07       		.uleb128 0x7
+ 1033 015a A8000000 		.4byte	.LASF26
+ 1034 015e 06       		.byte	0x6
+ 1035 015f 71       		.byte	0x71
+ 1036 0160 66010000 		.4byte	0x166
+ 1037 0164 00       		.byte	0
+ 1038 0165 00       		.byte	0
+ 1039 0166 08       		.uleb128 0x8
+ 1040 0167 FB000000 		.4byte	0xfb
+ 1041 016b 76010000 		.4byte	0x176
+ 1042 016f 09       		.uleb128 0x9
+ 1043 0170 E9000000 		.4byte	0xe9
+ 1044 0174 07       		.byte	0x7
+ 1045 0175 00       		.byte	0
+ 1046 0176 03       		.uleb128 0x3
+ 1047 0177 20030000 		.4byte	.LASF27
+ 1048 017b 06       		.byte	0x6
+ 1049 017c 72       		.byte	0x72
+ 1050 017d 51010000 		.4byte	0x151
+ 1051 0181 05       		.uleb128 0x5
+ 1052 0182 08       		.byte	0x8
+ 1053 0183 06       		.byte	0x6
+ 1054 0184 75       		.byte	0x75
+ 1055 0185 96010000 		.4byte	0x196
+ 1056 0189 07       		.uleb128 0x7
+ 1057 018a A8000000 		.4byte	.LASF26
+ 1058 018e 06       		.byte	0x6
+ 1059 018f 77       		.byte	0x77
+ 1060 0190 A6010000 		.4byte	0x1a6
+ 1061 0194 00       		.byte	0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 24
+
+
+ 1062 0195 00       		.byte	0
+ 1063 0196 08       		.uleb128 0x8
+ 1064 0197 28010000 		.4byte	0x128
+ 1065 019b A6010000 		.4byte	0x1a6
+ 1066 019f 09       		.uleb128 0x9
+ 1067 01a0 E9000000 		.4byte	0xe9
+ 1068 01a4 07       		.byte	0x7
+ 1069 01a5 00       		.byte	0
+ 1070 01a6 0B       		.uleb128 0xb
+ 1071 01a7 96010000 		.4byte	0x196
+ 1072 01ab 03       		.uleb128 0x3
+ 1073 01ac 2C000000 		.4byte	.LASF28
+ 1074 01b0 06       		.byte	0x6
+ 1075 01b1 78       		.byte	0x78
+ 1076 01b2 81010000 		.4byte	0x181
+ 1077 01b6 05       		.uleb128 0x5
+ 1078 01b7 04       		.byte	0x4
+ 1079 01b8 06       		.byte	0x6
+ 1080 01b9 7B       		.byte	0x7b
+ 1081 01ba CB010000 		.4byte	0x1cb
+ 1082 01be 07       		.uleb128 0x7
+ 1083 01bf A8000000 		.4byte	.LASF26
+ 1084 01c3 06       		.byte	0x6
+ 1085 01c4 7D       		.byte	0x7d
+ 1086 01c5 DB010000 		.4byte	0x1db
+ 1087 01c9 00       		.byte	0
+ 1088 01ca 00       		.byte	0
+ 1089 01cb 08       		.uleb128 0x8
+ 1090 01cc 28010000 		.4byte	0x128
+ 1091 01d0 DB010000 		.4byte	0x1db
+ 1092 01d4 09       		.uleb128 0x9
+ 1093 01d5 E9000000 		.4byte	0xe9
+ 1094 01d9 03       		.byte	0x3
+ 1095 01da 00       		.byte	0
+ 1096 01db 0B       		.uleb128 0xb
+ 1097 01dc CB010000 		.4byte	0x1cb
+ 1098 01e0 03       		.uleb128 0x3
+ 1099 01e1 30020000 		.4byte	.LASF29
+ 1100 01e5 06       		.byte	0x6
+ 1101 01e6 7E       		.byte	0x7e
+ 1102 01e7 B6010000 		.4byte	0x1b6
+ 1103 01eb 05       		.uleb128 0x5
+ 1104 01ec 10       		.byte	0x10
+ 1105 01ed 06       		.byte	0x6
+ 1106 01ee 81       		.byte	0x81
+ 1107 01ef 47020000 		.4byte	0x247
+ 1108 01f3 06       		.uleb128 0x6
+ 1109 01f4 696400   		.ascii	"id\000"
+ 1110 01f7 06       		.byte	0x6
+ 1111 01f8 83       		.byte	0x83
+ 1112 01f9 07010000 		.4byte	0x107
+ 1113 01fd 00       		.byte	0
+ 1114 01fe 06       		.uleb128 0x6
+ 1115 01ff 72747200 		.ascii	"rtr\000"
+ 1116 0203 06       		.byte	0x6
+ 1117 0204 84       		.byte	0x84
+ 1118 0205 FB000000 		.4byte	0xfb
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 25
+
+
+ 1119 0209 04       		.byte	0x4
+ 1120 020a 06       		.uleb128 0x6
+ 1121 020b 69646500 		.ascii	"ide\000"
+ 1122 020f 06       		.byte	0x6
+ 1123 0210 85       		.byte	0x85
+ 1124 0211 FB000000 		.4byte	0xfb
+ 1125 0215 05       		.byte	0x5
+ 1126 0216 06       		.uleb128 0x6
+ 1127 0217 646C6300 		.ascii	"dlc\000"
+ 1128 021b 06       		.byte	0x6
+ 1129 021c 86       		.byte	0x86
+ 1130 021d FB000000 		.4byte	0xfb
+ 1131 0221 06       		.byte	0x6
+ 1132 0222 06       		.uleb128 0x6
+ 1133 0223 69727100 		.ascii	"irq\000"
+ 1134 0227 06       		.byte	0x6
+ 1135 0228 87       		.byte	0x87
+ 1136 0229 FB000000 		.4byte	0xfb
+ 1137 022d 07       		.byte	0x7
+ 1138 022e 06       		.uleb128 0x6
+ 1139 022f 73737400 		.ascii	"sst\000"
+ 1140 0233 06       		.byte	0x6
+ 1141 0234 89       		.byte	0x89
+ 1142 0235 FB000000 		.4byte	0xfb
+ 1143 0239 08       		.byte	0x8
+ 1144 023a 06       		.uleb128 0x6
+ 1145 023b 6D736700 		.ascii	"msg\000"
+ 1146 023f 06       		.byte	0x6
+ 1147 0240 8B       		.byte	0x8b
+ 1148 0241 47020000 		.4byte	0x247
+ 1149 0245 0C       		.byte	0xc
+ 1150 0246 00       		.byte	0
+ 1151 0247 0C       		.uleb128 0xc
+ 1152 0248 04       		.byte	0x4
+ 1153 0249 76010000 		.4byte	0x176
+ 1154 024d 03       		.uleb128 0x3
+ 1155 024e DE030000 		.4byte	.LASF30
+ 1156 0252 06       		.byte	0x6
+ 1157 0253 8C       		.byte	0x8c
+ 1158 0254 EB010000 		.4byte	0x1eb
+ 1159 0258 05       		.uleb128 0x5
+ 1160 0259 10       		.byte	0x10
+ 1161 025a 06       		.byte	0x6
+ 1162 025b 8F       		.byte	0x8f
+ 1163 025c 91020000 		.4byte	0x291
+ 1164 0260 07       		.uleb128 0x7
+ 1165 0261 00000000 		.4byte	.LASF31
+ 1166 0265 06       		.byte	0x6
+ 1167 0266 91       		.byte	0x91
+ 1168 0267 FB000000 		.4byte	0xfb
+ 1169 026b 00       		.byte	0
+ 1170 026c 07       		.uleb128 0x7
+ 1171 026d 90030000 		.4byte	.LASF32
+ 1172 0271 06       		.byte	0x6
+ 1173 0272 92       		.byte	0x92
+ 1174 0273 07010000 		.4byte	0x107
+ 1175 0277 04       		.byte	0x4
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 26
+
+
+ 1176 0278 07       		.uleb128 0x7
+ 1177 0279 82040000 		.4byte	.LASF33
+ 1178 027d 06       		.byte	0x6
+ 1179 027e 93       		.byte	0x93
+ 1180 027f 07010000 		.4byte	0x107
+ 1181 0283 08       		.byte	0x8
+ 1182 0284 07       		.uleb128 0x7
+ 1183 0285 0A020000 		.4byte	.LASF34
+ 1184 0289 06       		.byte	0x6
+ 1185 028a 94       		.byte	0x94
+ 1186 028b 07010000 		.4byte	0x107
+ 1187 028f 0C       		.byte	0xc
+ 1188 0290 00       		.byte	0
+ 1189 0291 03       		.uleb128 0x3
+ 1190 0292 88040000 		.4byte	.LASF35
+ 1191 0296 06       		.byte	0x6
+ 1192 0297 95       		.byte	0x95
+ 1193 0298 58020000 		.4byte	0x258
+ 1194 029c 05       		.uleb128 0x5
+ 1195 029d 20       		.byte	0x20
+ 1196 029e 06       		.byte	0x6
+ 1197 029f A0       		.byte	0xa0
+ 1198 02a0 F9020000 		.4byte	0x2f9
+ 1199 02a4 07       		.uleb128 0x7
+ 1200 02a5 90030000 		.4byte	.LASF32
+ 1201 02a9 06       		.byte	0x6
+ 1202 02aa A2       		.byte	0xa2
+ 1203 02ab E0010000 		.4byte	0x1e0
+ 1204 02af 00       		.byte	0
+ 1205 02b0 07       		.uleb128 0x7
+ 1206 02b1 94010000 		.4byte	.LASF36
+ 1207 02b5 06       		.byte	0x6
+ 1208 02b6 A3       		.byte	0xa3
+ 1209 02b7 E0010000 		.4byte	0x1e0
+ 1210 02bb 04       		.byte	0x4
+ 1211 02bc 07       		.uleb128 0x7
+ 1212 02bd 96000000 		.4byte	.LASF37
+ 1213 02c1 06       		.byte	0x6
+ 1214 02c2 A4       		.byte	0xa4
+ 1215 02c3 AB010000 		.4byte	0x1ab
+ 1216 02c7 08       		.byte	0x8
+ 1217 02c8 07       		.uleb128 0x7
+ 1218 02c9 82040000 		.4byte	.LASF33
+ 1219 02cd 06       		.byte	0x6
+ 1220 02ce A5       		.byte	0xa5
+ 1221 02cf E0010000 		.4byte	0x1e0
+ 1222 02d3 10       		.byte	0x10
+ 1223 02d4 07       		.uleb128 0x7
+ 1224 02d5 0A020000 		.4byte	.LASF34
+ 1225 02d9 06       		.byte	0x6
+ 1226 02da A6       		.byte	0xa6
+ 1227 02db E0010000 		.4byte	0x1e0
+ 1228 02df 14       		.byte	0x14
+ 1229 02e0 07       		.uleb128 0x7
+ 1230 02e1 B5020000 		.4byte	.LASF38
+ 1231 02e5 06       		.byte	0x6
+ 1232 02e6 A7       		.byte	0xa7
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 27
+
+
+ 1233 02e7 E0010000 		.4byte	0x1e0
+ 1234 02eb 18       		.byte	0x18
+ 1235 02ec 07       		.uleb128 0x7
+ 1236 02ed 59030000 		.4byte	.LASF39
+ 1237 02f1 06       		.byte	0x6
+ 1238 02f2 A8       		.byte	0xa8
+ 1239 02f3 E0010000 		.4byte	0x1e0
+ 1240 02f7 1C       		.byte	0x1c
+ 1241 02f8 00       		.byte	0
+ 1242 02f9 03       		.uleb128 0x3
+ 1243 02fa 65030000 		.4byte	.LASF40
+ 1244 02fe 06       		.byte	0x6
+ 1245 02ff A9       		.byte	0xa9
+ 1246 0300 9C020000 		.4byte	0x29c
+ 1247 0304 0D       		.uleb128 0xd
+ 1248 0305 66020000 		.4byte	.LASF51
+ 1249 0309 01       		.byte	0x1
+ 1250 030a 2A       		.byte	0x2a
+ 1251 030b 00000000 		.4byte	.LFB34
+ 1252 030f 1C010000 		.4byte	.LFE34-.LFB34
+ 1253 0313 01       		.uleb128 0x1
+ 1254 0314 9C       		.byte	0x9c
+ 1255 0315 E9030000 		.4byte	0x3e9
+ 1256 0319 0E       		.uleb128 0xe
+ 1257 031a 6F000000 		.4byte	.LASF41
+ 1258 031e 01       		.byte	0x1
+ 1259 031f 2A       		.byte	0x2a
+ 1260 0320 7E000000 		.4byte	0x7e
+ 1261 0324 00000000 		.4byte	.LLST0
+ 1262 0328 0E       		.uleb128 0xe
+ 1263 0329 BE000000 		.4byte	.LASF42
+ 1264 032d 01       		.byte	0x1
+ 1265 032e 2A       		.byte	0x2a
+ 1266 032f 7E000000 		.4byte	0x7e
+ 1267 0333 2C000000 		.4byte	.LLST1
+ 1268 0337 0E       		.uleb128 0xe
+ 1269 0338 D2000000 		.4byte	.LASF43
+ 1270 033c 01       		.byte	0x1
+ 1271 033d 2A       		.byte	0x2a
+ 1272 033e 7E000000 		.4byte	0x7e
+ 1273 0342 58000000 		.4byte	.LLST2
+ 1274 0346 0F       		.uleb128 0xf
+ 1275 0347 12000000 		.4byte	.LVL1
+ 1276 034b 52060000 		.4byte	0x652
+ 1277 034f 10       		.uleb128 0x10
+ 1278 0350 4A000000 		.4byte	.LVL5
+ 1279 0354 5D060000 		.4byte	0x65d
+ 1280 0358 63030000 		.4byte	0x363
+ 1281 035c 11       		.uleb128 0x11
+ 1282 035d 01       		.uleb128 0x1
+ 1283 035e 50       		.byte	0x50
+ 1284 035f 02       		.uleb128 0x2
+ 1285 0360 74       		.byte	0x74
+ 1286 0361 00       		.sleb128 0
+ 1287 0362 00       		.byte	0
+ 1288 0363 10       		.uleb128 0x10
+ 1289 0364 60000000 		.4byte	.LVL6
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 28
+
+
+ 1290 0368 5D060000 		.4byte	0x65d
+ 1291 036c 77030000 		.4byte	0x377
+ 1292 0370 11       		.uleb128 0x11
+ 1293 0371 01       		.uleb128 0x1
+ 1294 0372 50       		.byte	0x50
+ 1295 0373 02       		.uleb128 0x2
+ 1296 0374 74       		.byte	0x74
+ 1297 0375 00       		.sleb128 0
+ 1298 0376 00       		.byte	0
+ 1299 0377 10       		.uleb128 0x10
+ 1300 0378 82000000 		.4byte	.LVL7
+ 1301 037c 5D060000 		.4byte	0x65d
+ 1302 0380 8B030000 		.4byte	0x38b
+ 1303 0384 11       		.uleb128 0x11
+ 1304 0385 01       		.uleb128 0x1
+ 1305 0386 50       		.byte	0x50
+ 1306 0387 02       		.uleb128 0x2
+ 1307 0388 74       		.byte	0x74
+ 1308 0389 00       		.sleb128 0
+ 1309 038a 00       		.byte	0
+ 1310 038b 10       		.uleb128 0x10
+ 1311 038c A2000000 		.4byte	.LVL8
+ 1312 0390 5D060000 		.4byte	0x65d
+ 1313 0394 9F030000 		.4byte	0x39f
+ 1314 0398 11       		.uleb128 0x11
+ 1315 0399 01       		.uleb128 0x1
+ 1316 039a 50       		.byte	0x50
+ 1317 039b 02       		.uleb128 0x2
+ 1318 039c 74       		.byte	0x74
+ 1319 039d 00       		.sleb128 0
+ 1320 039e 00       		.byte	0
+ 1321 039f 10       		.uleb128 0x10
+ 1322 03a0 B8000000 		.4byte	.LVL9
+ 1323 03a4 5D060000 		.4byte	0x65d
+ 1324 03a8 B3030000 		.4byte	0x3b3
+ 1325 03ac 11       		.uleb128 0x11
+ 1326 03ad 01       		.uleb128 0x1
+ 1327 03ae 50       		.byte	0x50
+ 1328 03af 02       		.uleb128 0x2
+ 1329 03b0 74       		.byte	0x74
+ 1330 03b1 00       		.sleb128 0
+ 1331 03b2 00       		.byte	0
+ 1332 03b3 10       		.uleb128 0x10
+ 1333 03b4 D6000000 		.4byte	.LVL10
+ 1334 03b8 5D060000 		.4byte	0x65d
+ 1335 03bc C7030000 		.4byte	0x3c7
+ 1336 03c0 11       		.uleb128 0x11
+ 1337 03c1 01       		.uleb128 0x1
+ 1338 03c2 50       		.byte	0x50
+ 1339 03c3 02       		.uleb128 0x2
+ 1340 03c4 74       		.byte	0x74
+ 1341 03c5 00       		.sleb128 0
+ 1342 03c6 00       		.byte	0
+ 1343 03c7 0F       		.uleb128 0xf
+ 1344 03c8 DA000000 		.4byte	.LVL11
+ 1345 03cc 69060000 		.4byte	0x669
+ 1346 03d0 12       		.uleb128 0x12
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 29
+
+
+ 1347 03d1 E2000000 		.4byte	.LVL12
+ 1348 03d5 74060000 		.4byte	0x674
+ 1349 03d9 11       		.uleb128 0x11
+ 1350 03da 01       		.uleb128 0x1
+ 1351 03db 50       		.byte	0x50
+ 1352 03dc 01       		.uleb128 0x1
+ 1353 03dd 4C       		.byte	0x4c
+ 1354 03de 11       		.uleb128 0x11
+ 1355 03df 01       		.uleb128 0x1
+ 1356 03e0 51       		.byte	0x51
+ 1357 03e1 05       		.uleb128 0x5
+ 1358 03e2 03       		.byte	0x3
+ 1359 03e3 00000000 		.4byte	CAN_FLAG_ISR
+ 1360 03e7 00       		.byte	0
+ 1361 03e8 00       		.byte	0
+ 1362 03e9 13       		.uleb128 0x13
+ 1363 03ea 16000000 		.4byte	.LASF56
+ 1364 03ee 01       		.byte	0x1
+ 1365 03ef 63       		.byte	0x63
+ 1366 03f0 7E000000 		.4byte	0x7e
+ 1367 03f4 00000000 		.4byte	.LFB35
+ 1368 03f8 3E000000 		.4byte	.LFE35-.LFB35
+ 1369 03fc 01       		.uleb128 0x1
+ 1370 03fd 9C       		.byte	0x9c
+ 1371 03fe 60040000 		.4byte	0x460
+ 1372 0402 0E       		.uleb128 0xe
+ 1373 0403 68040000 		.4byte	.LASF44
+ 1374 0407 01       		.byte	0x1
+ 1375 0408 63       		.byte	0x63
+ 1376 0409 60040000 		.4byte	0x460
+ 1377 040d 84000000 		.4byte	.LLST3
+ 1378 0411 14       		.uleb128 0x14
+ 1379 0412 80000000 		.4byte	.LASF45
+ 1380 0416 01       		.byte	0x1
+ 1381 0417 66       		.byte	0x66
+ 1382 0418 4D020000 		.4byte	0x24d
+ 1383 041c 02       		.uleb128 0x2
+ 1384 041d 91       		.byte	0x91
+ 1385 041e 68       		.sleb128 -24
+ 1386 041f 14       		.uleb128 0x14
+ 1387 0420 B2030000 		.4byte	.LASF46
+ 1388 0424 01       		.byte	0x1
+ 1389 0425 67       		.byte	0x67
+ 1390 0426 76010000 		.4byte	0x176
+ 1391 042a 02       		.uleb128 0x2
+ 1392 042b 91       		.byte	0x91
+ 1393 042c 60       		.sleb128 -32
+ 1394 042d 10       		.uleb128 0x10
+ 1395 042e 28000000 		.4byte	.LVL15
+ 1396 0432 7F060000 		.4byte	0x67f
+ 1397 0436 4F040000 		.4byte	0x44f
+ 1398 043a 11       		.uleb128 0x11
+ 1399 043b 01       		.uleb128 0x1
+ 1400 043c 50       		.byte	0x50
+ 1401 043d 02       		.uleb128 0x2
+ 1402 043e 7D       		.byte	0x7d
+ 1403 043f 00       		.sleb128 0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 30
+
+
+ 1404 0440 11       		.uleb128 0x11
+ 1405 0441 01       		.uleb128 0x1
+ 1406 0442 51       		.byte	0x51
+ 1407 0443 05       		.uleb128 0x5
+ 1408 0444 F3       		.byte	0xf3
+ 1409 0445 01       		.uleb128 0x1
+ 1410 0446 50       		.byte	0x50
+ 1411 0447 23       		.byte	0x23
+ 1412 0448 03       		.uleb128 0x3
+ 1413 0449 11       		.uleb128 0x11
+ 1414 044a 01       		.uleb128 0x1
+ 1415 044b 52       		.byte	0x52
+ 1416 044c 01       		.uleb128 0x1
+ 1417 044d 38       		.byte	0x38
+ 1418 044e 00       		.byte	0
+ 1419 044f 12       		.uleb128 0x12
+ 1420 0450 2E000000 		.4byte	.LVL16
+ 1421 0454 88060000 		.4byte	0x688
+ 1422 0458 11       		.uleb128 0x11
+ 1423 0459 01       		.uleb128 0x1
+ 1424 045a 50       		.byte	0x50
+ 1425 045b 02       		.uleb128 0x2
+ 1426 045c 74       		.byte	0x74
+ 1427 045d 00       		.sleb128 0
+ 1428 045e 00       		.byte	0
+ 1429 045f 00       		.byte	0
+ 1430 0460 0C       		.uleb128 0xc
+ 1431 0461 04       		.byte	0x4
+ 1432 0462 F0000000 		.4byte	0xf0
+ 1433 0466 15       		.uleb128 0x15
+ 1434 0467 0E040000 		.4byte	.LASF47
+ 1435 046b 01       		.byte	0x1
+ 1436 046c 8B       		.byte	0x8b
+ 1437 046d 8C000000 		.4byte	0x8c
+ 1438 0471 00000000 		.4byte	.LFB37
+ 1439 0475 0C000000 		.4byte	.LFE37-.LFB37
+ 1440 0479 01       		.uleb128 0x1
+ 1441 047a 9C       		.byte	0x9c
+ 1442 047b 15       		.uleb128 0x15
+ 1443 047c 93040000 		.4byte	.LASF48
+ 1444 0480 01       		.byte	0x1
+ 1445 0481 8F       		.byte	0x8f
+ 1446 0482 8C000000 		.4byte	0x8c
+ 1447 0486 00000000 		.4byte	.LFB38
+ 1448 048a 0C000000 		.4byte	.LFE38-.LFB38
+ 1449 048e 01       		.uleb128 0x1
+ 1450 048f 9C       		.byte	0x9c
+ 1451 0490 15       		.uleb128 0x15
+ 1452 0491 0A000000 		.4byte	.LASF49
+ 1453 0495 01       		.byte	0x1
+ 1454 0496 94       		.byte	0x94
+ 1455 0497 8C000000 		.4byte	0x8c
+ 1456 049b 00000000 		.4byte	.LFB39
+ 1457 049f 04000000 		.4byte	.LFE39-.LFB39
+ 1458 04a3 01       		.uleb128 0x1
+ 1459 04a4 9C       		.byte	0x9c
+ 1460 04a5 16       		.uleb128 0x16
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 31
+
+
+ 1461 04a6 58040000 		.4byte	.LASF78
+ 1462 04aa 01       		.byte	0x1
+ 1463 04ab 9A       		.byte	0x9a
+ 1464 04ac 8C000000 		.4byte	0x8c
+ 1465 04b0 00000000 		.4byte	.LFB40
+ 1466 04b4 48000000 		.4byte	.LFE40-.LFB40
+ 1467 04b8 01       		.uleb128 0x1
+ 1468 04b9 9C       		.byte	0x9c
+ 1469 04ba 17       		.uleb128 0x17
+ 1470 04bb 4C030000 		.4byte	.LASF50
+ 1471 04bf 01       		.byte	0x1
+ 1472 04c0 A9       		.byte	0xa9
+ 1473 04c1 00000000 		.4byte	.LFB41
+ 1474 04c5 50000000 		.4byte	.LFE41-.LFB41
+ 1475 04c9 01       		.uleb128 0x1
+ 1476 04ca 9C       		.byte	0x9c
+ 1477 04cb 0D       		.uleb128 0xd
+ 1478 04cc 75040000 		.4byte	.LASF52
+ 1479 04d0 01       		.byte	0x1
+ 1480 04d1 C2       		.byte	0xc2
+ 1481 04d2 00000000 		.4byte	.LFB43
+ 1482 04d6 2C010000 		.4byte	.LFE43-.LFB43
+ 1483 04da 01       		.uleb128 0x1
+ 1484 04db 9C       		.byte	0x9c
+ 1485 04dc 08050000 		.4byte	0x508
+ 1486 04e0 18       		.uleb128 0x18
+ 1487 04e1 8C000000 		.4byte	.LASF53
+ 1488 04e5 01       		.byte	0x1
+ 1489 04e6 C7       		.byte	0xc7
+ 1490 04e7 A2000000 		.4byte	0xa2
+ 1491 04eb CB000000 		.4byte	.LLST4
+ 1492 04ef 18       		.uleb128 0x18
+ 1493 04f0 24000000 		.4byte	.LASF54
+ 1494 04f4 01       		.byte	0x1
+ 1495 04f5 C8       		.byte	0xc8
+ 1496 04f6 8C000000 		.4byte	0x8c
+ 1497 04fa E9000000 		.4byte	.LLST5
+ 1498 04fe 0F       		.uleb128 0xf
+ 1499 04ff 0C010000 		.4byte	.LVL25
+ 1500 0503 BA040000 		.4byte	0x4ba
+ 1501 0507 00       		.byte	0
+ 1502 0508 0D       		.uleb128 0xd
+ 1503 0509 A2030000 		.4byte	.LASF55
+ 1504 050d 01       		.byte	0x1
+ 1505 050e B7       		.byte	0xb7
+ 1506 050f 00000000 		.4byte	.LFB42
+ 1507 0513 28000000 		.4byte	.LFE42-.LFB42
+ 1508 0517 01       		.uleb128 0x1
+ 1509 0518 9C       		.byte	0x9c
+ 1510 0519 27050000 		.4byte	0x527
+ 1511 051d 0F       		.uleb128 0xf
+ 1512 051e 06000000 		.4byte	.LVL26
+ 1513 0522 A5040000 		.4byte	0x4a5
+ 1514 0526 00       		.byte	0
+ 1515 0527 13       		.uleb128 0x13
+ 1516 0528 45020000 		.4byte	.LASF57
+ 1517 052c 01       		.byte	0x1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 32
+
+
+ 1518 052d 79       		.byte	0x79
+ 1519 052e 7E000000 		.4byte	0x7e
+ 1520 0532 00000000 		.4byte	.LFB36
+ 1521 0536 4C000000 		.4byte	.LFE36-.LFB36
+ 1522 053a 01       		.uleb128 0x1
+ 1523 053b 9C       		.byte	0x9c
+ 1524 053c 89050000 		.4byte	0x589
+ 1525 0540 0E       		.uleb128 0xe
+ 1526 0541 4E000000 		.4byte	.LASF58
+ 1527 0545 01       		.byte	0x1
+ 1528 0546 79       		.byte	0x79
+ 1529 0547 60040000 		.4byte	0x460
+ 1530 054b FC000000 		.4byte	.LLST6
+ 1531 054f 14       		.uleb128 0x14
+ 1532 0550 09040000 		.4byte	.LASF59
+ 1533 0554 01       		.byte	0x1
+ 1534 0555 7E       		.byte	0x7e
+ 1535 0556 89050000 		.4byte	0x589
+ 1536 055a 02       		.uleb128 0x2
+ 1537 055b 91       		.byte	0x91
+ 1538 055c 77       		.sleb128 -9
+ 1539 055d 0F       		.uleb128 0xf
+ 1540 055e 0C000000 		.4byte	.LVL28
+ 1541 0562 A5040000 		.4byte	0x4a5
+ 1542 0566 10       		.uleb128 0x10
+ 1543 0567 30000000 		.4byte	.LVL29
+ 1544 056b 7F060000 		.4byte	0x67f
+ 1545 056f 7F050000 		.4byte	0x57f
+ 1546 0573 11       		.uleb128 0x11
+ 1547 0574 01       		.uleb128 0x1
+ 1548 0575 50       		.byte	0x50
+ 1549 0576 02       		.uleb128 0x2
+ 1550 0577 74       		.byte	0x74
+ 1551 0578 00       		.sleb128 0
+ 1552 0579 11       		.uleb128 0x11
+ 1553 057a 01       		.uleb128 0x1
+ 1554 057b 52       		.byte	0x52
+ 1555 057c 01       		.uleb128 0x1
+ 1556 057d 3C       		.byte	0x3c
+ 1557 057e 00       		.byte	0
+ 1558 057f 0F       		.uleb128 0xf
+ 1559 0580 34000000 		.4byte	.LVL30
+ 1560 0584 08050000 		.4byte	0x508
+ 1561 0588 00       		.byte	0
+ 1562 0589 0B       		.uleb128 0xb
+ 1563 058a 8C000000 		.4byte	0x8c
+ 1564 058e 19       		.uleb128 0x19
+ 1565 058f 7D030000 		.4byte	.LASF60
+ 1566 0593 01       		.byte	0x1
+ 1567 0594 0F       		.byte	0xf
+ 1568 0595 89050000 		.4byte	0x589
+ 1569 0599 05       		.uleb128 0x5
+ 1570 059a 03       		.byte	0x3
+ 1571 059b 00000000 		.4byte	messagePresentFlag
+ 1572 059f 19       		.uleb128 0x19
+ 1573 05a0 8A020000 		.4byte	.LASF61
+ 1574 05a4 01       		.byte	0x1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 33
+
+
+ 1575 05a5 10       		.byte	0x10
+ 1576 05a6 89050000 		.4byte	0x589
+ 1577 05aa 05       		.uleb128 0x5
+ 1578 05ab 03       		.byte	0x3
+ 1579 05ac 00000000 		.4byte	messageReadFlag
+ 1580 05b0 08       		.uleb128 0x8
+ 1581 05b1 C0050000 		.4byte	0x5c0
+ 1582 05b5 C0050000 		.4byte	0x5c0
+ 1583 05b9 09       		.uleb128 0x9
+ 1584 05ba E9000000 		.4byte	0xe9
+ 1585 05be 0F       		.byte	0xf
+ 1586 05bf 00       		.byte	0
+ 1587 05c0 0B       		.uleb128 0xb
+ 1588 05c1 F0000000 		.4byte	0xf0
+ 1589 05c5 19       		.uleb128 0x19
+ 1590 05c6 CA020000 		.4byte	.LASF62
+ 1591 05ca 01       		.byte	0x1
+ 1592 05cb 16       		.byte	0x16
+ 1593 05cc D6050000 		.4byte	0x5d6
+ 1594 05d0 05       		.uleb128 0x5
+ 1595 05d1 03       		.byte	0x3
+ 1596 05d2 00000000 		.4byte	latestMessage
+ 1597 05d6 0B       		.uleb128 0xb
+ 1598 05d7 B0050000 		.4byte	0x5b0
+ 1599 05db 19       		.uleb128 0x19
+ 1600 05dc D8020000 		.4byte	.LASF63
+ 1601 05e0 01       		.byte	0x1
+ 1602 05e1 17       		.byte	0x17
+ 1603 05e2 89050000 		.4byte	0x589
+ 1604 05e6 05       		.uleb128 0x5
+ 1605 05e7 03       		.byte	0x3
+ 1606 05e8 00000000 		.4byte	latestMessageHead
+ 1607 05ec 19       		.uleb128 0x19
+ 1608 05ed 82010000 		.4byte	.LASF64
+ 1609 05f1 01       		.byte	0x1
+ 1610 05f2 18       		.byte	0x18
+ 1611 05f3 89050000 		.4byte	0x589
+ 1612 05f7 05       		.uleb128 0x5
+ 1613 05f8 03       		.byte	0x3
+ 1614 05f9 00000000 		.4byte	latestMessageTail
+ 1615 05fd 19       		.uleb128 0x19
+ 1616 05fe 5D000000 		.4byte	.LASF65
+ 1617 0602 01       		.byte	0x1
+ 1618 0603 19       		.byte	0x19
+ 1619 0604 89050000 		.4byte	0x589
+ 1620 0608 05       		.uleb128 0x5
+ 1621 0609 03       		.byte	0x3
+ 1622 060a 00000000 		.4byte	latestMessageFull
+ 1623 060e 19       		.uleb128 0x19
+ 1624 060f A7040000 		.4byte	.LASF66
+ 1625 0613 01       		.byte	0x1
+ 1626 0614 25       		.byte	0x25
+ 1627 0615 7E000000 		.4byte	0x7e
+ 1628 0619 05       		.uleb128 0x5
+ 1629 061a 03       		.byte	0x3
+ 1630 061b 00000000 		.4byte	deviceAddressA
+ 1631 061f 19       		.uleb128 0x19
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 34
+
+
+ 1632 0620 A6020000 		.4byte	.LASF67
+ 1633 0624 01       		.byte	0x1
+ 1634 0625 26       		.byte	0x26
+ 1635 0626 7E000000 		.4byte	0x7e
+ 1636 062a 05       		.uleb128 0x5
+ 1637 062b 03       		.byte	0x3
+ 1638 062c 00000000 		.4byte	deviceAddressB
+ 1639 0630 19       		.uleb128 0x19
+ 1640 0631 96030000 		.4byte	.LASF68
+ 1641 0635 01       		.byte	0x1
+ 1642 0636 27       		.byte	0x27
+ 1643 0637 7E000000 		.4byte	0x7e
+ 1644 063b 05       		.uleb128 0x5
+ 1645 063c 03       		.byte	0x3
+ 1646 063d 00000000 		.4byte	deviceGroup
+ 1647 0641 19       		.uleb128 0x19
+ 1648 0642 73030000 		.4byte	.LASF69
+ 1649 0646 01       		.byte	0x1
+ 1650 0647 28       		.byte	0x28
+ 1651 0648 91020000 		.4byte	0x291
+ 1652 064c 05       		.uleb128 0x5
+ 1653 064d 03       		.byte	0x3
+ 1654 064e 00000000 		.4byte	rxMailbox
+ 1655 0652 1A       		.uleb128 0x1a
+ 1656 0653 AD000000 		.4byte	.LASF70
+ 1657 0657 AD000000 		.4byte	.LASF70
+ 1658 065b 06       		.byte	0x6
+ 1659 065c C5       		.byte	0xc5
+ 1660 065d 1B       		.uleb128 0x1b
+ 1661 065e 99010000 		.4byte	.LASF71
+ 1662 0662 99010000 		.4byte	.LASF71
+ 1663 0666 06       		.byte	0x6
+ 1664 0667 1301     		.2byte	0x113
+ 1665 0669 1A       		.uleb128 0x1a
+ 1666 066a F5030000 		.4byte	.LASF72
+ 1667 066e F5030000 		.4byte	.LASF72
+ 1668 0672 06       		.byte	0x6
+ 1669 0673 C8       		.byte	0xc8
+ 1670 0674 1A       		.uleb128 0x1a
+ 1671 0675 49040000 		.4byte	.LASF73
+ 1672 0679 49040000 		.4byte	.LASF73
+ 1673 067d 07       		.byte	0x7
+ 1674 067e D0       		.byte	0xd0
+ 1675 067f 1C       		.uleb128 0x1c
+ 1676 0680 B7000000 		.4byte	.LASF79
+ 1677 0684 B7000000 		.4byte	.LASF79
+ 1678 0688 1B       		.uleb128 0x1b
+ 1679 0689 E9030000 		.4byte	.LASF74
+ 1680 068d E9030000 		.4byte	.LASF74
+ 1681 0691 06       		.byte	0x6
+ 1682 0692 1801     		.2byte	0x118
+ 1683 0694 00       		.byte	0
+ 1684              		.section	.debug_abbrev,"",%progbits
+ 1685              	.Ldebug_abbrev0:
+ 1686 0000 01       		.uleb128 0x1
+ 1687 0001 11       		.uleb128 0x11
+ 1688 0002 01       		.byte	0x1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 35
+
+
+ 1689 0003 25       		.uleb128 0x25
+ 1690 0004 0E       		.uleb128 0xe
+ 1691 0005 13       		.uleb128 0x13
+ 1692 0006 0B       		.uleb128 0xb
+ 1693 0007 03       		.uleb128 0x3
+ 1694 0008 0E       		.uleb128 0xe
+ 1695 0009 1B       		.uleb128 0x1b
+ 1696 000a 0E       		.uleb128 0xe
+ 1697 000b 55       		.uleb128 0x55
+ 1698 000c 17       		.uleb128 0x17
+ 1699 000d 11       		.uleb128 0x11
+ 1700 000e 01       		.uleb128 0x1
+ 1701 000f 10       		.uleb128 0x10
+ 1702 0010 17       		.uleb128 0x17
+ 1703 0011 00       		.byte	0
+ 1704 0012 00       		.byte	0
+ 1705 0013 02       		.uleb128 0x2
+ 1706 0014 24       		.uleb128 0x24
+ 1707 0015 00       		.byte	0
+ 1708 0016 0B       		.uleb128 0xb
+ 1709 0017 0B       		.uleb128 0xb
+ 1710 0018 3E       		.uleb128 0x3e
+ 1711 0019 0B       		.uleb128 0xb
+ 1712 001a 03       		.uleb128 0x3
+ 1713 001b 0E       		.uleb128 0xe
+ 1714 001c 00       		.byte	0
+ 1715 001d 00       		.byte	0
+ 1716 001e 03       		.uleb128 0x3
+ 1717 001f 16       		.uleb128 0x16
+ 1718 0020 00       		.byte	0
+ 1719 0021 03       		.uleb128 0x3
+ 1720 0022 0E       		.uleb128 0xe
+ 1721 0023 3A       		.uleb128 0x3a
+ 1722 0024 0B       		.uleb128 0xb
+ 1723 0025 3B       		.uleb128 0x3b
+ 1724 0026 0B       		.uleb128 0xb
+ 1725 0027 49       		.uleb128 0x49
+ 1726 0028 13       		.uleb128 0x13
+ 1727 0029 00       		.byte	0
+ 1728 002a 00       		.byte	0
+ 1729 002b 04       		.uleb128 0x4
+ 1730 002c 24       		.uleb128 0x24
+ 1731 002d 00       		.byte	0
+ 1732 002e 0B       		.uleb128 0xb
+ 1733 002f 0B       		.uleb128 0xb
+ 1734 0030 3E       		.uleb128 0x3e
+ 1735 0031 0B       		.uleb128 0xb
+ 1736 0032 03       		.uleb128 0x3
+ 1737 0033 08       		.uleb128 0x8
+ 1738 0034 00       		.byte	0
+ 1739 0035 00       		.byte	0
+ 1740 0036 05       		.uleb128 0x5
+ 1741 0037 13       		.uleb128 0x13
+ 1742 0038 01       		.byte	0x1
+ 1743 0039 0B       		.uleb128 0xb
+ 1744 003a 0B       		.uleb128 0xb
+ 1745 003b 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 36
+
+
+ 1746 003c 0B       		.uleb128 0xb
+ 1747 003d 3B       		.uleb128 0x3b
+ 1748 003e 0B       		.uleb128 0xb
+ 1749 003f 01       		.uleb128 0x1
+ 1750 0040 13       		.uleb128 0x13
+ 1751 0041 00       		.byte	0
+ 1752 0042 00       		.byte	0
+ 1753 0043 06       		.uleb128 0x6
+ 1754 0044 0D       		.uleb128 0xd
+ 1755 0045 00       		.byte	0
+ 1756 0046 03       		.uleb128 0x3
+ 1757 0047 08       		.uleb128 0x8
+ 1758 0048 3A       		.uleb128 0x3a
+ 1759 0049 0B       		.uleb128 0xb
+ 1760 004a 3B       		.uleb128 0x3b
+ 1761 004b 0B       		.uleb128 0xb
+ 1762 004c 49       		.uleb128 0x49
+ 1763 004d 13       		.uleb128 0x13
+ 1764 004e 38       		.uleb128 0x38
+ 1765 004f 0B       		.uleb128 0xb
+ 1766 0050 00       		.byte	0
+ 1767 0051 00       		.byte	0
+ 1768 0052 07       		.uleb128 0x7
+ 1769 0053 0D       		.uleb128 0xd
+ 1770 0054 00       		.byte	0
+ 1771 0055 03       		.uleb128 0x3
+ 1772 0056 0E       		.uleb128 0xe
+ 1773 0057 3A       		.uleb128 0x3a
+ 1774 0058 0B       		.uleb128 0xb
+ 1775 0059 3B       		.uleb128 0x3b
+ 1776 005a 0B       		.uleb128 0xb
+ 1777 005b 49       		.uleb128 0x49
+ 1778 005c 13       		.uleb128 0x13
+ 1779 005d 38       		.uleb128 0x38
+ 1780 005e 0B       		.uleb128 0xb
+ 1781 005f 00       		.byte	0
+ 1782 0060 00       		.byte	0
+ 1783 0061 08       		.uleb128 0x8
+ 1784 0062 01       		.uleb128 0x1
+ 1785 0063 01       		.byte	0x1
+ 1786 0064 49       		.uleb128 0x49
+ 1787 0065 13       		.uleb128 0x13
+ 1788 0066 01       		.uleb128 0x1
+ 1789 0067 13       		.uleb128 0x13
+ 1790 0068 00       		.byte	0
+ 1791 0069 00       		.byte	0
+ 1792 006a 09       		.uleb128 0x9
+ 1793 006b 21       		.uleb128 0x21
+ 1794 006c 00       		.byte	0
+ 1795 006d 49       		.uleb128 0x49
+ 1796 006e 13       		.uleb128 0x13
+ 1797 006f 2F       		.uleb128 0x2f
+ 1798 0070 0B       		.uleb128 0xb
+ 1799 0071 00       		.byte	0
+ 1800 0072 00       		.byte	0
+ 1801 0073 0A       		.uleb128 0xa
+ 1802 0074 16       		.uleb128 0x16
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 37
+
+
+ 1803 0075 00       		.byte	0
+ 1804 0076 03       		.uleb128 0x3
+ 1805 0077 0E       		.uleb128 0xe
+ 1806 0078 3A       		.uleb128 0x3a
+ 1807 0079 0B       		.uleb128 0xb
+ 1808 007a 3B       		.uleb128 0x3b
+ 1809 007b 05       		.uleb128 0x5
+ 1810 007c 49       		.uleb128 0x49
+ 1811 007d 13       		.uleb128 0x13
+ 1812 007e 00       		.byte	0
+ 1813 007f 00       		.byte	0
+ 1814 0080 0B       		.uleb128 0xb
+ 1815 0081 35       		.uleb128 0x35
+ 1816 0082 00       		.byte	0
+ 1817 0083 49       		.uleb128 0x49
+ 1818 0084 13       		.uleb128 0x13
+ 1819 0085 00       		.byte	0
+ 1820 0086 00       		.byte	0
+ 1821 0087 0C       		.uleb128 0xc
+ 1822 0088 0F       		.uleb128 0xf
+ 1823 0089 00       		.byte	0
+ 1824 008a 0B       		.uleb128 0xb
+ 1825 008b 0B       		.uleb128 0xb
+ 1826 008c 49       		.uleb128 0x49
+ 1827 008d 13       		.uleb128 0x13
+ 1828 008e 00       		.byte	0
+ 1829 008f 00       		.byte	0
+ 1830 0090 0D       		.uleb128 0xd
+ 1831 0091 2E       		.uleb128 0x2e
+ 1832 0092 01       		.byte	0x1
+ 1833 0093 3F       		.uleb128 0x3f
+ 1834 0094 19       		.uleb128 0x19
+ 1835 0095 03       		.uleb128 0x3
+ 1836 0096 0E       		.uleb128 0xe
+ 1837 0097 3A       		.uleb128 0x3a
+ 1838 0098 0B       		.uleb128 0xb
+ 1839 0099 3B       		.uleb128 0x3b
+ 1840 009a 0B       		.uleb128 0xb
+ 1841 009b 27       		.uleb128 0x27
+ 1842 009c 19       		.uleb128 0x19
+ 1843 009d 11       		.uleb128 0x11
+ 1844 009e 01       		.uleb128 0x1
+ 1845 009f 12       		.uleb128 0x12
+ 1846 00a0 06       		.uleb128 0x6
+ 1847 00a1 40       		.uleb128 0x40
+ 1848 00a2 18       		.uleb128 0x18
+ 1849 00a3 9742     		.uleb128 0x2117
+ 1850 00a5 19       		.uleb128 0x19
+ 1851 00a6 01       		.uleb128 0x1
+ 1852 00a7 13       		.uleb128 0x13
+ 1853 00a8 00       		.byte	0
+ 1854 00a9 00       		.byte	0
+ 1855 00aa 0E       		.uleb128 0xe
+ 1856 00ab 05       		.uleb128 0x5
+ 1857 00ac 00       		.byte	0
+ 1858 00ad 03       		.uleb128 0x3
+ 1859 00ae 0E       		.uleb128 0xe
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 38
+
+
+ 1860 00af 3A       		.uleb128 0x3a
+ 1861 00b0 0B       		.uleb128 0xb
+ 1862 00b1 3B       		.uleb128 0x3b
+ 1863 00b2 0B       		.uleb128 0xb
+ 1864 00b3 49       		.uleb128 0x49
+ 1865 00b4 13       		.uleb128 0x13
+ 1866 00b5 02       		.uleb128 0x2
+ 1867 00b6 17       		.uleb128 0x17
+ 1868 00b7 00       		.byte	0
+ 1869 00b8 00       		.byte	0
+ 1870 00b9 0F       		.uleb128 0xf
+ 1871 00ba 898201   		.uleb128 0x4109
+ 1872 00bd 00       		.byte	0
+ 1873 00be 11       		.uleb128 0x11
+ 1874 00bf 01       		.uleb128 0x1
+ 1875 00c0 31       		.uleb128 0x31
+ 1876 00c1 13       		.uleb128 0x13
+ 1877 00c2 00       		.byte	0
+ 1878 00c3 00       		.byte	0
+ 1879 00c4 10       		.uleb128 0x10
+ 1880 00c5 898201   		.uleb128 0x4109
+ 1881 00c8 01       		.byte	0x1
+ 1882 00c9 11       		.uleb128 0x11
+ 1883 00ca 01       		.uleb128 0x1
+ 1884 00cb 31       		.uleb128 0x31
+ 1885 00cc 13       		.uleb128 0x13
+ 1886 00cd 01       		.uleb128 0x1
+ 1887 00ce 13       		.uleb128 0x13
+ 1888 00cf 00       		.byte	0
+ 1889 00d0 00       		.byte	0
+ 1890 00d1 11       		.uleb128 0x11
+ 1891 00d2 8A8201   		.uleb128 0x410a
+ 1892 00d5 00       		.byte	0
+ 1893 00d6 02       		.uleb128 0x2
+ 1894 00d7 18       		.uleb128 0x18
+ 1895 00d8 9142     		.uleb128 0x2111
+ 1896 00da 18       		.uleb128 0x18
+ 1897 00db 00       		.byte	0
+ 1898 00dc 00       		.byte	0
+ 1899 00dd 12       		.uleb128 0x12
+ 1900 00de 898201   		.uleb128 0x4109
+ 1901 00e1 01       		.byte	0x1
+ 1902 00e2 11       		.uleb128 0x11
+ 1903 00e3 01       		.uleb128 0x1
+ 1904 00e4 31       		.uleb128 0x31
+ 1905 00e5 13       		.uleb128 0x13
+ 1906 00e6 00       		.byte	0
+ 1907 00e7 00       		.byte	0
+ 1908 00e8 13       		.uleb128 0x13
+ 1909 00e9 2E       		.uleb128 0x2e
+ 1910 00ea 01       		.byte	0x1
+ 1911 00eb 3F       		.uleb128 0x3f
+ 1912 00ec 19       		.uleb128 0x19
+ 1913 00ed 03       		.uleb128 0x3
+ 1914 00ee 0E       		.uleb128 0xe
+ 1915 00ef 3A       		.uleb128 0x3a
+ 1916 00f0 0B       		.uleb128 0xb
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 39
+
+
+ 1917 00f1 3B       		.uleb128 0x3b
+ 1918 00f2 0B       		.uleb128 0xb
+ 1919 00f3 27       		.uleb128 0x27
+ 1920 00f4 19       		.uleb128 0x19
+ 1921 00f5 49       		.uleb128 0x49
+ 1922 00f6 13       		.uleb128 0x13
+ 1923 00f7 11       		.uleb128 0x11
+ 1924 00f8 01       		.uleb128 0x1
+ 1925 00f9 12       		.uleb128 0x12
+ 1926 00fa 06       		.uleb128 0x6
+ 1927 00fb 40       		.uleb128 0x40
+ 1928 00fc 18       		.uleb128 0x18
+ 1929 00fd 9742     		.uleb128 0x2117
+ 1930 00ff 19       		.uleb128 0x19
+ 1931 0100 01       		.uleb128 0x1
+ 1932 0101 13       		.uleb128 0x13
+ 1933 0102 00       		.byte	0
+ 1934 0103 00       		.byte	0
+ 1935 0104 14       		.uleb128 0x14
+ 1936 0105 34       		.uleb128 0x34
+ 1937 0106 00       		.byte	0
+ 1938 0107 03       		.uleb128 0x3
+ 1939 0108 0E       		.uleb128 0xe
+ 1940 0109 3A       		.uleb128 0x3a
+ 1941 010a 0B       		.uleb128 0xb
+ 1942 010b 3B       		.uleb128 0x3b
+ 1943 010c 0B       		.uleb128 0xb
+ 1944 010d 49       		.uleb128 0x49
+ 1945 010e 13       		.uleb128 0x13
+ 1946 010f 02       		.uleb128 0x2
+ 1947 0110 18       		.uleb128 0x18
+ 1948 0111 00       		.byte	0
+ 1949 0112 00       		.byte	0
+ 1950 0113 15       		.uleb128 0x15
+ 1951 0114 2E       		.uleb128 0x2e
+ 1952 0115 00       		.byte	0
+ 1953 0116 3F       		.uleb128 0x3f
+ 1954 0117 19       		.uleb128 0x19
+ 1955 0118 03       		.uleb128 0x3
+ 1956 0119 0E       		.uleb128 0xe
+ 1957 011a 3A       		.uleb128 0x3a
+ 1958 011b 0B       		.uleb128 0xb
+ 1959 011c 3B       		.uleb128 0x3b
+ 1960 011d 0B       		.uleb128 0xb
+ 1961 011e 49       		.uleb128 0x49
+ 1962 011f 13       		.uleb128 0x13
+ 1963 0120 11       		.uleb128 0x11
+ 1964 0121 01       		.uleb128 0x1
+ 1965 0122 12       		.uleb128 0x12
+ 1966 0123 06       		.uleb128 0x6
+ 1967 0124 40       		.uleb128 0x40
+ 1968 0125 18       		.uleb128 0x18
+ 1969 0126 9742     		.uleb128 0x2117
+ 1970 0128 19       		.uleb128 0x19
+ 1971 0129 00       		.byte	0
+ 1972 012a 00       		.byte	0
+ 1973 012b 16       		.uleb128 0x16
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 40
+
+
+ 1974 012c 2E       		.uleb128 0x2e
+ 1975 012d 00       		.byte	0
+ 1976 012e 3F       		.uleb128 0x3f
+ 1977 012f 19       		.uleb128 0x19
+ 1978 0130 03       		.uleb128 0x3
+ 1979 0131 0E       		.uleb128 0xe
+ 1980 0132 3A       		.uleb128 0x3a
+ 1981 0133 0B       		.uleb128 0xb
+ 1982 0134 3B       		.uleb128 0x3b
+ 1983 0135 0B       		.uleb128 0xb
+ 1984 0136 27       		.uleb128 0x27
+ 1985 0137 19       		.uleb128 0x19
+ 1986 0138 49       		.uleb128 0x49
+ 1987 0139 13       		.uleb128 0x13
+ 1988 013a 11       		.uleb128 0x11
+ 1989 013b 01       		.uleb128 0x1
+ 1990 013c 12       		.uleb128 0x12
+ 1991 013d 06       		.uleb128 0x6
+ 1992 013e 40       		.uleb128 0x40
+ 1993 013f 18       		.uleb128 0x18
+ 1994 0140 9742     		.uleb128 0x2117
+ 1995 0142 19       		.uleb128 0x19
+ 1996 0143 00       		.byte	0
+ 1997 0144 00       		.byte	0
+ 1998 0145 17       		.uleb128 0x17
+ 1999 0146 2E       		.uleb128 0x2e
+ 2000 0147 00       		.byte	0
+ 2001 0148 3F       		.uleb128 0x3f
+ 2002 0149 19       		.uleb128 0x19
+ 2003 014a 03       		.uleb128 0x3
+ 2004 014b 0E       		.uleb128 0xe
+ 2005 014c 3A       		.uleb128 0x3a
+ 2006 014d 0B       		.uleb128 0xb
+ 2007 014e 3B       		.uleb128 0x3b
+ 2008 014f 0B       		.uleb128 0xb
+ 2009 0150 27       		.uleb128 0x27
+ 2010 0151 19       		.uleb128 0x19
+ 2011 0152 11       		.uleb128 0x11
+ 2012 0153 01       		.uleb128 0x1
+ 2013 0154 12       		.uleb128 0x12
+ 2014 0155 06       		.uleb128 0x6
+ 2015 0156 40       		.uleb128 0x40
+ 2016 0157 18       		.uleb128 0x18
+ 2017 0158 9742     		.uleb128 0x2117
+ 2018 015a 19       		.uleb128 0x19
+ 2019 015b 00       		.byte	0
+ 2020 015c 00       		.byte	0
+ 2021 015d 18       		.uleb128 0x18
+ 2022 015e 34       		.uleb128 0x34
+ 2023 015f 00       		.byte	0
+ 2024 0160 03       		.uleb128 0x3
+ 2025 0161 0E       		.uleb128 0xe
+ 2026 0162 3A       		.uleb128 0x3a
+ 2027 0163 0B       		.uleb128 0xb
+ 2028 0164 3B       		.uleb128 0x3b
+ 2029 0165 0B       		.uleb128 0xb
+ 2030 0166 49       		.uleb128 0x49
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 41
+
+
+ 2031 0167 13       		.uleb128 0x13
+ 2032 0168 02       		.uleb128 0x2
+ 2033 0169 17       		.uleb128 0x17
+ 2034 016a 00       		.byte	0
+ 2035 016b 00       		.byte	0
+ 2036 016c 19       		.uleb128 0x19
+ 2037 016d 34       		.uleb128 0x34
+ 2038 016e 00       		.byte	0
+ 2039 016f 03       		.uleb128 0x3
+ 2040 0170 0E       		.uleb128 0xe
+ 2041 0171 3A       		.uleb128 0x3a
+ 2042 0172 0B       		.uleb128 0xb
+ 2043 0173 3B       		.uleb128 0x3b
+ 2044 0174 0B       		.uleb128 0xb
+ 2045 0175 49       		.uleb128 0x49
+ 2046 0176 13       		.uleb128 0x13
+ 2047 0177 3F       		.uleb128 0x3f
+ 2048 0178 19       		.uleb128 0x19
+ 2049 0179 02       		.uleb128 0x2
+ 2050 017a 18       		.uleb128 0x18
+ 2051 017b 00       		.byte	0
+ 2052 017c 00       		.byte	0
+ 2053 017d 1A       		.uleb128 0x1a
+ 2054 017e 2E       		.uleb128 0x2e
+ 2055 017f 00       		.byte	0
+ 2056 0180 3F       		.uleb128 0x3f
+ 2057 0181 19       		.uleb128 0x19
+ 2058 0182 3C       		.uleb128 0x3c
+ 2059 0183 19       		.uleb128 0x19
+ 2060 0184 6E       		.uleb128 0x6e
+ 2061 0185 0E       		.uleb128 0xe
+ 2062 0186 03       		.uleb128 0x3
+ 2063 0187 0E       		.uleb128 0xe
+ 2064 0188 3A       		.uleb128 0x3a
+ 2065 0189 0B       		.uleb128 0xb
+ 2066 018a 3B       		.uleb128 0x3b
+ 2067 018b 0B       		.uleb128 0xb
+ 2068 018c 00       		.byte	0
+ 2069 018d 00       		.byte	0
+ 2070 018e 1B       		.uleb128 0x1b
+ 2071 018f 2E       		.uleb128 0x2e
+ 2072 0190 00       		.byte	0
+ 2073 0191 3F       		.uleb128 0x3f
+ 2074 0192 19       		.uleb128 0x19
+ 2075 0193 3C       		.uleb128 0x3c
+ 2076 0194 19       		.uleb128 0x19
+ 2077 0195 6E       		.uleb128 0x6e
+ 2078 0196 0E       		.uleb128 0xe
+ 2079 0197 03       		.uleb128 0x3
+ 2080 0198 0E       		.uleb128 0xe
+ 2081 0199 3A       		.uleb128 0x3a
+ 2082 019a 0B       		.uleb128 0xb
+ 2083 019b 3B       		.uleb128 0x3b
+ 2084 019c 05       		.uleb128 0x5
+ 2085 019d 00       		.byte	0
+ 2086 019e 00       		.byte	0
+ 2087 019f 1C       		.uleb128 0x1c
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 42
+
+
+ 2088 01a0 2E       		.uleb128 0x2e
+ 2089 01a1 00       		.byte	0
+ 2090 01a2 3F       		.uleb128 0x3f
+ 2091 01a3 19       		.uleb128 0x19
+ 2092 01a4 3C       		.uleb128 0x3c
+ 2093 01a5 19       		.uleb128 0x19
+ 2094 01a6 6E       		.uleb128 0x6e
+ 2095 01a7 0E       		.uleb128 0xe
+ 2096 01a8 03       		.uleb128 0x3
+ 2097 01a9 0E       		.uleb128 0xe
+ 2098 01aa 00       		.byte	0
+ 2099 01ab 00       		.byte	0
+ 2100 01ac 00       		.byte	0
+ 2101              		.section	.debug_loc,"",%progbits
+ 2102              	.Ldebug_loc0:
+ 2103              	.LLST0:
+ 2104 0000 00000000 		.4byte	.LVL0
+ 2105 0004 11000000 		.4byte	.LVL1-1
+ 2106 0008 0100     		.2byte	0x1
+ 2107 000a 50       		.byte	0x50
+ 2108 000b 11000000 		.4byte	.LVL1-1
+ 2109 000f 2C000000 		.4byte	.LVL3
+ 2110 0013 0100     		.2byte	0x1
+ 2111 0015 54       		.byte	0x54
+ 2112 0016 2C000000 		.4byte	.LVL3
+ 2113 001a 1C010000 		.4byte	.LFE34
+ 2114 001e 0400     		.2byte	0x4
+ 2115 0020 F3       		.byte	0xf3
+ 2116 0021 01       		.uleb128 0x1
+ 2117 0022 50       		.byte	0x50
+ 2118 0023 9F       		.byte	0x9f
+ 2119 0024 00000000 		.4byte	0
+ 2120 0028 00000000 		.4byte	0
+ 2121              	.LLST1:
+ 2122 002c 00000000 		.4byte	.LVL0
+ 2123 0030 11000000 		.4byte	.LVL1-1
+ 2124 0034 0100     		.2byte	0x1
+ 2125 0036 51       		.byte	0x51
+ 2126 0037 11000000 		.4byte	.LVL1-1
+ 2127 003b 2E000000 		.4byte	.LVL4
+ 2128 003f 0100     		.2byte	0x1
+ 2129 0041 56       		.byte	0x56
+ 2130 0042 2E000000 		.4byte	.LVL4
+ 2131 0046 1C010000 		.4byte	.LFE34
+ 2132 004a 0400     		.2byte	0x4
+ 2133 004c F3       		.byte	0xf3
+ 2134 004d 01       		.uleb128 0x1
+ 2135 004e 51       		.byte	0x51
+ 2136 004f 9F       		.byte	0x9f
+ 2137 0050 00000000 		.4byte	0
+ 2138 0054 00000000 		.4byte	0
+ 2139              	.LLST2:
+ 2140 0058 00000000 		.4byte	.LVL0
+ 2141 005c 11000000 		.4byte	.LVL1-1
+ 2142 0060 0100     		.2byte	0x1
+ 2143 0062 52       		.byte	0x52
+ 2144 0063 11000000 		.4byte	.LVL1-1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 43
+
+
+ 2145 0067 28000000 		.4byte	.LVL2
+ 2146 006b 0100     		.2byte	0x1
+ 2147 006d 57       		.byte	0x57
+ 2148 006e 28000000 		.4byte	.LVL2
+ 2149 0072 1C010000 		.4byte	.LFE34
+ 2150 0076 0400     		.2byte	0x4
+ 2151 0078 F3       		.byte	0xf3
+ 2152 0079 01       		.uleb128 0x1
+ 2153 007a 52       		.byte	0x52
+ 2154 007b 9F       		.byte	0x9f
+ 2155 007c 00000000 		.4byte	0
+ 2156 0080 00000000 		.4byte	0
+ 2157              	.LLST3:
+ 2158 0084 00000000 		.4byte	.LVL13
+ 2159 0088 24000000 		.4byte	.LVL14
+ 2160 008c 0100     		.2byte	0x1
+ 2161 008e 50       		.byte	0x50
+ 2162 008f 24000000 		.4byte	.LVL14
+ 2163 0093 27000000 		.4byte	.LVL15-1
+ 2164 0097 0300     		.2byte	0x3
+ 2165 0099 71       		.byte	0x71
+ 2166 009a 7D       		.sleb128 -3
+ 2167 009b 9F       		.byte	0x9f
+ 2168 009c 27000000 		.4byte	.LVL15-1
+ 2169 00a0 34000000 		.4byte	.LVL17
+ 2170 00a4 0400     		.2byte	0x4
+ 2171 00a6 F3       		.byte	0xf3
+ 2172 00a7 01       		.uleb128 0x1
+ 2173 00a8 50       		.byte	0x50
+ 2174 00a9 9F       		.byte	0x9f
+ 2175 00aa 34000000 		.4byte	.LVL17
+ 2176 00ae 36000000 		.4byte	.LVL18
+ 2177 00b2 0100     		.2byte	0x1
+ 2178 00b4 50       		.byte	0x50
+ 2179 00b5 36000000 		.4byte	.LVL18
+ 2180 00b9 3E000000 		.4byte	.LFE35
+ 2181 00bd 0400     		.2byte	0x4
+ 2182 00bf F3       		.byte	0xf3
+ 2183 00c0 01       		.uleb128 0x1
+ 2184 00c1 50       		.byte	0x50
+ 2185 00c2 9F       		.byte	0x9f
+ 2186 00c3 00000000 		.4byte	0
+ 2187 00c7 00000000 		.4byte	0
+ 2188              	.LLST4:
+ 2189 00cb 0E000000 		.4byte	.LVL19
+ 2190 00cf 1E000000 		.4byte	.LVL20
+ 2191 00d3 0100     		.2byte	0x1
+ 2192 00d5 53       		.byte	0x53
+ 2193 00d6 20000000 		.4byte	.LVL21
+ 2194 00da 2C000000 		.4byte	.LVL22
+ 2195 00de 0100     		.2byte	0x1
+ 2196 00e0 53       		.byte	0x53
+ 2197 00e1 00000000 		.4byte	0
+ 2198 00e5 00000000 		.4byte	0
+ 2199              	.LLST5:
+ 2200 00e9 2E000000 		.4byte	.LVL23
+ 2201 00ed 36000000 		.4byte	.LVL24
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 44
+
+
+ 2202 00f1 0100     		.2byte	0x1
+ 2203 00f3 54       		.byte	0x54
+ 2204 00f4 00000000 		.4byte	0
+ 2205 00f8 00000000 		.4byte	0
+ 2206              	.LLST6:
+ 2207 00fc 00000000 		.4byte	.LVL27
+ 2208 0100 0B000000 		.4byte	.LVL28-1
+ 2209 0104 0100     		.2byte	0x1
+ 2210 0106 50       		.byte	0x50
+ 2211 0107 0B000000 		.4byte	.LVL28-1
+ 2212 010b 38000000 		.4byte	.LVL31
+ 2213 010f 0100     		.2byte	0x1
+ 2214 0111 54       		.byte	0x54
+ 2215 0112 38000000 		.4byte	.LVL31
+ 2216 0116 3A000000 		.4byte	.LVL32
+ 2217 011a 0100     		.2byte	0x1
+ 2218 011c 50       		.byte	0x50
+ 2219 011d 3A000000 		.4byte	.LVL32
+ 2220 0121 40000000 		.4byte	.LVL33
+ 2221 0125 0100     		.2byte	0x1
+ 2222 0127 54       		.byte	0x54
+ 2223 0128 40000000 		.4byte	.LVL33
+ 2224 012c 4C000000 		.4byte	.LFE36
+ 2225 0130 0400     		.2byte	0x4
+ 2226 0132 F3       		.byte	0xf3
+ 2227 0133 01       		.uleb128 0x1
+ 2228 0134 50       		.byte	0x50
+ 2229 0135 9F       		.byte	0x9f
+ 2230 0136 00000000 		.4byte	0
+ 2231 013a 00000000 		.4byte	0
+ 2232              		.section	.debug_aranges,"",%progbits
+ 2233 0000 64000000 		.4byte	0x64
+ 2234 0004 0200     		.2byte	0x2
+ 2235 0006 00000000 		.4byte	.Ldebug_info0
+ 2236 000a 04       		.byte	0x4
+ 2237 000b 00       		.byte	0
+ 2238 000c 0000     		.2byte	0
+ 2239 000e 0000     		.2byte	0
+ 2240 0010 00000000 		.4byte	.LFB34
+ 2241 0014 1C010000 		.4byte	.LFE34-.LFB34
+ 2242 0018 00000000 		.4byte	.LFB35
+ 2243 001c 3E000000 		.4byte	.LFE35-.LFB35
+ 2244 0020 00000000 		.4byte	.LFB37
+ 2245 0024 0C000000 		.4byte	.LFE37-.LFB37
+ 2246 0028 00000000 		.4byte	.LFB38
+ 2247 002c 0C000000 		.4byte	.LFE38-.LFB38
+ 2248 0030 00000000 		.4byte	.LFB39
+ 2249 0034 04000000 		.4byte	.LFE39-.LFB39
+ 2250 0038 00000000 		.4byte	.LFB40
+ 2251 003c 48000000 		.4byte	.LFE40-.LFB40
+ 2252 0040 00000000 		.4byte	.LFB41
+ 2253 0044 50000000 		.4byte	.LFE41-.LFB41
+ 2254 0048 00000000 		.4byte	.LFB43
+ 2255 004c 2C010000 		.4byte	.LFE43-.LFB43
+ 2256 0050 00000000 		.4byte	.LFB42
+ 2257 0054 28000000 		.4byte	.LFE42-.LFB42
+ 2258 0058 00000000 		.4byte	.LFB36
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 45
+
+
+ 2259 005c 4C000000 		.4byte	.LFE36-.LFB36
+ 2260 0060 00000000 		.4byte	0
+ 2261 0064 00000000 		.4byte	0
+ 2262              		.section	.debug_ranges,"",%progbits
+ 2263              	.Ldebug_ranges0:
+ 2264 0000 00000000 		.4byte	.LFB34
+ 2265 0004 1C010000 		.4byte	.LFE34
+ 2266 0008 00000000 		.4byte	.LFB35
+ 2267 000c 3E000000 		.4byte	.LFE35
+ 2268 0010 00000000 		.4byte	.LFB37
+ 2269 0014 0C000000 		.4byte	.LFE37
+ 2270 0018 00000000 		.4byte	.LFB38
+ 2271 001c 0C000000 		.4byte	.LFE38
+ 2272 0020 00000000 		.4byte	.LFB39
+ 2273 0024 04000000 		.4byte	.LFE39
+ 2274 0028 00000000 		.4byte	.LFB40
+ 2275 002c 48000000 		.4byte	.LFE40
+ 2276 0030 00000000 		.4byte	.LFB41
+ 2277 0034 50000000 		.4byte	.LFE41
+ 2278 0038 00000000 		.4byte	.LFB43
+ 2279 003c 2C010000 		.4byte	.LFE43
+ 2280 0040 00000000 		.4byte	.LFB42
+ 2281 0044 28000000 		.4byte	.LFE42
+ 2282 0048 00000000 		.4byte	.LFB36
+ 2283 004c 4C000000 		.4byte	.LFE36
+ 2284 0050 00000000 		.4byte	0
+ 2285 0054 00000000 		.4byte	0
+ 2286              		.section	.debug_line,"",%progbits
+ 2287              	.Ldebug_line0:
+ 2288 0000 F6020000 		.section	.debug_str,"MS",%progbits,1
+ 2288      02009701 
+ 2288      00000201 
+ 2288      FB0E0D00 
+ 2288      01010101 
+ 2289              	.LASF31:
+ 2290 0000 72786D61 		.ascii	"rxmailbox\000"
+ 2290      696C626F 
+ 2290      7800
+ 2291              	.LASF49:
+ 2292 000a 67657443 		.ascii	"getChipType\000"
+ 2292      68697054 
+ 2292      79706500 
+ 2293              	.LASF56:
+ 2294 0016 53656E64 		.ascii	"SendCANPacket\000"
+ 2294      43414E50 
+ 2294      61636B65 
+ 2294      7400
+ 2295              	.LASF54:
+ 2296 0024 6D61696C 		.ascii	"mailbox\000"
+ 2296      626F7800 
+ 2297              	.LASF28:
+ 2298 002c 43414E5F 		.ascii	"CAN_DATA_BYTES\000"
+ 2298      44415441 
+ 2298      5F425954 
+ 2298      455300
+ 2299              	.LASF2:
+ 2300 003b 73686F72 		.ascii	"short int\000"
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 46
+
+
+ 2300      7420696E 
+ 2300      7400
+ 2301              	.LASF16:
+ 2302 0045 73697A65 		.ascii	"sizetype\000"
+ 2302      74797065 
+ 2302      00
+ 2303              	.LASF58:
+ 2304 004e 72656365 		.ascii	"receivedPacket\000"
+ 2304      69766564 
+ 2304      5061636B 
+ 2304      657400
+ 2305              	.LASF65:
+ 2306 005d 6C617465 		.ascii	"latestMessageFull\000"
+ 2306      73744D65 
+ 2306      73736167 
+ 2306      6546756C 
+ 2306      6C00
+ 2307              	.LASF41:
+ 2308 006f 64657669 		.ascii	"deviceGroupInput\000"
+ 2308      63654772 
+ 2308      6F757049 
+ 2308      6E707574 
+ 2308      00
+ 2309              	.LASF45:
+ 2310 0080 50536F43 		.ascii	"PSoCMessage\000"
+ 2310      4D657373 
+ 2310      61676500 
+ 2311              	.LASF53:
+ 2312 008c 73746174 		.ascii	"statusReg\000"
+ 2312      75735265 
+ 2312      6700
+ 2313              	.LASF37:
+ 2314 0096 72786461 		.ascii	"rxdata\000"
+ 2314      746100
+ 2315              	.LASF4:
+ 2316 009d 5F5F7569 		.ascii	"__uint16_t\000"
+ 2316      6E743136 
+ 2316      5F7400
+ 2317              	.LASF26:
+ 2318 00a8 62797465 		.ascii	"byte\000"
+ 2318      00
+ 2319              	.LASF70:
+ 2320 00ad 43414E5F 		.ascii	"CAN_Start\000"
+ 2320      53746172 
+ 2320      7400
+ 2321              	.LASF79:
+ 2322 00b7 6D656D63 		.ascii	"memcpy\000"
+ 2322      707900
+ 2323              	.LASF42:
+ 2324 00be 64657669 		.ascii	"deviceAddressInputA\000"
+ 2324      63654164 
+ 2324      64726573 
+ 2324      73496E70 
+ 2324      75744100 
+ 2325              	.LASF43:
+ 2326 00d2 64657669 		.ascii	"deviceAddressInputB\000"
+ 2326      63654164 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 47
+
+
+ 2326      64726573 
+ 2326      73496E70 
+ 2326      75744200 
+ 2327              	.LASF75:
+ 2328 00e6 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2328      43313120 
+ 2328      352E342E 
+ 2328      31203230 
+ 2328      31363036 
+ 2329 0119 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 2329      20726576 
+ 2329      6973696F 
+ 2329      6E203233 
+ 2329      37373135 
+ 2330 014c 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2330      66756E63 
+ 2330      74696F6E 
+ 2330      2D736563 
+ 2330      74696F6E 
+ 2331              	.LASF12:
+ 2332 0174 75696E74 		.ascii	"uint8_t\000"
+ 2332      385F7400 
+ 2333              	.LASF18:
+ 2334 017c 75696E74 		.ascii	"uint8\000"
+ 2334      3800
+ 2335              	.LASF64:
+ 2336 0182 6C617465 		.ascii	"latestMessageTail\000"
+ 2336      73744D65 
+ 2336      73736167 
+ 2336      65546169 
+ 2336      6C00
+ 2337              	.LASF36:
+ 2338 0194 72786964 		.ascii	"rxid\000"
+ 2338      00
+ 2339              	.LASF71:
+ 2340 0199 43414E5F 		.ascii	"CAN_RxBufConfig\000"
+ 2340      52784275 
+ 2340      66436F6E 
+ 2340      66696700 
+ 2341              	.LASF77:
+ 2342 01a9 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
+ 2342      73657273 
+ 2342      5C6D6577 
+ 2342      696E5C4F 
+ 2342      6E654472 
+ 2343 01d7 5C537765 		.ascii	"\\Swerve Motor Controller\\SwerveMotorFirmware.cyds"
+ 2343      72766520 
+ 2343      4D6F746F 
+ 2343      7220436F 
+ 2343      6E74726F 
+ 2344 0208 6E00     		.ascii	"n\000"
+ 2345              	.LASF34:
+ 2346 020a 72786163 		.ascii	"rxacr\000"
+ 2346      7200
+ 2347              	.LASF0:
+ 2348 0210 7369676E 		.ascii	"signed char\000"
+ 2348      65642063 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 48
+
+
+ 2348      68617200 
+ 2349              	.LASF20:
+ 2350 021c 666C6F61 		.ascii	"float\000"
+ 2350      7400
+ 2351              	.LASF9:
+ 2352 0222 6C6F6E67 		.ascii	"long long int\000"
+ 2352      206C6F6E 
+ 2352      6720696E 
+ 2352      7400
+ 2353              	.LASF29:
+ 2354 0230 43414E5F 		.ascii	"CAN_REG_32\000"
+ 2354      5245475F 
+ 2354      333200
+ 2355              	.LASF17:
+ 2356 023b 43414E50 		.ascii	"CANPacket\000"
+ 2356      61636B65 
+ 2356      7400
+ 2357              	.LASF57:
+ 2358 0245 506F6C6C 		.ascii	"PollAndReceiveCANPacket\000"
+ 2358      416E6452 
+ 2358      65636569 
+ 2358      76654341 
+ 2358      4E506163 
+ 2359              	.LASF6:
+ 2360 025d 6C6F6E67 		.ascii	"long int\000"
+ 2360      20696E74 
+ 2360      00
+ 2361              	.LASF51:
+ 2362 0266 496E6974 		.ascii	"InitCAN_swerve\000"
+ 2362      43414E5F 
+ 2362      73776572 
+ 2362      766500
+ 2363              	.LASF3:
+ 2364 0275 5F5F7569 		.ascii	"__uint8_t\000"
+ 2364      6E74385F 
+ 2364      7400
+ 2365              	.LASF7:
+ 2366 027f 5F5F7569 		.ascii	"__uint32_t\000"
+ 2366      6E743332 
+ 2366      5F7400
+ 2367              	.LASF61:
+ 2368 028a 6D657373 		.ascii	"messageReadFlag\000"
+ 2368      61676552 
+ 2368      65616446 
+ 2368      6C616700 
+ 2369              	.LASF25:
+ 2370 029a 6C6F6E67 		.ascii	"long double\000"
+ 2370      20646F75 
+ 2370      626C6500 
+ 2371              	.LASF67:
+ 2372 02a6 64657669 		.ascii	"deviceAddressB\000"
+ 2372      63654164 
+ 2372      64726573 
+ 2372      734200
+ 2373              	.LASF38:
+ 2374 02b5 7278616D 		.ascii	"rxamrd\000"
+ 2374      726400
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 49
+
+
+ 2375              	.LASF1:
+ 2376 02bc 756E7369 		.ascii	"unsigned char\000"
+ 2376      676E6564 
+ 2376      20636861 
+ 2376      7200
+ 2377              	.LASF62:
+ 2378 02ca 6C617465 		.ascii	"latestMessage\000"
+ 2378      73744D65 
+ 2378      73736167 
+ 2378      6500
+ 2379              	.LASF63:
+ 2380 02d8 6C617465 		.ascii	"latestMessageHead\000"
+ 2380      73744D65 
+ 2380      73736167 
+ 2380      65486561 
+ 2380      6400
+ 2381              	.LASF10:
+ 2382 02ea 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2382      206C6F6E 
+ 2382      6720756E 
+ 2382      7369676E 
+ 2382      65642069 
+ 2383              	.LASF14:
+ 2384 0301 75696E74 		.ascii	"uint32_t\000"
+ 2384      33325F74 
+ 2384      00
+ 2385              	.LASF11:
+ 2386 030a 756E7369 		.ascii	"unsigned int\000"
+ 2386      676E6564 
+ 2386      20696E74 
+ 2386      00
+ 2387              	.LASF13:
+ 2388 0317 75696E74 		.ascii	"uint16_t\000"
+ 2388      31365F74 
+ 2388      00
+ 2389              	.LASF27:
+ 2390 0320 43414E5F 		.ascii	"CAN_DATA_BYTES_MSG\000"
+ 2390      44415441 
+ 2390      5F425954 
+ 2390      45535F4D 
+ 2390      534700
+ 2391              	.LASF24:
+ 2392 0333 72656733 		.ascii	"reg32\000"
+ 2392      3200
+ 2393              	.LASF5:
+ 2394 0339 73686F72 		.ascii	"short unsigned int\000"
+ 2394      7420756E 
+ 2394      7369676E 
+ 2394      65642069 
+ 2394      6E7400
+ 2395              	.LASF50:
+ 2396 034c 636F756E 		.ascii	"countAddFIFO\000"
+ 2396      74416464 
+ 2396      4649464F 
+ 2396      00
+ 2397              	.LASF39:
+ 2398 0359 72786163 		.ascii	"rxacrd\000"
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 50
+
+
+ 2398      726400
+ 2399              	.LASF22:
+ 2400 0360 63686172 		.ascii	"char\000"
+ 2400      00
+ 2401              	.LASF40:
+ 2402 0365 43414E5F 		.ascii	"CAN_RX_STRUCT\000"
+ 2402      52585F53 
+ 2402      54525543 
+ 2402      5400
+ 2403              	.LASF69:
+ 2404 0373 72784D61 		.ascii	"rxMailbox\000"
+ 2404      696C626F 
+ 2404      7800
+ 2405              	.LASF60:
+ 2406 037d 6D657373 		.ascii	"messagePresentFlag\000"
+ 2406      61676550 
+ 2406      72657365 
+ 2406      6E74466C 
+ 2406      616700
+ 2407              	.LASF32:
+ 2408 0390 7278636D 		.ascii	"rxcmd\000"
+ 2408      6400
+ 2409              	.LASF68:
+ 2410 0396 64657669 		.ascii	"deviceGroup\000"
+ 2410      63654772 
+ 2410      6F757000 
+ 2411              	.LASF55:
+ 2412 03a2 636F756E 		.ascii	"countRemoveFIFO\000"
+ 2412      7452656D 
+ 2412      6F766546 
+ 2412      49464F00 
+ 2413              	.LASF46:
+ 2414 03b2 50536F43 		.ascii	"PSoCData\000"
+ 2414      44617461 
+ 2414      00
+ 2415              	.LASF15:
+ 2416 03bb 64617461 		.ascii	"data\000"
+ 2416      00
+ 2417              	.LASF19:
+ 2418 03c0 75696E74 		.ascii	"uint32\000"
+ 2418      333200
+ 2419              	.LASF23:
+ 2420 03c7 72656738 		.ascii	"reg8\000"
+ 2420      00
+ 2421              	.LASF8:
+ 2422 03cc 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2422      20756E73 
+ 2422      69676E65 
+ 2422      6420696E 
+ 2422      7400
+ 2423              	.LASF30:
+ 2424 03de 43414E5F 		.ascii	"CAN_TX_MSG\000"
+ 2424      54585F4D 
+ 2424      534700
+ 2425              	.LASF74:
+ 2426 03e9 43414E5F 		.ascii	"CAN_SendMsg\000"
+ 2426      53656E64 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 51
+
+
+ 2426      4D736700 
+ 2427              	.LASF72:
+ 2428 03f5 43414E5F 		.ascii	"CAN_GlobalIntEnable\000"
+ 2428      476C6F62 
+ 2428      616C496E 
+ 2428      74456E61 
+ 2428      626C6500 
+ 2429              	.LASF59:
+ 2430 0409 73697A65 		.ascii	"size\000"
+ 2430      00
+ 2431              	.LASF47:
+ 2432 040e 6765744C 		.ascii	"getLocalDeviceSerial\000"
+ 2432      6F63616C 
+ 2432      44657669 
+ 2432      63655365 
+ 2432      7269616C 
+ 2433              	.LASF76:
+ 2434 0423 2E2E5C43 		.ascii	"..\\CANLib\\PortFiles\\PortPSOC_swerve.c\000"
+ 2434      414E4C69 
+ 2434      625C506F 
+ 2434      72744669 
+ 2434      6C65735C 
+ 2435              	.LASF73:
+ 2436 0449 4379496E 		.ascii	"CyIntSetVector\000"
+ 2436      74536574 
+ 2436      56656374 
+ 2436      6F7200
+ 2437              	.LASF78:
+ 2438 0458 4649464F 		.ascii	"FIFOSize\000"
+ 2438      53697A65 
+ 2438      00
+ 2439              	.LASF21:
+ 2440 0461 646F7562 		.ascii	"double\000"
+ 2440      6C6500
+ 2441              	.LASF44:
+ 2442 0468 7061636B 		.ascii	"packetToSend\000"
+ 2442      6574546F 
+ 2442      53656E64 
+ 2442      00
+ 2443              	.LASF52:
+ 2444 0475 43414E5F 		.ascii	"CAN_FLAG_ISR\000"
+ 2444      464C4147 
+ 2444      5F495352 
+ 2444      00
+ 2445              	.LASF33:
+ 2446 0482 7278616D 		.ascii	"rxamr\000"
+ 2446      7200
+ 2447              	.LASF35:
+ 2448 0488 43414E5F 		.ascii	"CAN_RX_CFG\000"
+ 2448      52585F43 
+ 2448      464700
+ 2449              	.LASF48:
+ 2450 0493 6765744C 		.ascii	"getLocalDeviceGroup\000"
+ 2450      6F63616C 
+ 2450      44657669 
+ 2450      63654772 
+ 2450      6F757000 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccDB7rOC.s 			page 52
+
+
+ 2451              	.LASF66:
+ 2452 04a7 64657669 		.ascii	"deviceAddressA\000"
+ 2452      63654164 
+ 2452      64726573 
+ 2452      734100
+ 2453              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,8 @@
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj|fc249c25-8f34-4767-801b-4e3eeae4259c
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\StripLightLib.cyprj|422a7947-81ec-4fbf-be68-803575b83d4a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|9a6cf0fd-e662-470c-8009-ac79ab2dbac0
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|05e01cfb-a9f1-4245-8682-5c91a6b8e5b0
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|68439634-4018-4ba7-8032-c19f095ba033
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|78fc7d1f-b0bc-4b4a-a4c6-237f40a83fca
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|5075c740-660f-4996-bbe7-1167c0998613
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|5239e26b-359a-4159-a1c1-81fd0b89cbb7

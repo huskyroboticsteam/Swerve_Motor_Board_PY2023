@@ -1,0 +1,31 @@
+# SwerveMotorFirmware
+# 2023-01-09 00:56:08Z
+
+# IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
+dont_use_io iocell 3 2
+# IO_3@[IOP=(3)][IoId=(3)] is reserved: SWDDebugEnabled
+dont_use_io iocell 3 3
+set_location "ClockGenBlock" m0s8clockgenblockcell -1 -1 0
+set_io "Limit1(0)" iocell 2 3
+set_io "Limit2(0)" iocell 2 2
+set_io "Motor1PWM(0)" iocell 5 2
+set_io "Potentiometer(0)" iocell 2 6
+set_io "\ADC_SAR_Seq_1:Bypass(0)\" iocell 1 7
+set_io "CANRX(0)" iocell 4 0
+set_io "CANTX(0)" iocell 4 1
+set_io "\UART:tx(0)\" iocell 3 1
+set_io "\UART:rx(0)\" iocell 3 0
+set_io "Dip1(0)" iocell 4 2
+set_io "Dip2(0)" iocell 4 3
+set_io "Dip3(0)" iocell 4 4
+set_io "Dip4(0)" iocell 4 5
+set_io "LED_Debug1(0)" iocell 0 2
+set_io "LED_Debug2(0)" iocell 0 1
+set_io "LED_CAN(0)" iocell 0 0
+set_io "LED_Error(0)" iocell 0 3
+set_io "Motor1Fault(0)" iocell 0 4
+set_io "Motor2Fault(0)" iocell 0 5
+set_io "Motor1Direction(0)" iocell 5 3
+set_io "Motor2PWM(0)" iocell 5 0
+set_io "Motor2Direction(0)" iocell 5 1
+set_location "\ADC_SAR_Seq_1:cy_psoc4_sar\" p4sarcell -1 -1 0
