@@ -1,32 +1,41 @@
 /* ========================================
  *
- * Copyright YOUR COMPANY, THE YEAR
+ * Copyright HUSKY ROBOTICS, OLIVER HUANG
  * All Rights Reserved
  * UNPUBLISHED, LICENSED SOFTWARE.
  *
  * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
+ * WHICH IS THE PROPERTY OF Husky Robotics.
  *
  * ========================================
 */
+
+// main.c
+// Swerve Motor Board
+
 #include <project.h>
 #include "cyapicallbacks.h"
 #include <stdio.h>
 #include <stdint.h>
-//#include "../CANLib/CANLibrary.h"
+// #include "../CANLib/CANLibrary.h"
 #include "MotorDrive.h"
 #include "LED_Array.h"
 #include "DebugMessages.h"
 
-//LED
+
+int getSerialAddress();
+void Initialize(void);
+void PrintCanPacket(CANPacket receivedPacket);
+
+// LED
 uint8 time_LED = 0;
 extern const uint32 StripLights_CLUT[ ];
 uint8_t send_animation = 0;
 
-//Uart variables
+// Uart variables
 char8 txData[TX_DATA_SIZE];
 
-//drive varaible
+// drive varaible
 uint8 invalidate = 0;
 
 /*drive mode
@@ -43,7 +52,7 @@ int test;
 CAN_RX_CFG rxMailbox;
 //CY_ISR_PROTO(ISR_CAN);
 
-
+//stops motor every 20s or so if no new packet was received. software might want this removed
 CY_ISR(Period_Reset_Handler) {
     volatile int timer = Timer_1_ReadStatusRegister();
     invalidate++;
@@ -54,13 +63,15 @@ CY_ISR(Period_Reset_Handler) {
     StripLights_Trigger(1);
     send_animation++;
     if(invalidate >= 20){
-        set_PWM_M1(0, 0, 0);    //check what this means
+        set_PWM_M1(0, 0, 0);    
         set_PWM_M2(0, 0, 0);  
     }
 }
-  
+ 
+//only for rotation motor (inc) 
+//activates on 180 and -180 (two limit switches)
 CY_ISR(Pin_Limit_Handler){
-    set_PWM_M1(0, 0, 0);
+    set_PWM_M1(0, 0, 0);    //figure out which motor is rotation
     set_PWM_M2(0, 0, 0);
     QuadDec_SetCounter(0);
 }
@@ -117,21 +128,21 @@ void Initialize(void) {
     initalize_LEDs(LOW_LED_POWER);
     
     //display Dip Status
-    address = Can_addr_Read();              //needs figuring out, we got two addresses now
+    address = getSerialAddress();   //address of drive motor. Swivel motor is this + 1
     UART_Start();
     
     LED_Error_Write(~(address >> 3 & 1));
     LED_Debug2_Write(~(address >> 2) & 1);
     LED_Debug1_Write(~(address >> 1) & 1);
     LED_CAN_Write(~address & 1);
-    InitCAN_swerve(0x4, (int)address, 1); //1 is placeholder
+    InitCAN_swerve(0x4, (int)address, (int)address + 1); //group, drive, swivel
     Timer_1_Start();
     QuadDec_Start();
     isr_Limit_1_StartEx(Pin_Limit_Handler);
     isr_period_StartEx(Period_Reset_Handler);
 }
 
-void PrintCanPacket(CANPacket receivedPacket){
+void PrintCanPacket(CANPacket receivedPacket) {
     for(int i = 0; i < 8; i++ ) {
         sprintf(txData,"Byte%d %x   ", i+1, receivedPacket.data[i]);
         UART_UartPutString(txData);
@@ -140,6 +151,26 @@ void PrintCanPacket(CANPacket receivedPacket){
     sprintf(txData,"\r\n");
     UART_UartPutString(txData);
 }
+
+// Reads dip switches to calculate the serial address
+// Taken from Davis Sauer's IMU project
+int getSerialAddress()
+{
+    int address = 0;
+    if (Dip1_Read()==0)
+        address += 1;
+    if (Dip2_Read()==0)
+        address += 2;
+    if (Dip3_Read()==0)
+        address += 4;
+    if (Dip4_Read()==0)
+        address += 8;
+    if (address == 0)
+        address = DEVICE_SERIAL_TELEM_LOCALIZATION;
+ 
+    return address;
+}
+
 
 /*
 void ReadCan(CANPacket *receivedPacket){

@@ -1,6 +1,6 @@
 // ======================================================================
 // SwerveMotorFirmware.v generated from TopDesign.cysch
-// 01/08/2023 at 16:56
+// 01/12/2023 at 18:19
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1612,11 +1612,11 @@ endmodule
 `endif
 
 `ifdef WARP
-`define CY_BLK_DIR "C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\B_WS2811_v1_3"
-`include "C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v"
+`define CY_BLK_DIR "C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3"
+`include "C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v"
 `else
-`define CY_BLK_DIR "C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\B_WS2811_v1_3"
-`include "C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v"
+`define CY_BLK_DIR "C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3"
+`include "C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v"
 `endif
 
 // StripLights_v2_2(Channels=1, ClockSpeedKhz=800, Display_Memory=0, LEDs_per_Strip=3, Speed=1, Transfer_Method=1, WS281x_Type=2, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=StripLights_v2_2, CY_CONFIG_TITLE=StripLights, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=StripLights, CY_INSTANCE_SHORT_NAME=StripLights, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=2, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=StripLights, )
@@ -2834,7 +2834,7 @@ module top ;
 		  .divisor(2),
 		  .period("0"),
 		  .is_direct(0),
-		  .is_digital(0))
+		  .is_digital(1))
 		Clock_1
 		 (.clock_out(Net_14));
 
@@ -2886,7 +2886,7 @@ module top ;
 		  .divisor(0),
 		  .period("10000000000000"),
 		  .is_direct(0),
-		  .is_digital(0))
+		  .is_digital(1))
 		Clock_2
 		 (.clock_out(Net_156));
 
@@ -3409,7 +3409,7 @@ module top ;
 		  .divisor(2),
 		  .period("0"),
 		  .is_direct(0),
-		  .is_digital(0))
+		  .is_digital(1))
 		timer_clock
 		 (.clock_out(Net_1314));
 

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
   28:Generated_Source\PSoC4/StripLights.c **** uint8   StripLights_ledArray[StripLights_ARRAY_ROWS][StripLights_ARRAY_COLS];
   29:Generated_Source\PSoC4/StripLights.c **** #endif
   30:Generated_Source\PSoC4/StripLights.c **** 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 2
 
 
   31:Generated_Source\PSoC4/StripLights.c **** uint32  StripLights_ledIndex = 0;  
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
   85:Generated_Source\PSoC4/StripLights.c **** 0x0000FF00, 0x0055FF00, 0x00AAFF00, 0x00FFFF00,  // 48, Red, ??, ??, Magenta
   86:Generated_Source\PSoC4/StripLights.c **** 0x0000FF55, 0x0055FF55, 0x00AAFF55, 0x00FFFF55,  // 52,
   87:Generated_Source\PSoC4/StripLights.c **** 0x0000FFAA, 0x0055FFAA, 0x00AAFFAA, 0x00FFFFAA,  // 56,
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 3
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 3
 
 
   88:Generated_Source\PSoC4/StripLights.c **** 0x0000FFFF, 0x0055FFFF, 0x00AAFFFF, 0x00FFFFFF,  // 60, Yellow,??, ??, White
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  142:Generated_Source\PSoC4/StripLights.c **** 
  143:Generated_Source\PSoC4/StripLights.c **** //xxBBRRGG  (64)  [ Index = 24 ]
  144:Generated_Source\PSoC4/StripLights.c **** 0x00000000, 0x00550000, 0x00AA0000, 0x00FF0000,  // 0, Black,  LtBlue, MBlue, Blue
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 4
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 4
 
 
  145:Generated_Source\PSoC4/StripLights.c **** 0x00005500, 0x00555500, 0x00AA5500, 0x00FF5500,  // 4, LtGreen
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  199:Generated_Source\PSoC4/StripLights.c **** *  void  
  200:Generated_Source\PSoC4/StripLights.c **** *
  201:Generated_Source\PSoC4/StripLights.c **** * Return: 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 5
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 5
 
 
  202:Generated_Source\PSoC4/StripLights.c **** *  void
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  256:Generated_Source\PSoC4/StripLights.c **** *
  257:Generated_Source\PSoC4/StripLights.c **** * Return: 
  258:Generated_Source\PSoC4/StripLights.c **** *  void
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 6
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 6
 
 
  259:Generated_Source\PSoC4/StripLights.c **** *
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  313:Generated_Source\PSoC4/StripLights.c ****     {
  314:Generated_Source\PSoC4/StripLights.c ****          return((uint32)0);
  315:Generated_Source\PSoC4/StripLights.c ****     }
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 7
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 7
 
 
  316:Generated_Source\PSoC4/StripLights.c **** }
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  370:Generated_Source\PSoC4/StripLights.c **** /*****************************************************************************
  371:Generated_Source\PSoC4/StripLights.c **** * Function Name: StripLights_FISR
  372:Generated_Source\PSoC4/StripLights.c **** ******************************************************************************
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 8
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 8
 
 
  373:Generated_Source\PSoC4/StripLights.c **** *
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
   53 0022 0C4A     		ldr	r2, .L4+12
   54 0024 1268     		ldr	r2, [r2]
   55 0026 1340     		ands	r3, r2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 9
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 9
 
 
  402:Generated_Source\PSoC4/StripLights.c **** 
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
   97              		.thumb_func
   98              		.type	StripLights_CISR, %function
   99              	StripLights_CISR:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 10
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 10
 
 
  100              	.LFB40:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  447:Generated_Source\PSoC4/StripLights.c ****              color = StripLights_ledArray[StripLights_row][0];
  122              		.loc 1 447 0
  123 0018 114A     		ldr	r2, .L9+4
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 11
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 11
 
 
  124 001a 5368     		ldr	r3, [r2, #4]
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  465:Generated_Source\PSoC4/StripLights.c ****     {
  466:Generated_Source\PSoC4/StripLights.c ****         StripLights_refreshComplete = 1u;
  161              		.loc 1 466 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 12
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 12
 
 
  162 0052 0122     		movs	r2, #1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  208              		.loc 1 272 0
  209 000e 0F48     		ldr	r0, .L13
  210              	.LVL1:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 13
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 13
 
 
  211 0010 4368     		ldr	r3, [r0, #4]
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  290:Generated_Source\PSoC4/StripLights.c **** 
  256              		.loc 1 290 0
  257              		@ sp needed
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 14
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 14
 
 
  258 004a 7047     		bx	lr
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  307              	.LFE36:
  308              		.size	StripLights_Ready, .-StripLights_Ready
  309              		.section	.text.StripLights_Stop,"ax",%progbits
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 15
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 15
 
 
  310              		.align	2
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  359              	.LVL10:
  359:Generated_Source\PSoC4/StripLights.c **** 
  360              		.loc 1 359 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 16
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 16
 
 
  361 000a 1821     		movs	r1, #24
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  494:Generated_Source\PSoC4/StripLights.c **** * Summary:
  495:Generated_Source\PSoC4/StripLights.c **** *   Clear LED memory with given color, but do not update display.
  496:Generated_Source\PSoC4/StripLights.c **** *
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 17
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 17
 
 
  497:Generated_Source\PSoC4/StripLights.c **** * Parameters:  
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  424 001c 0131     		adds	r1, r1, #1
  425              	.LVL19:
  426              	.L26:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 18
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 18
 
 
  508:Generated_Source\PSoC4/StripLights.c ****     {
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  468              	.LFE41:
  469              		.size	StripLights_DisplayClear, .-StripLights_DisplayClear
  470 000e C046     		.section	.text.StripLights_WriteColor,"ax",%progbits
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 19
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 19
 
 
  471              		.align	2
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  501              		.loc 1 544 0
  502 0014 000C     		lsrs	r0, r0, #16
  503              	.LVL26:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 20
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 20
 
 
  545:Generated_Source\PSoC4/StripLights.c ****     StripLights_DATA = (uint8)(color & 0x000000FF);  // Write Blue
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  536              		.loc 1 566 0 is_stmt 0 discriminator 1
  537 0004 0029     		cmp	r1, #0
  538 0006 09DB     		blt	.L37
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 21
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 21
 
 
  539              		.loc 1 566 0 discriminator 2
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  587:Generated_Source\PSoC4/StripLights.c **** *
  588:Generated_Source\PSoC4/StripLights.c **** * Return: 
  589:Generated_Source\PSoC4/StripLights.c **** *  None 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 22
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 22
 
 
  590:Generated_Source\PSoC4/StripLights.c **** *******************************************************************************/
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  613              		.section	.text.StripLights_DrawCircle,"ax",%progbits
  614              		.align	2
  615              		.global	StripLights_DrawCircle
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 23
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 23
 
 
  616              		.code	16
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  649 0016 0193     		str	r3, [sp, #4]
  625:Generated_Source\PSoC4/StripLights.c **** 	int32 f = 1 - radius;
  650              		.loc 1 625 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 24
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 24
 
 
  651 0018 0123     		movs	r3, #1
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  694              		.loc 1 626 0
  695 0054 0023     		movs	r3, #0
  635:Generated_Source\PSoC4/StripLights.c **** 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 25
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 25
 
 
  636:Generated_Source\PSoC4/StripLights.c **** 	while(x < y)
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  737 007e 1900     		movs	r1, r3
  738 0080 3800     		movs	r0, r7
  739 0082 FFF7FEFF 		bl	StripLights_Pixel
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 26
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 26
 
 
  740              	.LVL57:
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  788 00d8 3800     		movs	r0, r7
  789 00da FFF7FEFF 		bl	StripLights_Pixel
  790              	.LVL63:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 27
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 27
 
 
  655:Generated_Source\PSoC4/StripLights.c **** 		StripLights_Pixel( x0 - y, y0 - x, color);
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  668:Generated_Source\PSoC4/StripLights.c **** *  x0, y0:  The beginning endpoint
  669:Generated_Source\PSoC4/StripLights.c **** *  x1, y1:  The end endpoint.
  670:Generated_Source\PSoC4/StripLights.c **** *  color:   Color of the line.
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 28
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 28
 
 
  671:Generated_Source\PSoC4/StripLights.c **** *
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  685:Generated_Source\PSoC4/StripLights.c **** 		stepy = -1;
  870              		.loc 1 685 0
  871 0020 0122     		movs	r2, #1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 29
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 29
 
 
  872              	.LVL76:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  908 0042 7F00     		lsls	r7, r7, #1
  909              	.LVL85:
  704:Generated_Source\PSoC4/StripLights.c **** 	StripLights_Pixel(x0, y0, color);
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 30
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 30
 
 
  910              		.loc 1 704 0
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  950 006c FFF7FEFF 		bl	StripLights_Pixel
  951              	.LVL94:
  952              	.L53:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 31
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 31
 
 
  709:Generated_Source\PSoC4/StripLights.c **** 		{
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  991 0094 FFF7FEFF 		bl	StripLights_Pixel
  992              	.LVL101:
  993              	.L57:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 32
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 32
 
 
  724:Generated_Source\PSoC4/StripLights.c **** 		{
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  754:Generated_Source\PSoC4/StripLights.c **** *******************************************************************************/
  755:Generated_Source\PSoC4/StripLights.c **** void StripLights_DrawRect(int32 x0, int32 y0, int32 x1, int32 y1, int32 fill, uint32 color)
  756:Generated_Source\PSoC4/StripLights.c **** {	
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 33
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 33
 
 
  1027              		.loc 1 756 0
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  772:Generated_Source\PSoC4/StripLights.c **** 		while(xDiff >= 0)
  773:Generated_Source\PSoC4/StripLights.c **** 		{
  774:Generated_Source\PSoC4/StripLights.c **** 			StripLights_DrawLine(x0, y0, x0, y1, color);
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 34
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 34
 
 
  1066              		.loc 1 774 0
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1104              		.loc 1 789 0
  1105 004c 0097     		str	r7, [sp]
  1106 004e 0299     		ldr	r1, [sp, #8]
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 35
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 35
 
 
  1107 0050 0B00     		movs	r3, r1
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  805:Generated_Source\PSoC4/StripLights.c **** * Return: 
  806:Generated_Source\PSoC4/StripLights.c **** *  None 
  807:Generated_Source\PSoC4/StripLights.c **** *  
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 36
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 36
 
 
  808:Generated_Source\PSoC4/StripLights.c **** *******************************************************************************/
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1184 002e 1A60     		str	r2, [r3]
  824:Generated_Source\PSoC4/StripLights.c ****            break;
  1185              		.loc 1 824 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 37
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 37
 
 
  1186 0030 13E0     		b	.L71
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1222              	.L80:
  1223              		.align	2
  1224              	.L79:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 38
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 38
 
 
  1225 005c 7F7F7F00 		.word	8355711
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1272 0020 0020     		movs	r0, #0
  1273 0022 FFF7FEFF 		bl	StripLights_MemClear
  1274              	.LVL129:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 39
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 39
 
 
  218:Generated_Source\PSoC4/StripLights.c ****     
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1320 0070 00000000 		.word	StripLights_CISR
  1321 0074 00000000 		.word	StripLights_FISR
  1322 0078 00000000 		.word	StripLights_refreshComplete
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 40
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 40
 
 
  1323              		.cfi_endproc
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1368              	.LVL138:
  1369 001c 0223     		movs	r3, #2
  852:Generated_Source\PSoC4/StripLights.c **** 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 41
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 41
 
 
  853:Generated_Source\PSoC4/StripLights.c **** 	for(dy = y; dy < maxY; dy++)
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1412              		.loc 1 860 0 is_stmt 0 discriminator 1
  1413 004a 0120     		movs	r0, #1
  1414 004c FFF7FEFF 		bl	StripLights_Trigger
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 42
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 42
 
 
  1415              	.LVL148:
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1468 0058 CCFF0000 		.word	65484
  1469 005c E5FF0000 		.word	65509
  1470 0060 00000000 		.word	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 43
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 43
 
 
  1471 0064 00005500 		.word	5570560
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1525 013c 55FFFF00 		.word	16777045
  1526 0140 AAFF0000 		.word	65450
  1527 0144 AAFF5500 		.word	5636010
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 44
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 44
 
 
  1528 0148 AAFFAA00 		.word	11206570
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1582              		.size	color.7668, 4
  1583              	color.7668:
  1584 000c 00000000 		.space	4
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 45
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 45
 
 
  1585              		.type	colorIndex.7653, %object
@@ -2662,48 +2662,48 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1603 0006 00000000 		.4byte	.Ldebug_abbrev0
  1604 000a 04       		.byte	0x4
  1605 000b 01       		.uleb128 0x1
- 1606 000c E3000000 		.4byte	.LASF61
+ 1606 000c 5E010000 		.4byte	.LASF61
  1607 0010 0C       		.byte	0xc
- 1608 0011 8B000000 		.4byte	.LASF62
- 1609 0015 B6010000 		.4byte	.LASF63
+ 1608 0011 06010000 		.4byte	.LASF62
+ 1609 0015 11000000 		.4byte	.LASF63
  1610 0019 00000000 		.4byte	.Ldebug_ranges0+0
  1611 001d 00000000 		.4byte	0
  1612 0021 00000000 		.4byte	.Ldebug_line0
  1613 0025 02       		.uleb128 0x2
  1614 0026 01       		.byte	0x1
  1615 0027 06       		.byte	0x6
- 1616 0028 2B020000 		.4byte	.LASF0
+ 1616 0028 45020000 		.4byte	.LASF0
  1617 002c 02       		.uleb128 0x2
  1618 002d 01       		.byte	0x1
  1619 002e 08       		.byte	0x8
- 1620 002f 72020000 		.4byte	.LASF1
+ 1620 002f 8C020000 		.4byte	.LASF1
  1621 0033 02       		.uleb128 0x2
  1622 0034 02       		.byte	0x2
  1623 0035 05       		.byte	0x5
- 1624 0036 52000000 		.4byte	.LASF2
+ 1624 0036 CD000000 		.4byte	.LASF2
  1625 003a 02       		.uleb128 0x2
  1626 003b 02       		.byte	0x2
  1627 003c 07       		.byte	0x7
- 1628 003d 63030000 		.4byte	.LASF3
+ 1628 003d 7D030000 		.4byte	.LASF3
  1629 0041 02       		.uleb128 0x2
  1630 0042 04       		.byte	0x4
  1631 0043 05       		.byte	0x5
- 1632 0044 58020000 		.4byte	.LASF4
+ 1632 0044 72020000 		.4byte	.LASF4
  1633 0048 02       		.uleb128 0x2
  1634 0049 04       		.byte	0x4
  1635 004a 07       		.byte	0x7
- 1636 004b E0020000 		.4byte	.LASF5
+ 1636 004b FA020000 		.4byte	.LASF5
  1637 004f 02       		.uleb128 0x2
  1638 0050 08       		.byte	0x8
  1639 0051 05       		.byte	0x5
- 1640 0052 3D020000 		.4byte	.LASF6
+ 1640 0052 57020000 		.4byte	.LASF6
  1641 0056 02       		.uleb128 0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 46
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 46
 
 
  1642 0057 08       		.byte	0x8
  1643 0058 07       		.byte	0x7
- 1644 0059 BC020000 		.4byte	.LASF7
+ 1644 0059 D6020000 		.4byte	.LASF7
  1645 005d 03       		.uleb128 0x3
  1646 005e 04       		.byte	0x4
  1647 005f 05       		.byte	0x5
@@ -2711,36 +2711,36 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1649 0064 02       		.uleb128 0x2
  1650 0065 04       		.byte	0x4
  1651 0066 07       		.byte	0x7
- 1652 0067 D3020000 		.4byte	.LASF8
+ 1652 0067 ED020000 		.4byte	.LASF8
  1653 006b 04       		.uleb128 0x4
- 1654 006c 9C010000 		.4byte	.LASF9
+ 1654 006c 17020000 		.4byte	.LASF9
  1655 0070 02       		.byte	0x2
  1656 0071 FC01     		.2byte	0x1fc
  1657 0073 2C000000 		.4byte	0x2c
  1658 0077 04       		.uleb128 0x4
- 1659 0078 98030000 		.4byte	.LASF10
+ 1659 0078 B2030000 		.4byte	.LASF10
  1660 007c 02       		.byte	0x2
  1661 007d FE01     		.2byte	0x1fe
  1662 007f 48000000 		.4byte	0x48
  1663 0083 04       		.uleb128 0x4
- 1664 0084 C9030000 		.4byte	.LASF11
+ 1664 0084 E3030000 		.4byte	.LASF11
  1665 0088 02       		.byte	0x2
  1666 0089 0102     		.2byte	0x201
  1667 008b 41000000 		.4byte	0x41
  1668 008f 02       		.uleb128 0x2
  1669 0090 04       		.byte	0x4
  1670 0091 04       		.byte	0x4
- 1671 0092 37020000 		.4byte	.LASF12
+ 1671 0092 51020000 		.4byte	.LASF12
  1672 0096 02       		.uleb128 0x2
  1673 0097 08       		.byte	0x8
  1674 0098 04       		.byte	0x4
- 1675 0099 CF030000 		.4byte	.LASF13
+ 1675 0099 E9030000 		.4byte	.LASF13
  1676 009d 02       		.uleb128 0x2
  1677 009e 01       		.byte	0x1
  1678 009f 08       		.byte	0x8
- 1679 00a0 23000000 		.4byte	.LASF14
+ 1679 00a0 9E000000 		.4byte	.LASF14
  1680 00a4 04       		.uleb128 0x4
- 1681 00a5 A5030000 		.4byte	.LASF15
+ 1681 00a5 BF030000 		.4byte	.LASF15
  1682 00a9 02       		.byte	0x2
  1683 00aa A602     		.2byte	0x2a6
  1684 00ac B0000000 		.4byte	0xb0
@@ -2749,19 +2749,19 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1687 00b5 02       		.uleb128 0x2
  1688 00b6 08       		.byte	0x8
  1689 00b7 04       		.byte	0x4
- 1690 00b8 66020000 		.4byte	.LASF16
+ 1690 00b8 80020000 		.4byte	.LASF16
  1691 00bc 02       		.uleb128 0x2
  1692 00bd 04       		.byte	0x4
  1693 00be 07       		.byte	0x7
- 1694 00bf 37040000 		.4byte	.LASF17
+ 1694 00bf 51040000 		.4byte	.LASF17
  1695 00c3 06       		.uleb128 0x6
  1696 00c4 04       		.byte	0x4
  1697 00c5 6B000000 		.4byte	0x6b
  1698 00c9 07       		.uleb128 0x7
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 47
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 47
 
 
- 1699 00ca F8030000 		.4byte	.LASF20
+ 1699 00ca 12040000 		.4byte	.LASF20
  1700 00ce 01       		.byte	0x1
  1701 00cf 8301     		.2byte	0x183
  1702 00d1 00000000 		.4byte	.LFB39
@@ -2770,17 +2770,17 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1705 00da 9C       		.byte	0x9c
  1706 00db 0A010000 		.4byte	0x10a
  1707 00df 08       		.uleb128 0x8
- 1708 00e0 71010000 		.4byte	.LASF18
+ 1708 00e0 EC010000 		.4byte	.LASF18
  1709 00e4 01       		.byte	0x1
  1710 00e5 8501     		.2byte	0x185
  1711 00e7 77000000 		.4byte	0x77
  1712 00eb 08       		.uleb128 0x8
- 1713 00ec 3D000000 		.4byte	.LASF19
+ 1713 00ec B8000000 		.4byte	.LASF19
  1714 00f0 01       		.byte	0x1
  1715 00f1 8601     		.2byte	0x186
  1716 00f3 77000000 		.4byte	0x77
  1717 00f7 09       		.uleb128 0x9
- 1718 00f8 5C000000 		.4byte	.LASF22
+ 1718 00f8 D7000000 		.4byte	.LASF22
  1719 00fc 01       		.byte	0x1
  1720 00fd 8701     		.2byte	0x187
  1721 00ff 77000000 		.4byte	0x77
@@ -2789,7 +2789,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1724 0105 08000000 		.4byte	color.7660
  1725 0109 00       		.byte	0
  1726 010a 07       		.uleb128 0x7
- 1727 010b D6030000 		.4byte	.LASF21
+ 1727 010b F0030000 		.4byte	.LASF21
  1728 010f 01       		.byte	0x1
  1729 0110 B101     		.2byte	0x1b1
  1730 0112 00000000 		.4byte	.LFB40
@@ -2798,17 +2798,17 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1733 011b 9C       		.byte	0x9c
  1734 011c 57010000 		.4byte	0x157
  1735 0120 08       		.uleb128 0x8
- 1736 0121 71010000 		.4byte	.LASF18
+ 1736 0121 EC010000 		.4byte	.LASF18
  1737 0125 01       		.byte	0x1
  1738 0126 B301     		.2byte	0x1b3
  1739 0128 77000000 		.4byte	0x77
  1740 012c 08       		.uleb128 0x8
- 1741 012d 3D000000 		.4byte	.LASF19
+ 1741 012d B8000000 		.4byte	.LASF19
  1742 0131 01       		.byte	0x1
  1743 0132 B401     		.2byte	0x1b4
  1744 0134 77000000 		.4byte	0x77
  1745 0138 09       		.uleb128 0x9
- 1746 0139 5C000000 		.4byte	.LASF22
+ 1746 0139 D7000000 		.4byte	.LASF22
  1747 013d 01       		.byte	0x1
  1748 013e B501     		.2byte	0x1b5
  1749 0140 77000000 		.4byte	0x77
@@ -2816,16 +2816,16 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1751 0145 03       		.byte	0x3
  1752 0146 0C000000 		.4byte	color.7668
  1753 014a 08       		.uleb128 0x8
- 1754 014b FB020000 		.4byte	.LASF23
+ 1754 014b 15030000 		.4byte	.LASF23
  1755 014f 01       		.byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 48
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 48
 
 
  1756 0150 B601     		.2byte	0x1b6
  1757 0152 77000000 		.4byte	0x77
  1758 0156 00       		.byte	0
  1759 0157 07       		.uleb128 0x7
- 1760 0158 17020000 		.4byte	.LASF24
+ 1760 0158 31020000 		.4byte	.LASF24
  1761 015c 01       		.byte	0x1
  1762 015d 0501     		.2byte	0x105
  1763 015f 00000000 		.4byte	.LFB35
@@ -2840,14 +2840,14 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1772 0175 77000000 		.4byte	0x77
  1773 0179 00000000 		.4byte	.LLST0
  1774 017d 0B       		.uleb128 0xb
- 1775 017e 5C000000 		.4byte	.LASF22
+ 1775 017e D7000000 		.4byte	.LASF22
  1776 0182 01       		.byte	0x1
  1777 0183 0701     		.2byte	0x107
  1778 0185 77000000 		.4byte	0x77
  1779 0189 21000000 		.4byte	.LLST1
  1780 018d 00       		.byte	0
  1781 018e 0C       		.uleb128 0xc
- 1782 018f 51030000 		.4byte	.LASF64
+ 1782 018f 6B030000 		.4byte	.LASF64
  1783 0193 01       		.byte	0x1
  1784 0194 3101     		.2byte	0x131
  1785 0196 77000000 		.4byte	0x77
@@ -2856,7 +2856,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1788 01a2 01       		.uleb128 0x1
  1789 01a3 9C       		.byte	0x9c
  1790 01a4 0D       		.uleb128 0xd
- 1791 01a5 E7030000 		.4byte	.LASF65
+ 1791 01a5 01040000 		.4byte	.LASF65
  1792 01a9 01       		.byte	0x1
  1793 01aa 4C01     		.2byte	0x14c
  1794 01ac 00000000 		.4byte	.LFB37
@@ -2864,7 +2864,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1796 01b4 01       		.uleb128 0x1
  1797 01b5 9C       		.byte	0x9c
  1798 01b6 0E       		.uleb128 0xe
- 1799 01b7 80020000 		.4byte	.LASF32
+ 1799 01b7 9A020000 		.4byte	.LASF32
  1800 01bb 01       		.byte	0x1
  1801 01bc 6001     		.2byte	0x160
  1802 01be 77000000 		.4byte	0x77
@@ -2874,16 +2874,16 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1806 01cb 9C       		.byte	0x9c
  1807 01cc 0D020000 		.4byte	0x20d
  1808 01d0 0F       		.uleb128 0xf
- 1809 01d1 8F030000 		.4byte	.LASF25
+ 1809 01d1 A9030000 		.4byte	.LASF25
  1810 01d5 01       		.byte	0x1
  1811 01d6 6001     		.2byte	0x160
  1812 01d8 77000000 		.4byte	0x77
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 49
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 49
 
 
  1813 01dc 85000000 		.4byte	.LLST2
  1814 01e0 09       		.uleb128 0x9
- 1815 01e1 5C000000 		.4byte	.LASF22
+ 1815 01e1 D7000000 		.4byte	.LASF22
  1816 01e5 01       		.byte	0x1
  1817 01e6 6201     		.2byte	0x162
  1818 01e8 77000000 		.4byte	0x77
@@ -2895,7 +2895,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1824 01f4 6301     		.2byte	0x163
  1825 01f6 22020000 		.4byte	0x222
  1826 01fa 09       		.uleb128 0x9
- 1827 01fb AC020000 		.4byte	.LASF27
+ 1827 01fb C6020000 		.4byte	.LASF27
  1828 01ff 01       		.byte	0x1
  1829 0200 6401     		.2byte	0x164
  1830 0202 77000000 		.4byte	0x77
@@ -2915,7 +2915,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1844 0222 12       		.uleb128 0x12
  1845 0223 0D020000 		.4byte	0x20d
  1846 0227 07       		.uleb128 0x7
- 1847 0228 09040000 		.4byte	.LASF28
+ 1847 0228 23040000 		.4byte	.LASF28
  1848 022c 01       		.byte	0x1
  1849 022d F801     		.2byte	0x1f8
  1850 022f 00000000 		.4byte	.LFB42
@@ -2924,7 +2924,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1853 0238 9C       		.byte	0x9c
  1854 0239 6C020000 		.4byte	0x26c
  1855 023d 13       		.uleb128 0x13
- 1856 023e 5C000000 		.4byte	.LASF22
+ 1856 023e D7000000 		.4byte	.LASF22
  1857 0242 01       		.byte	0x1
  1858 0243 F801     		.2byte	0x1f8
  1859 0245 77000000 		.4byte	0x77
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1867 0257 A6000000 		.4byte	.LLST3
  1868 025b 14       		.uleb128 0x14
  1869 025c 636F6C00 		.ascii	"col\000"
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 50
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 50
 
 
  1870 0260 01       		.byte	0x1
@@ -2947,7 +2947,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1873 0267 C5000000 		.4byte	.LLST4
  1874 026b 00       		.byte	0
  1875 026c 07       		.uleb128 0x7
- 1876 026d 76030000 		.4byte	.LASF29
+ 1876 026d 90030000 		.4byte	.LASF29
  1877 0271 01       		.byte	0x1
  1878 0272 E501     		.2byte	0x1e5
  1879 0274 00000000 		.4byte	.LFB41
@@ -2956,7 +2956,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1882 027d 9C       		.byte	0x9c
  1883 027e B7020000 		.4byte	0x2b7
  1884 0282 0F       		.uleb128 0xf
- 1885 0283 5C000000 		.4byte	.LASF22
+ 1885 0283 D7000000 		.4byte	.LASF22
  1886 0287 01       		.byte	0x1
  1887 0288 E501     		.2byte	0x1e5
  1888 028a 77000000 		.4byte	0x77
@@ -2984,7 +2984,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1910 02b5 00       		.byte	0
  1911 02b6 00       		.byte	0
  1912 02b7 07       		.uleb128 0x7
- 1913 02b8 85010000 		.4byte	.LASF30
+ 1913 02b8 00020000 		.4byte	.LASF30
  1914 02bc 01       		.byte	0x1
  1915 02bd 1902     		.2byte	0x219
  1916 02bf 00000000 		.4byte	.LFB43
@@ -2993,17 +2993,17 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1919 02c8 9C       		.byte	0x9c
  1920 02c9 DE020000 		.4byte	0x2de
  1921 02cd 0F       		.uleb128 0xf
- 1922 02ce 5C000000 		.4byte	.LASF22
+ 1922 02ce D7000000 		.4byte	.LASF22
  1923 02d2 01       		.byte	0x1
  1924 02d3 1902     		.2byte	0x219
  1925 02d5 77000000 		.4byte	0x77
  1926 02d9 04010000 		.4byte	.LLST6
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 51
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 51
 
 
  1927 02dd 00       		.byte	0
  1928 02de 07       		.uleb128 0x7
- 1929 02df 25040000 		.4byte	.LASF31
+ 1929 02df 3F040000 		.4byte	.LASF31
  1930 02e3 01       		.byte	0x1
  1931 02e4 3302     		.2byte	0x233
  1932 02e6 00000000 		.4byte	.LFB44
@@ -3024,7 +3024,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1947 0308 83000000 		.4byte	0x83
  1948 030c 6D010000 		.4byte	.LLST8
  1949 0310 13       		.uleb128 0x13
- 1950 0311 5C000000 		.4byte	.LASF22
+ 1950 0311 D7000000 		.4byte	.LASF22
  1951 0315 01       		.byte	0x1
  1952 0316 3302     		.2byte	0x233
  1953 0318 77000000 		.4byte	0x77
@@ -3032,7 +3032,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1955 031d 52       		.byte	0x52
  1956 031e 00       		.byte	0
  1957 031f 18       		.uleb128 0x18
- 1958 0320 28000000 		.4byte	.LASF33
+ 1958 0320 A3000000 		.4byte	.LASF33
  1959 0324 01       		.byte	0x1
  1960 0325 4F02     		.2byte	0x24f
  1961 0327 77000000 		.4byte	0x77
@@ -3054,18 +3054,18 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  1977 034d 83000000 		.4byte	0x83
  1978 0351 AF010000 		.4byte	.LLST10
  1979 0355 09       		.uleb128 0x9
- 1980 0356 5C000000 		.4byte	.LASF22
+ 1980 0356 D7000000 		.4byte	.LASF22
  1981 035a 01       		.byte	0x1
  1982 035b 5102     		.2byte	0x251
  1983 035d 77000000 		.4byte	0x77
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 52
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 52
 
 
  1984 0361 01       		.uleb128 0x1
  1985 0362 53       		.byte	0x53
  1986 0363 00       		.byte	0
  1987 0364 07       		.uleb128 0x7
- 1988 0365 95020000 		.4byte	.LASF34
+ 1988 0365 AF020000 		.4byte	.LASF34
  1989 0369 01       		.byte	0x1
  1990 036a 6F02     		.2byte	0x26f
  1991 036c 00000000 		.4byte	.LFB46
@@ -3086,13 +3086,13 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2006 0390 83000000 		.4byte	0x83
  2007 0394 FC010000 		.4byte	.LLST12
  2008 0398 0F       		.uleb128 0xf
- 2009 0399 52040000 		.4byte	.LASF35
+ 2009 0399 6C040000 		.4byte	.LASF35
  2010 039d 01       		.byte	0x1
  2011 039e 6F02     		.2byte	0x26f
  2012 03a0 83000000 		.4byte	0x83
  2013 03a4 28020000 		.4byte	.LLST13
  2014 03a8 0F       		.uleb128 0xf
- 2015 03a9 5C000000 		.4byte	.LASF22
+ 2015 03a9 D7000000 		.4byte	.LASF22
  2016 03ad 01       		.byte	0x1
  2017 03ae 6F02     		.2byte	0x26f
  2018 03b0 77000000 		.4byte	0x77
@@ -3104,13 +3104,13 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2024 03be 83000000 		.4byte	0x83
  2025 03c2 7E020000 		.4byte	.LLST15
  2026 03c6 0B       		.uleb128 0xb
- 2027 03c7 C3030000 		.4byte	.LASF36
+ 2027 03c7 DD030000 		.4byte	.LASF36
  2028 03cb 01       		.byte	0x1
  2029 03cc 7202     		.2byte	0x272
  2030 03ce 83000000 		.4byte	0x83
  2031 03d2 B2020000 		.4byte	.LLST16
  2032 03d6 0B       		.uleb128 0xb
- 2033 03d7 4B020000 		.4byte	.LASF37
+ 2033 03d7 65020000 		.4byte	.LASF37
  2034 03db 01       		.byte	0x1
  2035 03dc 7302     		.2byte	0x273
  2036 03de 83000000 		.4byte	0x83
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2038 03e6 14       		.uleb128 0x14
  2039 03e7 7800     		.ascii	"x\000"
  2040 03e9 01       		.byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 53
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 53
 
 
  2041 03ea 7402     		.2byte	0x274
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2095 0441 16       		.uleb128 0x16
  2096 0442 01       		.uleb128 0x1
  2097 0443 52       		.byte	0x52
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 54
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 54
 
 
  2098 0444 02       		.uleb128 0x2
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2152 048c 00       		.sleb128 0
  2153 048d 00       		.byte	0
  2154 048e 15       		.uleb128 0x15
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 55
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 55
 
 
  2155 048f 86000000 		.4byte	.LVL57
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2209 04e0 01       		.uleb128 0x1
  2210 04e1 50       		.byte	0x50
  2211 04e2 02       		.uleb128 0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 56
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 56
 
 
  2212 04e3 77       		.byte	0x77
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2266 052b 51       		.byte	0x51
  2267 052c 02       		.uleb128 0x2
  2268 052d 75       		.byte	0x75
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 57
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 57
 
 
  2269 052e 00       		.sleb128 0
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2323 0576 91       		.byte	0x91
  2324 0577 4C       		.sleb128 -52
  2325 0578 06       		.byte	0x6
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 58
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 58
 
 
  2326 0579 00       		.byte	0
@@ -3448,7 +3448,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2350 0597 00       		.byte	0
  2351 0598 00       		.byte	0
  2352 0599 07       		.uleb128 0x7
- 2353 059a 70040000 		.4byte	.LASF38
+ 2353 059a 8A040000 		.4byte	.LASF38
  2354 059e 01       		.byte	0x1
  2355 059f A402     		.2byte	0x2a4
  2356 05a1 00000000 		.4byte	.LFB47
@@ -3478,13 +3478,13 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2380 05dd 793100   		.ascii	"y1\000"
  2381 05e0 01       		.byte	0x1
  2382 05e1 A402     		.2byte	0x2a4
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 59
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 59
 
 
  2383 05e3 83000000 		.4byte	0x83
  2384 05e7 B5030000 		.4byte	.LLST23
  2385 05eb 13       		.uleb128 0x13
- 2386 05ec 5C000000 		.4byte	.LASF22
+ 2386 05ec D7000000 		.4byte	.LASF22
  2387 05f0 01       		.byte	0x1
  2388 05f1 A402     		.2byte	0x2a4
  2389 05f3 77000000 		.4byte	0x77
@@ -3504,13 +3504,13 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2403 0610 83000000 		.4byte	0x83
  2404 0614 0A040000 		.4byte	.LLST25
  2405 0618 0B       		.uleb128 0xb
- 2406 0619 45030000 		.4byte	.LASF39
+ 2406 0619 5F030000 		.4byte	.LASF39
  2407 061d 01       		.byte	0x1
  2408 061e A802     		.2byte	0x2a8
  2409 0620 83000000 		.4byte	0x83
  2410 0624 1D040000 		.4byte	.LLST26
  2411 0628 0B       		.uleb128 0xb
- 2412 0629 4B030000 		.4byte	.LASF40
+ 2412 0629 65030000 		.4byte	.LASF40
  2413 062d 01       		.byte	0x1
  2414 062e A802     		.2byte	0x2a8
  2415 0630 83000000 		.4byte	0x83
@@ -3520,7 +3520,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2419 063d 26000000 		.4byte	.LBE2-.LBB2
  2420 0641 73060000 		.4byte	0x673
  2421 0645 0B       		.uleb128 0xb
- 2422 0646 3C030000 		.4byte	.LASF41
+ 2422 0646 56030000 		.4byte	.LASF41
  2423 064a 01       		.byte	0x1
  2424 064b C402     		.2byte	0x2c4
  2425 064d 5D000000 		.4byte	0x5d
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2437 0665 01       		.uleb128 0x1
  2438 0666 51       		.byte	0x51
  2439 0667 02       		.uleb128 0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 60
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 60
 
 
  2440 0668 75       		.byte	0x75
@@ -3557,7 +3557,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2453 0678 24000000 		.4byte	.LBE3-.LBB3
  2454 067c AE060000 		.4byte	0x6ae
  2455 0680 0B       		.uleb128 0xb
- 2456 0681 3C030000 		.4byte	.LASF41
+ 2456 0681 56030000 		.4byte	.LASF41
  2457 0685 01       		.byte	0x1
  2458 0686 D302     		.2byte	0x2d3
  2459 0688 5D000000 		.4byte	0x5d
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2494 06bd 16       		.uleb128 0x16
  2495 06be 01       		.uleb128 0x1
  2496 06bf 51       		.byte	0x51
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 61
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 61
 
 
  2497 06c0 02       		.uleb128 0x2
@@ -3614,7 +3614,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2507 06ca 00       		.byte	0
  2508 06cb 00       		.byte	0
  2509 06cc 07       		.uleb128 0x7
- 2510 06cd 76000000 		.4byte	.LASF42
+ 2510 06cd F1000000 		.4byte	.LASF42
  2511 06d1 01       		.byte	0x1
  2512 06d2 F302     		.2byte	0x2f3
  2513 06d4 00000000 		.4byte	.LFB48
@@ -3647,7 +3647,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2540 0716 83000000 		.4byte	0x83
  2541 071a 2F050000 		.4byte	.LLST33
  2542 071e 13       		.uleb128 0x13
- 2543 071f DE000000 		.4byte	.LASF43
+ 2543 071f 59010000 		.4byte	.LASF43
  2544 0723 01       		.byte	0x1
  2545 0724 F302     		.2byte	0x2f3
  2546 0726 83000000 		.4byte	0x83
@@ -3655,10 +3655,10 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2548 072b 91       		.byte	0x91
  2549 072c 00       		.sleb128 0
  2550 072d 13       		.uleb128 0x13
- 2551 072e 5C000000 		.4byte	.LASF22
+ 2551 072e D7000000 		.4byte	.LASF22
  2552 0732 01       		.byte	0x1
  2553 0733 F302     		.2byte	0x2f3
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 62
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 62
 
 
  2554 0735 77000000 		.4byte	0x77
@@ -3666,7 +3666,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2556 073a 91       		.byte	0x91
  2557 073b 04       		.sleb128 4
  2558 073c 0B       		.uleb128 0xb
- 2559 073d 9F030000 		.4byte	.LASF44
+ 2559 073d B9030000 		.4byte	.LASF44
  2560 0741 01       		.byte	0x1
  2561 0742 F502     		.2byte	0x2f5
  2562 0744 5D000000 		.4byte	0x5d
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2608 078a 51       		.byte	0x51
  2609 078b 02       		.uleb128 0x2
  2610 078c 75       		.byte	0x75
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 63
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 63
 
 
  2611 078d 00       		.sleb128 0
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2665 07cc 68000000 		.4byte	.LVL124
  2666 07d0 99050000 		.4byte	0x599
  2667 07d4 F9070000 		.4byte	0x7f9
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 64
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 64
 
 
  2668 07d8 16       		.uleb128 0x16
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2722 0814 16       		.uleb128 0x16
  2723 0815 01       		.uleb128 0x1
  2724 0816 53       		.byte	0x53
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 65
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 65
 
 
  2725 0817 03       		.uleb128 0x3
@@ -3855,7 +3855,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2736 0822 00       		.byte	0
  2737 0823 00       		.byte	0
  2738 0824 07       		.uleb128 0x7
- 2739 0825 2C030000 		.4byte	.LASF45
+ 2739 0825 46030000 		.4byte	.LASF45
  2740 0829 01       		.byte	0x1
  2741 082a 2903     		.2byte	0x329
  2742 082c 00000000 		.4byte	.LFB49
@@ -3864,25 +3864,25 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2745 0835 9C       		.byte	0x9c
  2746 0836 61080000 		.4byte	0x861
  2747 083a 13       		.uleb128 0x13
- 2748 083b F2020000 		.4byte	.LASF46
+ 2748 083b 0C030000 		.4byte	.LASF46
  2749 083f 01       		.byte	0x1
  2750 0840 2903     		.2byte	0x329
  2751 0842 77000000 		.4byte	0x77
  2752 0846 01       		.uleb128 0x1
  2753 0847 50       		.byte	0x50
  2754 0848 08       		.uleb128 0x8
- 2755 0849 71010000 		.4byte	.LASF18
+ 2755 0849 EC010000 		.4byte	.LASF18
  2756 084d 01       		.byte	0x1
  2757 084e 2B03     		.2byte	0x32b
  2758 0850 77000000 		.4byte	0x77
  2759 0854 08       		.uleb128 0x8
- 2760 0855 3D000000 		.4byte	.LASF19
+ 2760 0855 B8000000 		.4byte	.LASF19
  2761 0859 01       		.byte	0x1
  2762 085a 2C03     		.2byte	0x32c
  2763 085c 77000000 		.4byte	0x77
  2764 0860 00       		.byte	0
  2765 0861 1A       		.uleb128 0x1a
- 2766 0862 40040000 		.4byte	.LASF47
+ 2766 0862 5A040000 		.4byte	.LASF47
  2767 0866 01       		.byte	0x1
  2768 0867 CD       		.byte	0xcd
  2769 0868 00000000 		.4byte	.LFB34
@@ -3891,14 +3891,14 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2772 0871 9C       		.byte	0x9c
  2773 0872 F0080000 		.4byte	0x8f0
  2774 0876 1B       		.uleb128 0x1b
- 2775 0877 A2010000 		.4byte	.LASF48
+ 2775 0877 1D020000 		.4byte	.LASF48
  2776 087b 01       		.byte	0x1
  2777 087c CF       		.byte	0xcf
  2778 087d 6B000000 		.4byte	0x6b
  2779 0881 1B       		.uleb128 0x1b
- 2780 0882 FB020000 		.4byte	.LASF23
+ 2780 0882 15030000 		.4byte	.LASF23
  2781 0886 01       		.byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 66
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 66
 
 
  2782 0887 D0       		.byte	0xd0
@@ -3956,9 +3956,9 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2834 08ee 00       		.byte	0
  2835 08ef 00       		.byte	0
  2836 08f0 07       		.uleb128 0x7
- 2837 08f1 11000000 		.4byte	.LASF49
+ 2837 08f1 8C000000 		.4byte	.LASF49
  2838 08f5 01       		.byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 67
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 67
 
 
  2839 08f6 4C03     		.2byte	0x34c
@@ -3980,13 +3980,13 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2855 091a 83000000 		.4byte	0x83
  2856 091e 8B050000 		.4byte	.LLST36
  2857 0922 0F       		.uleb128 0xf
- 2858 0923 69040000 		.4byte	.LASF50
+ 2858 0923 83040000 		.4byte	.LASF50
  2859 0927 01       		.byte	0x1
  2860 0928 4C03     		.2byte	0x34c
  2861 092a C3000000 		.4byte	0xc3
  2862 092e AC050000 		.4byte	.LLST37
  2863 0932 0F       		.uleb128 0xf
- 2864 0933 51020000 		.4byte	.LASF51
+ 2864 0933 6B020000 		.4byte	.LASF51
  2865 0937 01       		.byte	0x1
  2866 0938 4C03     		.2byte	0x34c
  2867 093a 83000000 		.4byte	0x83
@@ -4004,21 +4004,21 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2879 0958 83000000 		.4byte	0x83
  2880 095c 38060000 		.4byte	.LLST40
  2881 0960 0B       		.uleb128 0xb
- 2882 0961 1E040000 		.4byte	.LASF52
+ 2882 0961 38040000 		.4byte	.LASF52
  2883 0965 01       		.byte	0x1
  2884 0966 4F03     		.2byte	0x34f
  2885 0968 83000000 		.4byte	0x83
  2886 096c 7A060000 		.4byte	.LLST41
  2887 0970 0B       		.uleb128 0xb
- 2888 0971 61020000 		.4byte	.LASF53
+ 2888 0971 7B020000 		.4byte	.LASF53
  2889 0975 01       		.byte	0x1
  2890 0976 5003     		.2byte	0x350
  2891 0978 83000000 		.4byte	0x83
  2892 097c BB060000 		.4byte	.LLST42
  2893 0980 0B       		.uleb128 0xb
- 2894 0981 B7020000 		.4byte	.LASF54
+ 2894 0981 D1020000 		.4byte	.LASF54
  2895 0985 01       		.byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 68
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 68
 
 
  2896 0986 5003     		.2byte	0x350
@@ -4053,7 +4053,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2925 09b9 00       		.byte	0
  2926 09ba 00       		.byte	0
  2927 09bb 1C       		.uleb128 0x1c
- 2928 09bc A2010000 		.4byte	.LASF48
+ 2928 09bc 1D020000 		.4byte	.LASF48
  2929 09c0 01       		.byte	0x1
  2930 09c1 17       		.byte	0x17
  2931 09c2 6B000000 		.4byte	0x6b
@@ -4071,18 +4071,18 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2943 09e0 02       		.byte	0x2
  2944 09e1 00       		.byte	0
  2945 09e2 1C       		.uleb128 0x1c
- 2946 09e3 B0000000 		.4byte	.LASF55
+ 2946 09e3 2B010000 		.4byte	.LASF55
  2947 09e7 01       		.byte	0x1
  2948 09e8 1A       		.byte	0x1a
  2949 09e9 CC090000 		.4byte	0x9cc
  2950 09ed 05       		.uleb128 0x5
  2951 09ee 03       		.byte	0x3
  2952 09ef 00000000 		.4byte	StripLights_ledArray
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 69
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 69
 
 
  2953 09f3 1C       		.uleb128 0x1c
- 2954 09f4 17030000 		.4byte	.LASF56
+ 2954 09f4 31030000 		.4byte	.LASF56
  2955 09f8 01       		.byte	0x1
  2956 09f9 1F       		.byte	0x1f
  2957 09fa 77000000 		.4byte	0x77
@@ -4090,7 +4090,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2959 09ff 03       		.byte	0x3
  2960 0a00 00000000 		.4byte	StripLights_ledIndex
  2961 0a04 1C       		.uleb128 0x1c
- 2962 0a05 59040000 		.4byte	.LASF57
+ 2962 0a05 73040000 		.4byte	.LASF57
  2963 0a09 01       		.byte	0x1
  2964 0a0a 20       		.byte	0x20
  2965 0a0b 77000000 		.4byte	0x77
@@ -4098,7 +4098,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2967 0a10 03       		.byte	0x3
  2968 0a11 00000000 		.4byte	StripLights_row
  2969 0a15 1D       		.uleb128 0x1d
- 2970 0a16 FB020000 		.4byte	.LASF23
+ 2970 0a16 15030000 		.4byte	.LASF23
  2971 0a1a 01       		.byte	0x1
  2972 0a1b B601     		.2byte	0x1b6
  2973 0a1d 77000000 		.4byte	0x77
@@ -4106,7 +4106,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2975 0a22 03       		.byte	0x3
  2976 0a23 00000000 		.4byte	StripLights_refreshComplete
  2977 0a27 1D       		.uleb128 0x1d
- 2978 0a28 71010000 		.4byte	.LASF18
+ 2978 0a28 EC010000 		.4byte	.LASF18
  2979 0a2c 01       		.byte	0x1
  2980 0a2d 2B03     		.2byte	0x32b
  2981 0a2f 77000000 		.4byte	0x77
@@ -4114,7 +4114,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  2983 0a34 03       		.byte	0x3
  2984 0a35 00000000 		.4byte	StripLights_DimMask
  2985 0a39 1D       		.uleb128 0x1d
- 2986 0a3a 3D000000 		.4byte	.LASF19
+ 2986 0a3a B8000000 		.4byte	.LASF19
  2987 0a3e 01       		.byte	0x1
  2988 0a3f 2C03     		.2byte	0x32c
  2989 0a41 77000000 		.4byte	0x77
@@ -4132,21 +4132,21 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3001 0a5c 12       		.uleb128 0x12
  3002 0a5d 0D020000 		.4byte	0x20d
  3003 0a61 1E       		.uleb128 0x1e
- 3004 0a62 62000000 		.4byte	.LASF58
- 3005 0a66 62000000 		.4byte	.LASF58
+ 3004 0a62 DD000000 		.4byte	.LASF58
+ 3005 0a66 DD000000 		.4byte	.LASF58
  3006 0a6a 03       		.byte	0x3
  3007 0a6b 1B       		.byte	0x1b
  3008 0a6c 1E       		.uleb128 0x1e
- 3009 0a6d C5000000 		.4byte	.LASF59
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 70
+ 3009 0a6d 40010000 		.4byte	.LASF59
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 70
 
 
- 3010 0a71 C5000000 		.4byte	.LASF59
+ 3010 0a71 40010000 		.4byte	.LASF59
  3011 0a75 04       		.byte	0x4
  3012 0a76 18       		.byte	0x18
  3013 0a77 1E       		.uleb128 0x1e
- 3014 0a78 AA030000 		.4byte	.LASF60
- 3015 0a7c AA030000 		.4byte	.LASF60
+ 3014 0a78 C4030000 		.4byte	.LASF60
+ 3015 0a7c C4030000 		.4byte	.LASF60
  3016 0a80 05       		.byte	0x5
  3017 0a81 18       		.byte	0x18
  3018 0a82 00       		.byte	0
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3064 002b 00       		.byte	0
  3065 002c 03       		.uleb128 0x3
  3066 002d 0E       		.uleb128 0xe
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 71
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 71
 
 
  3067 002e 3A       		.uleb128 0x3a
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3121 0065 3A       		.uleb128 0x3a
  3122 0066 0B       		.uleb128 0xb
  3123 0067 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 72
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 72
 
 
  3124 0068 05       		.uleb128 0x5
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3178 009e 0C       		.uleb128 0xc
  3179 009f 2E       		.uleb128 0x2e
  3180 00a0 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 73
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 73
 
 
  3181 00a1 3F       		.uleb128 0x3f
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3235 00d9 3B       		.uleb128 0x3b
  3236 00da 05       		.uleb128 0x5
  3237 00db 27       		.uleb128 0x27
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 74
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 74
 
 
  3238 00dc 19       		.uleb128 0x19
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3292 0113 00       		.byte	0
  3293 0114 13       		.uleb128 0x13
  3294 0115 05       		.uleb128 0x5
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 75
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 75
 
 
  3295 0116 00       		.byte	0
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3349 0153 13       		.uleb128 0x13
  3350 0154 00       		.byte	0
  3351 0155 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 76
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 76
 
 
  3352 0156 18       		.uleb128 0x18
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3406 018d 06       		.uleb128 0x6
  3407 018e 40       		.uleb128 0x40
  3408 018f 18       		.uleb128 0x18
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 77
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 77
 
 
  3409 0190 9742     		.uleb128 0x2117
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3463 01c7 18       		.uleb128 0x18
  3464 01c8 00       		.byte	0
  3465 01c9 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 78
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 78
 
 
  3466 01ca 1E       		.uleb128 0x1e
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3520 0048 00000000 		.4byte	StripLights_ledArray
  3521 004c 22       		.byte	0x22
  3522 004d 28000000 		.4byte	.LVL4
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 79
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 79
 
 
  3523 0051 30000000 		.4byte	.LVL5
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3577 00d8 0100     		.2byte	0x1
  3578 00da 52       		.byte	0x52
  3579 00db 00000000 		.4byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 80
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 80
 
 
  3580 00df 00000000 		.4byte	0
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3634 015f 0400     		.2byte	0x4
  3635 0161 F3       		.byte	0xf3
  3636 0162 01       		.uleb128 0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 81
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 81
 
 
  3637 0163 50       		.byte	0x50
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3691 01e5 5B       		.byte	0x5b
  3692 01e6 F0000000 		.4byte	.LVL71
  3693 01ea FC000000 		.4byte	.LFE46
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 82
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 82
 
 
  3694 01ee 0400     		.2byte	0x4
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3748 0272 0200     		.2byte	0x2
  3749 0274 91       		.byte	0x91
  3750 0275 4C       		.sleb128 -52
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 83
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 83
 
 
  3751 0276 00000000 		.4byte	0
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3805 0308 5A       		.byte	0x5a
  3806 0309 00000000 		.4byte	0
  3807 030d 00000000 		.4byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 84
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 84
 
 
  3808              	.LLST18:
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3862 03a0 52       		.byte	0x52
  3863 03a1 2A000000 		.4byte	.LVL78
  3864 03a5 AA000000 		.4byte	.LFE47
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 85
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 85
 
 
  3865 03a9 0200     		.2byte	0x2
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3919 0432 0100     		.2byte	0x1
  3920 0434 59       		.byte	0x59
  3921 0435 00000000 		.4byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 86
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 86
 
 
  3922 0439 00000000 		.4byte	0
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  3976 04ca 0200     		.2byte	0x2
  3977 04cc 91       		.byte	0x91
  3978 04cd 64       		.sleb128 -28
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 87
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 87
 
 
  3979 04ce 40000000 		.4byte	.LVL120
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  4033 0559 1E000000 		.4byte	.LVL114
  4034 055d 40000000 		.4byte	.LVL120
  4035 0561 0100     		.2byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 88
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 88
 
 
  4036 0563 55       		.byte	0x55
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  4090 05eb 0100     		.2byte	0x1
  4091 05ed 5B       		.byte	0x5b
  4092 05ee 4A000000 		.4byte	.LVL147
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 89
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 89
 
 
  4093 05f2 4F000000 		.4byte	.LVL148-1
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  4147 067a 12000000 		.4byte	.LVL135
  4148 067e 16000000 		.4byte	.LVL137
  4149 0682 0200     		.2byte	0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 90
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 90
 
 
  4150 0684 31       		.byte	0x31
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  4204 003c 24000000 		.4byte	.LFE38-.LFB38
  4205 0040 00000000 		.4byte	.LFB42
  4206 0044 28000000 		.4byte	.LFE42-.LFB42
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 91
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 91
 
 
  4207 0048 00000000 		.4byte	.LFB41
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  4261 0078 00000000 		.4byte	.LFB34
  4262 007c 7C000000 		.4byte	.LFE34
  4263 0080 00000000 		.4byte	.LFB50
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 92
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 92
 
 
  4264 0084 5A000000 		.4byte	.LFE50
@@ -5477,342 +5477,349 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 1
  4271      6874735F 
  4271      434C5554 
  4271      00
- 4272              	.LASF49:
- 4273 0011 53747269 		.ascii	"StripLights_bplot\000"
- 4273      704C6967 
- 4273      6874735F 
- 4273      62706C6F 
- 4273      7400
- 4274              	.LASF14:
- 4275 0023 63686172 		.ascii	"char\000"
- 4275      00
- 4276              	.LASF33:
- 4277 0028 53747269 		.ascii	"StripLights_GetPixel\000"
+ 4272              	.LASF63:
+ 4273 0011 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
+ 4273      73657273 
+ 4273      5C6D6577 
+ 4273      696E5C4F 
+ 4273      6E654472 
+ 4274 003f 5C537765 		.ascii	"\\Swerve Motor Board 2023\\Swerve_Motor_Board_PY202"
+ 4274      72766520 
+ 4274      4D6F746F 
+ 4274      7220426F 
+ 4274      61726420 
+ 4275 0070 335C5377 		.ascii	"3\\SwerveMotorFirmware.cydsn\000"
+ 4275      65727665 
+ 4275      4D6F746F 
+ 4275      72466972 
+ 4275      6D776172 
+ 4276              	.LASF49:
+ 4277 008c 53747269 		.ascii	"StripLights_bplot\000"
  4277      704C6967 
  4277      6874735F 
- 4277      47657450 
- 4277      6978656C 
- 4278              	.LASF19:
- 4279 003d 53747269 		.ascii	"StripLights_DimShift\000"
- 4279      704C6967 
- 4279      6874735F 
- 4279      44696D53 
- 4279      68696674 
- 4280              	.LASF2:
- 4281 0052 73686F72 		.ascii	"short int\000"
- 4281      7420696E 
- 4281      7400
- 4282              	.LASF22:
- 4283 005c 636F6C6F 		.ascii	"color\000"
- 4283      7200
- 4284              	.LASF58:
- 4285 0062 53747269 		.ascii	"StripLights_SetFont\000"
- 4285      704C6967 
- 4285      6874735F 
- 4285      53657446 
- 4285      6F6E7400 
- 4286              	.LASF42:
- 4287 0076 53747269 		.ascii	"StripLights_DrawRect\000"
- 4287      704C6967 
- 4287      6874735F 
- 4287      44726177 
- 4287      52656374 
- 4288              	.LASF62:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 93
+ 4277      62706C6F 
+ 4277      7400
+ 4278              	.LASF14:
+ 4279 009e 63686172 		.ascii	"char\000"
+ 4279      00
+ 4280              	.LASF33:
+ 4281 00a3 53747269 		.ascii	"StripLights_GetPixel\000"
+ 4281      704C6967 
+ 4281      6874735F 
+ 4281      47657450 
+ 4281      6978656C 
+ 4282              	.LASF19:
+ 4283 00b8 53747269 		.ascii	"StripLights_DimShift\000"
+ 4283      704C6967 
+ 4283      6874735F 
+ 4283      44696D53 
+ 4283      68696674 
+ 4284              	.LASF2:
+ 4285 00cd 73686F72 		.ascii	"short int\000"
+ 4285      7420696E 
+ 4285      7400
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 93
 
 
- 4289 008b 47656E65 		.ascii	"Generated_Source\\PSoC4\\StripLights.c\000"
- 4289      72617465 
- 4289      645F536F 
- 4289      75726365 
- 4289      5C50536F 
- 4290              	.LASF55:
- 4291 00b0 53747269 		.ascii	"StripLights_ledArray\000"
+ 4286              	.LASF22:
+ 4287 00d7 636F6C6F 		.ascii	"color\000"
+ 4287      7200
+ 4288              	.LASF58:
+ 4289 00dd 53747269 		.ascii	"StripLights_SetFont\000"
+ 4289      704C6967 
+ 4289      6874735F 
+ 4289      53657446 
+ 4289      6F6E7400 
+ 4290              	.LASF42:
+ 4291 00f1 53747269 		.ascii	"StripLights_DrawRect\000"
  4291      704C6967 
  4291      6874735F 
- 4291      6C656441 
- 4291      72726179 
- 4292              	.LASF59:
- 4293 00c5 53747269 		.ascii	"StripLights_cisr_StartEx\000"
- 4293      704C6967 
- 4293      6874735F 
- 4293      63697372 
- 4293      5F537461 
- 4294              	.LASF43:
- 4295 00de 66696C6C 		.ascii	"fill\000"
- 4295      00
- 4296              	.LASF61:
- 4297 00e3 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 4297      43313120 
- 4297      352E342E 
- 4297      31203230 
- 4297      31363036 
- 4298 0116 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 4298      20726576 
- 4298      6973696F 
- 4298      6E203233 
- 4298      37373135 
- 4299 0149 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 4299      66756E63 
- 4299      74696F6E 
- 4299      2D736563 
- 4299      74696F6E 
- 4300              	.LASF18:
- 4301 0171 53747269 		.ascii	"StripLights_DimMask\000"
- 4301      704C6967 
- 4301      6874735F 
- 4301      44696D4D 
- 4301      61736B00 
- 4302              	.LASF30:
- 4303 0185 53747269 		.ascii	"StripLights_WriteColor\000"
- 4303      704C6967 
- 4303      6874735F 
- 4303      57726974 
- 4303      65436F6C 
- 4304              	.LASF9:
- 4305 019c 75696E74 		.ascii	"uint8\000"
- 4305      3800
- 4306              	.LASF48:
- 4307 01a2 53747269 		.ascii	"StripLights_initvar\000"
+ 4291      44726177 
+ 4291      52656374 
+ 4292              	.LASF62:
+ 4293 0106 47656E65 		.ascii	"Generated_Source\\PSoC4\\StripLights.c\000"
+ 4293      72617465 
+ 4293      645F536F 
+ 4293      75726365 
+ 4293      5C50536F 
+ 4294              	.LASF55:
+ 4295 012b 53747269 		.ascii	"StripLights_ledArray\000"
+ 4295      704C6967 
+ 4295      6874735F 
+ 4295      6C656441 
+ 4295      72726179 
+ 4296              	.LASF59:
+ 4297 0140 53747269 		.ascii	"StripLights_cisr_StartEx\000"
+ 4297      704C6967 
+ 4297      6874735F 
+ 4297      63697372 
+ 4297      5F537461 
+ 4298              	.LASF43:
+ 4299 0159 66696C6C 		.ascii	"fill\000"
+ 4299      00
+ 4300              	.LASF61:
+ 4301 015e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 4301      43313120 
+ 4301      352E342E 
+ 4301      31203230 
+ 4301      31363036 
+ 4302 0191 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 4302      20726576 
+ 4302      6973696F 
+ 4302      6E203233 
+ 4302      37373135 
+ 4303 01c4 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 4303      66756E63 
+ 4303      74696F6E 
+ 4303      2D736563 
+ 4303      74696F6E 
+ 4304              	.LASF18:
+ 4305 01ec 53747269 		.ascii	"StripLights_DimMask\000"
+ 4305      704C6967 
+ 4305      6874735F 
+ 4305      44696D4D 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 94
+
+
+ 4305      61736B00 
+ 4306              	.LASF30:
+ 4307 0200 53747269 		.ascii	"StripLights_WriteColor\000"
  4307      704C6967 
  4307      6874735F 
- 4307      696E6974 
- 4307      76617200 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 94
-
-
- 4308              	.LASF63:
- 4309 01b6 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
- 4309      73657273 
- 4309      5C6D6577 
- 4309      696E5C4F 
- 4309      6E654472 
- 4310 01e4 5C537765 		.ascii	"\\Swerve Motor Controller\\SwerveMotorFirmware.cyds"
- 4310      72766520 
- 4310      4D6F746F 
- 4310      7220436F 
- 4310      6E74726F 
- 4311 0215 6E00     		.ascii	"n\000"
+ 4307      57726974 
+ 4307      65436F6C 
+ 4308              	.LASF9:
+ 4309 0217 75696E74 		.ascii	"uint8\000"
+ 4309      3800
+ 4310              	.LASF48:
+ 4311 021d 53747269 		.ascii	"StripLights_initvar\000"
+ 4311      704C6967 
+ 4311      6874735F 
+ 4311      696E6974 
+ 4311      76617200 
  4312              	.LASF24:
- 4313 0217 53747269 		.ascii	"StripLights_Trigger\000"
+ 4313 0231 53747269 		.ascii	"StripLights_Trigger\000"
  4313      704C6967 
  4313      6874735F 
  4313      54726967 
  4313      67657200 
  4314              	.LASF0:
- 4315 022b 7369676E 		.ascii	"signed char\000"
+ 4315 0245 7369676E 		.ascii	"signed char\000"
  4315      65642063 
  4315      68617200 
  4316              	.LASF12:
- 4317 0237 666C6F61 		.ascii	"float\000"
+ 4317 0251 666C6F61 		.ascii	"float\000"
  4317      7400
  4318              	.LASF6:
- 4319 023d 6C6F6E67 		.ascii	"long long int\000"
+ 4319 0257 6C6F6E67 		.ascii	"long long int\000"
  4319      206C6F6E 
  4319      6720696E 
  4319      7400
  4320              	.LASF37:
- 4321 024b 6464465F 		.ascii	"ddF_y\000"
+ 4321 0265 6464465F 		.ascii	"ddF_y\000"
  4321      7900
  4322              	.LASF51:
- 4323 0251 75706461 		.ascii	"update\000"
+ 4323 026b 75706461 		.ascii	"update\000"
  4323      746500
  4324              	.LASF4:
- 4325 0258 6C6F6E67 		.ascii	"long int\000"
+ 4325 0272 6C6F6E67 		.ascii	"long int\000"
  4325      20696E74 
  4325      00
  4326              	.LASF53:
- 4327 0261 6D617858 		.ascii	"maxX\000"
+ 4327 027b 6D617858 		.ascii	"maxX\000"
  4327      00
  4328              	.LASF16:
- 4329 0266 6C6F6E67 		.ascii	"long double\000"
+ 4329 0280 6C6F6E67 		.ascii	"long double\000"
  4329      20646F75 
  4329      626C6500 
  4330              	.LASF1:
- 4331 0272 756E7369 		.ascii	"unsigned char\000"
+ 4331 028c 756E7369 		.ascii	"unsigned char\000"
  4331      676E6564 
  4331      20636861 
  4331      7200
  4332              	.LASF32:
- 4333 0280 53747269 		.ascii	"StripLights_ColorInc\000"
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 95
+
+
+ 4333 029a 53747269 		.ascii	"StripLights_ColorInc\000"
  4333      704C6967 
  4333      6874735F 
  4333      436F6C6F 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 95
-
-
  4333      72496E63 
  4334              	.LASF34:
- 4335 0295 53747269 		.ascii	"StripLights_DrawCircle\000"
+ 4335 02af 53747269 		.ascii	"StripLights_DrawCircle\000"
  4335      704C6967 
  4335      6874735F 
  4335      44726177 
  4335      43697263 
  4336              	.LASF27:
- 4337 02ac 636F6C6F 		.ascii	"colorIndex\000"
+ 4337 02c6 636F6C6F 		.ascii	"colorIndex\000"
  4337      72496E64 
  4337      657800
  4338              	.LASF54:
- 4339 02b7 6D617859 		.ascii	"maxY\000"
+ 4339 02d1 6D617859 		.ascii	"maxY\000"
  4339      00
  4340              	.LASF7:
- 4341 02bc 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 4341 02d6 6C6F6E67 		.ascii	"long long unsigned int\000"
  4341      206C6F6E 
  4341      6720756E 
  4341      7369676E 
  4341      65642069 
  4342              	.LASF8:
- 4343 02d3 756E7369 		.ascii	"unsigned int\000"
+ 4343 02ed 756E7369 		.ascii	"unsigned int\000"
  4343      676E6564 
  4343      20696E74 
  4343      00
  4344              	.LASF5:
- 4345 02e0 6C6F6E67 		.ascii	"long unsigned int\000"
+ 4345 02fa 6C6F6E67 		.ascii	"long unsigned int\000"
  4345      20756E73 
  4345      69676E65 
  4345      6420696E 
  4345      7400
  4346              	.LASF46:
- 4347 02f2 64696D4C 		.ascii	"dimLevel\000"
+ 4347 030c 64696D4C 		.ascii	"dimLevel\000"
  4347      6576656C 
  4347      00
  4348              	.LASF23:
- 4349 02fb 53747269 		.ascii	"StripLights_refreshComplete\000"
+ 4349 0315 53747269 		.ascii	"StripLights_refreshComplete\000"
  4349      704C6967 
  4349      6874735F 
  4349      72656672 
  4349      65736843 
  4350              	.LASF56:
- 4351 0317 53747269 		.ascii	"StripLights_ledIndex\000"
+ 4351 0331 53747269 		.ascii	"StripLights_ledIndex\000"
  4351      704C6967 
  4351      6874735F 
  4351      6C656449 
  4351      6E646578 
  4352              	.LASF45:
- 4353 032c 53747269 		.ascii	"StripLights_Dim\000"
+ 4353 0346 53747269 		.ascii	"StripLights_Dim\000"
  4353      704C6967 
  4353      6874735F 
  4353      44696D00 
  4354              	.LASF41:
- 4355 033c 66726163 		.ascii	"fraction\000"
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 96
+
+
+ 4355 0356 66726163 		.ascii	"fraction\000"
  4355      74696F6E 
  4355      00
  4356              	.LASF39:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 96
-
-
- 4357 0345 73746570 		.ascii	"stepx\000"
+ 4357 035f 73746570 		.ascii	"stepx\000"
  4357      7800
  4358              	.LASF40:
- 4359 034b 73746570 		.ascii	"stepy\000"
+ 4359 0365 73746570 		.ascii	"stepy\000"
  4359      7900
  4360              	.LASF64:
- 4361 0351 53747269 		.ascii	"StripLights_Ready\000"
+ 4361 036b 53747269 		.ascii	"StripLights_Ready\000"
  4361      704C6967 
  4361      6874735F 
  4361      52656164 
  4361      7900
  4362              	.LASF3:
- 4363 0363 73686F72 		.ascii	"short unsigned int\000"
+ 4363 037d 73686F72 		.ascii	"short unsigned int\000"
  4363      7420756E 
  4363      7369676E 
  4363      65642069 
  4363      6E7400
  4364              	.LASF29:
- 4365 0376 53747269 		.ascii	"StripLights_DisplayClear\000"
+ 4365 0390 53747269 		.ascii	"StripLights_DisplayClear\000"
  4365      704C6967 
  4365      6874735F 
  4365      44697370 
  4365      6C617943 
  4366              	.LASF25:
- 4367 038f 696E6356 		.ascii	"incValue\000"
+ 4367 03a9 696E6356 		.ascii	"incValue\000"
  4367      616C7565 
  4367      00
  4368              	.LASF10:
- 4369 0398 75696E74 		.ascii	"uint32\000"
+ 4369 03b2 75696E74 		.ascii	"uint32\000"
  4369      333200
  4370              	.LASF44:
- 4371 039f 78446966 		.ascii	"xDiff\000"
+ 4371 03b9 78446966 		.ascii	"xDiff\000"
  4371      6600
  4372              	.LASF15:
- 4373 03a5 72656738 		.ascii	"reg8\000"
+ 4373 03bf 72656738 		.ascii	"reg8\000"
  4373      00
  4374              	.LASF60:
- 4375 03aa 53747269 		.ascii	"StripLights_fisr_StartEx\000"
+ 4375 03c4 53747269 		.ascii	"StripLights_fisr_StartEx\000"
  4375      704C6967 
  4375      6874735F 
  4375      66697372 
  4375      5F537461 
  4376              	.LASF36:
- 4377 03c3 6464465F 		.ascii	"ddF_x\000"
+ 4377 03dd 6464465F 		.ascii	"ddF_x\000"
  4377      7800
  4378              	.LASF11:
- 4379 03c9 696E7433 		.ascii	"int32\000"
+ 4379 03e3 696E7433 		.ascii	"int32\000"
  4379      3200
  4380              	.LASF13:
- 4381 03cf 646F7562 		.ascii	"double\000"
+ 4381 03e9 646F7562 		.ascii	"double\000"
  4381      6C6500
  4382              	.LASF21:
- 4383 03d6 53747269 		.ascii	"StripLights_CISR\000"
+ 4383 03f0 53747269 		.ascii	"StripLights_CISR\000"
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 97
+
+
  4383      704C6967 
  4383      6874735F 
  4383      43495352 
  4383      00
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccfajK0r.s 			page 97
-
-
  4384              	.LASF65:
- 4385 03e7 53747269 		.ascii	"StripLights_Stop\000"
+ 4385 0401 53747269 		.ascii	"StripLights_Stop\000"
  4385      704C6967 
  4385      6874735F 
  4385      53746F70 
  4385      00
  4386              	.LASF20:
- 4387 03f8 53747269 		.ascii	"StripLights_FISR\000"
+ 4387 0412 53747269 		.ascii	"StripLights_FISR\000"
  4387      704C6967 
  4387      6874735F 
  4387      46495352 
  4387      00
  4388              	.LASF28:
- 4389 0409 53747269 		.ascii	"StripLights_MemClear\000"
+ 4389 0423 53747269 		.ascii	"StripLights_MemClear\000"
  4389      704C6967 
  4389      6874735F 
  4389      4D656D43 
  4389      6C656172 
  4390              	.LASF52:
- 4391 041e 61696E64 		.ascii	"aindex\000"
+ 4391 0438 61696E64 		.ascii	"aindex\000"
  4391      657800
  4392              	.LASF31:
- 4393 0425 53747269 		.ascii	"StripLights_Pixel\000"
+ 4393 043f 53747269 		.ascii	"StripLights_Pixel\000"
  4393      704C6967 
  4393      6874735F 
  4393      50697865 
  4393      6C00
  4394              	.LASF17:
- 4395 0437 73697A65 		.ascii	"sizetype\000"
+ 4395 0451 73697A65 		.ascii	"sizetype\000"
  4395      74797065 
  4395      00
  4396              	.LASF47:
- 4397 0440 53747269 		.ascii	"StripLights_Start\000"
+ 4397 045a 53747269 		.ascii	"StripLights_Start\000"
  4397      704C6967 
  4397      6874735F 
  4397      53746172 
  4397      7400
  4398              	.LASF35:
- 4399 0452 72616469 		.ascii	"radius\000"
+ 4399 046c 72616469 		.ascii	"radius\000"
  4399      757300
  4400              	.LASF57:
- 4401 0459 53747269 		.ascii	"StripLights_row\000"
+ 4401 0473 53747269 		.ascii	"StripLights_row\000"
  4401      704C6967 
  4401      6874735F 
  4401      726F7700 
  4402              	.LASF50:
- 4403 0469 6269744D 		.ascii	"bitMap\000"
+ 4403 0483 6269744D 		.ascii	"bitMap\000"
  4403      617000
  4404              	.LASF38:
- 4405 0470 53747269 		.ascii	"StripLights_DrawLine\000"
+ 4405 048a 53747269 		.ascii	"StripLights_DrawLine\000"
  4405      704C6967 
  4405      6874735F 
  4405      44726177 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccgBnrWK.s 			page 98
+
+
  4405      4C696E65 
  4406              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

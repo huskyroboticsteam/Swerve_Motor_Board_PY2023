@@ -360,20 +360,13 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
+<name v=".\SwerveMotorFirmware.cydsn\main.c" />
 <name v=".\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" />
-<name v=".\SwerveMotorFirmware.cydsn\main.c" />
-<name v=".\CANLib\CANCommon.h" />
 <name v=".\CANLib\PortFiles\PortPSOC_swerve.c" />
-<name v=".\CANLib\Port_swerve.h" />
-<name v=".\CANLib\CANLibrary.h" />
-<name v=".\SwerveMotorFirmware.cydsn\LED_Array.c" />
+<name v=".\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\project.h" />
 <name v=".\SwerveMotorFirmware.cydsn\MotorDrive.h" />
-<name v=".\SwerveMotorFirmware.cydsn\MotorDrive.c" />
-<name v=".\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\cytypes.h" />
-<name v=".\CANLib\CANPacket.c" />
-<name v=".\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\Can_addr.c" />
-<name v=".\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\Can_addr.h" />
+<name v=".\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\CAN.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -381,7 +374,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1411, 624" SelectedTabbedMdiWindow="26bf9ba8-9d4b-4ab4-a809-6146c2ee9169"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="ea4087bb-e838-44b2-94b7-2bea84f5f49d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="ae0b3fd8-0b8e-40cf-8493-80e6905fcbde" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="22e9a904-08e3-4911-8fdb-c7da5f2666d4" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\main.c" Guid="26bf9ba8-9d4b-4ab4-a809-6146c2ee9169" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\CANLib\CANCommon.h" Guid="cf9bdf16-be00-4ca0-8484-15ab5d07f9df" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\CANLib\PortFiles\PortPSOC_swerve.c" Guid="6eeed02e-83a4-476d-9ad4-d95ad6914fa6" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\CANLib\Port_swerve.h" Guid="6ccd8a9e-163c-43a4-8785-e701ed252aca" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\CANLib\CANLibrary.h" Guid="8ae06fbd-70aa-4653-b0ad-6d89d87829b4" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\LED_Array.c" Guid="601b86ae-fa3f-4078-ace8-0cc7881eebce" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\MotorDrive.h" Guid="9dd4c2a9-de98-4bca-a42a-ca0ac9501d6e" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\MotorDrive.c" Guid="0d3a72da-b29c-4bc4-be70-18b1e52c444c" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\cytypes.h" Guid="1b62349c-d1be-467e-bd41-f8306c3f2a3f" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\CANLib\CANPacket.c" Guid="989b40cb-8ea6-48ac-a848-3113655a422c" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\Can_addr.c" Guid="8f85e7da-7296-43cf-be90-1c183b78d30a" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\Can_addr.h" Guid="646ce27b-0628-42ed-b72a-642e113a165b" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1411, 624" SelectedTabbedMdiWindow="2a703266-3c1c-4067-a7f8-3e32905ec6ef"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="ea4087bb-e838-44b2-94b7-2bea84f5f49d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="2a703266-3c1c-4067-a7f8-3e32905ec6ef" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="e3850c66-ca3b-49e7-8084-ca6bd38547a9" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="e45d3d8f-fc6f-46f6-bfc9-88b8b659c3e3" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\PortFiles\PortPSOC_swerve.c" Guid="64229028-47a2-47b2-b375-ef6d071855de" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\project.h" Guid="74df288a-9ce3-4746-8319-2c32b0433714" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.h" Guid="ed31e5bd-4695-4db5-8638-425255c5cb1c" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\CAN.h" Guid="af648cd9-fa27-4247-8a40-ad9a6820f82d" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

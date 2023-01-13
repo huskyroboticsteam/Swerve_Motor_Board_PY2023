@@ -1,4 +1,4 @@
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.cysym
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.pdf
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_pins_v2_20\cy_pins_v2_20.cystate
@@ -374,13 +374,13 @@ C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComp
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\Timer_v2_80
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_Timer_v2_80\B_Timer_v2_80.cysym
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_Timer_v2_80\B_Timer_v2_80.v
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\StripLights_v2_2\StripLights_v2_2.cysym
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\StripLights_v2_2\StripLights.pdf
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\StripLights_v2_2\API\SLights.c
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\StripLights_v2_2\API\SLights.h
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\StripLights_v2_2\API\fonts.c
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\StripLights_v2_2\API\fonts.h
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\StripLights_v2_2\PSoC4\StripLights_v2_2.cysch
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLights_v2_2\StripLights_v2_2.cysym
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLights_v2_2\StripLights.pdf
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLights_v2_2\API\SLights.c
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLights_v2_2\API\SLights.h
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLights_v2_2\API\fonts.c
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLights_v2_2\API\fonts.h
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLights_v2_2\PSoC4\StripLights_v2_2.cysch
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\CyControlReg_v1_80\CyControlReg_v1_80.cysym
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\CyControlReg_v1_80\CyControlReg_v1_80.v
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\CyControlReg_v1_80\CyControlReg_v1_80.cycdx
@@ -404,9 +404,9 @@ C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrim
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\demux_v1_10\demux_v1_10.pdf
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\demux_v1_10\version.cypatch
 C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\demux_v1_10\Custom\custom.cs
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.cysym
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Controller\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.cysym
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr
 C:\Users\mewin\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\cy_boot_v6_10\PSoC4\API\cm0gcc.ld
 C:\Users\mewin\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\cy_boot_v6_10\PSoC4\API\Cm0RealView.scat
 C:\Users\mewin\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\cy_boot_v6_10\PSoC4\API\Cm0Start.c
