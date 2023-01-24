@@ -37,17 +37,21 @@
       <Folder BuildType="STRICT" Path="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn">
         <Files Root="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn">
           <File BuildType="BUILD" Toolchain="">main.c</File>
-          <File BuildType="BUILD" Toolchain="">DebugMessages.c</File>
-          <File BuildType="BUILD" Toolchain="">Initialize_CAN_addr.c</File>
           <File BuildType="BUILD" Toolchain="">LED_Array.c</File>
           <File BuildType="BUILD" Toolchain="">MotorDrive.c</File>
           <File BuildType="BUILD" Toolchain="">PositionPID.c</File>
+          <File BuildType="BUILD" Toolchain="">Motor_Unit_CAN.c</File>
+          <File BuildType="BUILD" Toolchain="">Motor_Unit_FSM.c</File>
           <File BuildType="BUILD" Toolchain="">cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">DebugMessages.h</File>
           <File BuildType="BUILD" Toolchain="">Initialize_CAN_addr.h</File>
           <File BuildType="BUILD" Toolchain="">LED_Array.h</File>
           <File BuildType="BUILD" Toolchain="">MotorDrive.h</File>
           <File BuildType="BUILD" Toolchain="">PositionPID.h</File>
+          <File BuildType="BUILD" Toolchain="">main.h</File>
+          <File BuildType="BUILD" Toolchain="">Motor_Unit_CAN.h</File>
+          <File BuildType="BUILD" Toolchain="">Motor_Unit_Debug.h</File>
+          <File BuildType="BUILD" Toolchain="">Motor_Unit_FSM.h</File>
           <File BuildType="BUILD" Toolchain="">..\CANLib\CANCommon.c</File>
           <File BuildType="BUILD" Toolchain="">..\CANLib\CANCommon.h</File>
           <File BuildType="BUILD" Toolchain="">..\CANLib\CANGPIO.c</File>

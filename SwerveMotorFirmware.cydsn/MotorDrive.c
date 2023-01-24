@@ -10,50 +10,69 @@
  * ========================================
 */
 #include <project.h>
-#include "cyapicallbacks.h"
 #include <stdio.h>
+#include <stdint.h>
+
+#include "main.h"
 #include "MotorDrive.h"
 
-extern volatile uint8 uart_debug;
-extern uint8 invalidate;
-extern char8 txData[TX_DATA_SIZE];
+uint8_t invalidate = 0;     // TODO: make sure this isn't a motor specific variable
+extern char txData[TX_DATA_SIZE];
 
-//uint8 limitSW = Status_Reg_Switches_Read();
+int32_t currPWM_Drive = 0;
+int32_t currPWM_Swivel = 0;
 
+
+// Drive Motor, Motor 1 in Top Design
 // takes between -255 and 255
-void set_PWM_M1(int compare, uint8_t disable_limit, uint8 limitSW) {
-   /* if(uart_debug) {
-        sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
-        UART_UartPutString(txData); 
-    }*/
-    invalidate = 0;
-    if (compare < -255 || compare > 255) { return; }
+void set_PWM_M1(int16_t compare, uint8_t disable_limit, uint8_t limitSW) {  //limitSw prev uint8
+    #ifdef PRINT_PWM_COMMAND
+    sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
+    UART_UartPutString(txData); 
+    #endif
+    
+    invalidate = 0;     
     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
         Motor1Direction_Write(0);
+        currPWM_Drive = compare;
         PWM_Motor1_WriteCompare(-compare);
     } else if (compare > 0 && (!(limitSW & 0b10) || disable_limit) ){
         Motor1Direction_Write(1);
+        currPWM_Drive = compare;
         PWM_Motor1_WriteCompare(compare);
     } else {
+        currPWM_Drive = 0;
         PWM_Motor1_WriteCompare(0);
     }
 }
 
-void set_PWM_M2(int compare, uint8_t disable_limit, uint8 limitSW) {
-   /* if(uart_debug) {
-        sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
-        UART_UartPutString(txData); 
-    }*/
-    invalidate = 0;
-    if (compare < -255 || compare > 255) { return; }
+//  Swivel Motor, Motor 2 in Top Design
+void set_PWM_M2(int16_t compare, uint8_t disable_limit, uint8_t limitSW) { 
+    #ifdef PRINT_PWM_COMMAND
+    sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
+    UART_UartPutString(txData); 
+    #endif
+    
+    invalidate = 0;     
     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
         Motor2Direction_Write(0);
+        currPWM_Swivel = compare;
         PWM_Motor2_WriteCompare(-compare);
     } else if (compare > 0 && (!(limitSW & 0b10) || disable_limit) ){
         Motor2Direction_Write(1);
+        currPWM_Swivel = compare;
         PWM_Motor2_WriteCompare(compare);
     } else {
+        currPWM_Swivel = 0;
         PWM_Motor2_WriteCompare(0);
     }
+}
+
+int16_t GetCurrentPWM_M1() {
+    return currPWM_Drive;
+}
+
+int16_t GetCurrentPWM_M2() {
+    return currPWM_Swivel;
 }
 /* [] END OF FILE */

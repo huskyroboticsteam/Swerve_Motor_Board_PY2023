@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
   28:Generated_Source\PSoC4/PWM_Motor2_PM.c **** * Summary:
   29:Generated_Source\PSoC4/PWM_Motor2_PM.c **** *  All configuration registers are retention. Nothing to save here.
   30:Generated_Source\PSoC4/PWM_Motor2_PM.c **** *
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 2
 
 
   31:Generated_Source\PSoC4/PWM_Motor2_PM.c **** * Parameters:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
   53              		.cfi_offset 4, -8
   54              		.cfi_offset 14, -4
   60:Generated_Source\PSoC4/PWM_Motor2_PM.c ****     if(0u != (PWM_Motor2_BLOCK_CONTROL_REG & PWM_Motor2_MASK))
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 3
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 3
 
 
   55              		.loc 1 60 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
   77:Generated_Source\PSoC4/PWM_Motor2_PM.c **** *
   78:Generated_Source\PSoC4/PWM_Motor2_PM.c **** * Summary:
   79:Generated_Source\PSoC4/PWM_Motor2_PM.c **** *  All configuration registers are retention. Nothing to restore here.
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 4
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 4
 
 
   80:Generated_Source\PSoC4/PWM_Motor2_PM.c **** *
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  117              		.cfi_def_cfa_offset 8
  118              		.cfi_offset 4, -8
  119              		.cfi_offset 14, -4
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 5
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 5
 
 
  110:Generated_Source\PSoC4/PWM_Motor2_PM.c ****     PWM_Motor2_RestoreConfig();
@@ -285,40 +285,40 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  154 0006 00000000 		.4byte	.Ldebug_abbrev0
  155 000a 04       		.byte	0x4
  156 000b 01       		.uleb128 0x1
- 157 000c 81010000 		.4byte	.LASF24
+ 157 000c 20010000 		.4byte	.LASF24
  158 0010 0C       		.byte	0xc
- 159 0011 B1000000 		.4byte	.LASF25
- 160 0015 3E000000 		.4byte	.LASF26
+ 159 0011 50000000 		.4byte	.LASF25
+ 160 0015 FC010000 		.4byte	.LASF26
  161 0019 00000000 		.4byte	.Ldebug_ranges0+0
  162 001d 00000000 		.4byte	0
  163 0021 00000000 		.4byte	.Ldebug_line0
  164 0025 02       		.uleb128 0x2
  165 0026 01       		.byte	0x1
  166 0027 06       		.byte	0x6
- 167 0028 22020000 		.4byte	.LASF0
+ 167 0028 C1010000 		.4byte	.LASF0
  168 002c 02       		.uleb128 0x2
  169 002d 01       		.byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 6
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 6
 
 
  170 002e 08       		.byte	0x8
- 171 002f 4B010000 		.4byte	.LASF1
+ 171 002f EA000000 		.4byte	.LASF1
  172 0033 02       		.uleb128 0x2
  173 0034 02       		.byte	0x2
  174 0035 05       		.byte	0x5
- 175 0036 53020000 		.4byte	.LASF2
+ 175 0036 F2010000 		.4byte	.LASF2
  176 003a 02       		.uleb128 0x2
  177 003b 02       		.byte	0x2
  178 003c 07       		.byte	0x7
- 179 003d 0F020000 		.4byte	.LASF3
+ 179 003d AE010000 		.4byte	.LASF3
  180 0041 02       		.uleb128 0x2
  181 0042 04       		.byte	0x4
  182 0043 05       		.byte	0x5
- 183 0044 6B010000 		.4byte	.LASF4
+ 183 0044 0A010000 		.4byte	.LASF4
  184 0048 02       		.uleb128 0x2
  185 0049 04       		.byte	0x4
  186 004a 07       		.byte	0x7
- 187 004b 01010000 		.4byte	.LASF5
+ 187 004b A0000000 		.4byte	.LASF5
  188 004f 02       		.uleb128 0x2
  189 0050 08       		.byte	0x8
  190 0051 05       		.byte	0x5
@@ -326,7 +326,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  192 0056 02       		.uleb128 0x2
  193 0057 08       		.byte	0x8
  194 0058 07       		.byte	0x7
- 195 0059 13010000 		.4byte	.LASF7
+ 195 0059 B2000000 		.4byte	.LASF7
  196 005d 03       		.uleb128 0x3
  197 005e 04       		.byte	0x4
  198 005f 05       		.byte	0x5
@@ -336,7 +336,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  202 0066 07       		.byte	0x7
  203 0067 2A000000 		.4byte	.LASF8
  204 006b 04       		.uleb128 0x4
- 205 006c FB000000 		.4byte	.LASF9
+ 205 006c 9A000000 		.4byte	.LASF9
  206 0070 02       		.byte	0x2
  207 0071 FC01     		.2byte	0x1fc
  208 0073 2C000000 		.4byte	0x2c
@@ -348,20 +348,20 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  214 0083 02       		.uleb128 0x2
  215 0084 04       		.byte	0x4
  216 0085 04       		.byte	0x4
- 217 0086 2F010000 		.4byte	.LASF11
+ 217 0086 CE000000 		.4byte	.LASF11
  218 008a 02       		.uleb128 0x2
  219 008b 08       		.byte	0x8
  220 008c 04       		.byte	0x4
- 221 008d 74010000 		.4byte	.LASF12
+ 221 008d 13010000 		.4byte	.LASF12
  222 0091 02       		.uleb128 0x2
  223 0092 01       		.byte	0x1
  224 0093 08       		.byte	0x8
- 225 0094 2A010000 		.4byte	.LASF13
+ 225 0094 C9000000 		.4byte	.LASF13
  226 0098 04       		.uleb128 0x4
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 7
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 7
 
 
- 227 0099 7B010000 		.4byte	.LASF14
+ 227 0099 1A010000 		.4byte	.LASF14
  228 009d 02       		.byte	0x2
  229 009e A802     		.2byte	0x2a8
  230 00a0 A4000000 		.4byte	0xa4
@@ -370,11 +370,11 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  233 00a9 02       		.uleb128 0x2
  234 00aa 08       		.byte	0x8
  235 00ab 04       		.byte	0x4
- 236 00ac 47020000 		.4byte	.LASF15
+ 236 00ac E6010000 		.4byte	.LASF15
  237 00b0 02       		.uleb128 0x2
  238 00b1 04       		.byte	0x4
  239 00b2 07       		.byte	0x7
- 240 00b3 76020000 		.4byte	.LASF16
+ 240 00b3 90020000 		.4byte	.LASF16
  241 00b7 06       		.uleb128 0x6
  242 00b8 01       		.byte	0x1
  243 00b9 03       		.byte	0x3
@@ -388,12 +388,12 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  251 00ca 00       		.byte	0
  252 00cb 00       		.byte	0
  253 00cc 08       		.uleb128 0x8
- 254 00cd 5D020000 		.4byte	.LASF17
+ 254 00cd 77020000 		.4byte	.LASF17
  255 00d1 03       		.byte	0x3
  256 00d2 24       		.byte	0x24
  257 00d3 B7000000 		.4byte	0xb7
  258 00d7 09       		.uleb128 0x9
- 259 00d8 35010000 		.4byte	.LASF18
+ 259 00d8 D4000000 		.4byte	.LASF18
  260 00dc 01       		.byte	0x1
  261 00dd 26       		.byte	0x26
  262 00de 00000000 		.4byte	.LFB1
@@ -401,7 +401,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  264 00e6 01       		.uleb128 0x1
  265 00e7 9C       		.byte	0x9c
  266 00e8 0A       		.uleb128 0xa
- 267 00e9 D8000000 		.4byte	.LASF20
+ 267 00e9 77000000 		.4byte	.LASF20
  268 00ed 01       		.byte	0x1
  269 00ee 3A       		.byte	0x3a
  270 00ef 00000000 		.4byte	.LFB2
@@ -414,18 +414,18 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  277 0102 48010000 		.4byte	0x148
  278 0106 00       		.byte	0
  279 0107 09       		.uleb128 0x9
- 280 0108 2E020000 		.4byte	.LASF19
+ 280 0108 CD010000 		.4byte	.LASF19
  281 010c 01       		.byte	0x1
  282 010d 58       		.byte	0x58
  283 010e 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 8
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 8
 
 
  284 0112 02000000 		.4byte	.LFE3-.LFB3
  285 0116 01       		.uleb128 0x1
  286 0117 9C       		.byte	0x9c
  287 0118 0A       		.uleb128 0xa
- 288 0119 E9000000 		.4byte	.LASF21
+ 288 0119 88000000 		.4byte	.LASF21
  289 011d 01       		.byte	0x1
  290 011e 6C       		.byte	0x6c
  291 011f 00000000 		.4byte	.LFB4
@@ -438,7 +438,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  298 0132 54010000 		.4byte	0x154
  299 0136 00       		.byte	0
  300 0137 0C       		.uleb128 0xc
- 301 0138 9F000000 		.4byte	.LASF28
+ 301 0138 3E000000 		.4byte	.LASF28
  302 013c 01       		.byte	0x1
  303 013d 15       		.byte	0x15
  304 013e CC000000 		.4byte	0xcc
@@ -451,8 +451,8 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  311 0151 03       		.byte	0x3
  312 0152 3301     		.2byte	0x133
  313 0154 0D       		.uleb128 0xd
- 314 0155 59010000 		.4byte	.LASF23
- 315 0159 59010000 		.4byte	.LASF23
+ 314 0155 F8000000 		.4byte	.LASF23
+ 315 0159 F8000000 		.4byte	.LASF23
  316 015d 03       		.byte	0x3
  317 015e 3101     		.2byte	0x131
  318 0160 00       		.byte	0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  338 0011 00       		.byte	0
  339 0012 00       		.byte	0
  340 0013 02       		.uleb128 0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 9
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 9
 
 
  341 0014 24       		.uleb128 0x24
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  395 004a 07       		.uleb128 0x7
  396 004b 0D       		.uleb128 0xd
  397 004c 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 10
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 10
 
 
  398 004d 03       		.uleb128 0x3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  452 0084 0E       		.uleb128 0xe
  453 0085 3A       		.uleb128 0x3a
  454 0086 0B       		.uleb128 0xb
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 11
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 11
 
 
  455 0087 3B       		.uleb128 0x3b
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  509 00c0 05       		.uleb128 0x5
  510 00c1 00       		.byte	0
  511 00c2 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 12
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 12
 
 
  512 00c3 00       		.byte	0
@@ -718,150 +718,154 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 1
  553      676E6564 
  553      20696E74 
  553      00
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 13
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 13
 
 
  554              	.LASF10:
  555 0037 75696E74 		.ascii	"uint32\000"
  555      333200
- 556              	.LASF26:
- 557 003e 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
- 557      73657273 
- 557      5C6D6577 
- 557      696E5C4F 
- 557      6E654472 
- 558 006c 5C537765 		.ascii	"\\Swerve Motor Controller\\SwerveMotorFirmware.cyds"
- 558      72766520 
- 558      4D6F746F 
- 558      7220436F 
- 558      6E74726F 
- 559 009d 6E00     		.ascii	"n\000"
- 560              	.LASF28:
- 561 009f 50574D5F 		.ascii	"PWM_Motor2_backup\000"
+ 556              	.LASF28:
+ 557 003e 50574D5F 		.ascii	"PWM_Motor2_backup\000"
+ 557      4D6F746F 
+ 557      72325F62 
+ 557      61636B75 
+ 557      7000
+ 558              	.LASF25:
+ 559 0050 47656E65 		.ascii	"Generated_Source\\PSoC4\\PWM_Motor2_PM.c\000"
+ 559      72617465 
+ 559      645F536F 
+ 559      75726365 
+ 559      5C50536F 
+ 560              	.LASF20:
+ 561 0077 50574D5F 		.ascii	"PWM_Motor2_Sleep\000"
  561      4D6F746F 
- 561      72325F62 
- 561      61636B75 
- 561      7000
- 562              	.LASF25:
- 563 00b1 47656E65 		.ascii	"Generated_Source\\PSoC4\\PWM_Motor2_PM.c\000"
- 563      72617465 
- 563      645F536F 
- 563      75726365 
- 563      5C50536F 
- 564              	.LASF20:
- 565 00d8 50574D5F 		.ascii	"PWM_Motor2_Sleep\000"
- 565      4D6F746F 
- 565      72325F53 
- 565      6C656570 
- 565      00
- 566              	.LASF21:
- 567 00e9 50574D5F 		.ascii	"PWM_Motor2_Wakeup\000"
- 567      4D6F746F 
- 567      72325F57 
- 567      616B6575 
- 567      7000
- 568              	.LASF9:
- 569 00fb 75696E74 		.ascii	"uint8\000"
- 569      3800
- 570              	.LASF5:
- 571 0101 6C6F6E67 		.ascii	"long unsigned int\000"
- 571      20756E73 
- 571      69676E65 
- 571      6420696E 
- 571      7400
- 572              	.LASF7:
- 573 0113 6C6F6E67 		.ascii	"long long unsigned int\000"
- 573      206C6F6E 
- 573      6720756E 
- 573      7369676E 
- 573      65642069 
- 574              	.LASF13:
- 575 012a 63686172 		.ascii	"char\000"
- 575      00
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 14
+ 561      72325F53 
+ 561      6C656570 
+ 561      00
+ 562              	.LASF21:
+ 563 0088 50574D5F 		.ascii	"PWM_Motor2_Wakeup\000"
+ 563      4D6F746F 
+ 563      72325F57 
+ 563      616B6575 
+ 563      7000
+ 564              	.LASF9:
+ 565 009a 75696E74 		.ascii	"uint8\000"
+ 565      3800
+ 566              	.LASF5:
+ 567 00a0 6C6F6E67 		.ascii	"long unsigned int\000"
+ 567      20756E73 
+ 567      69676E65 
+ 567      6420696E 
+ 567      7400
+ 568              	.LASF7:
+ 569 00b2 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 569      206C6F6E 
+ 569      6720756E 
+ 569      7369676E 
+ 569      65642069 
+ 570              	.LASF13:
+ 571 00c9 63686172 		.ascii	"char\000"
+ 571      00
+ 572              	.LASF11:
+ 573 00ce 666C6F61 		.ascii	"float\000"
+ 573      7400
+ 574              	.LASF18:
+ 575 00d4 50574D5F 		.ascii	"PWM_Motor2_SaveConfig\000"
+ 575      4D6F746F 
+ 575      72325F53 
+ 575      61766543 
+ 575      6F6E6669 
+ 576              	.LASF1:
+ 577 00ea 756E7369 		.ascii	"unsigned char\000"
+ 577      676E6564 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 14
 
 
- 576              	.LASF11:
- 577 012f 666C6F61 		.ascii	"float\000"
- 577      7400
- 578              	.LASF18:
- 579 0135 50574D5F 		.ascii	"PWM_Motor2_SaveConfig\000"
+ 577      20636861 
+ 577      7200
+ 578              	.LASF23:
+ 579 00f8 50574D5F 		.ascii	"PWM_Motor2_Enable\000"
  579      4D6F746F 
- 579      72325F53 
- 579      61766543 
- 579      6F6E6669 
- 580              	.LASF1:
- 581 014b 756E7369 		.ascii	"unsigned char\000"
- 581      676E6564 
- 581      20636861 
- 581      7200
- 582              	.LASF23:
- 583 0159 50574D5F 		.ascii	"PWM_Motor2_Enable\000"
- 583      4D6F746F 
- 583      72325F45 
- 583      6E61626C 
- 583      6500
- 584              	.LASF4:
- 585 016b 6C6F6E67 		.ascii	"long int\000"
- 585      20696E74 
- 585      00
- 586              	.LASF12:
- 587 0174 646F7562 		.ascii	"double\000"
- 587      6C6500
- 588              	.LASF14:
- 589 017b 72656733 		.ascii	"reg32\000"
- 589      3200
- 590              	.LASF24:
- 591 0181 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 591      43313120 
- 591      352E342E 
- 591      31203230 
- 591      31363036 
- 592 01b4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 592      20726576 
- 592      6973696F 
- 592      6E203233 
- 592      37373135 
- 593 01e7 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 593      66756E63 
- 593      74696F6E 
- 593      2D736563 
- 593      74696F6E 
- 594              	.LASF3:
- 595 020f 73686F72 		.ascii	"short unsigned int\000"
- 595      7420756E 
- 595      7369676E 
- 595      65642069 
- 595      6E7400
- 596              	.LASF0:
- 597 0222 7369676E 		.ascii	"signed char\000"
- 597      65642063 
- 597      68617200 
- 598              	.LASF19:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccG5w3v0.s 			page 15
+ 579      72325F45 
+ 579      6E61626C 
+ 579      6500
+ 580              	.LASF4:
+ 581 010a 6C6F6E67 		.ascii	"long int\000"
+ 581      20696E74 
+ 581      00
+ 582              	.LASF12:
+ 583 0113 646F7562 		.ascii	"double\000"
+ 583      6C6500
+ 584              	.LASF14:
+ 585 011a 72656733 		.ascii	"reg32\000"
+ 585      3200
+ 586              	.LASF24:
+ 587 0120 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 587      43313120 
+ 587      352E342E 
+ 587      31203230 
+ 587      31363036 
+ 588 0153 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 588      20726576 
+ 588      6973696F 
+ 588      6E203233 
+ 588      37373135 
+ 589 0186 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 589      66756E63 
+ 589      74696F6E 
+ 589      2D736563 
+ 589      74696F6E 
+ 590              	.LASF3:
+ 591 01ae 73686F72 		.ascii	"short unsigned int\000"
+ 591      7420756E 
+ 591      7369676E 
+ 591      65642069 
+ 591      6E7400
+ 592              	.LASF0:
+ 593 01c1 7369676E 		.ascii	"signed char\000"
+ 593      65642063 
+ 593      68617200 
+ 594              	.LASF19:
+ 595 01cd 50574D5F 		.ascii	"PWM_Motor2_RestoreConfig\000"
+ 595      4D6F746F 
+ 595      72325F52 
+ 595      6573746F 
+ 595      7265436F 
+ 596              	.LASF15:
+ 597 01e6 6C6F6E67 		.ascii	"long double\000"
+ 597      20646F75 
+ 597      626C6500 
+ 598              	.LASF2:
+ 599 01f2 73686F72 		.ascii	"short int\000"
+ 599      7420696E 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cct0SKmo.s 			page 15
 
 
- 599 022e 50574D5F 		.ascii	"PWM_Motor2_RestoreConfig\000"
- 599      4D6F746F 
- 599      72325F52 
- 599      6573746F 
- 599      7265436F 
- 600              	.LASF15:
- 601 0247 6C6F6E67 		.ascii	"long double\000"
- 601      20646F75 
- 601      626C6500 
- 602              	.LASF2:
- 603 0253 73686F72 		.ascii	"short int\000"
- 603      7420696E 
- 603      7400
+ 599      7400
+ 600              	.LASF26:
+ 601 01fc 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
+ 601      73657273 
+ 601      5C6D6577 
+ 601      696E5C4F 
+ 601      6E654472 
+ 602 022a 5C537765 		.ascii	"\\Swerve Motor Board 2023\\Swerve_Motor_Board_PY202"
+ 602      72766520 
+ 602      4D6F746F 
+ 602      7220426F 
+ 602      61726420 
+ 603 025b 335C5377 		.ascii	"3\\SwerveMotorFirmware.cydsn\000"
+ 603      65727665 
+ 603      4D6F746F 
+ 603      72466972 
+ 603      6D776172 
  604              	.LASF17:
- 605 025d 50574D5F 		.ascii	"PWM_Motor2_BACKUP_STRUCT\000"
+ 605 0277 50574D5F 		.ascii	"PWM_Motor2_BACKUP_STRUCT\000"
  605      4D6F746F 
  605      72325F42 
  605      41434B55 
  605      505F5354 
  606              	.LASF16:
- 607 0276 73697A65 		.ascii	"sizetype\000"
+ 607 0290 73697A65 		.ascii	"sizetype\000"
  607      74797065 
  607      00
  608              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

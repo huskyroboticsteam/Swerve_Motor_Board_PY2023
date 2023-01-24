@@ -1,6 +1,8 @@
 # SwerveMotorFirmware
-# 2023-01-13 02:20:04Z
+# 2023-01-24 02:38:24Z
 
+# IO_6@[IOP=(0)][IoId=(6)] is reserved: ExtClkEnabled
+dont_use_io iocell 0 6
 # IO_2@[IOP=(3)][IoId=(2)] is reserved: SWDDebugEnabled
 dont_use_io iocell 3 2
 # IO_3@[IOP=(3)][IoId=(3)] is reserved: SWDDebugEnabled
