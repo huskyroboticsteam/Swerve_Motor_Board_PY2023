@@ -11,6 +11,8 @@
 */
 
 /* [] END OF FILE */
+#define ID_SET_LIM_SW_ENC_BOUND 0x12
+
 #include "main.h"
 #include "../CANLib/CANLibrary.h"
 #include "Motor_Unit_CAN.h"
@@ -24,7 +26,10 @@ extern const uint32 StripLights_CLUT[ ];
 extern uint8_t address;
 #endif
 
-
+extern uint8_t bound_set1;
+extern uint8_t bound_set2;
+extern int32_t enc_Count_Lim1; //TODO 
+extern int32_t enc_Count_Lim2;
 
 extern int16_t nextPWM_M1;
 extern int16_t nextPWM_M2;
@@ -36,6 +41,10 @@ void SendEncoderData (CANPacket *packetToSend){
         PACKET_TELEMETRY_ANG_POSITION, CurrentPositionMiliDegree());
     SendCANPacket(packetToSend);
 }
+
+static int32_t GetEncCountFromPacket(const CANPacket *packet);
+
+static uint8_t GetLimitSwNumFromPacket(const CANPacket *packet);
 
 //Reads from CAN FIFO and changes the state and mode accordingly
 void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
@@ -143,7 +152,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
         }
         
-    } else if (motor_serial == (getSerialAddress() + 1)) {
+    } else if (motor_serial == (getSerialAddress() + 1)) {  //swivel
         switch(packageID){
             case(ID_MOTOR_UNIT_MODE_SEL):
                 if(GetModeFromPacket(receivedPacket) == MOTOR_UNIT_MODE_PWM) {
@@ -240,6 +249,17 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 SetStateTo(CHECK_CAN);
                 break;    
             
+            case(ID_SET_LIM_SW_ENC_BOUND) : //Set Limit Switch Encoder Bound
+            
+                if (GetLimitSwNumFromPacket(receivedPacket) == 0) { //lim1
+                    bound_set1 = 1;
+                    enc_Count_Lim1 = GetEncCountFromPacket(receivedPacket);
+                } else if (GetLimitSwNumFromPacket(receivedPacket) == 1) {
+                    bound_set2 = 1;
+                    enc_Count_Lim2 = GetEncCountFromPacket(receivedPacket);
+                }
+                break;
+            
             // Common Packets 
             case(ID_ESTOP):
                 set_PWM_M2(0, 0, 0);
@@ -281,6 +301,14 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
         }
     }
-}   
+}
+
+static int32_t GetEncCountFromPacket(const CANPacket *packet) {
+    return DecodeBytesToIntMSBFirst(packet->data, 2, 5);
+}
+
+static uint8_t GetLimitSwNumFromPacket(const CANPacket *packet) {
+    return packet->data[1];
+}
     
     //} else if (motor_serial == (getSerialAddress() + 1)) {

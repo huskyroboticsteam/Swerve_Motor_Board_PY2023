@@ -51,6 +51,11 @@ uint8_t ignoreLimSw_M1 = 0;
 uint8_t ignoreLimSw_M2 = 0;
 uint8_t encoderTimeOut = 0;
 
+uint8_t bound_set1 = 0;
+uint8_t bound_set2 = 0;
+int32_t enc_Count_Lim1 = 0;
+int32_t enc_Count_Lim2 = 0;
+
 uint8 address = 0;
 
 //Status and Data Structs
@@ -110,6 +115,12 @@ CY_ISR(Pin_Limit_Handler){
     #endif
     //TODO: Select Which Encoder zeros
     //QuadDec_SetCounter(0);
+    
+    if (bound_set1 && ~Limit1_Read()) {
+        QuadDec_SetCounter(enc_Count_Lim1);
+    } else if (bound_set2 && ~Limit2_Read()) {
+        QuadDec_SetCounter(enc_Count_Lim2);
+    }
 }
 
 int main(void)
