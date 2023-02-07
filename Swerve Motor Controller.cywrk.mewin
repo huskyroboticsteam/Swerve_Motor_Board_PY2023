@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Swerve Motor Controller\SwerveMotorFirmware\Source Files\main.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Swerve Motor Controller\SwerveMotorFirmware\TopDesign">
 <ExpandedNodeIds>
 <v>Swerve Motor Controller</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
@@ -69,6 +69,27 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
+<v>Swerve Motor Controller</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\TopDesign</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr\Pins</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr\Analog</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr\DMA</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr\Clocks</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr\Interrupts</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr\System</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr\Directives</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr\Flash Security</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\Port Files</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\Port Files\PortPSOC_swerve.c</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANCommon.c</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANCommon.h</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANGPIO.c</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANGPIO.h</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANLibrary.h</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANLocalization.c</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANLocalization.h</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANMotorUnit.c</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANMotorUnit.h</v>
@@ -96,27 +117,6 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\main.c</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\Motor_Unit_CAN.c</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\Motor_Unit_FSM.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\MotorDrive.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\PositionPID.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\ADC_SAR_Seq_1</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\ADC_SAR_Seq_1_intClock</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\ADC_SAR_Seq_1_IRQ</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Array_LED</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\CAN</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Can_addr</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\CAN_HFCLK</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\CAN_isr</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\CANRX</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\CANTX</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Clock_1</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Clock_2</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Clock_PWM1</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Clock_PWM2</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\cy_boot</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\cy_dmac</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\cy_lfclk</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -207,12 +207,16 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor_Unit_CAN.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor_Unit_FSM.lst</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor1CurrentSense.lst</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor1CurrentSense_PM.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor1Direction.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor1Direction_PM.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor1Fault.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor1Fault_PM.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor1PWM.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor1PWM_PM.lst</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor2CurrentSense.lst</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor2CurrentSense_PM.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor2Direction.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor2Direction_PM.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Motor2Fault.lst</v>
@@ -369,7 +373,6 @@
 <name v=".\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\SwerveMotorFirmware.cydsn\MotorDrive.h" />
 <name v=".\SwerveMotorFirmware.cydsn\MotorDrive.c" />
-<name v=".\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" />
 <name v=".\CANLib\PortFiles\PortPSOC_swerve.c" />
 <name v=".\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\project.h" />
 <name v=".\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\CAN.h" />
@@ -396,6 +399,8 @@
 <name v=".\CANLib\CANMotorUnit.c" />
 <name v=".\CANLib\CANPacket.h" />
 <name v=".\CANLib\CANScience.c" />
+<name v=".\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" />
+<name v=".\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\cyfitter.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -403,7 +408,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1223, 624" SelectedTabbedMdiWindow="2a703266-3c1c-4067-a7f8-3e32905ec6ef"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="ea4087bb-e838-44b2-94b7-2bea84f5f49d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="2a703266-3c1c-4067-a7f8-3e32905ec6ef" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="e3850c66-ca3b-49e7-8084-ca6bd38547a9" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.h" Guid="ed31e5bd-4695-4db5-8638-425255c5cb1c" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.c" Guid="06f99c89-4fc2-459b-9dea-393bbb85fd88" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="e45d3d8f-fc6f-46f6-bfc9-88b8b659c3e3" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\PortFiles\PortPSOC_swerve.c" Guid="64229028-47a2-47b2-b375-ef6d071855de" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\project.h" Guid="74df288a-9ce3-4746-8319-2c32b0433714" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\CAN.h" Guid="af648cd9-fa27-4247-8a40-ad9a6820f82d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="d1d4326c-e33b-4b36-99cc-5dccba0bdf6e" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.h" Guid="994a14e5-7eff-4b10-b911-443fbdf2aa63" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.h" Guid="c29ca365-3b06-405a-a345-01f8241d9b85" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_FSM.c" Guid="60742dcb-2dbc-4a07-973b-14c31fa30452" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" Guid="a3b7e42c-58e4-47e9-8354-e71193ed59ce" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.h" Guid="9b08bd51-0176-431a-98fb-97156b8bffde" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_FSM.h" Guid="0aa05235-7a06-4fd4-9f3a-4abc4d65fb92" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_Debug.h" Guid="34f8af64-09af-46cb-8bac-0153e90df84d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\LED_Array.h" Guid="bf6f1bdc-015d-444c-9bcd-fba0ad05530e" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\cyapicallbacks.h" Guid="390e0b91-55ec-4b3b-9644-6c8e335dd860" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\LED_Array.c" Guid="86cbebec-4356-4b5d-a617-6407606e3e41" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANCommon.h" Guid="ab5feeee-cc38-4945-bf56-7452a0494c5b" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANCommon.c" Guid="b5b7b0be-bad3-471c-b028-ec9f1a9fa516" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANPacket.c" Guid="1370f478-a828-42b5-9d31-e9f176729af2" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANMotorUnit.h" Guid="7f96436d-5e26-4686-b8fa-9c5dc270e4fa" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANLibrary.h" Guid="97b40ed0-699f-44cb-8ab1-65754b0817f6" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\CAN.c" Guid="716e095f-667d-47b8-8f19-fc10fdc1e5de" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\LED_CAN.c" Guid="f7e6714c-c250-4114-8eba-36dcc8caf2fd" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\LED_CAN.h" Guid="656af10b-4a90-4b0c-9304-818a9fb51d4a" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\StripLights.c" Guid="43d10fd1-106f-4cff-bc60-aea1098473f7" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANMotorUnit.c" Guid="89c59a5a-42dd-4bce-a96f-a83b31353412" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANPacket.h" Guid="372b4af3-20f8-406b-ab09-7f97d440d727" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANScience.c" Guid="c9f17ff1-1a8d-4d68-8ea9-f3ac796169bf" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1151, 624" SelectedTabbedMdiWindow="e3850c66-ca3b-49e7-8084-ca6bd38547a9"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="ea4087bb-e838-44b2-94b7-2bea84f5f49d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="2a703266-3c1c-4067-a7f8-3e32905ec6ef" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="e3850c66-ca3b-49e7-8084-ca6bd38547a9" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.h" Guid="ed31e5bd-4695-4db5-8638-425255c5cb1c" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.c" Guid="06f99c89-4fc2-459b-9dea-393bbb85fd88" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\PortFiles\PortPSOC_swerve.c" Guid="64229028-47a2-47b2-b375-ef6d071855de" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\project.h" Guid="74df288a-9ce3-4746-8319-2c32b0433714" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\CAN.h" Guid="af648cd9-fa27-4247-8a40-ad9a6820f82d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="d1d4326c-e33b-4b36-99cc-5dccba0bdf6e" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.h" Guid="994a14e5-7eff-4b10-b911-443fbdf2aa63" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.h" Guid="c29ca365-3b06-405a-a345-01f8241d9b85" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_FSM.c" Guid="60742dcb-2dbc-4a07-973b-14c31fa30452" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" Guid="a3b7e42c-58e4-47e9-8354-e71193ed59ce" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.h" Guid="9b08bd51-0176-431a-98fb-97156b8bffde" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_FSM.h" Guid="0aa05235-7a06-4fd4-9f3a-4abc4d65fb92" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_Debug.h" Guid="34f8af64-09af-46cb-8bac-0153e90df84d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\LED_Array.h" Guid="bf6f1bdc-015d-444c-9bcd-fba0ad05530e" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\cyapicallbacks.h" Guid="390e0b91-55ec-4b3b-9644-6c8e335dd860" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\LED_Array.c" Guid="86cbebec-4356-4b5d-a617-6407606e3e41" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANCommon.h" Guid="ab5feeee-cc38-4945-bf56-7452a0494c5b" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANCommon.c" Guid="b5b7b0be-bad3-471c-b028-ec9f1a9fa516" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANPacket.c" Guid="1370f478-a828-42b5-9d31-e9f176729af2" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANMotorUnit.h" Guid="7f96436d-5e26-4686-b8fa-9c5dc270e4fa" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANLibrary.h" Guid="97b40ed0-699f-44cb-8ab1-65754b0817f6" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\CAN.c" Guid="716e095f-667d-47b8-8f19-fc10fdc1e5de" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\LED_CAN.c" Guid="f7e6714c-c250-4114-8eba-36dcc8caf2fd" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\LED_CAN.h" Guid="656af10b-4a90-4b0c-9304-818a9fb51d4a" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\StripLights.c" Guid="43d10fd1-106f-4cff-bc60-aea1098473f7" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANMotorUnit.c" Guid="89c59a5a-42dd-4bce-a96f-a83b31353412" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANPacket.h" Guid="372b4af3-20f8-406b-ab09-7f97d440d727" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\CANLib\CANScience.c" Guid="c9f17ff1-1a8d-4d68-8ea9-f3ac796169bf" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="26bb320e-f0de-451d-ac73-0987f6590891" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Generated_Source\PSoC4\cyfitter.h" Guid="223d3523-ff8e-4e64-9858-586e37dc6b5c" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

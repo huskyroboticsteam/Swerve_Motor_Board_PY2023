@@ -64,7 +64,7 @@ uint8_t CAN_check_delay = 0;
 CANPacket can_recieve;
 CANPacket can_send;
 
-//stops motor every 20s or so if no new packet was received. software might want this removed
+//stops motor every 20ms or so if no new packet was received. software might want this removed
 CY_ISR(Period_Reset_Handler) {
     int timer = Timer_1_ReadStatusRegister();
     invalidate++;

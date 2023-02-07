@@ -2,7 +2,7 @@
 --	Conversion of SwerveMotorFirmware.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon Jan 23 18:38:23 2023
+--	Mon Feb 06 19:44:49 2023
 --
 
 USE cypress.cypress.all;
@@ -370,7 +370,7 @@ TERMINAL \ADC_SAR_Seq_1:Net_3167\ : bit;
 TERMINAL \ADC_SAR_Seq_1:Net_3166\ : bit;
 TERMINAL \ADC_SAR_Seq_1:Net_8\ : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_17\ : bit;
-SIGNAL Net_197 : bit;
+SIGNAL Net_259 : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3108\ : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3109_3\ : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3109_2\ : bit;
@@ -389,7 +389,7 @@ SIGNAL \ADC_SAR_Seq_1:Net_3111_3\ : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3111_2\ : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3111_1\ : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3111_0\ : bit;
-SIGNAL Net_196 : bit;
+SIGNAL Net_258 : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3207_1\ : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3207_0\ : bit;
 SIGNAL \ADC_SAR_Seq_1:Net_3235\ : bit;
@@ -1104,6 +1104,16 @@ SIGNAL tmpFB_0__Motor2Direction_net_0 : bit;
 SIGNAL tmpIO_0__Motor2Direction_net_0 : bit;
 TERMINAL tmpSIOVREF__Motor2Direction_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Motor2Direction_net_0 : bit;
+SIGNAL tmpOE__Motor1CurrentSense_net_0 : bit;
+SIGNAL tmpFB_0__Motor1CurrentSense_net_0 : bit;
+SIGNAL tmpIO_0__Motor1CurrentSense_net_0 : bit;
+TERMINAL tmpSIOVREF__Motor1CurrentSense_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__Motor1CurrentSense_net_0 : bit;
+SIGNAL tmpOE__Motor2CurrentSense_net_0 : bit;
+SIGNAL tmpFB_0__Motor2CurrentSense_net_0 : bit;
+SIGNAL tmpIO_0__Motor2CurrentSense_net_0 : bit;
+TERMINAL tmpSIOVREF__Motor2CurrentSense_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__Motor2CurrentSense_net_0 : bit;
 SIGNAL \QuadDec:Net_1251\\D\ : bit;
 SIGNAL \QuadDec:Cnt16:CounterUDB:prevCapture\\D\ : bit;
 SIGNAL \QuadDec:Cnt16:CounterUDB:overflow_reg_i\\D\ : bit;
@@ -2214,14 +2224,14 @@ Clock_2:cy_clock_v1_0
 		vref=>\ADC_SAR_Seq_1:Net_8\,
 		ext_vref=>\ADC_SAR_Seq_1:Net_43\,
 		clock=>\ADC_SAR_Seq_1:Net_1845\,
-		sample_done=>Net_197,
+		sample_done=>Net_259,
 		chan_id_valid=>\ADC_SAR_Seq_1:Net_3108\,
 		chan_id=>(\ADC_SAR_Seq_1:Net_3109_3\, \ADC_SAR_Seq_1:Net_3109_2\, \ADC_SAR_Seq_1:Net_3109_1\, \ADC_SAR_Seq_1:Net_3109_0\),
 		data_valid=>\ADC_SAR_Seq_1:Net_3110\,
 		data=>(\ADC_SAR_Seq_1:Net_3111_11\, \ADC_SAR_Seq_1:Net_3111_10\, \ADC_SAR_Seq_1:Net_3111_9\, \ADC_SAR_Seq_1:Net_3111_8\,
 			\ADC_SAR_Seq_1:Net_3111_7\, \ADC_SAR_Seq_1:Net_3111_6\, \ADC_SAR_Seq_1:Net_3111_5\, \ADC_SAR_Seq_1:Net_3111_4\,
 			\ADC_SAR_Seq_1:Net_3111_3\, \ADC_SAR_Seq_1:Net_3111_2\, \ADC_SAR_Seq_1:Net_3111_1\, \ADC_SAR_Seq_1:Net_3111_0\),
-		eos_intr=>Net_196,
+		eos_intr=>Net_258,
 		irq=>\ADC_SAR_Seq_1:Net_3112\,
 		sw_negvref=>zero,
 		cfg_st_sel=>(zero, zero),
@@ -4281,6 +4291,146 @@ Motor2Direction:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__Limit1_net_0,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__Motor2Direction_net_0);
+Motor1CurrentSense:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"8829216b-445e-4d72-b278-d966a69e3b5d",
+		drive_mode=>"010",
+		ibuf_enabled=>"1",
+		init_dr_st=>"1",
+		input_sync=>"0",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"0",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"I",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"00",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(tmpOE__Limit1_net_0),
+		y=>(zero),
+		fb=>(tmpFB_0__Motor1CurrentSense_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__Motor1CurrentSense_net_0),
+		siovref=>(tmpSIOVREF__Motor1CurrentSense_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>tmpOE__Limit1_net_0,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>tmpOE__Limit1_net_0,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__Motor1CurrentSense_net_0);
+Motor2CurrentSense:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"389dd4c6-cea3-43b8-9b5b-35d4e0cf00e7",
+		drive_mode=>"010",
+		ibuf_enabled=>"1",
+		init_dr_st=>"1",
+		input_sync=>"0",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"0",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"I",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"00",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(tmpOE__Limit1_net_0),
+		y=>(zero),
+		fb=>(tmpFB_0__Motor2CurrentSense_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__Motor2CurrentSense_net_0),
+		siovref=>(tmpSIOVREF__Motor2CurrentSense_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>tmpOE__Limit1_net_0,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>tmpOE__Limit1_net_0,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__Motor2CurrentSense_net_0);
 \QuadDec:Net_1251\:cy_dff
 	PORT MAP(d=>\QuadDec:Net_1251\\D\,
 		clk=>\QuadDec:bQuadDec:sync_clock\,

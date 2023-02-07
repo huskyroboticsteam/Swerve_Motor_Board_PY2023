@@ -1,5 +1,5 @@
 -- Project:   SwerveMotorFirmware
--- Generated: 01/23/2023 18:38:24
+-- Generated: 02/06/2023 19:44:51
 -- PSoC Creator  4.4
 
 ENTITY SwerveMotorFirmware IS
@@ -26,7 +26,9 @@ ENTITY SwerveMotorFirmware IS
         Motor2Fault(0)_PAD : IN std_ulogic;
         Motor1Direction(0)_PAD : OUT std_ulogic;
         Motor2PWM(0)_PAD : OUT std_ulogic;
-        Motor2Direction(0)_PAD : OUT std_ulogic);
+        Motor2Direction(0)_PAD : OUT std_ulogic;
+        Motor1CurrentSense(0)_PAD : IN std_ulogic;
+        Motor2CurrentSense(0)_PAD : IN std_ulogic);
     ATTRIBUTE voltage_VDDIO_A_1 OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_0 OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CTB OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -66,9 +68,11 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     SIGNAL LED_Error(0)__PA : bit;
     SIGNAL Limit1(0)__PA : bit;
     SIGNAL Limit2(0)__PA : bit;
+    SIGNAL Motor1CurrentSense(0)__PA : bit;
     SIGNAL Motor1Direction(0)__PA : bit;
     SIGNAL Motor1Fault(0)__PA : bit;
     SIGNAL Motor1PWM(0)__PA : bit;
+    SIGNAL Motor2CurrentSense(0)__PA : bit;
     SIGNAL Motor2Direction(0)__PA : bit;
     SIGNAL Motor2Fault(0)__PA : bit;
     SIGNAL Motor2PWM(0)__PA : bit;
@@ -99,10 +103,10 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     SIGNAL Net_179 : bit;
     SIGNAL Net_18 : bit;
     SIGNAL Net_183 : bit;
-    SIGNAL Net_196 : bit;
-    SIGNAL Net_197 : bit;
     SIGNAL Net_200 : bit;
     SIGNAL Net_223 : bit;
+    SIGNAL Net_258 : bit;
+    SIGNAL Net_259 : bit;
     SIGNAL Net_30 : bit;
     SIGNAL Net_39 : bit;
     SIGNAL Net_3_ff11 : bit;
@@ -302,7 +306,7 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE lib_model OF Motor1PWM(0) : LABEL IS "iocell3";
     ATTRIBUTE Location OF Motor1PWM(0) : LABEL IS "P5[2]";
     ATTRIBUTE lib_model OF Potentiometer(0) : LABEL IS "iocell4";
-    ATTRIBUTE Location OF Potentiometer(0) : LABEL IS "P2[6]";
+    ATTRIBUTE Location OF Potentiometer(0) : LABEL IS "P2[4]";
     ATTRIBUTE lib_model OF Pin_Encoder_A(0) : LABEL IS "iocell5";
     ATTRIBUTE lib_model OF Pin_Encoder_B(0) : LABEL IS "iocell6";
     ATTRIBUTE lib_model OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "iocell7";
@@ -342,6 +346,10 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE Location OF Motor2PWM(0) : LABEL IS "P5[0]";
     ATTRIBUTE lib_model OF Motor2Direction(0) : LABEL IS "iocell25";
     ATTRIBUTE Location OF Motor2Direction(0) : LABEL IS "P5[1]";
+    ATTRIBUTE lib_model OF Motor1CurrentSense(0) : LABEL IS "iocell26";
+    ATTRIBUTE Location OF Motor1CurrentSense(0) : LABEL IS "P2[0]";
+    ATTRIBUTE lib_model OF Motor2CurrentSense(0) : LABEL IS "iocell27";
+    ATTRIBUTE Location OF Motor2CurrentSense(0) : LABEL IS "P2[1]";
     ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:reload\ : LABEL IS "macrocell2";
     ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:status_0\ : LABEL IS "macrocell3";
     ATTRIBUTE lib_model OF \QuadDec:Cnt16:CounterUDB:status_2\ : LABEL IS "macrocell4";
@@ -3176,6 +3184,186 @@ BEGIN
             out_clock_en => '1',
             out_reset => '0');
 
+    Motor1CurrentSense:logicalport
+        GENERIC MAP(
+            drive_mode => "010",
+            ibuf_enabled => "1",
+            id => "8829216b-445e-4d72-b278-d966a69e3b5d",
+            init_dr_st => "1",
+            input_buffer_sel => "00",
+            input_clk_en => 0,
+            input_sync => "0",
+            input_sync_mode => "0",
+            intr_mode => "00",
+            invert_in_clock => 0,
+            invert_in_clock_en => 0,
+            invert_in_reset => 0,
+            invert_out_clock => 0,
+            invert_out_clock_en => 0,
+            invert_out_reset => 0,
+            io_voltage => "",
+            layout_mode => "CONTIGUOUS",
+            oe_conn => "0",
+            oe_reset => 0,
+            oe_sync => "0",
+            output_clk_en => 0,
+            output_clock_mode => "0",
+            output_conn => "0",
+            output_mode => "0",
+            output_reset => 0,
+            output_sync => "0",
+            ovt_hyst_trim => "0",
+            ovt_needed => "0",
+            ovt_slew_control => "00",
+            pa_in_clock => -1,
+            pa_in_clock_en => -1,
+            pa_in_reset => -1,
+            pa_out_clock => -1,
+            pa_out_clock_en => -1,
+            pa_out_reset => -1,
+            pin_aliases => "",
+            pin_mode => "I",
+            por_state => 4,
+            port_alias_group => "",
+            port_alias_required => 0,
+            sio_group_cnt => 0,
+            sio_hifreq => "00000000",
+            sio_hyst => "1",
+            sio_ibuf => "00000000",
+            sio_info => "00",
+            sio_obuf => "00000000",
+            sio_refsel => "00000000",
+            sio_vohsel => "00000000",
+            sio_vtrip => "00000000",
+            slew_rate => "0",
+            spanning => 0,
+            sw_only => 0,
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0)
+        PORT MAP(
+            in_clock_en => open,
+            in_reset => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    Motor1CurrentSense(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "Motor1CurrentSense",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => Motor1CurrentSense(0)__PA,
+            oe => open,
+            pad_in => Motor1CurrentSense(0)_PAD,
+            in_clock => open,
+            in_clock_en => '1',
+            in_reset => '0',
+            out_clock => open,
+            out_clock_en => '1',
+            out_reset => '0');
+
+    Motor2CurrentSense:logicalport
+        GENERIC MAP(
+            drive_mode => "010",
+            ibuf_enabled => "1",
+            id => "389dd4c6-cea3-43b8-9b5b-35d4e0cf00e7",
+            init_dr_st => "1",
+            input_buffer_sel => "00",
+            input_clk_en => 0,
+            input_sync => "0",
+            input_sync_mode => "0",
+            intr_mode => "00",
+            invert_in_clock => 0,
+            invert_in_clock_en => 0,
+            invert_in_reset => 0,
+            invert_out_clock => 0,
+            invert_out_clock_en => 0,
+            invert_out_reset => 0,
+            io_voltage => "",
+            layout_mode => "CONTIGUOUS",
+            oe_conn => "0",
+            oe_reset => 0,
+            oe_sync => "0",
+            output_clk_en => 0,
+            output_clock_mode => "0",
+            output_conn => "0",
+            output_mode => "0",
+            output_reset => 0,
+            output_sync => "0",
+            ovt_hyst_trim => "0",
+            ovt_needed => "0",
+            ovt_slew_control => "00",
+            pa_in_clock => -1,
+            pa_in_clock_en => -1,
+            pa_in_reset => -1,
+            pa_out_clock => -1,
+            pa_out_clock_en => -1,
+            pa_out_reset => -1,
+            pin_aliases => "",
+            pin_mode => "I",
+            por_state => 4,
+            port_alias_group => "",
+            port_alias_required => 0,
+            sio_group_cnt => 0,
+            sio_hifreq => "00000000",
+            sio_hyst => "1",
+            sio_ibuf => "00000000",
+            sio_info => "00",
+            sio_obuf => "00000000",
+            sio_refsel => "00000000",
+            sio_vohsel => "00000000",
+            sio_vtrip => "00000000",
+            slew_rate => "0",
+            spanning => 0,
+            sw_only => 0,
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0)
+        PORT MAP(
+            in_clock_en => open,
+            in_reset => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    Motor2CurrentSense(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "Motor2CurrentSense",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => Motor2CurrentSense(0)__PA,
+            oe => open,
+            pad_in => Motor2CurrentSense(0)_PAD,
+            in_clock => open,
+            in_clock_en => '1',
+            in_reset => '0',
+            out_clock => open,
+            out_clock_en => '1',
+            out_reset => '0');
+
     \QuadDec:Cnt16:CounterUDB:reload\:macrocell
         GENERIC MAP(
             eqn_main => "(!main_0 * !main_1 * !main_2)",
@@ -3564,7 +3752,7 @@ BEGIN
             cy_registers => "")
         PORT MAP(
             clock => \ADC_SAR_Seq_1:Net_1845_ff10\,
-            sample_done => Net_197,
+            sample_done => Net_259,
             chan_id_valid => \ADC_SAR_Seq_1:Net_3108\,
             chan_id_3 => \ADC_SAR_Seq_1:Net_3109_3\,
             chan_id_2 => \ADC_SAR_Seq_1:Net_3109_2\,
@@ -3583,7 +3771,7 @@ BEGIN
             data_2 => \ADC_SAR_Seq_1:Net_3111_2\,
             data_1 => \ADC_SAR_Seq_1:Net_3111_1\,
             data_0 => \ADC_SAR_Seq_1:Net_3111_0\,
-            tr_sar_out => Net_196,
+            tr_sar_out => Net_258,
             irq => \ADC_SAR_Seq_1:Net_3112\,
             sw_negvref => open,
             cfg_st_sel_1 => open,
