@@ -36,9 +36,8 @@
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Potentiometer.h" value="HEADER;;;;;Potentiometer" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Potentiometer_aliases.h" value="HEADER;;;;;Potentiometer" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Potentiometer_PM.c" value="SOURCE_C;CortexM0;;;;Potentiometer" />
-  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\QuadDec.c" value="SOURCE_C;CortexM0;;;;QuadDec" />
-  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\QuadDec.h" value="HEADER;;;;;QuadDec" />
-  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\QuadDec_PM.c" value="SOURCE_C;CortexM0;;;;QuadDec" />
+  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\isr_enc_count.c" value="SOURCE_C;CortexM0;;;;isr_enc_count" />
+  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\isr_enc_count.h" value="HEADER;;;;;isr_enc_count" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Pin_Encoder_A.c" value="SOURCE_C;CortexM0;;;;Pin_Encoder_A" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Pin_Encoder_A.h" value="HEADER;;;;;Pin_Encoder_A" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Pin_Encoder_A_aliases.h" value="HEADER;;;;;Pin_Encoder_A" />
@@ -165,9 +164,8 @@
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Motor2CurrentSense.h" value="HEADER;;;;;Motor2CurrentSense" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Motor2CurrentSense_aliases.h" value="HEADER;;;;;Motor2CurrentSense" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Motor2CurrentSense_PM.c" value="SOURCE_C;CortexM0;;;;Motor2CurrentSense" />
-  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\QuadDec_Cnt16.c" value="SOURCE_C;CortexM0;;;;QuadDec_Cnt16" />
-  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\QuadDec_Cnt16.h" value="HEADER;;;;;QuadDec_Cnt16" />
-  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\QuadDec_Cnt16_PM.c" value="SOURCE_C;CortexM0;;;;QuadDec_Cnt16" />
+  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Status_Reg_Switches_1.c" value="SOURCE_C;CortexM0;;;;Status_Reg_Switches_1" />
+  <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\Status_Reg_Switches_1.h" value="HEADER;;;;;Status_Reg_Switches_1" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\ADC_SAR_Seq_1_IRQ.c" value="SOURCE_C;CortexM0;;;;ADC_SAR_Seq_1_IRQ" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\ADC_SAR_Seq_1_IRQ.h" value="HEADER;;;;;ADC_SAR_Seq_1_IRQ" />
   <file name="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\codegentemp\ADC_SAR_Seq_1_intClock.c" value="SOURCE_C;CortexM0;;;;ADC_SAR_Seq_1_intClock" />

@@ -56,6 +56,11 @@ uint8_t bound_set2 = 0;
 int32_t enc_Count_Lim1 = 0;
 int32_t enc_Count_Lim2 = 0;
 
+//Encoder counter
+int32_t counter = 0;
+int8_t currStatePinA;
+int8_t lastStatePinA;
+
 uint8 address = 0;
 
 //Status and Data Structs
@@ -117,10 +122,34 @@ CY_ISR(Pin_Limit_Handler){
     //QuadDec_SetCounter(0);
     
     if (bound_set1 && ~Limit1_Read()) {
-        QuadDec_SetCounter(enc_Count_Lim1);
+        counter = enc_Count_Lim1;
+        //QuadDec_SetCounter(enc_Count_Lim1);
     } else if (bound_set2 && ~Limit2_Read()) {
-        QuadDec_SetCounter(enc_Count_Lim2);
+        counter = enc_Count_Lim2;
+        //QuadDec_SetCounter(enc_Count_Lim2);
     }
+}
+
+CY_ISR(Enc_Count_Handler) {
+    //Read Encoder pin A current state
+    currStatePinA = Pin_Encoder_A_Read();
+    
+    //if last and current state of pin A differ, then pulse occur
+    if (currStatePinA != lastStatePinA  && currStatePinA == 1){
+        // If the DT (B) state is different than the CLK (A) state then
+    	// the encoder is rotating CCW so decrement
+        if (Pin_Encoder_B_Read() != currStatePinA) {
+    			counter --;
+    			//currentDir ="CCW";
+		} else {
+			// Encoder is rotating CW so increment
+			counter ++;
+			//currentDir ="CW";
+		}
+        //can print here for testing
+    }
+	// Remember last CLK state
+	lastStatePinA = currStatePinA;
 }
 
 int main(void)
@@ -216,12 +245,14 @@ void Initialize(void) {
     
     InitCAN_swerve(0x4, (int)address, (int)address + 1); //group, drive, swivel
     Timer_1_Start();
-    QuadDec_Start();
+    //QuadDec_Start();
     PWM_Motor1_Start();
     PWM_Motor2_Start();
     
+    isr_enc_count_StartEx(Enc_Count_Handler);
     isr_Limit_1_StartEx(Pin_Limit_Handler);
     isr_period_StartEx(Period_Reset_Handler);
+    
 }
 
 

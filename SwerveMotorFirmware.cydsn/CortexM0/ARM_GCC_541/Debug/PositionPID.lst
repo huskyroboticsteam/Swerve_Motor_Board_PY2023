@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 1
 
 
    1              		.syntax unified
@@ -53,39 +53,42 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
   23:PositionPID.c **** int32_t PWM = 0;
   24:PositionPID.c **** extern uint8_t ignoreLimSw_M2;
   25:PositionPID.c **** 
-  26:PositionPID.c **** extern char txData[TX_DATA_SIZE];
-  27:PositionPID.c **** int8 flipEncoder = 1;
-  28:PositionPID.c **** uint8_t usingPot = 0;
-  29:PositionPID.c **** 
-  30:PositionPID.c **** int integral = 0;     //needs to be reset upon mode change
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 2
+  26:PositionPID.c **** //encoder counter
+  27:PositionPID.c **** extern int32_t counter;
+  28:PositionPID.c **** 
+  29:PositionPID.c **** extern char txData[TX_DATA_SIZE];
+  30:PositionPID.c **** int8 flipEncoder = 1;
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 2
 
 
-  31:PositionPID.c **** int lastPosition = 0; //needs to be reset upon mode change
-  32:PositionPID.c **** int integralClamp = 500;
-  33:PositionPID.c **** 
-  34:PositionPID.c **** double ratio;
-  35:PositionPID.c **** uint8 complete = 0;
-  36:PositionPID.c **** int32 maxPWM = 32767;
-  37:PositionPID.c **** 
-  38:PositionPID.c **** uint8_t enabledPID = 0;
-  39:PositionPID.c **** 
-  40:PositionPID.c **** void ClearPIDProgress() {
-  28              		.loc 1 40 0
+  31:PositionPID.c **** uint8_t usingPot = 0;
+  32:PositionPID.c **** 
+  33:PositionPID.c **** int integral = 0;     //needs to be reset upon mode change
+  34:PositionPID.c **** int lastPosition = 0; //needs to be reset upon mode change
+  35:PositionPID.c **** int integralClamp = 500;
+  36:PositionPID.c **** 
+  37:PositionPID.c **** double ratio;
+  38:PositionPID.c **** uint8 complete = 0;
+  39:PositionPID.c **** int32 maxPWM = 32767;
+  40:PositionPID.c **** 
+  41:PositionPID.c **** uint8_t enabledPID = 0;
+  42:PositionPID.c **** 
+  43:PositionPID.c **** void ClearPIDProgress() {
+  28              		.loc 1 43 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              		@ link register save eliminated.
-  41:PositionPID.c ****     integral = 0;
-  33              		.loc 1 41 0
+  44:PositionPID.c ****     integral = 0;
+  33              		.loc 1 44 0
   34 0000 024B     		ldr	r3, .L2
   35 0002 0022     		movs	r2, #0
   36 0004 1A60     		str	r2, [r3]
-  42:PositionPID.c ****     lastPosition = 0;
-  37              		.loc 1 42 0
+  45:PositionPID.c ****     lastPosition = 0;
+  37              		.loc 1 45 0
   38 0006 5A60     		str	r2, [r3, #4]
-  43:PositionPID.c **** }
-  39              		.loc 1 43 0
+  46:PositionPID.c **** }
+  39              		.loc 1 46 0
   40              		@ sp needed
   41 0008 7047     		bx	lr
   42              	.L3:
@@ -103,24 +106,24 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
   54              		.type	DisablePID, %function
   55              	DisablePID:
   56              	.LFB36:
-  44:PositionPID.c **** void DisablePID() {
-  57              		.loc 1 44 0
+  47:PositionPID.c **** void DisablePID() {
+  57              		.loc 1 47 0
   58              		.cfi_startproc
   59              		@ args = 0, pretend = 0, frame = 0
   60              		@ frame_needed = 0, uses_anonymous_args = 0
   61              		@ link register save eliminated.
-  45:PositionPID.c ****     enabledPID = 0;
-  62              		.loc 1 45 0
+  48:PositionPID.c ****     enabledPID = 0;
+  62              		.loc 1 48 0
   63 0000 0022     		movs	r2, #0
   64 0002 014B     		ldr	r3, .L5
   65 0004 1A72     		strb	r2, [r3, #8]
-  46:PositionPID.c **** }
-  66              		.loc 1 46 0
+  49:PositionPID.c **** }
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 3
+
+
+  66              		.loc 1 49 0
   67              		@ sp needed
   68 0006 7047     		bx	lr
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 3
-
-
   69              	.L6:
   70              		.align	2
   71              	.L5:
@@ -136,19 +139,19 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
   81              		.type	EnablePID, %function
   82              	EnablePID:
   83              	.LFB37:
-  47:PositionPID.c **** void EnablePID() {
-  84              		.loc 1 47 0
+  50:PositionPID.c **** void EnablePID() {
+  84              		.loc 1 50 0
   85              		.cfi_startproc
   86              		@ args = 0, pretend = 0, frame = 0
   87              		@ frame_needed = 0, uses_anonymous_args = 0
   88              		@ link register save eliminated.
-  48:PositionPID.c ****     enabledPID = 1;
-  89              		.loc 1 48 0
+  51:PositionPID.c ****     enabledPID = 1;
+  89              		.loc 1 51 0
   90 0000 0122     		movs	r2, #1
   91 0002 014B     		ldr	r3, .L8
   92 0004 1A72     		strb	r2, [r3, #8]
-  49:PositionPID.c **** }
-  93              		.loc 1 49 0
+  52:PositionPID.c **** }
+  93              		.loc 1 52 0
   94              		@ sp needed
   95 0006 7047     		bx	lr
   96              	.L9:
@@ -166,21 +169,21 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  108              		.type	PIDIsEnabled, %function
  109              	PIDIsEnabled:
  110              	.LFB38:
-  50:PositionPID.c **** uint8_t PIDIsEnabled() {
- 111              		.loc 1 50 0
+  53:PositionPID.c **** uint8_t PIDIsEnabled() {
+ 111              		.loc 1 53 0
  112              		.cfi_startproc
  113              		@ args = 0, pretend = 0, frame = 0
  114              		@ frame_needed = 0, uses_anonymous_args = 0
  115              		@ link register save eliminated.
-  51:PositionPID.c ****     return(enabledPID);
- 116              		.loc 1 51 0
+  54:PositionPID.c ****     return(enabledPID);
+ 116              		.loc 1 54 0
  117 0000 014B     		ldr	r3, .L11
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 4
+
+
  118 0002 187A     		ldrb	r0, [r3, #8]
-  52:PositionPID.c **** }
- 119              		.loc 1 52 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 4
-
-
+  55:PositionPID.c **** }
+ 119              		.loc 1 55 0
  120              		@ sp needed
  121 0004 7047     		bx	lr
  122              	.L12:
@@ -198,26 +201,26 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  134              		.type	SetkPosition, %function
  135              	SetkPosition:
  136              	.LFB40:
-  53:PositionPID.c **** void InitializePID() { //TODO: make work with both motors or ask if only swivel needed
-  54:PositionPID.c ****     set_PWM_M2(0, 0, 0);
-  55:PositionPID.c ****     ClearPIDProgress();
-  56:PositionPID.c ****     DisablePID();
-  57:PositionPID.c ****     lastPosition = GetEncoderValWithFlip();
-  58:PositionPID.c **** }
-  59:PositionPID.c **** 
-  60:PositionPID.c **** void SetkPosition(int32_t kP){
- 137              		.loc 1 60 0
+  56:PositionPID.c **** void InitializePID() { //TODO: make work with both motors or ask if only swivel needed
+  57:PositionPID.c ****     set_PWM_M2(0, 0, 0);
+  58:PositionPID.c ****     ClearPIDProgress();
+  59:PositionPID.c ****     DisablePID();
+  60:PositionPID.c ****     lastPosition = GetEncoderValWithFlip();
+  61:PositionPID.c **** }
+  62:PositionPID.c **** 
+  63:PositionPID.c **** void SetkPosition(int32_t kP){
+ 137              		.loc 1 63 0
  138              		.cfi_startproc
  139              		@ args = 0, pretend = 0, frame = 0
  140              		@ frame_needed = 0, uses_anonymous_args = 0
  141              		@ link register save eliminated.
  142              	.LVL0:
-  61:PositionPID.c ****     kPosition = kP;
- 143              		.loc 1 61 0
+  64:PositionPID.c ****     kPosition = kP;
+ 143              		.loc 1 64 0
  144 0000 014B     		ldr	r3, .L14
  145 0002 D860     		str	r0, [r3, #12]
-  62:PositionPID.c **** }
- 146              		.loc 1 62 0
+  65:PositionPID.c **** }
+ 146              		.loc 1 65 0
  147              		@ sp needed
  148 0004 7047     		bx	lr
  149              	.L15:
@@ -235,22 +238,22 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  161              		.type	SetkIntegral, %function
  162              	SetkIntegral:
  163              	.LFB41:
-  63:PositionPID.c **** void SetkIntegral(int32_t kI){
- 164              		.loc 1 63 0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 5
+
+
+  66:PositionPID.c **** void SetkIntegral(int32_t kI){
+ 164              		.loc 1 66 0
  165              		.cfi_startproc
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 5
-
-
  166              		@ args = 0, pretend = 0, frame = 0
  167              		@ frame_needed = 0, uses_anonymous_args = 0
  168              		@ link register save eliminated.
  169              	.LVL1:
-  64:PositionPID.c ****     kIntegral = kI;
- 170              		.loc 1 64 0
+  67:PositionPID.c ****     kIntegral = kI;
+ 170              		.loc 1 67 0
  171 0000 014B     		ldr	r3, .L17
  172 0002 1861     		str	r0, [r3, #16]
-  65:PositionPID.c **** }
- 173              		.loc 1 65 0
+  68:PositionPID.c **** }
+ 173              		.loc 1 68 0
  174              		@ sp needed
  175 0004 7047     		bx	lr
  176              	.L18:
@@ -268,19 +271,19 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  188              		.type	SetkDerivative, %function
  189              	SetkDerivative:
  190              	.LFB42:
-  66:PositionPID.c **** void SetkDerivative(int32_t kD){
- 191              		.loc 1 66 0
+  69:PositionPID.c **** void SetkDerivative(int32_t kD){
+ 191              		.loc 1 69 0
  192              		.cfi_startproc
  193              		@ args = 0, pretend = 0, frame = 0
  194              		@ frame_needed = 0, uses_anonymous_args = 0
  195              		@ link register save eliminated.
  196              	.LVL2:
-  67:PositionPID.c ****     kDerivative = kD;
- 197              		.loc 1 67 0
+  70:PositionPID.c ****     kDerivative = kD;
+ 197              		.loc 1 70 0
  198 0000 014B     		ldr	r3, .L20
  199 0002 5861     		str	r0, [r3, #20]
-  68:PositionPID.c **** }
- 200              		.loc 1 68 0
+  71:PositionPID.c **** }
+ 200              		.loc 1 71 0
  201              		@ sp needed
  202 0004 7047     		bx	lr
  203              	.L21:
@@ -295,25 +298,25 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  212              		.global	SetkPPJR
  213              		.code	16
  214              		.thumb_func
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 6
+
+
  215              		.type	SetkPPJR, %function
  216              	SetkPPJR:
  217              	.LFB43:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 6
-
-
-  69:PositionPID.c **** void SetkPPJR(uint32_t kppjr){
- 218              		.loc 1 69 0
+  72:PositionPID.c **** void SetkPPJR(uint32_t kppjr){
+ 218              		.loc 1 72 0
  219              		.cfi_startproc
  220              		@ args = 0, pretend = 0, frame = 0
  221              		@ frame_needed = 0, uses_anonymous_args = 0
  222              		@ link register save eliminated.
  223              	.LVL3:
-  70:PositionPID.c ****     kPPJR = kppjr;
- 224              		.loc 1 70 0
+  73:PositionPID.c ****     kPPJR = kppjr;
+ 224              		.loc 1 73 0
  225 0000 014B     		ldr	r3, .L23
  226 0002 9861     		str	r0, [r3, #24]
-  71:PositionPID.c **** }
- 227              		.loc 1 71 0
+  74:PositionPID.c **** }
+ 227              		.loc 1 74 0
  228              		@ sp needed
  229 0004 7047     		bx	lr
  230              	.L24:
@@ -331,18 +334,18 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  242              		.type	GetkPosition, %function
  243              	GetkPosition:
  244              	.LFB44:
-  72:PositionPID.c **** int32_t GetkPosition(){
- 245              		.loc 1 72 0
+  75:PositionPID.c **** int32_t GetkPosition(){
+ 245              		.loc 1 75 0
  246              		.cfi_startproc
  247              		@ args = 0, pretend = 0, frame = 0
  248              		@ frame_needed = 0, uses_anonymous_args = 0
  249              		@ link register save eliminated.
-  73:PositionPID.c ****     return kPosition;
- 250              		.loc 1 73 0
+  76:PositionPID.c ****     return kPosition;
+ 250              		.loc 1 76 0
  251 0000 014B     		ldr	r3, .L26
  252 0002 D868     		ldr	r0, [r3, #12]
-  74:PositionPID.c **** }
- 253              		.loc 1 74 0
+  77:PositionPID.c **** }
+ 253              		.loc 1 77 0
  254              		@ sp needed
  255 0004 7047     		bx	lr
  256              	.L27:
@@ -355,26 +358,26 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  263              		.section	.text.GetkIntegral,"ax",%progbits
  264              		.align	2
  265              		.global	GetkIntegral
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 7
+
+
  266              		.code	16
  267              		.thumb_func
  268              		.type	GetkIntegral, %function
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 7
-
-
  269              	GetkIntegral:
  270              	.LFB45:
-  75:PositionPID.c **** int32_t GetkIntegral(){
- 271              		.loc 1 75 0
+  78:PositionPID.c **** int32_t GetkIntegral(){
+ 271              		.loc 1 78 0
  272              		.cfi_startproc
  273              		@ args = 0, pretend = 0, frame = 0
  274              		@ frame_needed = 0, uses_anonymous_args = 0
  275              		@ link register save eliminated.
-  76:PositionPID.c ****     return kIntegral;
- 276              		.loc 1 76 0
+  79:PositionPID.c ****     return kIntegral;
+ 276              		.loc 1 79 0
  277 0000 014B     		ldr	r3, .L29
  278 0002 1869     		ldr	r0, [r3, #16]
-  77:PositionPID.c **** }
- 279              		.loc 1 77 0
+  80:PositionPID.c **** }
+ 279              		.loc 1 80 0
  280              		@ sp needed
  281 0004 7047     		bx	lr
  282              	.L30:
@@ -392,18 +395,18 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  294              		.type	GetkDerivative, %function
  295              	GetkDerivative:
  296              	.LFB46:
-  78:PositionPID.c **** int32_t GetkDerivative(){
- 297              		.loc 1 78 0
+  81:PositionPID.c **** int32_t GetkDerivative(){
+ 297              		.loc 1 81 0
  298              		.cfi_startproc
  299              		@ args = 0, pretend = 0, frame = 0
  300              		@ frame_needed = 0, uses_anonymous_args = 0
  301              		@ link register save eliminated.
-  79:PositionPID.c ****     return kDerivative;
- 302              		.loc 1 79 0
+  82:PositionPID.c ****     return kDerivative;
+ 302              		.loc 1 82 0
  303 0000 014B     		ldr	r3, .L32
  304 0002 5869     		ldr	r0, [r3, #20]
-  80:PositionPID.c **** }
- 305              		.loc 1 80 0
+  83:PositionPID.c **** }
+ 305              		.loc 1 83 0
  306              		@ sp needed
  307 0004 7047     		bx	lr
  308              	.L33:
@@ -415,27 +418,27 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  314              		.size	GetkDerivative, .-GetkDerivative
  315              		.section	.text.GetkPPJR,"ax",%progbits
  316              		.align	2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 8
+
+
  317              		.global	GetkPPJR
  318              		.code	16
  319              		.thumb_func
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 8
-
-
  320              		.type	GetkPPJR, %function
  321              	GetkPPJR:
  322              	.LFB47:
-  81:PositionPID.c **** uint32_t GetkPPJR(){
- 323              		.loc 1 81 0
+  84:PositionPID.c **** uint32_t GetkPPJR(){
+ 323              		.loc 1 84 0
  324              		.cfi_startproc
  325              		@ args = 0, pretend = 0, frame = 0
  326              		@ frame_needed = 0, uses_anonymous_args = 0
  327              		@ link register save eliminated.
-  82:PositionPID.c ****     return kPPJR;
- 328              		.loc 1 82 0
+  85:PositionPID.c ****     return kPPJR;
+ 328              		.loc 1 85 0
  329 0000 014B     		ldr	r3, .L35
  330 0002 9869     		ldr	r0, [r3, #24]
-  83:PositionPID.c **** }
- 331              		.loc 1 83 0
+  86:PositionPID.c **** }
+ 331              		.loc 1 86 0
  332              		@ sp needed
  333 0004 7047     		bx	lr
  334              	.L36:
@@ -453,20 +456,20 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  346              		.type	SetMaxPIDPWM, %function
  347              	SetMaxPIDPWM:
  348              	.LFB48:
-  84:PositionPID.c **** 
-  85:PositionPID.c **** void SetMaxPIDPWM(uint16_t setValue){
- 349              		.loc 1 85 0
+  87:PositionPID.c **** 
+  88:PositionPID.c **** void SetMaxPIDPWM(uint16_t setValue){
+ 349              		.loc 1 88 0
  350              		.cfi_startproc
  351              		@ args = 0, pretend = 0, frame = 0
  352              		@ frame_needed = 0, uses_anonymous_args = 0
  353              		@ link register save eliminated.
  354              	.LVL4:
-  86:PositionPID.c ****     maxPWM = setValue;
- 355              		.loc 1 86 0
+  89:PositionPID.c ****     maxPWM = setValue;
+ 355              		.loc 1 89 0
  356 0000 014B     		ldr	r3, .L38
  357 0002 1860     		str	r0, [r3]
-  87:PositionPID.c **** }
- 358              		.loc 1 87 0
+  90:PositionPID.c **** }
+ 358              		.loc 1 90 0
  359              		@ sp needed
  360 0004 7047     		bx	lr
  361              	.L39:
@@ -475,30 +478,30 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  364 0008 00000000 		.word	.LANCHOR1
  365              		.cfi_endproc
  366              	.LFE48:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 9
+
+
  367              		.size	SetMaxPIDPWM, .-SetMaxPIDPWM
  368              		.section	.text.GetMaxPIDPWM,"ax",%progbits
  369              		.align	2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 9
-
-
  370              		.global	GetMaxPIDPWM
  371              		.code	16
  372              		.thumb_func
  373              		.type	GetMaxPIDPWM, %function
  374              	GetMaxPIDPWM:
  375              	.LFB49:
-  88:PositionPID.c **** int32_t GetMaxPIDPWM(){
- 376              		.loc 1 88 0
+  91:PositionPID.c **** int32_t GetMaxPIDPWM(){
+ 376              		.loc 1 91 0
  377              		.cfi_startproc
  378              		@ args = 0, pretend = 0, frame = 0
  379              		@ frame_needed = 0, uses_anonymous_args = 0
  380              		@ link register save eliminated.
-  89:PositionPID.c ****     return maxPWM;
- 381              		.loc 1 89 0
+  92:PositionPID.c ****     return maxPWM;
+ 381              		.loc 1 92 0
  382 0000 014B     		ldr	r3, .L41
  383 0002 1868     		ldr	r0, [r3]
-  90:PositionPID.c **** }
- 384              		.loc 1 90 0
+  93:PositionPID.c **** }
+ 384              		.loc 1 93 0
  385              		@ sp needed
  386 0004 7047     		bx	lr
  387              	.L42:
@@ -516,2349 +519,2314 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 1
  399              		.type	GetEncoderValWithFlip, %function
  400              	GetEncoderValWithFlip:
  401              	.LFB50:
-  91:PositionPID.c **** 
-  92:PositionPID.c **** int32_t GetEncoderValWithFlip() {
- 402              		.loc 1 92 0
+  94:PositionPID.c **** 
+  95:PositionPID.c **** int32_t GetEncoderValWithFlip() {
+ 402              		.loc 1 95 0
  403              		.cfi_startproc
  404              		@ args = 0, pretend = 0, frame = 0
  405              		@ frame_needed = 0, uses_anonymous_args = 0
- 406 0000 10B5     		push	{r4, lr}
- 407              		.cfi_def_cfa_offset 8
- 408              		.cfi_offset 4, -8
- 409              		.cfi_offset 14, -4
-  93:PositionPID.c ****     return flipEncoder * QuadDec_GetCounter();
- 410              		.loc 1 93 0
- 411 0002 034B     		ldr	r3, .L44
- 412 0004 0424     		movs	r4, #4
- 413 0006 1C57     		ldrsb	r4, [r3, r4]
- 414 0008 FFF7FEFF 		bl	QuadDec_GetCounter
- 415              	.LVL5:
- 416 000c 6043     		muls	r0, r4
-  94:PositionPID.c **** }
- 417              		.loc 1 94 0
- 418              		@ sp needed
- 419 000e 10BD     		pop	{r4, pc}
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 10
-
-
- 420              	.L45:
- 421              		.align	2
- 422              	.L44:
- 423 0010 00000000 		.word	.LANCHOR1
- 424              		.cfi_endproc
- 425              	.LFE50:
- 426              		.size	GetEncoderValWithFlip, .-GetEncoderValWithFlip
- 427              		.section	.text.InitializePID,"ax",%progbits
- 428              		.align	2
- 429              		.global	InitializePID
- 430              		.code	16
- 431              		.thumb_func
- 432              		.type	InitializePID, %function
- 433              	InitializePID:
- 434              	.LFB39:
-  53:PositionPID.c ****     set_PWM_M2(0, 0, 0);
- 435              		.loc 1 53 0
- 436              		.cfi_startproc
- 437              		@ args = 0, pretend = 0, frame = 0
- 438              		@ frame_needed = 0, uses_anonymous_args = 0
- 439 0000 10B5     		push	{r4, lr}
- 440              		.cfi_def_cfa_offset 8
- 441              		.cfi_offset 4, -8
- 442              		.cfi_offset 14, -4
-  54:PositionPID.c ****     ClearPIDProgress();
- 443              		.loc 1 54 0
- 444 0002 0022     		movs	r2, #0
- 445 0004 0021     		movs	r1, #0
- 446 0006 0020     		movs	r0, #0
- 447 0008 FFF7FEFF 		bl	set_PWM_M2
- 448              	.LVL6:
-  55:PositionPID.c ****     DisablePID();
- 449              		.loc 1 55 0
- 450 000c FFF7FEFF 		bl	ClearPIDProgress
- 451              	.LVL7:
-  56:PositionPID.c ****     lastPosition = GetEncoderValWithFlip();
- 452              		.loc 1 56 0
- 453 0010 FFF7FEFF 		bl	DisablePID
- 454              	.LVL8:
-  57:PositionPID.c **** }
- 455              		.loc 1 57 0
- 456 0014 FFF7FEFF 		bl	GetEncoderValWithFlip
- 457              	.LVL9:
- 458 0018 014B     		ldr	r3, .L47
- 459 001a 5860     		str	r0, [r3, #4]
-  58:PositionPID.c **** 
- 460              		.loc 1 58 0
- 461              		@ sp needed
- 462 001c 10BD     		pop	{r4, pc}
- 463              	.L48:
- 464 001e C046     		.align	2
- 465              	.L47:
- 466 0020 00000000 		.word	.LANCHOR0
- 467              		.cfi_endproc
- 468              	.LFE39:
- 469              		.size	InitializePID, .-InitializePID
- 470              		.section	.text.SetEncoderDirDefault,"ax",%progbits
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 11
-
-
- 471              		.align	2
- 472              		.global	SetEncoderDirDefault
- 473              		.code	16
- 474              		.thumb_func
- 475              		.type	SetEncoderDirDefault, %function
- 476              	SetEncoderDirDefault:
- 477              	.LFB51:
-  95:PositionPID.c **** void SetEncoderDirDefault(){
- 478              		.loc 1 95 0
- 479              		.cfi_startproc
- 480              		@ args = 0, pretend = 0, frame = 0
- 481              		@ frame_needed = 0, uses_anonymous_args = 0
- 482              		@ link register save eliminated.
-  96:PositionPID.c ****     flipEncoder = 1;
- 483              		.loc 1 96 0
- 484 0000 0122     		movs	r2, #1
- 485 0002 014B     		ldr	r3, .L50
- 486 0004 1A71     		strb	r2, [r3, #4]
+ 406              		@ link register save eliminated.
+  96:PositionPID.c ****     return flipEncoder * counter; //QuadDec_GetCounter();
+ 407              		.loc 1 96 0
+ 408 0000 034B     		ldr	r3, .L44
+ 409 0002 0420     		movs	r0, #4
+ 410 0004 1856     		ldrsb	r0, [r3, r0]
+ 411 0006 034B     		ldr	r3, .L44+4
+ 412 0008 1B68     		ldr	r3, [r3]
+ 413 000a 5843     		muls	r0, r3
   97:PositionPID.c **** }
- 487              		.loc 1 97 0
- 488              		@ sp needed
- 489 0006 7047     		bx	lr
- 490              	.L51:
- 491              		.align	2
- 492              	.L50:
- 493 0008 00000000 		.word	.LANCHOR1
- 494              		.cfi_endproc
- 495              	.LFE51:
- 496              		.size	SetEncoderDirDefault, .-SetEncoderDirDefault
- 497              		.section	.text.SetEncoderDirReverse,"ax",%progbits
- 498              		.align	2
- 499              		.global	SetEncoderDirReverse
- 500              		.code	16
- 501              		.thumb_func
- 502              		.type	SetEncoderDirReverse, %function
- 503              	SetEncoderDirReverse:
- 504              	.LFB52:
-  98:PositionPID.c **** void SetEncoderDirReverse(){
- 505              		.loc 1 98 0
- 506              		.cfi_startproc
- 507              		@ args = 0, pretend = 0, frame = 0
- 508              		@ frame_needed = 0, uses_anonymous_args = 0
- 509              		@ link register save eliminated.
-  99:PositionPID.c ****     flipEncoder = -1;
- 510              		.loc 1 99 0
- 511 0000 FF22     		movs	r2, #255
- 512 0002 014B     		ldr	r3, .L53
- 513 0004 1A71     		strb	r2, [r3, #4]
+ 414              		.loc 1 97 0
+ 415              		@ sp needed
+ 416 000c 7047     		bx	lr
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 10
+
+
+ 417              	.L45:
+ 418 000e C046     		.align	2
+ 419              	.L44:
+ 420 0010 00000000 		.word	.LANCHOR1
+ 421 0014 00000000 		.word	counter
+ 422              		.cfi_endproc
+ 423              	.LFE50:
+ 424              		.size	GetEncoderValWithFlip, .-GetEncoderValWithFlip
+ 425              		.section	.text.InitializePID,"ax",%progbits
+ 426              		.align	2
+ 427              		.global	InitializePID
+ 428              		.code	16
+ 429              		.thumb_func
+ 430              		.type	InitializePID, %function
+ 431              	InitializePID:
+ 432              	.LFB39:
+  56:PositionPID.c ****     set_PWM_M2(0, 0, 0);
+ 433              		.loc 1 56 0
+ 434              		.cfi_startproc
+ 435              		@ args = 0, pretend = 0, frame = 0
+ 436              		@ frame_needed = 0, uses_anonymous_args = 0
+ 437 0000 10B5     		push	{r4, lr}
+ 438              		.cfi_def_cfa_offset 8
+ 439              		.cfi_offset 4, -8
+ 440              		.cfi_offset 14, -4
+  57:PositionPID.c ****     ClearPIDProgress();
+ 441              		.loc 1 57 0
+ 442 0002 0022     		movs	r2, #0
+ 443 0004 0021     		movs	r1, #0
+ 444 0006 0020     		movs	r0, #0
+ 445 0008 FFF7FEFF 		bl	set_PWM_M2
+ 446              	.LVL5:
+  58:PositionPID.c ****     DisablePID();
+ 447              		.loc 1 58 0
+ 448 000c FFF7FEFF 		bl	ClearPIDProgress
+ 449              	.LVL6:
+  59:PositionPID.c ****     lastPosition = GetEncoderValWithFlip();
+ 450              		.loc 1 59 0
+ 451 0010 FFF7FEFF 		bl	DisablePID
+ 452              	.LVL7:
+  60:PositionPID.c **** }
+ 453              		.loc 1 60 0
+ 454 0014 FFF7FEFF 		bl	GetEncoderValWithFlip
+ 455              	.LVL8:
+ 456 0018 014B     		ldr	r3, .L47
+ 457 001a 5860     		str	r0, [r3, #4]
+  61:PositionPID.c **** 
+ 458              		.loc 1 61 0
+ 459              		@ sp needed
+ 460 001c 10BD     		pop	{r4, pc}
+ 461              	.L48:
+ 462 001e C046     		.align	2
+ 463              	.L47:
+ 464 0020 00000000 		.word	.LANCHOR0
+ 465              		.cfi_endproc
+ 466              	.LFE39:
+ 467              		.size	InitializePID, .-InitializePID
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 11
+
+
+ 468              		.section	.text.SetEncoderDirDefault,"ax",%progbits
+ 469              		.align	2
+ 470              		.global	SetEncoderDirDefault
+ 471              		.code	16
+ 472              		.thumb_func
+ 473              		.type	SetEncoderDirDefault, %function
+ 474              	SetEncoderDirDefault:
+ 475              	.LFB51:
+  98:PositionPID.c **** void SetEncoderDirDefault(){
+ 476              		.loc 1 98 0
+ 477              		.cfi_startproc
+ 478              		@ args = 0, pretend = 0, frame = 0
+ 479              		@ frame_needed = 0, uses_anonymous_args = 0
+ 480              		@ link register save eliminated.
+  99:PositionPID.c ****     flipEncoder = 1;
+ 481              		.loc 1 99 0
+ 482 0000 0122     		movs	r2, #1
+ 483 0002 014B     		ldr	r3, .L50
+ 484 0004 1A71     		strb	r2, [r3, #4]
  100:PositionPID.c **** }
- 514              		.loc 1 100 0
- 515              		@ sp needed
- 516 0006 7047     		bx	lr
- 517              	.L54:
- 518              		.align	2
- 519              	.L53:
- 520 0008 00000000 		.word	.LANCHOR1
- 521              		.cfi_endproc
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 12
+ 485              		.loc 1 100 0
+ 486              		@ sp needed
+ 487 0006 7047     		bx	lr
+ 488              	.L51:
+ 489              		.align	2
+ 490              	.L50:
+ 491 0008 00000000 		.word	.LANCHOR1
+ 492              		.cfi_endproc
+ 493              	.LFE51:
+ 494              		.size	SetEncoderDirDefault, .-SetEncoderDirDefault
+ 495              		.section	.text.SetEncoderDirReverse,"ax",%progbits
+ 496              		.align	2
+ 497              		.global	SetEncoderDirReverse
+ 498              		.code	16
+ 499              		.thumb_func
+ 500              		.type	SetEncoderDirReverse, %function
+ 501              	SetEncoderDirReverse:
+ 502              	.LFB52:
+ 101:PositionPID.c **** void SetEncoderDirReverse(){
+ 503              		.loc 1 101 0
+ 504              		.cfi_startproc
+ 505              		@ args = 0, pretend = 0, frame = 0
+ 506              		@ frame_needed = 0, uses_anonymous_args = 0
+ 507              		@ link register save eliminated.
+ 102:PositionPID.c ****     flipEncoder = -1;
+ 508              		.loc 1 102 0
+ 509 0000 FF22     		movs	r2, #255
+ 510 0002 014B     		ldr	r3, .L53
+ 511 0004 1A71     		strb	r2, [r3, #4]
+ 103:PositionPID.c **** }
+ 512              		.loc 1 103 0
+ 513              		@ sp needed
+ 514 0006 7047     		bx	lr
+ 515              	.L54:
+ 516              		.align	2
+ 517              	.L53:
+ 518 0008 00000000 		.word	.LANCHOR1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 12
 
 
- 522              	.LFE52:
- 523              		.size	SetEncoderDirReverse, .-SetEncoderDirReverse
- 524              		.global	__aeabi_idiv
- 525              		.section	.text.CurrentPositionMiliDegree,"ax",%progbits
- 526              		.align	2
- 527              		.global	CurrentPositionMiliDegree
- 528              		.code	16
- 529              		.thumb_func
- 530              		.type	CurrentPositionMiliDegree, %function
- 531              	CurrentPositionMiliDegree:
- 532              	.LFB53:
- 101:PositionPID.c **** int32_t CurrentPositionMiliDegree(){
- 533              		.loc 1 101 0
- 534              		.cfi_startproc
- 535              		@ args = 0, pretend = 0, frame = 0
- 536              		@ frame_needed = 0, uses_anonymous_args = 0
- 537 0000 10B5     		push	{r4, lr}
- 538              		.cfi_def_cfa_offset 8
- 539              		.cfi_offset 4, -8
- 540              		.cfi_offset 14, -4
- 102:PositionPID.c ****     if(kPPJR == 0){
- 541              		.loc 1 102 0
- 542 0002 064B     		ldr	r3, .L57
- 543 0004 9869     		ldr	r0, [r3, #24]
- 544 0006 0028     		cmp	r0, #0
- 545 0008 07D0     		beq	.L56
- 103:PositionPID.c ****         return(0);
- 104:PositionPID.c ****     }
- 105:PositionPID.c ****     return GetEncoderValWithFlip() * (360*1000) / kPPJR;
- 546              		.loc 1 105 0
- 547 000a FFF7FEFF 		bl	GetEncoderValWithFlip
- 548              	.LVL10:
- 549 000e 044B     		ldr	r3, .L57+4
- 550 0010 5843     		muls	r0, r3
- 551 0012 024B     		ldr	r3, .L57
- 552 0014 9969     		ldr	r1, [r3, #24]
- 553 0016 FFF7FEFF 		bl	__aeabi_idiv
- 554              	.LVL11:
- 555              	.L56:
- 106:PositionPID.c **** }
- 556              		.loc 1 106 0
- 557              		@ sp needed
- 558 001a 10BD     		pop	{r4, pc}
- 559              	.L58:
- 560              		.align	2
- 561              	.L57:
- 562 001c 00000000 		.word	.LANCHOR0
- 563 0020 407E0500 		.word	360000
- 564              		.cfi_endproc
- 565              	.LFE53:
- 566              		.size	CurrentPositionMiliDegree, .-CurrentPositionMiliDegree
- 567              		.section	.text.MiliDegreesToTicks,"ax",%progbits
- 568              		.align	2
- 569              		.global	MiliDegreesToTicks
- 570              		.code	16
- 571              		.thumb_func
- 572              		.type	MiliDegreesToTicks, %function
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 13
+ 519              		.cfi_endproc
+ 520              	.LFE52:
+ 521              		.size	SetEncoderDirReverse, .-SetEncoderDirReverse
+ 522              		.global	__aeabi_idiv
+ 523              		.section	.text.CurrentPositionMiliDegree,"ax",%progbits
+ 524              		.align	2
+ 525              		.global	CurrentPositionMiliDegree
+ 526              		.code	16
+ 527              		.thumb_func
+ 528              		.type	CurrentPositionMiliDegree, %function
+ 529              	CurrentPositionMiliDegree:
+ 530              	.LFB53:
+ 104:PositionPID.c **** int32_t CurrentPositionMiliDegree(){
+ 531              		.loc 1 104 0
+ 532              		.cfi_startproc
+ 533              		@ args = 0, pretend = 0, frame = 0
+ 534              		@ frame_needed = 0, uses_anonymous_args = 0
+ 535 0000 10B5     		push	{r4, lr}
+ 536              		.cfi_def_cfa_offset 8
+ 537              		.cfi_offset 4, -8
+ 538              		.cfi_offset 14, -4
+ 105:PositionPID.c ****     if(kPPJR == 0){
+ 539              		.loc 1 105 0
+ 540 0002 074B     		ldr	r3, .L57
+ 541 0004 9C69     		ldr	r4, [r3, #24]
+ 542 0006 002C     		cmp	r4, #0
+ 543 0008 07D0     		beq	.L56
+ 106:PositionPID.c ****         return(0);
+ 107:PositionPID.c ****     }
+ 108:PositionPID.c ****     return GetEncoderValWithFlip() * (360*1000) / kPPJR;
+ 544              		.loc 1 108 0
+ 545 000a FFF7FEFF 		bl	GetEncoderValWithFlip
+ 546              	.LVL9:
+ 547 000e 054B     		ldr	r3, .L57+4
+ 548 0010 5843     		muls	r0, r3
+ 549 0012 2100     		movs	r1, r4
+ 550 0014 FFF7FEFF 		bl	__aeabi_idiv
+ 551              	.LVL10:
+ 552 0018 0400     		movs	r4, r0
+ 553              	.L56:
+ 109:PositionPID.c **** }
+ 554              		.loc 1 109 0
+ 555 001a 2000     		movs	r0, r4
+ 556              		@ sp needed
+ 557 001c 10BD     		pop	{r4, pc}
+ 558              	.L58:
+ 559 001e C046     		.align	2
+ 560              	.L57:
+ 561 0020 00000000 		.word	.LANCHOR0
+ 562 0024 407E0500 		.word	360000
+ 563              		.cfi_endproc
+ 564              	.LFE53:
+ 565              		.size	CurrentPositionMiliDegree, .-CurrentPositionMiliDegree
+ 566              		.section	.text.MiliDegreesToTicks,"ax",%progbits
+ 567              		.align	2
+ 568              		.global	MiliDegreesToTicks
+ 569              		.code	16
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 13
 
 
- 573              	MiliDegreesToTicks:
- 574              	.LFB55:
- 107:PositionPID.c **** void SetPosition(int32 miliDegrees) {
- 108:PositionPID.c ****         //TODO: Make Potentiometer Compatible
- 109:PositionPID.c ****         PWM = Position_PID(MiliDegreesToTicks(miliDegrees));
- 110:PositionPID.c ****         
- 111:PositionPID.c ****         //Max Power clamp
- 112:PositionPID.c ****         if(PWM > GetMaxPIDPWM()){
- 113:PositionPID.c ****             set_PWM_M2(GetMaxPIDPWM(), ignoreLimSw_M2, Status_Reg_Switches_Read());   
- 114:PositionPID.c ****         } else if(PWM < -GetMaxPIDPWM()) {
- 115:PositionPID.c ****             set_PWM_M2(-GetMaxPIDPWM(), ignoreLimSw_M2, Status_Reg_Switches_Read());
- 116:PositionPID.c ****         } else {
- 117:PositionPID.c ****             set_PWM_M2(PWM, ignoreLimSw_M2, Status_Reg_Switches_Read());   
- 118:PositionPID.c ****         }
- 119:PositionPID.c **** }
- 120:PositionPID.c **** 
- 121:PositionPID.c **** int32_t MiliDegreesToTicks(int32_t miliDegrees){
- 575              		.loc 1 121 0
- 576              		.cfi_startproc
- 577              		@ args = 0, pretend = 0, frame = 0
- 578              		@ frame_needed = 0, uses_anonymous_args = 0
- 579              	.LVL12:
- 580 0000 10B5     		push	{r4, lr}
- 581              		.cfi_def_cfa_offset 8
- 582              		.cfi_offset 4, -8
- 583              		.cfi_offset 14, -4
- 122:PositionPID.c ****     int32_t ticks = miliDegrees * kPPJR/(360*1000);// make float
- 584              		.loc 1 122 0
- 585 0002 034B     		ldr	r3, .L60
- 586 0004 9B69     		ldr	r3, [r3, #24]
- 587 0006 5843     		muls	r0, r3
- 588              	.LVL13:
- 589 0008 0249     		ldr	r1, .L60+4
- 590 000a FFF7FEFF 		bl	__aeabi_idiv
- 591              	.LVL14:
- 123:PositionPID.c ****     return(ticks);
- 124:PositionPID.c **** }
- 592              		.loc 1 124 0
- 593              		@ sp needed
- 594 000e 10BD     		pop	{r4, pc}
- 595              	.L61:
- 596              		.align	2
- 597              	.L60:
- 598 0010 00000000 		.word	.LANCHOR0
- 599 0014 407E0500 		.word	360000
- 600              		.cfi_endproc
- 601              	.LFE55:
- 602              		.size	MiliDegreesToTicks, .-MiliDegreesToTicks
- 603              		.section	.text.Position_PID,"ax",%progbits
- 604              		.align	2
- 605              		.global	Position_PID
- 606              		.code	16
- 607              		.thumb_func
- 608              		.type	Position_PID, %function
- 609              	Position_PID:
- 610              	.LFB56:
- 125:PositionPID.c **** 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 14
+ 570              		.thumb_func
+ 571              		.type	MiliDegreesToTicks, %function
+ 572              	MiliDegreesToTicks:
+ 573              	.LFB55:
+ 110:PositionPID.c **** void SetPosition(int32 miliDegrees) {
+ 111:PositionPID.c ****         //TODO: Make Potentiometer Compatible
+ 112:PositionPID.c ****         PWM = Position_PID(MiliDegreesToTicks(miliDegrees));
+ 113:PositionPID.c ****         
+ 114:PositionPID.c ****         //Max Power clamp
+ 115:PositionPID.c ****         if(PWM > GetMaxPIDPWM()){
+ 116:PositionPID.c ****             set_PWM_M2(GetMaxPIDPWM(), ignoreLimSw_M2, Status_Reg_Switches_Read());   
+ 117:PositionPID.c ****         } else if(PWM < -GetMaxPIDPWM()) {
+ 118:PositionPID.c ****             set_PWM_M2(-GetMaxPIDPWM(), ignoreLimSw_M2, Status_Reg_Switches_Read());
+ 119:PositionPID.c ****         } else {
+ 120:PositionPID.c ****             set_PWM_M2(PWM, ignoreLimSw_M2, Status_Reg_Switches_Read());   
+ 121:PositionPID.c ****         }
+ 122:PositionPID.c **** }
+ 123:PositionPID.c **** 
+ 124:PositionPID.c **** int32_t MiliDegreesToTicks(int32_t miliDegrees){
+ 574              		.loc 1 124 0
+ 575              		.cfi_startproc
+ 576              		@ args = 0, pretend = 0, frame = 0
+ 577              		@ frame_needed = 0, uses_anonymous_args = 0
+ 578              	.LVL11:
+ 579 0000 10B5     		push	{r4, lr}
+ 580              		.cfi_def_cfa_offset 8
+ 581              		.cfi_offset 4, -8
+ 582              		.cfi_offset 14, -4
+ 125:PositionPID.c ****     int32_t ticks = miliDegrees * kPPJR/(360*1000);// make float
+ 583              		.loc 1 125 0
+ 584 0002 034B     		ldr	r3, .L60
+ 585 0004 9B69     		ldr	r3, [r3, #24]
+ 586 0006 5843     		muls	r0, r3
+ 587              	.LVL12:
+ 588 0008 0249     		ldr	r1, .L60+4
+ 589 000a FFF7FEFF 		bl	__aeabi_idiv
+ 590              	.LVL13:
+ 126:PositionPID.c ****     return(ticks);
+ 127:PositionPID.c **** }
+ 591              		.loc 1 127 0
+ 592              		@ sp needed
+ 593 000e 10BD     		pop	{r4, pc}
+ 594              	.L61:
+ 595              		.align	2
+ 596              	.L60:
+ 597 0010 00000000 		.word	.LANCHOR0
+ 598 0014 407E0500 		.word	360000
+ 599              		.cfi_endproc
+ 600              	.LFE55:
+ 601              		.size	MiliDegreesToTicks, .-MiliDegreesToTicks
+ 602              		.section	.text.Position_PID,"ax",%progbits
+ 603              		.align	2
+ 604              		.global	Position_PID
+ 605              		.code	16
+ 606              		.thumb_func
+ 607              		.type	Position_PID, %function
+ 608              	Position_PID:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 14
 
 
- 126:PositionPID.c **** int32_t Position_PID(int32 targetTick){
- 611              		.loc 1 126 0
- 612              		.cfi_startproc
- 613              		@ args = 0, pretend = 0, frame = 8
- 614              		@ frame_needed = 0, uses_anonymous_args = 0
- 615              	.LVL15:
- 616 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 617              		.cfi_def_cfa_offset 20
- 618              		.cfi_offset 4, -20
- 619              		.cfi_offset 5, -16
- 620              		.cfi_offset 6, -12
- 621              		.cfi_offset 7, -8
- 622              		.cfi_offset 14, -4
- 623 0002 83B0     		sub	sp, sp, #12
- 624              		.cfi_def_cfa_offset 32
- 625 0004 0500     		movs	r5, r0
- 127:PositionPID.c ****     if(!PIDIsEnabled()){
- 626              		.loc 1 127 0
- 627 0006 FFF7FEFF 		bl	PIDIsEnabled
- 628              	.LVL16:
- 629 000a 0028     		cmp	r0, #0
- 630 000c 30D0     		beq	.L66
- 128:PositionPID.c ****         return(0);
- 129:PositionPID.c ****     }
- 130:PositionPID.c ****     //TODO: Make Potenitometer Compatible
- 131:PositionPID.c ****     volatile int32 current =  GetEncoderValWithFlip();
- 631              		.loc 1 131 0
- 632 000e FFF7FEFF 		bl	GetEncoderValWithFlip
- 633              	.LVL17:
- 634 0012 0190     		str	r0, [sp, #4]
- 132:PositionPID.c ****     int32 position = targetTick - current;
- 635              		.loc 1 132 0
- 636 0014 019C     		ldr	r4, [sp, #4]
- 637 0016 2C1B     		subs	r4, r5, r4
- 638              	.LVL18:
- 133:PositionPID.c ****     
- 134:PositionPID.c ****     //if within tolerance exit
- 135:PositionPID.c ****     if(position <= 5 && position >= -5) {
- 639              		.loc 1 135 0
- 640 0018 631D     		adds	r3, r4, #5
- 641 001a 0A2B     		cmp	r3, #10
- 642 001c 2AD9     		bls	.L67
- 136:PositionPID.c ****       return(0);
- 137:PositionPID.c ****     }
- 138:PositionPID.c ****     
- 139:PositionPID.c ****     integral = integral + position;
- 643              		.loc 1 139 0
- 644 001e 174B     		ldr	r3, .L68
- 645 0020 1A68     		ldr	r2, [r3]
- 646 0022 A218     		adds	r2, r4, r2
- 647 0024 1A60     		str	r2, [r3]
- 140:PositionPID.c ****     
- 141:PositionPID.c ****     //integral clamp
- 142:PositionPID.c ****     if (integral > integralClamp) {
- 648              		.loc 1 142 0
- 649 0026 164B     		ldr	r3, .L68+4
- 650 0028 9B68     		ldr	r3, [r3, #8]
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 15
+ 609              	.LFB56:
+ 128:PositionPID.c **** 
+ 129:PositionPID.c **** int32_t Position_PID(int32 targetTick){
+ 610              		.loc 1 129 0
+ 611              		.cfi_startproc
+ 612              		@ args = 0, pretend = 0, frame = 8
+ 613              		@ frame_needed = 0, uses_anonymous_args = 0
+ 614              	.LVL14:
+ 615 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 616              		.cfi_def_cfa_offset 20
+ 617              		.cfi_offset 4, -20
+ 618              		.cfi_offset 5, -16
+ 619              		.cfi_offset 6, -12
+ 620              		.cfi_offset 7, -8
+ 621              		.cfi_offset 14, -4
+ 622 0002 83B0     		sub	sp, sp, #12
+ 623              		.cfi_def_cfa_offset 32
+ 624 0004 0500     		movs	r5, r0
+ 130:PositionPID.c ****     if(!PIDIsEnabled()){
+ 625              		.loc 1 130 0
+ 626 0006 FFF7FEFF 		bl	PIDIsEnabled
+ 627              	.LVL15:
+ 628 000a 0028     		cmp	r0, #0
+ 629 000c 30D0     		beq	.L66
+ 131:PositionPID.c ****         return(0);
+ 132:PositionPID.c ****     }
+ 133:PositionPID.c ****     //TODO: Make Potenitometer Compatible
+ 134:PositionPID.c ****     volatile int32 current =  GetEncoderValWithFlip();
+ 630              		.loc 1 134 0
+ 631 000e FFF7FEFF 		bl	GetEncoderValWithFlip
+ 632              	.LVL16:
+ 633 0012 0190     		str	r0, [sp, #4]
+ 135:PositionPID.c ****     int32 position = targetTick - current;
+ 634              		.loc 1 135 0
+ 635 0014 019C     		ldr	r4, [sp, #4]
+ 636 0016 2C1B     		subs	r4, r5, r4
+ 637              	.LVL17:
+ 136:PositionPID.c ****     
+ 137:PositionPID.c ****     //if within tolerance exit
+ 138:PositionPID.c ****     if(position <= 5 && position >= -5) {
+ 638              		.loc 1 138 0
+ 639 0018 631D     		adds	r3, r4, #5
+ 640 001a 0A2B     		cmp	r3, #10
+ 641 001c 2AD9     		bls	.L67
+ 139:PositionPID.c ****       return(0);
+ 140:PositionPID.c ****     }
+ 141:PositionPID.c ****     
+ 142:PositionPID.c ****     integral = integral + position;
+ 642              		.loc 1 142 0
+ 643 001e 174B     		ldr	r3, .L68
+ 644 0020 1A68     		ldr	r2, [r3]
+ 645 0022 A218     		adds	r2, r4, r2
+ 646 0024 1A60     		str	r2, [r3]
+ 143:PositionPID.c ****     
+ 144:PositionPID.c ****     //integral clamp
+ 145:PositionPID.c ****     if (integral > integralClamp) {
+ 647              		.loc 1 145 0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 15
 
 
- 651 002a 9A42     		cmp	r2, r3
- 652 002c 01DD     		ble	.L64
- 143:PositionPID.c ****         integral = integralClamp;   
- 653              		.loc 1 143 0
- 654 002e 134A     		ldr	r2, .L68
- 655 0030 1360     		str	r3, [r2]
- 656              	.L64:
- 144:PositionPID.c ****     }
- 145:PositionPID.c ****     if (integral < -integralClamp) {
- 657              		.loc 1 145 0
- 658 0032 5B42     		rsbs	r3, r3, #0
- 659 0034 114A     		ldr	r2, .L68
- 660 0036 1268     		ldr	r2, [r2]
- 661 0038 9342     		cmp	r3, r2
- 662 003a 01DD     		ble	.L65
- 146:PositionPID.c ****         integral = -integralClamp;
- 663              		.loc 1 146 0
- 664 003c 0F4A     		ldr	r2, .L68
- 665 003e 1360     		str	r3, [r2]
- 666              	.L65:
+ 648 0026 164B     		ldr	r3, .L68+4
+ 649 0028 9B68     		ldr	r3, [r3, #8]
+ 650 002a 9A42     		cmp	r2, r3
+ 651 002c 01DD     		ble	.L64
+ 146:PositionPID.c ****         integral = integralClamp;   
+ 652              		.loc 1 146 0
+ 653 002e 134A     		ldr	r2, .L68
+ 654 0030 1360     		str	r3, [r2]
+ 655              	.L64:
  147:PositionPID.c ****     }
- 148:PositionPID.c ****     
- 149:PositionPID.c ****     int derivative = position - lastPosition;
- 667              		.loc 1 149 0
- 668 0040 0E4D     		ldr	r5, .L68
- 669              	.LVL19:
- 670 0042 6B68     		ldr	r3, [r5, #4]
- 671 0044 E71A     		subs	r7, r4, r3
- 672              	.LVL20:
- 150:PositionPID.c ****     int PWMOut = position*kPosition/10 + integral*kIntegral/10 + derivative*kDerivative/10;
- 673              		.loc 1 150 0
- 674 0046 E868     		ldr	r0, [r5, #12]
- 675 0048 6043     		muls	r0, r4
- 676 004a 0A21     		movs	r1, #10
- 677 004c FFF7FEFF 		bl	__aeabi_idiv
- 678              	.LVL21:
- 679 0050 0600     		movs	r6, r0
- 680 0052 2869     		ldr	r0, [r5, #16]
- 681 0054 2B68     		ldr	r3, [r5]
- 682 0056 5843     		muls	r0, r3
- 683 0058 0A21     		movs	r1, #10
- 684 005a FFF7FEFF 		bl	__aeabi_idiv
- 685              	.LVL22:
- 686 005e 3618     		adds	r6, r6, r0
- 687 0060 6869     		ldr	r0, [r5, #20]
- 688 0062 7843     		muls	r0, r7
- 689 0064 0A21     		movs	r1, #10
- 690 0066 FFF7FEFF 		bl	__aeabi_idiv
- 691              	.LVL23:
- 151:PositionPID.c ****     lastPosition = position;
- 692              		.loc 1 151 0
- 693 006a 6C60     		str	r4, [r5, #4]
- 152:PositionPID.c ****     
- 153:PositionPID.c ****     #ifdef PRINT_PID_DEBUG
- 154:PositionPID.c ****         sprintf(txData,"c:%d, P:%d, I%d, D:%d, Out:%d", current, position, integral, derivative, PW
- 155:PositionPID.c ****         UART_UartPutString(txData);   
- 156:PositionPID.c ****     #endif
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 16
+ 148:PositionPID.c ****     if (integral < -integralClamp) {
+ 656              		.loc 1 148 0
+ 657 0032 5B42     		rsbs	r3, r3, #0
+ 658 0034 114A     		ldr	r2, .L68
+ 659 0036 1268     		ldr	r2, [r2]
+ 660 0038 9342     		cmp	r3, r2
+ 661 003a 01DD     		ble	.L65
+ 149:PositionPID.c ****         integral = -integralClamp;
+ 662              		.loc 1 149 0
+ 663 003c 0F4A     		ldr	r2, .L68
+ 664 003e 1360     		str	r3, [r2]
+ 665              	.L65:
+ 150:PositionPID.c ****     }
+ 151:PositionPID.c ****     
+ 152:PositionPID.c ****     int derivative = position - lastPosition;
+ 666              		.loc 1 152 0
+ 667 0040 0E4D     		ldr	r5, .L68
+ 668              	.LVL18:
+ 669 0042 6B68     		ldr	r3, [r5, #4]
+ 670 0044 E71A     		subs	r7, r4, r3
+ 671              	.LVL19:
+ 153:PositionPID.c ****     int PWMOut = position*kPosition/10 + integral*kIntegral/10 + derivative*kDerivative/10;
+ 672              		.loc 1 153 0
+ 673 0046 E868     		ldr	r0, [r5, #12]
+ 674 0048 6043     		muls	r0, r4
+ 675 004a 0A21     		movs	r1, #10
+ 676 004c FFF7FEFF 		bl	__aeabi_idiv
+ 677              	.LVL20:
+ 678 0050 0600     		movs	r6, r0
+ 679 0052 2869     		ldr	r0, [r5, #16]
+ 680 0054 2B68     		ldr	r3, [r5]
+ 681 0056 5843     		muls	r0, r3
+ 682 0058 0A21     		movs	r1, #10
+ 683 005a FFF7FEFF 		bl	__aeabi_idiv
+ 684              	.LVL21:
+ 685 005e 3618     		adds	r6, r6, r0
+ 686 0060 6869     		ldr	r0, [r5, #20]
+ 687 0062 7843     		muls	r0, r7
+ 688 0064 0A21     		movs	r1, #10
+ 689 0066 FFF7FEFF 		bl	__aeabi_idiv
+ 690              	.LVL22:
+ 154:PositionPID.c ****     lastPosition = position;
+ 691              		.loc 1 154 0
+ 692 006a 6C60     		str	r4, [r5, #4]
+ 155:PositionPID.c ****     
+ 156:PositionPID.c ****     #ifdef PRINT_PID_DEBUG
+ 157:PositionPID.c ****         sprintf(txData,"c:%d, P:%d, I%d, D:%d, Out:%d", current, position, integral, derivative, PW
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 16
 
 
- 157:PositionPID.c ****  
- 158:PositionPID.c ****     return (PWMOut);
- 694              		.loc 1 158 0
- 695 006c 3018     		adds	r0, r6, r0
- 696              	.LVL24:
- 697 006e 02E0     		b	.L63
- 698              	.LVL25:
- 699              	.L66:
- 128:PositionPID.c ****     }
- 700              		.loc 1 128 0
- 701 0070 0020     		movs	r0, #0
- 702 0072 00E0     		b	.L63
- 703              	.LVL26:
- 704              	.L67:
- 136:PositionPID.c ****     }
- 705              		.loc 1 136 0
- 706 0074 0020     		movs	r0, #0
- 707              	.LVL27:
- 708              	.L63:
- 159:PositionPID.c **** }
- 709              		.loc 1 159 0
- 710 0076 03B0     		add	sp, sp, #12
- 711              		@ sp needed
- 712 0078 F0BD     		pop	{r4, r5, r6, r7, pc}
- 713              	.L69:
- 714 007a C046     		.align	2
- 715              	.L68:
- 716 007c 00000000 		.word	.LANCHOR0
- 717 0080 00000000 		.word	.LANCHOR1
- 718              		.cfi_endproc
- 719              	.LFE56:
- 720              		.size	Position_PID, .-Position_PID
- 721              		.section	.text.SetPosition,"ax",%progbits
- 722              		.align	2
- 723              		.global	SetPosition
- 724              		.code	16
- 725              		.thumb_func
- 726              		.type	SetPosition, %function
- 727              	SetPosition:
- 728              	.LFB54:
- 107:PositionPID.c ****         //TODO: Make Potentiometer Compatible
- 729              		.loc 1 107 0
- 730              		.cfi_startproc
- 731              		@ args = 0, pretend = 0, frame = 0
- 732              		@ frame_needed = 0, uses_anonymous_args = 0
- 733              	.LVL28:
- 734 0000 70B5     		push	{r4, r5, r6, lr}
- 735              		.cfi_def_cfa_offset 16
- 736              		.cfi_offset 4, -16
- 737              		.cfi_offset 5, -12
- 738              		.cfi_offset 6, -8
- 739              		.cfi_offset 14, -4
- 109:PositionPID.c ****         
- 740              		.loc 1 109 0
- 741 0002 FFF7FEFF 		bl	MiliDegreesToTicks
- 742              	.LVL29:
- 743 0006 FFF7FEFF 		bl	Position_PID
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 17
+ 158:PositionPID.c ****         UART_UartPutString(txData);   
+ 159:PositionPID.c ****     #endif
+ 160:PositionPID.c ****  
+ 161:PositionPID.c ****     return (PWMOut);
+ 693              		.loc 1 161 0
+ 694 006c 3018     		adds	r0, r6, r0
+ 695              	.LVL23:
+ 696 006e 02E0     		b	.L63
+ 697              	.LVL24:
+ 698              	.L66:
+ 131:PositionPID.c ****     }
+ 699              		.loc 1 131 0
+ 700 0070 0020     		movs	r0, #0
+ 701 0072 00E0     		b	.L63
+ 702              	.LVL25:
+ 703              	.L67:
+ 139:PositionPID.c ****     }
+ 704              		.loc 1 139 0
+ 705 0074 0020     		movs	r0, #0
+ 706              	.LVL26:
+ 707              	.L63:
+ 162:PositionPID.c **** }
+ 708              		.loc 1 162 0
+ 709 0076 03B0     		add	sp, sp, #12
+ 710              		@ sp needed
+ 711 0078 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 712              	.L69:
+ 713 007a C046     		.align	2
+ 714              	.L68:
+ 715 007c 00000000 		.word	.LANCHOR0
+ 716 0080 00000000 		.word	.LANCHOR1
+ 717              		.cfi_endproc
+ 718              	.LFE56:
+ 719              		.size	Position_PID, .-Position_PID
+ 720              		.section	.text.SetPosition,"ax",%progbits
+ 721              		.align	2
+ 722              		.global	SetPosition
+ 723              		.code	16
+ 724              		.thumb_func
+ 725              		.type	SetPosition, %function
+ 726              	SetPosition:
+ 727              	.LFB54:
+ 110:PositionPID.c ****         //TODO: Make Potentiometer Compatible
+ 728              		.loc 1 110 0
+ 729              		.cfi_startproc
+ 730              		@ args = 0, pretend = 0, frame = 0
+ 731              		@ frame_needed = 0, uses_anonymous_args = 0
+ 732              	.LVL27:
+ 733 0000 70B5     		push	{r4, r5, r6, lr}
+ 734              		.cfi_def_cfa_offset 16
+ 735              		.cfi_offset 4, -16
+ 736              		.cfi_offset 5, -12
+ 737              		.cfi_offset 6, -8
+ 738              		.cfi_offset 14, -4
+ 112:PositionPID.c ****         
+ 739              		.loc 1 112 0
+ 740 0002 FFF7FEFF 		bl	MiliDegreesToTicks
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 17
 
 
- 744              	.LVL30:
- 745 000a 0400     		movs	r4, r0
- 746 000c 144B     		ldr	r3, .L74
- 747 000e D861     		str	r0, [r3, #28]
- 112:PositionPID.c ****             set_PWM_M2(GetMaxPIDPWM(), ignoreLimSw_M2, Status_Reg_Switches_Read());   
- 748              		.loc 1 112 0
- 749 0010 FFF7FEFF 		bl	GetMaxPIDPWM
- 750              	.LVL31:
- 751 0014 0500     		movs	r5, r0
- 752 0016 8442     		cmp	r4, r0
- 753 0018 09DD     		ble	.L71
- 113:PositionPID.c ****         } else if(PWM < -GetMaxPIDPWM()) {
- 754              		.loc 1 113 0
- 755 001a 124B     		ldr	r3, .L74+4
- 756 001c 1C78     		ldrb	r4, [r3]
- 757 001e FFF7FEFF 		bl	Status_Reg_Switches_Read
- 758              	.LVL32:
- 759 0022 0200     		movs	r2, r0
- 760 0024 28B2     		sxth	r0, r5
- 761 0026 2100     		movs	r1, r4
- 762 0028 FFF7FEFF 		bl	set_PWM_M2
- 763              	.LVL33:
- 764 002c 16E0     		b	.L70
- 765              	.L71:
- 114:PositionPID.c ****             set_PWM_M2(-GetMaxPIDPWM(), ignoreLimSw_M2, Status_Reg_Switches_Read());
- 766              		.loc 1 114 0
- 767 002e 4342     		rsbs	r3, r0, #0
- 768 0030 9C42     		cmp	r4, r3
- 769 0032 0ADA     		bge	.L73
- 115:PositionPID.c ****         } else {
- 770              		.loc 1 115 0
- 771 0034 0B4B     		ldr	r3, .L74+4
- 772 0036 1C78     		ldrb	r4, [r3]
- 773 0038 FFF7FEFF 		bl	Status_Reg_Switches_Read
- 774              	.LVL34:
- 775 003c 0200     		movs	r2, r0
- 776 003e 6D42     		rsbs	r5, r5, #0
- 777 0040 28B2     		sxth	r0, r5
- 778 0042 2100     		movs	r1, r4
- 779 0044 FFF7FEFF 		bl	set_PWM_M2
- 780              	.LVL35:
- 781 0048 08E0     		b	.L70
- 782              	.L73:
- 117:PositionPID.c ****         }
- 783              		.loc 1 117 0
- 784 004a 064B     		ldr	r3, .L74+4
- 785 004c 1D78     		ldrb	r5, [r3]
- 786 004e FFF7FEFF 		bl	Status_Reg_Switches_Read
- 787              	.LVL36:
- 788 0052 0200     		movs	r2, r0
- 789 0054 20B2     		sxth	r0, r4
- 790 0056 2900     		movs	r1, r5
- 791 0058 FFF7FEFF 		bl	set_PWM_M2
- 792              	.LVL37:
- 793              	.L70:
- 119:PositionPID.c **** 
- 794              		.loc 1 119 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 18
+ 741              	.LVL28:
+ 742 0006 FFF7FEFF 		bl	Position_PID
+ 743              	.LVL29:
+ 744 000a 0400     		movs	r4, r0
+ 745 000c 144B     		ldr	r3, .L74
+ 746 000e D861     		str	r0, [r3, #28]
+ 115:PositionPID.c ****             set_PWM_M2(GetMaxPIDPWM(), ignoreLimSw_M2, Status_Reg_Switches_Read());   
+ 747              		.loc 1 115 0
+ 748 0010 FFF7FEFF 		bl	GetMaxPIDPWM
+ 749              	.LVL30:
+ 750 0014 0500     		movs	r5, r0
+ 751 0016 8442     		cmp	r4, r0
+ 752 0018 09DD     		ble	.L71
+ 116:PositionPID.c ****         } else if(PWM < -GetMaxPIDPWM()) {
+ 753              		.loc 1 116 0
+ 754 001a 124B     		ldr	r3, .L74+4
+ 755 001c 1C78     		ldrb	r4, [r3]
+ 756 001e FFF7FEFF 		bl	Status_Reg_Switches_Read
+ 757              	.LVL31:
+ 758 0022 0200     		movs	r2, r0
+ 759 0024 28B2     		sxth	r0, r5
+ 760 0026 2100     		movs	r1, r4
+ 761 0028 FFF7FEFF 		bl	set_PWM_M2
+ 762              	.LVL32:
+ 763 002c 16E0     		b	.L70
+ 764              	.L71:
+ 117:PositionPID.c ****             set_PWM_M2(-GetMaxPIDPWM(), ignoreLimSw_M2, Status_Reg_Switches_Read());
+ 765              		.loc 1 117 0
+ 766 002e 4342     		rsbs	r3, r0, #0
+ 767 0030 9C42     		cmp	r4, r3
+ 768 0032 0ADA     		bge	.L73
+ 118:PositionPID.c ****         } else {
+ 769              		.loc 1 118 0
+ 770 0034 0B4B     		ldr	r3, .L74+4
+ 771 0036 1C78     		ldrb	r4, [r3]
+ 772 0038 FFF7FEFF 		bl	Status_Reg_Switches_Read
+ 773              	.LVL33:
+ 774 003c 0200     		movs	r2, r0
+ 775 003e 6D42     		rsbs	r5, r5, #0
+ 776 0040 28B2     		sxth	r0, r5
+ 777 0042 2100     		movs	r1, r4
+ 778 0044 FFF7FEFF 		bl	set_PWM_M2
+ 779              	.LVL34:
+ 780 0048 08E0     		b	.L70
+ 781              	.L73:
+ 120:PositionPID.c ****         }
+ 782              		.loc 1 120 0
+ 783 004a 064B     		ldr	r3, .L74+4
+ 784 004c 1D78     		ldrb	r5, [r3]
+ 785 004e FFF7FEFF 		bl	Status_Reg_Switches_Read
+ 786              	.LVL35:
+ 787 0052 0200     		movs	r2, r0
+ 788 0054 20B2     		sxth	r0, r4
+ 789 0056 2900     		movs	r1, r5
+ 790 0058 FFF7FEFF 		bl	set_PWM_M2
+ 791              	.LVL36:
+ 792              	.L70:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 18
 
 
- 795              		@ sp needed
- 796 005c 70BD     		pop	{r4, r5, r6, pc}
- 797              	.L75:
- 798 005e C046     		.align	2
- 799              	.L74:
- 800 0060 00000000 		.word	.LANCHOR0
- 801 0064 00000000 		.word	ignoreLimSw_M2
- 802              		.cfi_endproc
- 803              	.LFE54:
- 804              		.size	SetPosition, .-SetPosition
- 805              		.global	enabledPID
- 806              		.global	maxPWM
- 807              		.global	complete
- 808              		.comm	ratio,8,8
- 809              		.global	integralClamp
- 810              		.global	lastPosition
- 811              		.global	integral
- 812              		.global	usingPot
- 813              		.global	flipEncoder
- 814              		.global	PWM
- 815              		.global	kPPJR
- 816              		.global	kDerivative
- 817              		.global	kIntegral
- 818              		.global	kPosition
- 819              		.data
- 820              		.align	2
- 821              		.set	.LANCHOR1,. + 0
- 822              		.type	maxPWM, %object
- 823              		.size	maxPWM, 4
- 824              	maxPWM:
- 825 0000 FF7F0000 		.word	32767
- 826              		.type	flipEncoder, %object
- 827              		.size	flipEncoder, 1
- 828              	flipEncoder:
- 829 0004 01       		.byte	1
- 830 0005 000000   		.space	3
- 831              		.type	integralClamp, %object
- 832              		.size	integralClamp, 4
- 833              	integralClamp:
- 834 0008 F4010000 		.word	500
- 835              		.bss
- 836              		.align	2
- 837              		.set	.LANCHOR0,. + 0
- 838              		.type	integral, %object
- 839              		.size	integral, 4
- 840              	integral:
- 841 0000 00000000 		.space	4
- 842              		.type	lastPosition, %object
- 843              		.size	lastPosition, 4
- 844              	lastPosition:
- 845 0004 00000000 		.space	4
- 846              		.type	enabledPID, %object
- 847              		.size	enabledPID, 1
- 848              	enabledPID:
- 849 0008 00       		.space	1
- 850 0009 000000   		.space	3
- 851              		.type	kPosition, %object
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 19
+ 122:PositionPID.c **** 
+ 793              		.loc 1 122 0
+ 794              		@ sp needed
+ 795 005c 70BD     		pop	{r4, r5, r6, pc}
+ 796              	.L75:
+ 797 005e C046     		.align	2
+ 798              	.L74:
+ 799 0060 00000000 		.word	.LANCHOR0
+ 800 0064 00000000 		.word	ignoreLimSw_M2
+ 801              		.cfi_endproc
+ 802              	.LFE54:
+ 803              		.size	SetPosition, .-SetPosition
+ 804              		.global	enabledPID
+ 805              		.global	maxPWM
+ 806              		.global	complete
+ 807              		.comm	ratio,8,8
+ 808              		.global	integralClamp
+ 809              		.global	lastPosition
+ 810              		.global	integral
+ 811              		.global	usingPot
+ 812              		.global	flipEncoder
+ 813              		.global	PWM
+ 814              		.global	kPPJR
+ 815              		.global	kDerivative
+ 816              		.global	kIntegral
+ 817              		.global	kPosition
+ 818              		.data
+ 819              		.align	2
+ 820              		.set	.LANCHOR1,. + 0
+ 821              		.type	maxPWM, %object
+ 822              		.size	maxPWM, 4
+ 823              	maxPWM:
+ 824 0000 FF7F0000 		.word	32767
+ 825              		.type	flipEncoder, %object
+ 826              		.size	flipEncoder, 1
+ 827              	flipEncoder:
+ 828 0004 01       		.byte	1
+ 829 0005 000000   		.space	3
+ 830              		.type	integralClamp, %object
+ 831              		.size	integralClamp, 4
+ 832              	integralClamp:
+ 833 0008 F4010000 		.word	500
+ 834              		.bss
+ 835              		.align	2
+ 836              		.set	.LANCHOR0,. + 0
+ 837              		.type	integral, %object
+ 838              		.size	integral, 4
+ 839              	integral:
+ 840 0000 00000000 		.space	4
+ 841              		.type	lastPosition, %object
+ 842              		.size	lastPosition, 4
+ 843              	lastPosition:
+ 844 0004 00000000 		.space	4
+ 845              		.type	enabledPID, %object
+ 846              		.size	enabledPID, 1
+ 847              	enabledPID:
+ 848 0008 00       		.space	1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 19
 
 
- 852              		.size	kPosition, 4
- 853              	kPosition:
- 854 000c 00000000 		.space	4
- 855              		.type	kIntegral, %object
- 856              		.size	kIntegral, 4
- 857              	kIntegral:
- 858 0010 00000000 		.space	4
- 859              		.type	kDerivative, %object
- 860              		.size	kDerivative, 4
- 861              	kDerivative:
- 862 0014 00000000 		.space	4
- 863              		.type	kPPJR, %object
- 864              		.size	kPPJR, 4
- 865              	kPPJR:
- 866 0018 00000000 		.space	4
- 867              		.type	PWM, %object
- 868              		.size	PWM, 4
- 869              	PWM:
- 870 001c 00000000 		.space	4
- 871              		.type	complete, %object
- 872              		.size	complete, 1
- 873              	complete:
- 874 0020 00       		.space	1
- 875              		.type	usingPot, %object
- 876              		.size	usingPot, 1
- 877              	usingPot:
- 878 0021 00       		.space	1
- 879              		.text
- 880              	.Letext0:
- 881              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 882              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 883              		.file 4 "Generated_Source\\PSoC4/cytypes.h"
- 884              		.file 5 "Generated_Source\\PSoC4/QuadDec.h"
- 885              		.file 6 "MotorDrive.h"
- 886              		.file 7 "Generated_Source\\PSoC4/Status_Reg_Switches.h"
- 887              		.section	.debug_info,"",%progbits
- 888              	.Ldebug_info0:
- 889 0000 96050000 		.4byte	0x596
- 890 0004 0400     		.2byte	0x4
- 891 0006 00000000 		.4byte	.Ldebug_abbrev0
- 892 000a 04       		.byte	0x4
- 893 000b 01       		.uleb128 0x1
- 894 000c FC000000 		.4byte	.LASF72
- 895 0010 0C       		.byte	0xc
- 896 0011 65000000 		.4byte	.LASF73
- 897 0015 C4030000 		.4byte	.LASF74
- 898 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 899 001d 00000000 		.4byte	0
- 900 0021 00000000 		.4byte	.Ldebug_line0
- 901 0025 02       		.uleb128 0x2
- 902 0026 01       		.byte	0x1
- 903 0027 06       		.byte	0x6
- 904 0028 5D020000 		.4byte	.LASF0
- 905 002c 03       		.uleb128 0x3
- 906 002d FA010000 		.4byte	.LASF3
- 907 0031 02       		.byte	0x2
- 908 0032 1D       		.byte	0x1d
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 20
+ 849 0009 000000   		.space	3
+ 850              		.type	kPosition, %object
+ 851              		.size	kPosition, 4
+ 852              	kPosition:
+ 853 000c 00000000 		.space	4
+ 854              		.type	kIntegral, %object
+ 855              		.size	kIntegral, 4
+ 856              	kIntegral:
+ 857 0010 00000000 		.space	4
+ 858              		.type	kDerivative, %object
+ 859              		.size	kDerivative, 4
+ 860              	kDerivative:
+ 861 0014 00000000 		.space	4
+ 862              		.type	kPPJR, %object
+ 863              		.size	kPPJR, 4
+ 864              	kPPJR:
+ 865 0018 00000000 		.space	4
+ 866              		.type	PWM, %object
+ 867              		.size	PWM, 4
+ 868              	PWM:
+ 869 001c 00000000 		.space	4
+ 870              		.type	complete, %object
+ 871              		.size	complete, 1
+ 872              	complete:
+ 873 0020 00       		.space	1
+ 874              		.type	usingPot, %object
+ 875              		.size	usingPot, 1
+ 876              	usingPot:
+ 877 0021 00       		.space	1
+ 878              		.text
+ 879              	.Letext0:
+ 880              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 881              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 882              		.file 4 "Generated_Source\\PSoC4/cytypes.h"
+ 883              		.file 5 "MotorDrive.h"
+ 884              		.file 6 "Generated_Source\\PSoC4/Status_Reg_Switches.h"
+ 885              		.section	.debug_info,"",%progbits
+ 886              	.Ldebug_info0:
+ 887 0000 88050000 		.4byte	0x588
+ 888 0004 0400     		.2byte	0x4
+ 889 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 890 000a 04       		.byte	0x4
+ 891 000b 01       		.uleb128 0x1
+ 892 000c E9000000 		.4byte	.LASF72
+ 893 0010 0C       		.byte	0xc
+ 894 0011 52000000 		.4byte	.LASF73
+ 895 0015 B9030000 		.4byte	.LASF74
+ 896 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 897 001d 00000000 		.4byte	0
+ 898 0021 00000000 		.4byte	.Ldebug_line0
+ 899 0025 02       		.uleb128 0x2
+ 900 0026 01       		.byte	0x1
+ 901 0027 06       		.byte	0x6
+ 902 0028 52020000 		.4byte	.LASF0
+ 903 002c 03       		.uleb128 0x3
+ 904 002d E7010000 		.4byte	.LASF3
+ 905 0031 02       		.byte	0x2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 20
 
 
- 909 0033 37000000 		.4byte	0x37
- 910 0037 02       		.uleb128 0x2
- 911 0038 01       		.byte	0x1
- 912 0039 08       		.byte	0x8
- 913 003a 3E020000 		.4byte	.LASF1
- 914 003e 02       		.uleb128 0x2
- 915 003f 02       		.byte	0x2
- 916 0040 05       		.byte	0x5
- 917 0041 4C000000 		.4byte	.LASF2
- 918 0045 03       		.uleb128 0x3
- 919 0046 B6000000 		.4byte	.LASF4
- 920 004a 02       		.byte	0x2
- 921 004b 2B       		.byte	0x2b
- 922 004c 50000000 		.4byte	0x50
- 923 0050 02       		.uleb128 0x2
- 924 0051 02       		.byte	0x2
- 925 0052 07       		.byte	0x7
- 926 0053 EA020000 		.4byte	.LASF5
- 927 0057 03       		.uleb128 0x3
- 928 0058 AF030000 		.4byte	.LASF6
- 929 005c 02       		.byte	0x2
- 930 005d 3F       		.byte	0x3f
- 931 005e 62000000 		.4byte	0x62
- 932 0062 02       		.uleb128 0x2
- 933 0063 04       		.byte	0x4
- 934 0064 05       		.byte	0x5
- 935 0065 E2010000 		.4byte	.LASF7
- 936 0069 03       		.uleb128 0x3
- 937 006a 98000000 		.4byte	.LASF8
- 938 006e 02       		.byte	0x2
- 939 006f 41       		.byte	0x41
- 940 0070 74000000 		.4byte	0x74
- 941 0074 02       		.uleb128 0x2
- 942 0075 04       		.byte	0x4
- 943 0076 07       		.byte	0x7
- 944 0077 76030000 		.4byte	.LASF9
- 945 007b 02       		.uleb128 0x2
- 946 007c 08       		.byte	0x8
- 947 007d 05       		.byte	0x5
- 948 007e B6010000 		.4byte	.LASF10
- 949 0082 02       		.uleb128 0x2
- 950 0083 08       		.byte	0x8
- 951 0084 07       		.byte	0x7
- 952 0085 71020000 		.4byte	.LASF11
- 953 0089 04       		.uleb128 0x4
- 954 008a 04       		.byte	0x4
- 955 008b 05       		.byte	0x5
- 956 008c 696E7400 		.ascii	"int\000"
- 957 0090 02       		.uleb128 0x2
- 958 0091 04       		.byte	0x4
- 959 0092 07       		.byte	0x7
- 960 0093 91020000 		.4byte	.LASF12
- 961 0097 03       		.uleb128 0x3
- 962 0098 8A010000 		.4byte	.LASF13
- 963 009c 03       		.byte	0x3
- 964 009d 18       		.byte	0x18
- 965 009e 2C000000 		.4byte	0x2c
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 21
+ 906 0032 1D       		.byte	0x1d
+ 907 0033 37000000 		.4byte	0x37
+ 908 0037 02       		.uleb128 0x2
+ 909 0038 01       		.byte	0x1
+ 910 0039 08       		.byte	0x8
+ 911 003a 2B020000 		.4byte	.LASF1
+ 912 003e 02       		.uleb128 0x2
+ 913 003f 02       		.byte	0x2
+ 914 0040 05       		.byte	0x5
+ 915 0041 39000000 		.4byte	.LASF2
+ 916 0045 03       		.uleb128 0x3
+ 917 0046 A3000000 		.4byte	.LASF4
+ 918 004a 02       		.byte	0x2
+ 919 004b 2B       		.byte	0x2b
+ 920 004c 50000000 		.4byte	0x50
+ 921 0050 02       		.uleb128 0x2
+ 922 0051 02       		.byte	0x2
+ 923 0052 07       		.byte	0x7
+ 924 0053 DF020000 		.4byte	.LASF5
+ 925 0057 03       		.uleb128 0x3
+ 926 0058 A4030000 		.4byte	.LASF6
+ 927 005c 02       		.byte	0x2
+ 928 005d 3F       		.byte	0x3f
+ 929 005e 62000000 		.4byte	0x62
+ 930 0062 02       		.uleb128 0x2
+ 931 0063 04       		.byte	0x4
+ 932 0064 05       		.byte	0x5
+ 933 0065 CF010000 		.4byte	.LASF7
+ 934 0069 03       		.uleb128 0x3
+ 935 006a 85000000 		.4byte	.LASF8
+ 936 006e 02       		.byte	0x2
+ 937 006f 41       		.byte	0x41
+ 938 0070 74000000 		.4byte	0x74
+ 939 0074 02       		.uleb128 0x2
+ 940 0075 04       		.byte	0x4
+ 941 0076 07       		.byte	0x7
+ 942 0077 6B030000 		.4byte	.LASF9
+ 943 007b 02       		.uleb128 0x2
+ 944 007c 08       		.byte	0x8
+ 945 007d 05       		.byte	0x5
+ 946 007e A3010000 		.4byte	.LASF10
+ 947 0082 02       		.uleb128 0x2
+ 948 0083 08       		.byte	0x8
+ 949 0084 07       		.byte	0x7
+ 950 0085 66020000 		.4byte	.LASF11
+ 951 0089 04       		.uleb128 0x4
+ 952 008a 04       		.byte	0x4
+ 953 008b 05       		.byte	0x5
+ 954 008c 696E7400 		.ascii	"int\000"
+ 955 0090 02       		.uleb128 0x2
+ 956 0091 04       		.byte	0x4
+ 957 0092 07       		.byte	0x7
+ 958 0093 86020000 		.4byte	.LASF12
+ 959 0097 03       		.uleb128 0x3
+ 960 0098 77010000 		.4byte	.LASF13
+ 961 009c 03       		.byte	0x3
+ 962 009d 18       		.byte	0x18
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 21
 
 
- 966 00a2 03       		.uleb128 0x3
- 967 00a3 9E020000 		.4byte	.LASF14
- 968 00a7 03       		.byte	0x3
- 969 00a8 24       		.byte	0x24
- 970 00a9 45000000 		.4byte	0x45
- 971 00ad 03       		.uleb128 0x3
- 972 00ae 69020000 		.4byte	.LASF15
- 973 00b2 03       		.byte	0x3
- 974 00b3 2C       		.byte	0x2c
- 975 00b4 57000000 		.4byte	0x57
- 976 00b8 03       		.uleb128 0x3
- 977 00b9 88020000 		.4byte	.LASF16
- 978 00bd 03       		.byte	0x3
- 979 00be 30       		.byte	0x30
- 980 00bf 69000000 		.4byte	0x69
- 981 00c3 05       		.uleb128 0x5
- 982 00c4 92010000 		.4byte	.LASF17
- 983 00c8 04       		.byte	0x4
- 984 00c9 FC01     		.2byte	0x1fc
- 985 00cb 37000000 		.4byte	0x37
- 986 00cf 05       		.uleb128 0x5
- 987 00d0 C4010000 		.4byte	.LASF18
- 988 00d4 04       		.byte	0x4
- 989 00d5 FF01     		.2byte	0x1ff
- 990 00d7 25000000 		.4byte	0x25
- 991 00db 05       		.uleb128 0x5
- 992 00dc 88030000 		.4byte	.LASF19
- 993 00e0 04       		.byte	0x4
- 994 00e1 0102     		.2byte	0x201
- 995 00e3 62000000 		.4byte	0x62
- 996 00e7 02       		.uleb128 0x2
- 997 00e8 04       		.byte	0x4
- 998 00e9 04       		.byte	0x4
- 999 00ea B0010000 		.4byte	.LASF20
- 1000 00ee 02       		.uleb128 0x2
- 1001 00ef 08       		.byte	0x8
- 1002 00f0 04       		.byte	0x4
- 1003 00f1 5C040000 		.4byte	.LASF21
- 1004 00f5 02       		.uleb128 0x2
- 1005 00f6 01       		.byte	0x1
- 1006 00f7 08       		.byte	0x8
- 1007 00f8 13030000 		.4byte	.LASF22
- 1008 00fc 02       		.uleb128 0x2
- 1009 00fd 08       		.byte	0x8
- 1010 00fe 04       		.byte	0x4
- 1011 00ff 32020000 		.4byte	.LASF23
- 1012 0103 02       		.uleb128 0x2
- 1013 0104 04       		.byte	0x4
- 1014 0105 07       		.byte	0x7
- 1015 0106 56000000 		.4byte	.LASF24
- 1016 010a 06       		.uleb128 0x6
- 1017 010b 4C020000 		.4byte	.LASF25
- 1018 010f 01       		.byte	0x1
- 1019 0110 28       		.byte	0x28
- 1020 0111 00000000 		.4byte	.LFB35
- 1021 0115 10000000 		.4byte	.LFE35-.LFB35
- 1022 0119 01       		.uleb128 0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 22
+ 963 009e 2C000000 		.4byte	0x2c
+ 964 00a2 03       		.uleb128 0x3
+ 965 00a3 93020000 		.4byte	.LASF14
+ 966 00a7 03       		.byte	0x3
+ 967 00a8 24       		.byte	0x24
+ 968 00a9 45000000 		.4byte	0x45
+ 969 00ad 03       		.uleb128 0x3
+ 970 00ae 5E020000 		.4byte	.LASF15
+ 971 00b2 03       		.byte	0x3
+ 972 00b3 2C       		.byte	0x2c
+ 973 00b4 57000000 		.4byte	0x57
+ 974 00b8 03       		.uleb128 0x3
+ 975 00b9 7D020000 		.4byte	.LASF16
+ 976 00bd 03       		.byte	0x3
+ 977 00be 30       		.byte	0x30
+ 978 00bf 69000000 		.4byte	0x69
+ 979 00c3 05       		.uleb128 0x5
+ 980 00c4 7F010000 		.4byte	.LASF17
+ 981 00c8 04       		.byte	0x4
+ 982 00c9 FC01     		.2byte	0x1fc
+ 983 00cb 37000000 		.4byte	0x37
+ 984 00cf 05       		.uleb128 0x5
+ 985 00d0 B1010000 		.4byte	.LASF18
+ 986 00d4 04       		.byte	0x4
+ 987 00d5 FF01     		.2byte	0x1ff
+ 988 00d7 25000000 		.4byte	0x25
+ 989 00db 05       		.uleb128 0x5
+ 990 00dc 7D030000 		.4byte	.LASF19
+ 991 00e0 04       		.byte	0x4
+ 992 00e1 0102     		.2byte	0x201
+ 993 00e3 62000000 		.4byte	0x62
+ 994 00e7 02       		.uleb128 0x2
+ 995 00e8 04       		.byte	0x4
+ 996 00e9 04       		.byte	0x4
+ 997 00ea 9D010000 		.4byte	.LASF20
+ 998 00ee 02       		.uleb128 0x2
+ 999 00ef 08       		.byte	0x8
+ 1000 00f0 04       		.byte	0x4
+ 1001 00f1 51040000 		.4byte	.LASF21
+ 1002 00f5 02       		.uleb128 0x2
+ 1003 00f6 01       		.byte	0x1
+ 1004 00f7 08       		.byte	0x8
+ 1005 00f8 08030000 		.4byte	.LASF22
+ 1006 00fc 02       		.uleb128 0x2
+ 1007 00fd 08       		.byte	0x8
+ 1008 00fe 04       		.byte	0x4
+ 1009 00ff 1F020000 		.4byte	.LASF23
+ 1010 0103 02       		.uleb128 0x2
+ 1011 0104 04       		.byte	0x4
+ 1012 0105 07       		.byte	0x7
+ 1013 0106 43000000 		.4byte	.LASF24
+ 1014 010a 06       		.uleb128 0x6
+ 1015 010b 39020000 		.4byte	.LASF25
+ 1016 010f 01       		.byte	0x1
+ 1017 0110 2B       		.byte	0x2b
+ 1018 0111 00000000 		.4byte	.LFB35
+ 1019 0115 10000000 		.4byte	.LFE35-.LFB35
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 22
 
 
- 1023 011a 9C       		.byte	0x9c
- 1024 011b 06       		.uleb128 0x6
- 1025 011c F1000000 		.4byte	.LASF26
- 1026 0120 01       		.byte	0x1
- 1027 0121 2C       		.byte	0x2c
- 1028 0122 00000000 		.4byte	.LFB36
- 1029 0126 0C000000 		.4byte	.LFE36-.LFB36
- 1030 012a 01       		.uleb128 0x1
- 1031 012b 9C       		.byte	0x9c
- 1032 012c 06       		.uleb128 0x6
- 1033 012d 52040000 		.4byte	.LASF27
- 1034 0131 01       		.byte	0x1
- 1035 0132 2F       		.byte	0x2f
- 1036 0133 00000000 		.4byte	.LFB37
- 1037 0137 0C000000 		.4byte	.LFE37-.LFB37
- 1038 013b 01       		.uleb128 0x1
- 1039 013c 9C       		.byte	0x9c
- 1040 013d 07       		.uleb128 0x7
- 1041 013e A7020000 		.4byte	.LASF33
- 1042 0142 01       		.byte	0x1
- 1043 0143 32       		.byte	0x32
- 1044 0144 97000000 		.4byte	0x97
- 1045 0148 00000000 		.4byte	.LFB38
- 1046 014c 0C000000 		.4byte	.LFE38-.LFB38
- 1047 0150 01       		.uleb128 0x1
- 1048 0151 9C       		.byte	0x9c
- 1049 0152 08       		.uleb128 0x8
- 1050 0153 26000000 		.4byte	.LASF28
- 1051 0157 01       		.byte	0x1
- 1052 0158 3C       		.byte	0x3c
- 1053 0159 00000000 		.4byte	.LFB40
- 1054 015d 0C000000 		.4byte	.LFE40-.LFB40
- 1055 0161 01       		.uleb128 0x1
- 1056 0162 9C       		.byte	0x9c
- 1057 0163 74010000 		.4byte	0x174
- 1058 0167 09       		.uleb128 0x9
- 1059 0168 6B5000   		.ascii	"kP\000"
- 1060 016b 01       		.byte	0x1
- 1061 016c 3C       		.byte	0x3c
- 1062 016d AD000000 		.4byte	0xad
- 1063 0171 01       		.uleb128 0x1
- 1064 0172 50       		.byte	0x50
- 1065 0173 00       		.byte	0
- 1066 0174 08       		.uleb128 0x8
- 1067 0175 19000000 		.4byte	.LASF29
- 1068 0179 01       		.byte	0x1
- 1069 017a 3F       		.byte	0x3f
- 1070 017b 00000000 		.4byte	.LFB41
- 1071 017f 0C000000 		.4byte	.LFE41-.LFB41
- 1072 0183 01       		.uleb128 0x1
- 1073 0184 9C       		.byte	0x9c
- 1074 0185 96010000 		.4byte	0x196
- 1075 0189 09       		.uleb128 0x9
- 1076 018a 6B4900   		.ascii	"kI\000"
- 1077 018d 01       		.byte	0x1
- 1078 018e 3F       		.byte	0x3f
- 1079 018f AD000000 		.4byte	0xad
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 23
+ 1020 0119 01       		.uleb128 0x1
+ 1021 011a 9C       		.byte	0x9c
+ 1022 011b 06       		.uleb128 0x6
+ 1023 011c DE000000 		.4byte	.LASF26
+ 1024 0120 01       		.byte	0x1
+ 1025 0121 2F       		.byte	0x2f
+ 1026 0122 00000000 		.4byte	.LFB36
+ 1027 0126 0C000000 		.4byte	.LFE36-.LFB36
+ 1028 012a 01       		.uleb128 0x1
+ 1029 012b 9C       		.byte	0x9c
+ 1030 012c 06       		.uleb128 0x6
+ 1031 012d 47040000 		.4byte	.LASF27
+ 1032 0131 01       		.byte	0x1
+ 1033 0132 32       		.byte	0x32
+ 1034 0133 00000000 		.4byte	.LFB37
+ 1035 0137 0C000000 		.4byte	.LFE37-.LFB37
+ 1036 013b 01       		.uleb128 0x1
+ 1037 013c 9C       		.byte	0x9c
+ 1038 013d 07       		.uleb128 0x7
+ 1039 013e 9C020000 		.4byte	.LASF33
+ 1040 0142 01       		.byte	0x1
+ 1041 0143 35       		.byte	0x35
+ 1042 0144 97000000 		.4byte	0x97
+ 1043 0148 00000000 		.4byte	.LFB38
+ 1044 014c 0C000000 		.4byte	.LFE38-.LFB38
+ 1045 0150 01       		.uleb128 0x1
+ 1046 0151 9C       		.byte	0x9c
+ 1047 0152 08       		.uleb128 0x8
+ 1048 0153 13000000 		.4byte	.LASF28
+ 1049 0157 01       		.byte	0x1
+ 1050 0158 3F       		.byte	0x3f
+ 1051 0159 00000000 		.4byte	.LFB40
+ 1052 015d 0C000000 		.4byte	.LFE40-.LFB40
+ 1053 0161 01       		.uleb128 0x1
+ 1054 0162 9C       		.byte	0x9c
+ 1055 0163 74010000 		.4byte	0x174
+ 1056 0167 09       		.uleb128 0x9
+ 1057 0168 6B5000   		.ascii	"kP\000"
+ 1058 016b 01       		.byte	0x1
+ 1059 016c 3F       		.byte	0x3f
+ 1060 016d AD000000 		.4byte	0xad
+ 1061 0171 01       		.uleb128 0x1
+ 1062 0172 50       		.byte	0x50
+ 1063 0173 00       		.byte	0
+ 1064 0174 08       		.uleb128 0x8
+ 1065 0175 06000000 		.4byte	.LASF29
+ 1066 0179 01       		.byte	0x1
+ 1067 017a 42       		.byte	0x42
+ 1068 017b 00000000 		.4byte	.LFB41
+ 1069 017f 0C000000 		.4byte	.LFE41-.LFB41
+ 1070 0183 01       		.uleb128 0x1
+ 1071 0184 9C       		.byte	0x9c
+ 1072 0185 96010000 		.4byte	0x196
+ 1073 0189 09       		.uleb128 0x9
+ 1074 018a 6B4900   		.ascii	"kI\000"
+ 1075 018d 01       		.byte	0x1
+ 1076 018e 42       		.byte	0x42
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 23
 
 
- 1080 0193 01       		.uleb128 0x1
- 1081 0194 50       		.byte	0x50
- 1082 0195 00       		.byte	0
- 1083 0196 08       		.uleb128 0x8
- 1084 0197 D7000000 		.4byte	.LASF30
- 1085 019b 01       		.byte	0x1
- 1086 019c 42       		.byte	0x42
- 1087 019d 00000000 		.4byte	.LFB42
- 1088 01a1 0C000000 		.4byte	.LFE42-.LFB42
- 1089 01a5 01       		.uleb128 0x1
- 1090 01a6 9C       		.byte	0x9c
- 1091 01a7 B8010000 		.4byte	0x1b8
- 1092 01ab 09       		.uleb128 0x9
- 1093 01ac 6B4400   		.ascii	"kD\000"
- 1094 01af 01       		.byte	0x1
- 1095 01b0 42       		.byte	0x42
- 1096 01b1 AD000000 		.4byte	0xad
- 1097 01b5 01       		.uleb128 0x1
- 1098 01b6 50       		.byte	0x50
- 1099 01b7 00       		.byte	0
- 1100 01b8 08       		.uleb128 0x8
- 1101 01b9 A7010000 		.4byte	.LASF31
- 1102 01bd 01       		.byte	0x1
- 1103 01be 45       		.byte	0x45
- 1104 01bf 00000000 		.4byte	.LFB43
- 1105 01c3 0C000000 		.4byte	.LFE43-.LFB43
- 1106 01c7 01       		.uleb128 0x1
- 1107 01c8 9C       		.byte	0x9c
- 1108 01c9 DB010000 		.4byte	0x1db
- 1109 01cd 0A       		.uleb128 0xa
- 1110 01ce EB010000 		.4byte	.LASF32
- 1111 01d2 01       		.byte	0x1
- 1112 01d3 45       		.byte	0x45
- 1113 01d4 B8000000 		.4byte	0xb8
- 1114 01d8 01       		.uleb128 0x1
- 1115 01d9 50       		.byte	0x50
- 1116 01da 00       		.byte	0
- 1117 01db 07       		.uleb128 0x7
- 1118 01dc 80000000 		.4byte	.LASF34
- 1119 01e0 01       		.byte	0x1
- 1120 01e1 48       		.byte	0x48
- 1121 01e2 AD000000 		.4byte	0xad
- 1122 01e6 00000000 		.4byte	.LFB44
- 1123 01ea 0C000000 		.4byte	.LFE44-.LFB44
- 1124 01ee 01       		.uleb128 0x1
- 1125 01ef 9C       		.byte	0x9c
- 1126 01f0 07       		.uleb128 0x7
- 1127 01f1 06030000 		.4byte	.LASF35
- 1128 01f5 01       		.byte	0x1
- 1129 01f6 4B       		.byte	0x4b
- 1130 01f7 AD000000 		.4byte	0xad
- 1131 01fb 00000000 		.4byte	.LFB45
- 1132 01ff 0C000000 		.4byte	.LFE45-.LFB45
- 1133 0203 01       		.uleb128 0x1
- 1134 0204 9C       		.byte	0x9c
- 1135 0205 07       		.uleb128 0x7
- 1136 0206 63040000 		.4byte	.LASF36
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 24
+ 1077 018f AD000000 		.4byte	0xad
+ 1078 0193 01       		.uleb128 0x1
+ 1079 0194 50       		.byte	0x50
+ 1080 0195 00       		.byte	0
+ 1081 0196 08       		.uleb128 0x8
+ 1082 0197 C4000000 		.4byte	.LASF30
+ 1083 019b 01       		.byte	0x1
+ 1084 019c 45       		.byte	0x45
+ 1085 019d 00000000 		.4byte	.LFB42
+ 1086 01a1 0C000000 		.4byte	.LFE42-.LFB42
+ 1087 01a5 01       		.uleb128 0x1
+ 1088 01a6 9C       		.byte	0x9c
+ 1089 01a7 B8010000 		.4byte	0x1b8
+ 1090 01ab 09       		.uleb128 0x9
+ 1091 01ac 6B4400   		.ascii	"kD\000"
+ 1092 01af 01       		.byte	0x1
+ 1093 01b0 45       		.byte	0x45
+ 1094 01b1 AD000000 		.4byte	0xad
+ 1095 01b5 01       		.uleb128 0x1
+ 1096 01b6 50       		.byte	0x50
+ 1097 01b7 00       		.byte	0
+ 1098 01b8 08       		.uleb128 0x8
+ 1099 01b9 94010000 		.4byte	.LASF31
+ 1100 01bd 01       		.byte	0x1
+ 1101 01be 48       		.byte	0x48
+ 1102 01bf 00000000 		.4byte	.LFB43
+ 1103 01c3 0C000000 		.4byte	.LFE43-.LFB43
+ 1104 01c7 01       		.uleb128 0x1
+ 1105 01c8 9C       		.byte	0x9c
+ 1106 01c9 DB010000 		.4byte	0x1db
+ 1107 01cd 0A       		.uleb128 0xa
+ 1108 01ce D8010000 		.4byte	.LASF32
+ 1109 01d2 01       		.byte	0x1
+ 1110 01d3 48       		.byte	0x48
+ 1111 01d4 B8000000 		.4byte	0xb8
+ 1112 01d8 01       		.uleb128 0x1
+ 1113 01d9 50       		.byte	0x50
+ 1114 01da 00       		.byte	0
+ 1115 01db 07       		.uleb128 0x7
+ 1116 01dc 6D000000 		.4byte	.LASF34
+ 1117 01e0 01       		.byte	0x1
+ 1118 01e1 4B       		.byte	0x4b
+ 1119 01e2 AD000000 		.4byte	0xad
+ 1120 01e6 00000000 		.4byte	.LFB44
+ 1121 01ea 0C000000 		.4byte	.LFE44-.LFB44
+ 1122 01ee 01       		.uleb128 0x1
+ 1123 01ef 9C       		.byte	0x9c
+ 1124 01f0 07       		.uleb128 0x7
+ 1125 01f1 FB020000 		.4byte	.LASF35
+ 1126 01f5 01       		.byte	0x1
+ 1127 01f6 4E       		.byte	0x4e
+ 1128 01f7 AD000000 		.4byte	0xad
+ 1129 01fb 00000000 		.4byte	.LFB45
+ 1130 01ff 0C000000 		.4byte	.LFE45-.LFB45
+ 1131 0203 01       		.uleb128 0x1
+ 1132 0204 9C       		.byte	0x9c
+ 1133 0205 07       		.uleb128 0x7
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 24
 
 
- 1137 020a 01       		.byte	0x1
- 1138 020b 4E       		.byte	0x4e
- 1139 020c AD000000 		.4byte	0xad
- 1140 0210 00000000 		.4byte	.LFB46
- 1141 0214 0C000000 		.4byte	.LFE46-.LFB46
- 1142 0218 01       		.uleb128 0x1
- 1143 0219 9C       		.byte	0x9c
- 1144 021a 07       		.uleb128 0x7
- 1145 021b 2E030000 		.4byte	.LASF37
- 1146 021f 01       		.byte	0x1
- 1147 0220 51       		.byte	0x51
- 1148 0221 B8000000 		.4byte	0xb8
- 1149 0225 00000000 		.4byte	.LFB47
- 1150 0229 0C000000 		.4byte	.LFE47-.LFB47
- 1151 022d 01       		.uleb128 0x1
- 1152 022e 9C       		.byte	0x9c
- 1153 022f 08       		.uleb128 0x8
- 1154 0230 73000000 		.4byte	.LASF38
- 1155 0234 01       		.byte	0x1
- 1156 0235 55       		.byte	0x55
- 1157 0236 00000000 		.4byte	.LFB48
- 1158 023a 0C000000 		.4byte	.LFE48-.LFB48
- 1159 023e 01       		.uleb128 0x1
- 1160 023f 9C       		.byte	0x9c
- 1161 0240 52020000 		.4byte	0x252
- 1162 0244 0A       		.uleb128 0xa
- 1163 0245 18030000 		.4byte	.LASF39
- 1164 0249 01       		.byte	0x1
- 1165 024a 55       		.byte	0x55
- 1166 024b A2000000 		.4byte	0xa2
- 1167 024f 01       		.uleb128 0x1
- 1168 0250 50       		.byte	0x50
- 1169 0251 00       		.byte	0
- 1170 0252 07       		.uleb128 0x7
- 1171 0253 21030000 		.4byte	.LASF40
- 1172 0257 01       		.byte	0x1
- 1173 0258 58       		.byte	0x58
- 1174 0259 AD000000 		.4byte	0xad
- 1175 025d 00000000 		.4byte	.LFB49
- 1176 0261 0C000000 		.4byte	.LFE49-.LFB49
- 1177 0265 01       		.uleb128 0x1
- 1178 0266 9C       		.byte	0x9c
- 1179 0267 0B       		.uleb128 0xb
- 1180 0268 10020000 		.4byte	.LASF41
- 1181 026c 01       		.byte	0x1
- 1182 026d 5C       		.byte	0x5c
- 1183 026e AD000000 		.4byte	0xad
- 1184 0272 00000000 		.4byte	.LFB50
- 1185 0276 14000000 		.4byte	.LFE50-.LFB50
- 1186 027a 01       		.uleb128 0x1
- 1187 027b 9C       		.byte	0x9c
- 1188 027c 8A020000 		.4byte	0x28a
- 1189 0280 0C       		.uleb128 0xc
- 1190 0281 0C000000 		.4byte	.LVL5
- 1191 0285 78050000 		.4byte	0x578
- 1192 0289 00       		.byte	0
- 1193 028a 0D       		.uleb128 0xd
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 25
+ 1134 0206 58040000 		.4byte	.LASF36
+ 1135 020a 01       		.byte	0x1
+ 1136 020b 51       		.byte	0x51
+ 1137 020c AD000000 		.4byte	0xad
+ 1138 0210 00000000 		.4byte	.LFB46
+ 1139 0214 0C000000 		.4byte	.LFE46-.LFB46
+ 1140 0218 01       		.uleb128 0x1
+ 1141 0219 9C       		.byte	0x9c
+ 1142 021a 07       		.uleb128 0x7
+ 1143 021b 23030000 		.4byte	.LASF37
+ 1144 021f 01       		.byte	0x1
+ 1145 0220 54       		.byte	0x54
+ 1146 0221 B8000000 		.4byte	0xb8
+ 1147 0225 00000000 		.4byte	.LFB47
+ 1148 0229 0C000000 		.4byte	.LFE47-.LFB47
+ 1149 022d 01       		.uleb128 0x1
+ 1150 022e 9C       		.byte	0x9c
+ 1151 022f 08       		.uleb128 0x8
+ 1152 0230 60000000 		.4byte	.LASF38
+ 1153 0234 01       		.byte	0x1
+ 1154 0235 58       		.byte	0x58
+ 1155 0236 00000000 		.4byte	.LFB48
+ 1156 023a 0C000000 		.4byte	.LFE48-.LFB48
+ 1157 023e 01       		.uleb128 0x1
+ 1158 023f 9C       		.byte	0x9c
+ 1159 0240 52020000 		.4byte	0x252
+ 1160 0244 0A       		.uleb128 0xa
+ 1161 0245 0D030000 		.4byte	.LASF39
+ 1162 0249 01       		.byte	0x1
+ 1163 024a 58       		.byte	0x58
+ 1164 024b A2000000 		.4byte	0xa2
+ 1165 024f 01       		.uleb128 0x1
+ 1166 0250 50       		.byte	0x50
+ 1167 0251 00       		.byte	0
+ 1168 0252 07       		.uleb128 0x7
+ 1169 0253 16030000 		.4byte	.LASF40
+ 1170 0257 01       		.byte	0x1
+ 1171 0258 5B       		.byte	0x5b
+ 1172 0259 AD000000 		.4byte	0xad
+ 1173 025d 00000000 		.4byte	.LFB49
+ 1174 0261 0C000000 		.4byte	.LFE49-.LFB49
+ 1175 0265 01       		.uleb128 0x1
+ 1176 0266 9C       		.byte	0x9c
+ 1177 0267 07       		.uleb128 0x7
+ 1178 0268 FD010000 		.4byte	.LASF41
+ 1179 026c 01       		.byte	0x1
+ 1180 026d 5F       		.byte	0x5f
+ 1181 026e AD000000 		.4byte	0xad
+ 1182 0272 00000000 		.4byte	.LFB50
+ 1183 0276 18000000 		.4byte	.LFE50-.LFB50
+ 1184 027a 01       		.uleb128 0x1
+ 1185 027b 9C       		.byte	0x9c
+ 1186 027c 0B       		.uleb128 0xb
+ 1187 027d 83030000 		.4byte	.LASF75
+ 1188 0281 01       		.byte	0x1
+ 1189 0282 38       		.byte	0x38
+ 1190 0283 00000000 		.4byte	.LFB39
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 25
 
 
- 1194 028b 8E030000 		.4byte	.LASF75
- 1195 028f 01       		.byte	0x1
- 1196 0290 35       		.byte	0x35
- 1197 0291 00000000 		.4byte	.LFB39
- 1198 0295 24000000 		.4byte	.LFE39-.LFB39
- 1199 0299 01       		.uleb128 0x1
- 1200 029a 9C       		.byte	0x9c
- 1201 029b D8020000 		.4byte	0x2d8
- 1202 029f 0E       		.uleb128 0xe
- 1203 02a0 0C000000 		.4byte	.LVL6
- 1204 02a4 83050000 		.4byte	0x583
- 1205 02a8 BC020000 		.4byte	0x2bc
- 1206 02ac 0F       		.uleb128 0xf
- 1207 02ad 01       		.uleb128 0x1
- 1208 02ae 50       		.byte	0x50
- 1209 02af 01       		.uleb128 0x1
- 1210 02b0 30       		.byte	0x30
- 1211 02b1 0F       		.uleb128 0xf
- 1212 02b2 01       		.uleb128 0x1
- 1213 02b3 51       		.byte	0x51
- 1214 02b4 01       		.uleb128 0x1
- 1215 02b5 30       		.byte	0x30
- 1216 02b6 0F       		.uleb128 0xf
- 1217 02b7 01       		.uleb128 0x1
- 1218 02b8 52       		.byte	0x52
- 1219 02b9 01       		.uleb128 0x1
- 1220 02ba 30       		.byte	0x30
- 1221 02bb 00       		.byte	0
- 1222 02bc 0C       		.uleb128 0xc
- 1223 02bd 10000000 		.4byte	.LVL7
- 1224 02c1 0A010000 		.4byte	0x10a
- 1225 02c5 0C       		.uleb128 0xc
- 1226 02c6 14000000 		.4byte	.LVL8
- 1227 02ca 1B010000 		.4byte	0x11b
- 1228 02ce 0C       		.uleb128 0xc
- 1229 02cf 18000000 		.4byte	.LVL9
- 1230 02d3 67020000 		.4byte	0x267
- 1231 02d7 00       		.byte	0
- 1232 02d8 06       		.uleb128 0x6
- 1233 02d9 41030000 		.4byte	.LASF42
- 1234 02dd 01       		.byte	0x1
- 1235 02de 5F       		.byte	0x5f
- 1236 02df 00000000 		.4byte	.LFB51
- 1237 02e3 0C000000 		.4byte	.LFE51-.LFB51
- 1238 02e7 01       		.uleb128 0x1
- 1239 02e8 9C       		.byte	0x9c
- 1240 02e9 06       		.uleb128 0x6
- 1241 02ea D5020000 		.4byte	.LASF43
- 1242 02ee 01       		.byte	0x1
- 1243 02ef 62       		.byte	0x62
- 1244 02f0 00000000 		.4byte	.LFB52
- 1245 02f4 0C000000 		.4byte	.LFE52-.LFB52
- 1246 02f8 01       		.uleb128 0x1
- 1247 02f9 9C       		.byte	0x9c
- 1248 02fa 10       		.uleb128 0x10
- 1249 02fb 56030000 		.4byte	.LASF44
- 1250 02ff 01       		.byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 26
+ 1191 0287 24000000 		.4byte	.LFE39-.LFB39
+ 1192 028b 01       		.uleb128 0x1
+ 1193 028c 9C       		.byte	0x9c
+ 1194 028d CA020000 		.4byte	0x2ca
+ 1195 0291 0C       		.uleb128 0xc
+ 1196 0292 0C000000 		.4byte	.LVL5
+ 1197 0296 75050000 		.4byte	0x575
+ 1198 029a AE020000 		.4byte	0x2ae
+ 1199 029e 0D       		.uleb128 0xd
+ 1200 029f 01       		.uleb128 0x1
+ 1201 02a0 50       		.byte	0x50
+ 1202 02a1 01       		.uleb128 0x1
+ 1203 02a2 30       		.byte	0x30
+ 1204 02a3 0D       		.uleb128 0xd
+ 1205 02a4 01       		.uleb128 0x1
+ 1206 02a5 51       		.byte	0x51
+ 1207 02a6 01       		.uleb128 0x1
+ 1208 02a7 30       		.byte	0x30
+ 1209 02a8 0D       		.uleb128 0xd
+ 1210 02a9 01       		.uleb128 0x1
+ 1211 02aa 52       		.byte	0x52
+ 1212 02ab 01       		.uleb128 0x1
+ 1213 02ac 30       		.byte	0x30
+ 1214 02ad 00       		.byte	0
+ 1215 02ae 0E       		.uleb128 0xe
+ 1216 02af 10000000 		.4byte	.LVL6
+ 1217 02b3 0A010000 		.4byte	0x10a
+ 1218 02b7 0E       		.uleb128 0xe
+ 1219 02b8 14000000 		.4byte	.LVL7
+ 1220 02bc 1B010000 		.4byte	0x11b
+ 1221 02c0 0E       		.uleb128 0xe
+ 1222 02c1 18000000 		.4byte	.LVL8
+ 1223 02c5 67020000 		.4byte	0x267
+ 1224 02c9 00       		.byte	0
+ 1225 02ca 06       		.uleb128 0x6
+ 1226 02cb 36030000 		.4byte	.LASF42
+ 1227 02cf 01       		.byte	0x1
+ 1228 02d0 62       		.byte	0x62
+ 1229 02d1 00000000 		.4byte	.LFB51
+ 1230 02d5 0C000000 		.4byte	.LFE51-.LFB51
+ 1231 02d9 01       		.uleb128 0x1
+ 1232 02da 9C       		.byte	0x9c
+ 1233 02db 06       		.uleb128 0x6
+ 1234 02dc CA020000 		.4byte	.LASF43
+ 1235 02e0 01       		.byte	0x1
+ 1236 02e1 65       		.byte	0x65
+ 1237 02e2 00000000 		.4byte	.LFB52
+ 1238 02e6 0C000000 		.4byte	.LFE52-.LFB52
+ 1239 02ea 01       		.uleb128 0x1
+ 1240 02eb 9C       		.byte	0x9c
+ 1241 02ec 0F       		.uleb128 0xf
+ 1242 02ed 4B030000 		.4byte	.LASF44
+ 1243 02f1 01       		.byte	0x1
+ 1244 02f2 68       		.byte	0x68
+ 1245 02f3 AD000000 		.4byte	0xad
+ 1246 02f7 00000000 		.4byte	.LFB53
+ 1247 02fb 28000000 		.4byte	.LFE53-.LFB53
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 26
 
 
- 1251 0300 65       		.byte	0x65
- 1252 0301 AD000000 		.4byte	0xad
- 1253 0305 00000000 		.4byte	.LFB53
- 1254 0309 24000000 		.4byte	.LFE53-.LFB53
- 1255 030d 01       		.uleb128 0x1
- 1256 030e 9C       		.byte	0x9c
- 1257 030f 1D030000 		.4byte	0x31d
- 1258 0313 0C       		.uleb128 0xc
- 1259 0314 0E000000 		.4byte	.LVL10
- 1260 0318 67020000 		.4byte	0x267
- 1261 031c 00       		.byte	0
- 1262 031d 11       		.uleb128 0x11
- 1263 031e 3F040000 		.4byte	.LASF46
- 1264 0322 01       		.byte	0x1
- 1265 0323 79       		.byte	0x79
- 1266 0324 AD000000 		.4byte	0xad
- 1267 0328 00000000 		.4byte	.LFB55
- 1268 032c 18000000 		.4byte	.LFE55-.LFB55
- 1269 0330 01       		.uleb128 0x1
- 1270 0331 9C       		.byte	0x9c
- 1271 0332 53030000 		.4byte	0x353
- 1272 0336 12       		.uleb128 0x12
- 1273 0337 9C030000 		.4byte	.LASF45
- 1274 033b 01       		.byte	0x1
- 1275 033c 79       		.byte	0x79
- 1276 033d AD000000 		.4byte	0xad
- 1277 0341 00000000 		.4byte	.LLST0
- 1278 0345 13       		.uleb128 0x13
- 1279 0346 00000000 		.4byte	.LASF49
- 1280 034a 01       		.byte	0x1
- 1281 034b 7A       		.byte	0x7a
- 1282 034c AD000000 		.4byte	0xad
- 1283 0350 01       		.uleb128 0x1
- 1284 0351 50       		.byte	0x50
- 1285 0352 00       		.byte	0
- 1286 0353 11       		.uleb128 0x11
- 1287 0354 33000000 		.4byte	.LASF47
- 1288 0358 01       		.byte	0x1
- 1289 0359 7E       		.byte	0x7e
- 1290 035a AD000000 		.4byte	0xad
- 1291 035e 00000000 		.4byte	.LFB56
- 1292 0362 84000000 		.4byte	.LFE56-.LFB56
- 1293 0366 01       		.uleb128 0x1
- 1294 0367 9C       		.byte	0x9c
- 1295 0368 C9030000 		.4byte	0x3c9
- 1296 036c 12       		.uleb128 0x12
- 1297 036d B9030000 		.4byte	.LASF48
- 1298 0371 01       		.byte	0x1
- 1299 0372 7E       		.byte	0x7e
- 1300 0373 DB000000 		.4byte	0xdb
- 1301 0377 21000000 		.4byte	.LLST1
- 1302 037b 13       		.uleb128 0x13
- 1303 037c CD020000 		.4byte	.LASF50
- 1304 0380 01       		.byte	0x1
- 1305 0381 83       		.byte	0x83
- 1306 0382 C9030000 		.4byte	0x3c9
- 1307 0386 02       		.uleb128 0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 27
+ 1248 02ff 01       		.uleb128 0x1
+ 1249 0300 9C       		.byte	0x9c
+ 1250 0301 0F030000 		.4byte	0x30f
+ 1251 0305 0E       		.uleb128 0xe
+ 1252 0306 0E000000 		.4byte	.LVL9
+ 1253 030a 67020000 		.4byte	0x267
+ 1254 030e 00       		.byte	0
+ 1255 030f 10       		.uleb128 0x10
+ 1256 0310 34040000 		.4byte	.LASF46
+ 1257 0314 01       		.byte	0x1
+ 1258 0315 7C       		.byte	0x7c
+ 1259 0316 AD000000 		.4byte	0xad
+ 1260 031a 00000000 		.4byte	.LFB55
+ 1261 031e 18000000 		.4byte	.LFE55-.LFB55
+ 1262 0322 01       		.uleb128 0x1
+ 1263 0323 9C       		.byte	0x9c
+ 1264 0324 45030000 		.4byte	0x345
+ 1265 0328 11       		.uleb128 0x11
+ 1266 0329 91030000 		.4byte	.LASF45
+ 1267 032d 01       		.byte	0x1
+ 1268 032e 7C       		.byte	0x7c
+ 1269 032f AD000000 		.4byte	0xad
+ 1270 0333 00000000 		.4byte	.LLST0
+ 1271 0337 12       		.uleb128 0x12
+ 1272 0338 00000000 		.4byte	.LASF49
+ 1273 033c 01       		.byte	0x1
+ 1274 033d 7D       		.byte	0x7d
+ 1275 033e AD000000 		.4byte	0xad
+ 1276 0342 01       		.uleb128 0x1
+ 1277 0343 50       		.byte	0x50
+ 1278 0344 00       		.byte	0
+ 1279 0345 10       		.uleb128 0x10
+ 1280 0346 20000000 		.4byte	.LASF47
+ 1281 034a 01       		.byte	0x1
+ 1282 034b 81       		.byte	0x81
+ 1283 034c AD000000 		.4byte	0xad
+ 1284 0350 00000000 		.4byte	.LFB56
+ 1285 0354 84000000 		.4byte	.LFE56-.LFB56
+ 1286 0358 01       		.uleb128 0x1
+ 1287 0359 9C       		.byte	0x9c
+ 1288 035a BB030000 		.4byte	0x3bb
+ 1289 035e 11       		.uleb128 0x11
+ 1290 035f AE030000 		.4byte	.LASF48
+ 1291 0363 01       		.byte	0x1
+ 1292 0364 81       		.byte	0x81
+ 1293 0365 DB000000 		.4byte	0xdb
+ 1294 0369 21000000 		.4byte	.LLST1
+ 1295 036d 12       		.uleb128 0x12
+ 1296 036e C2020000 		.4byte	.LASF50
+ 1297 0372 01       		.byte	0x1
+ 1298 0373 86       		.byte	0x86
+ 1299 0374 BB030000 		.4byte	0x3bb
+ 1300 0378 02       		.uleb128 0x2
+ 1301 0379 91       		.byte	0x91
+ 1302 037a 64       		.sleb128 -28
+ 1303 037b 13       		.uleb128 0x13
+ 1304 037c AE000000 		.4byte	.LASF51
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 27
 
 
- 1308 0387 91       		.byte	0x91
- 1309 0388 64       		.sleb128 -28
- 1310 0389 14       		.uleb128 0x14
- 1311 038a C1000000 		.4byte	.LASF51
- 1312 038e 01       		.byte	0x1
- 1313 038f 84       		.byte	0x84
- 1314 0390 DB000000 		.4byte	0xdb
- 1315 0394 66000000 		.4byte	.LLST2
- 1316 0398 14       		.uleb128 0x14
- 1317 0399 E6000000 		.4byte	.LASF52
- 1318 039d 01       		.byte	0x1
- 1319 039e 95       		.byte	0x95
- 1320 039f 89000000 		.4byte	0x89
- 1321 03a3 84000000 		.4byte	.LLST3
- 1322 03a7 14       		.uleb128 0x14
- 1323 03a8 A8030000 		.4byte	.LASF53
- 1324 03ac 01       		.byte	0x1
- 1325 03ad 96       		.byte	0x96
- 1326 03ae 89000000 		.4byte	0x89
- 1327 03b2 97000000 		.4byte	.LLST4
- 1328 03b6 0C       		.uleb128 0xc
- 1329 03b7 0A000000 		.4byte	.LVL16
- 1330 03bb 3D010000 		.4byte	0x13d
- 1331 03bf 0C       		.uleb128 0xc
- 1332 03c0 12000000 		.4byte	.LVL17
- 1333 03c4 67020000 		.4byte	0x267
- 1334 03c8 00       		.byte	0
- 1335 03c9 15       		.uleb128 0x15
- 1336 03ca DB000000 		.4byte	0xdb
- 1337 03ce 08       		.uleb128 0x8
- 1338 03cf 40000000 		.4byte	.LASF54
- 1339 03d3 01       		.byte	0x1
- 1340 03d4 6B       		.byte	0x6b
- 1341 03d5 00000000 		.4byte	.LFB54
- 1342 03d9 68000000 		.4byte	.LFE54-.LFB54
- 1343 03dd 01       		.uleb128 0x1
- 1344 03de 9C       		.byte	0x9c
- 1345 03df 7F040000 		.4byte	0x47f
- 1346 03e3 12       		.uleb128 0x12
- 1347 03e4 9C030000 		.4byte	.LASF45
- 1348 03e8 01       		.byte	0x1
- 1349 03e9 6B       		.byte	0x6b
- 1350 03ea DB000000 		.4byte	0xdb
- 1351 03ee BA000000 		.4byte	.LLST5
- 1352 03f2 0E       		.uleb128 0xe
- 1353 03f3 06000000 		.4byte	.LVL29
- 1354 03f7 1D030000 		.4byte	0x31d
- 1355 03fb 07040000 		.4byte	0x407
- 1356 03ff 0F       		.uleb128 0xf
- 1357 0400 01       		.uleb128 0x1
- 1358 0401 50       		.byte	0x50
- 1359 0402 03       		.uleb128 0x3
- 1360 0403 F3       		.byte	0xf3
- 1361 0404 01       		.uleb128 0x1
- 1362 0405 50       		.byte	0x50
- 1363 0406 00       		.byte	0
- 1364 0407 0C       		.uleb128 0xc
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 28
+ 1305 0380 01       		.byte	0x1
+ 1306 0381 87       		.byte	0x87
+ 1307 0382 DB000000 		.4byte	0xdb
+ 1308 0386 66000000 		.4byte	.LLST2
+ 1309 038a 13       		.uleb128 0x13
+ 1310 038b D3000000 		.4byte	.LASF52
+ 1311 038f 01       		.byte	0x1
+ 1312 0390 98       		.byte	0x98
+ 1313 0391 89000000 		.4byte	0x89
+ 1314 0395 84000000 		.4byte	.LLST3
+ 1315 0399 13       		.uleb128 0x13
+ 1316 039a 9D030000 		.4byte	.LASF53
+ 1317 039e 01       		.byte	0x1
+ 1318 039f 99       		.byte	0x99
+ 1319 03a0 89000000 		.4byte	0x89
+ 1320 03a4 97000000 		.4byte	.LLST4
+ 1321 03a8 0E       		.uleb128 0xe
+ 1322 03a9 0A000000 		.4byte	.LVL15
+ 1323 03ad 3D010000 		.4byte	0x13d
+ 1324 03b1 0E       		.uleb128 0xe
+ 1325 03b2 12000000 		.4byte	.LVL16
+ 1326 03b6 67020000 		.4byte	0x267
+ 1327 03ba 00       		.byte	0
+ 1328 03bb 14       		.uleb128 0x14
+ 1329 03bc DB000000 		.4byte	0xdb
+ 1330 03c0 08       		.uleb128 0x8
+ 1331 03c1 2D000000 		.4byte	.LASF54
+ 1332 03c5 01       		.byte	0x1
+ 1333 03c6 6E       		.byte	0x6e
+ 1334 03c7 00000000 		.4byte	.LFB54
+ 1335 03cb 68000000 		.4byte	.LFE54-.LFB54
+ 1336 03cf 01       		.uleb128 0x1
+ 1337 03d0 9C       		.byte	0x9c
+ 1338 03d1 71040000 		.4byte	0x471
+ 1339 03d5 11       		.uleb128 0x11
+ 1340 03d6 91030000 		.4byte	.LASF45
+ 1341 03da 01       		.byte	0x1
+ 1342 03db 6E       		.byte	0x6e
+ 1343 03dc DB000000 		.4byte	0xdb
+ 1344 03e0 BA000000 		.4byte	.LLST5
+ 1345 03e4 0C       		.uleb128 0xc
+ 1346 03e5 06000000 		.4byte	.LVL28
+ 1347 03e9 0F030000 		.4byte	0x30f
+ 1348 03ed F9030000 		.4byte	0x3f9
+ 1349 03f1 0D       		.uleb128 0xd
+ 1350 03f2 01       		.uleb128 0x1
+ 1351 03f3 50       		.byte	0x50
+ 1352 03f4 03       		.uleb128 0x3
+ 1353 03f5 F3       		.byte	0xf3
+ 1354 03f6 01       		.uleb128 0x1
+ 1355 03f7 50       		.byte	0x50
+ 1356 03f8 00       		.byte	0
+ 1357 03f9 0E       		.uleb128 0xe
+ 1358 03fa 0A000000 		.4byte	.LVL29
+ 1359 03fe 45030000 		.4byte	0x345
+ 1360 0402 0E       		.uleb128 0xe
+ 1361 0403 14000000 		.4byte	.LVL30
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 28
 
 
- 1365 0408 0A000000 		.4byte	.LVL30
- 1366 040c 53030000 		.4byte	0x353
- 1367 0410 0C       		.uleb128 0xc
- 1368 0411 14000000 		.4byte	.LVL31
- 1369 0415 52020000 		.4byte	0x252
- 1370 0419 0C       		.uleb128 0xc
- 1371 041a 22000000 		.4byte	.LVL32
- 1372 041e 8E050000 		.4byte	0x58e
- 1373 0422 0E       		.uleb128 0xe
- 1374 0423 2C000000 		.4byte	.LVL33
- 1375 0427 83050000 		.4byte	0x583
- 1376 042b 3C040000 		.4byte	0x43c
- 1377 042f 0F       		.uleb128 0xf
- 1378 0430 01       		.uleb128 0x1
- 1379 0431 50       		.byte	0x50
- 1380 0432 02       		.uleb128 0x2
- 1381 0433 75       		.byte	0x75
- 1382 0434 00       		.sleb128 0
- 1383 0435 0F       		.uleb128 0xf
- 1384 0436 01       		.uleb128 0x1
- 1385 0437 51       		.byte	0x51
- 1386 0438 02       		.uleb128 0x2
- 1387 0439 74       		.byte	0x74
- 1388 043a 00       		.sleb128 0
- 1389 043b 00       		.byte	0
- 1390 043c 0C       		.uleb128 0xc
- 1391 043d 3C000000 		.4byte	.LVL34
- 1392 0441 8E050000 		.4byte	0x58e
- 1393 0445 0E       		.uleb128 0xe
- 1394 0446 48000000 		.4byte	.LVL35
- 1395 044a 83050000 		.4byte	0x583
- 1396 044e 5F040000 		.4byte	0x45f
- 1397 0452 0F       		.uleb128 0xf
- 1398 0453 01       		.uleb128 0x1
- 1399 0454 50       		.byte	0x50
- 1400 0455 02       		.uleb128 0x2
- 1401 0456 75       		.byte	0x75
- 1402 0457 00       		.sleb128 0
- 1403 0458 0F       		.uleb128 0xf
- 1404 0459 01       		.uleb128 0x1
- 1405 045a 51       		.byte	0x51
- 1406 045b 02       		.uleb128 0x2
- 1407 045c 74       		.byte	0x74
- 1408 045d 00       		.sleb128 0
- 1409 045e 00       		.byte	0
- 1410 045f 0C       		.uleb128 0xc
- 1411 0460 52000000 		.4byte	.LVL36
- 1412 0464 8E050000 		.4byte	0x58e
- 1413 0468 16       		.uleb128 0x16
- 1414 0469 5C000000 		.4byte	.LVL37
- 1415 046d 83050000 		.4byte	0x583
- 1416 0471 0F       		.uleb128 0xf
- 1417 0472 01       		.uleb128 0x1
- 1418 0473 50       		.byte	0x50
- 1419 0474 02       		.uleb128 0x2
- 1420 0475 74       		.byte	0x74
- 1421 0476 00       		.sleb128 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 29
+ 1362 0407 52020000 		.4byte	0x252
+ 1363 040b 0E       		.uleb128 0xe
+ 1364 040c 22000000 		.4byte	.LVL31
+ 1365 0410 80050000 		.4byte	0x580
+ 1366 0414 0C       		.uleb128 0xc
+ 1367 0415 2C000000 		.4byte	.LVL32
+ 1368 0419 75050000 		.4byte	0x575
+ 1369 041d 2E040000 		.4byte	0x42e
+ 1370 0421 0D       		.uleb128 0xd
+ 1371 0422 01       		.uleb128 0x1
+ 1372 0423 50       		.byte	0x50
+ 1373 0424 02       		.uleb128 0x2
+ 1374 0425 75       		.byte	0x75
+ 1375 0426 00       		.sleb128 0
+ 1376 0427 0D       		.uleb128 0xd
+ 1377 0428 01       		.uleb128 0x1
+ 1378 0429 51       		.byte	0x51
+ 1379 042a 02       		.uleb128 0x2
+ 1380 042b 74       		.byte	0x74
+ 1381 042c 00       		.sleb128 0
+ 1382 042d 00       		.byte	0
+ 1383 042e 0E       		.uleb128 0xe
+ 1384 042f 3C000000 		.4byte	.LVL33
+ 1385 0433 80050000 		.4byte	0x580
+ 1386 0437 0C       		.uleb128 0xc
+ 1387 0438 48000000 		.4byte	.LVL34
+ 1388 043c 75050000 		.4byte	0x575
+ 1389 0440 51040000 		.4byte	0x451
+ 1390 0444 0D       		.uleb128 0xd
+ 1391 0445 01       		.uleb128 0x1
+ 1392 0446 50       		.byte	0x50
+ 1393 0447 02       		.uleb128 0x2
+ 1394 0448 75       		.byte	0x75
+ 1395 0449 00       		.sleb128 0
+ 1396 044a 0D       		.uleb128 0xd
+ 1397 044b 01       		.uleb128 0x1
+ 1398 044c 51       		.byte	0x51
+ 1399 044d 02       		.uleb128 0x2
+ 1400 044e 74       		.byte	0x74
+ 1401 044f 00       		.sleb128 0
+ 1402 0450 00       		.byte	0
+ 1403 0451 0E       		.uleb128 0xe
+ 1404 0452 52000000 		.4byte	.LVL35
+ 1405 0456 80050000 		.4byte	0x580
+ 1406 045a 15       		.uleb128 0x15
+ 1407 045b 5C000000 		.4byte	.LVL36
+ 1408 045f 75050000 		.4byte	0x575
+ 1409 0463 0D       		.uleb128 0xd
+ 1410 0464 01       		.uleb128 0x1
+ 1411 0465 50       		.byte	0x50
+ 1412 0466 02       		.uleb128 0x2
+ 1413 0467 74       		.byte	0x74
+ 1414 0468 00       		.sleb128 0
+ 1415 0469 0D       		.uleb128 0xd
+ 1416 046a 01       		.uleb128 0x1
+ 1417 046b 51       		.byte	0x51
+ 1418 046c 02       		.uleb128 0x2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 29
 
 
- 1422 0477 0F       		.uleb128 0xf
- 1423 0478 01       		.uleb128 0x1
- 1424 0479 51       		.byte	0x51
- 1425 047a 02       		.uleb128 0x2
- 1426 047b 75       		.byte	0x75
- 1427 047c 00       		.sleb128 0
- 1428 047d 00       		.byte	0
- 1429 047e 00       		.byte	0
- 1430 047f 17       		.uleb128 0x17
- 1431 0480 37030000 		.4byte	.LASF55
- 1432 0484 01       		.byte	0x1
- 1433 0485 13       		.byte	0x13
- 1434 0486 AD000000 		.4byte	0xad
- 1435 048a 05       		.uleb128 0x5
- 1436 048b 03       		.byte	0x3
- 1437 048c 00000000 		.4byte	kPosition
- 1438 0490 17       		.uleb128 0x17
- 1439 0491 AC000000 		.4byte	.LASF56
- 1440 0495 01       		.byte	0x1
- 1441 0496 14       		.byte	0x14
- 1442 0497 AD000000 		.4byte	0xad
- 1443 049b 05       		.uleb128 0x5
- 1444 049c 03       		.byte	0x3
- 1445 049d 00000000 		.4byte	kIntegral
- 1446 04a1 17       		.uleb128 0x17
- 1447 04a2 04020000 		.4byte	.LASF57
- 1448 04a6 01       		.byte	0x1
- 1449 04a7 15       		.byte	0x15
- 1450 04a8 AD000000 		.4byte	0xad
- 1451 04ac 05       		.uleb128 0x5
- 1452 04ad 03       		.byte	0x3
- 1453 04ae 00000000 		.4byte	kDerivative
- 1454 04b2 17       		.uleb128 0x17
- 1455 04b3 5F000000 		.4byte	.LASF58
- 1456 04b7 01       		.byte	0x1
- 1457 04b8 16       		.byte	0x16
- 1458 04b9 AD000000 		.4byte	0xad
- 1459 04bd 05       		.uleb128 0x5
- 1460 04be 03       		.byte	0x3
- 1461 04bf 00000000 		.4byte	kPPJR
- 1462 04c3 18       		.uleb128 0x18
- 1463 04c4 50574D00 		.ascii	"PWM\000"
- 1464 04c8 01       		.byte	0x1
- 1465 04c9 17       		.byte	0x17
- 1466 04ca AD000000 		.4byte	0xad
- 1467 04ce 05       		.uleb128 0x5
- 1468 04cf 03       		.byte	0x3
- 1469 04d0 00000000 		.4byte	PWM
- 1470 04d4 19       		.uleb128 0x19
- 1471 04d5 98010000 		.4byte	.LASF59
- 1472 04d9 01       		.byte	0x1
- 1473 04da 18       		.byte	0x18
- 1474 04db 97000000 		.4byte	0x97
- 1475 04df 17       		.uleb128 0x17
- 1476 04e0 26020000 		.4byte	.LASF60
- 1477 04e4 01       		.byte	0x1
- 1478 04e5 1B       		.byte	0x1b
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 30
+ 1419 046d 75       		.byte	0x75
+ 1420 046e 00       		.sleb128 0
+ 1421 046f 00       		.byte	0
+ 1422 0470 00       		.byte	0
+ 1423 0471 16       		.uleb128 0x16
+ 1424 0472 2C030000 		.4byte	.LASF55
+ 1425 0476 01       		.byte	0x1
+ 1426 0477 13       		.byte	0x13
+ 1427 0478 AD000000 		.4byte	0xad
+ 1428 047c 05       		.uleb128 0x5
+ 1429 047d 03       		.byte	0x3
+ 1430 047e 00000000 		.4byte	kPosition
+ 1431 0482 16       		.uleb128 0x16
+ 1432 0483 99000000 		.4byte	.LASF56
+ 1433 0487 01       		.byte	0x1
+ 1434 0488 14       		.byte	0x14
+ 1435 0489 AD000000 		.4byte	0xad
+ 1436 048d 05       		.uleb128 0x5
+ 1437 048e 03       		.byte	0x3
+ 1438 048f 00000000 		.4byte	kIntegral
+ 1439 0493 16       		.uleb128 0x16
+ 1440 0494 F1010000 		.4byte	.LASF57
+ 1441 0498 01       		.byte	0x1
+ 1442 0499 15       		.byte	0x15
+ 1443 049a AD000000 		.4byte	0xad
+ 1444 049e 05       		.uleb128 0x5
+ 1445 049f 03       		.byte	0x3
+ 1446 04a0 00000000 		.4byte	kDerivative
+ 1447 04a4 16       		.uleb128 0x16
+ 1448 04a5 4C000000 		.4byte	.LASF58
+ 1449 04a9 01       		.byte	0x1
+ 1450 04aa 16       		.byte	0x16
+ 1451 04ab AD000000 		.4byte	0xad
+ 1452 04af 05       		.uleb128 0x5
+ 1453 04b0 03       		.byte	0x3
+ 1454 04b1 00000000 		.4byte	kPPJR
+ 1455 04b5 17       		.uleb128 0x17
+ 1456 04b6 50574D00 		.ascii	"PWM\000"
+ 1457 04ba 01       		.byte	0x1
+ 1458 04bb 17       		.byte	0x17
+ 1459 04bc AD000000 		.4byte	0xad
+ 1460 04c0 05       		.uleb128 0x5
+ 1461 04c1 03       		.byte	0x3
+ 1462 04c2 00000000 		.4byte	PWM
+ 1463 04c6 18       		.uleb128 0x18
+ 1464 04c7 85010000 		.4byte	.LASF59
+ 1465 04cb 01       		.byte	0x1
+ 1466 04cc 18       		.byte	0x18
+ 1467 04cd 97000000 		.4byte	0x97
+ 1468 04d1 18       		.uleb128 0x18
+ 1469 04d2 4A020000 		.4byte	.LASF60
+ 1470 04d6 01       		.byte	0x1
+ 1471 04d7 1B       		.byte	0x1b
+ 1472 04d8 AD000000 		.4byte	0xad
+ 1473 04dc 16       		.uleb128 0x16
+ 1474 04dd 13020000 		.4byte	.LASF61
+ 1475 04e1 01       		.byte	0x1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 30
 
 
- 1479 04e6 CF000000 		.4byte	0xcf
- 1480 04ea 05       		.uleb128 0x5
- 1481 04eb 03       		.byte	0x3
- 1482 04ec 00000000 		.4byte	flipEncoder
- 1483 04f0 17       		.uleb128 0x17
- 1484 04f1 A3000000 		.4byte	.LASF61
- 1485 04f5 01       		.byte	0x1
- 1486 04f6 1C       		.byte	0x1c
- 1487 04f7 97000000 		.4byte	0x97
- 1488 04fb 05       		.uleb128 0x5
- 1489 04fc 03       		.byte	0x3
- 1490 04fd 00000000 		.4byte	usingPot
- 1491 0501 17       		.uleb128 0x17
- 1492 0502 F1010000 		.4byte	.LASF62
- 1493 0506 01       		.byte	0x1
- 1494 0507 1E       		.byte	0x1e
- 1495 0508 89000000 		.4byte	0x89
- 1496 050c 05       		.uleb128 0x5
- 1497 050d 03       		.byte	0x3
- 1498 050e 00000000 		.4byte	integral
- 1499 0512 17       		.uleb128 0x17
- 1500 0513 CA000000 		.4byte	.LASF63
- 1501 0517 01       		.byte	0x1
- 1502 0518 1F       		.byte	0x1f
- 1503 0519 89000000 		.4byte	0x89
- 1504 051d 05       		.uleb128 0x5
- 1505 051e 03       		.byte	0x3
- 1506 051f 00000000 		.4byte	lastPosition
- 1507 0523 17       		.uleb128 0x17
- 1508 0524 D4010000 		.4byte	.LASF64
- 1509 0528 01       		.byte	0x1
- 1510 0529 20       		.byte	0x20
- 1511 052a 89000000 		.4byte	0x89
- 1512 052e 05       		.uleb128 0x5
- 1513 052f 03       		.byte	0x3
- 1514 0530 00000000 		.4byte	integralClamp
- 1515 0534 17       		.uleb128 0x17
- 1516 0535 70030000 		.4byte	.LASF65
- 1517 0539 01       		.byte	0x1
- 1518 053a 22       		.byte	0x22
- 1519 053b EE000000 		.4byte	0xee
- 1520 053f 05       		.uleb128 0x5
- 1521 0540 03       		.byte	0x3
- 1522 0541 00000000 		.4byte	ratio
- 1523 0545 17       		.uleb128 0x17
- 1524 0546 FD020000 		.4byte	.LASF66
- 1525 054a 01       		.byte	0x1
- 1526 054b 23       		.byte	0x23
- 1527 054c C3000000 		.4byte	0xc3
- 1528 0550 05       		.uleb128 0x5
- 1529 0551 03       		.byte	0x3
- 1530 0552 00000000 		.4byte	complete
- 1531 0556 17       		.uleb128 0x17
- 1532 0557 72040000 		.4byte	.LASF67
- 1533 055b 01       		.byte	0x1
- 1534 055c 24       		.byte	0x24
- 1535 055d DB000000 		.4byte	0xdb
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 31
+ 1476 04e2 1E       		.byte	0x1e
+ 1477 04e3 CF000000 		.4byte	0xcf
+ 1478 04e7 05       		.uleb128 0x5
+ 1479 04e8 03       		.byte	0x3
+ 1480 04e9 00000000 		.4byte	flipEncoder
+ 1481 04ed 16       		.uleb128 0x16
+ 1482 04ee 90000000 		.4byte	.LASF62
+ 1483 04f2 01       		.byte	0x1
+ 1484 04f3 1F       		.byte	0x1f
+ 1485 04f4 97000000 		.4byte	0x97
+ 1486 04f8 05       		.uleb128 0x5
+ 1487 04f9 03       		.byte	0x3
+ 1488 04fa 00000000 		.4byte	usingPot
+ 1489 04fe 16       		.uleb128 0x16
+ 1490 04ff DE010000 		.4byte	.LASF63
+ 1491 0503 01       		.byte	0x1
+ 1492 0504 21       		.byte	0x21
+ 1493 0505 89000000 		.4byte	0x89
+ 1494 0509 05       		.uleb128 0x5
+ 1495 050a 03       		.byte	0x3
+ 1496 050b 00000000 		.4byte	integral
+ 1497 050f 16       		.uleb128 0x16
+ 1498 0510 B7000000 		.4byte	.LASF64
+ 1499 0514 01       		.byte	0x1
+ 1500 0515 22       		.byte	0x22
+ 1501 0516 89000000 		.4byte	0x89
+ 1502 051a 05       		.uleb128 0x5
+ 1503 051b 03       		.byte	0x3
+ 1504 051c 00000000 		.4byte	lastPosition
+ 1505 0520 16       		.uleb128 0x16
+ 1506 0521 C1010000 		.4byte	.LASF65
+ 1507 0525 01       		.byte	0x1
+ 1508 0526 23       		.byte	0x23
+ 1509 0527 89000000 		.4byte	0x89
+ 1510 052b 05       		.uleb128 0x5
+ 1511 052c 03       		.byte	0x3
+ 1512 052d 00000000 		.4byte	integralClamp
+ 1513 0531 16       		.uleb128 0x16
+ 1514 0532 65030000 		.4byte	.LASF66
+ 1515 0536 01       		.byte	0x1
+ 1516 0537 25       		.byte	0x25
+ 1517 0538 EE000000 		.4byte	0xee
+ 1518 053c 05       		.uleb128 0x5
+ 1519 053d 03       		.byte	0x3
+ 1520 053e 00000000 		.4byte	ratio
+ 1521 0542 16       		.uleb128 0x16
+ 1522 0543 F2020000 		.4byte	.LASF67
+ 1523 0547 01       		.byte	0x1
+ 1524 0548 26       		.byte	0x26
+ 1525 0549 C3000000 		.4byte	0xc3
+ 1526 054d 05       		.uleb128 0x5
+ 1527 054e 03       		.byte	0x3
+ 1528 054f 00000000 		.4byte	complete
+ 1529 0553 16       		.uleb128 0x16
+ 1530 0554 67040000 		.4byte	.LASF68
+ 1531 0558 01       		.byte	0x1
+ 1532 0559 27       		.byte	0x27
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 31
 
 
- 1536 0561 05       		.uleb128 0x5
- 1537 0562 03       		.byte	0x3
- 1538 0563 00000000 		.4byte	maxPWM
- 1539 0567 17       		.uleb128 0x17
- 1540 0568 C9010000 		.4byte	.LASF68
- 1541 056c 01       		.byte	0x1
- 1542 056d 26       		.byte	0x26
- 1543 056e 97000000 		.4byte	0x97
- 1544 0572 05       		.uleb128 0x5
- 1545 0573 03       		.byte	0x3
- 1546 0574 00000000 		.4byte	enabledPID
- 1547 0578 1A       		.uleb128 0x1a
- 1548 0579 06000000 		.4byte	.LASF69
- 1549 057d 06000000 		.4byte	.LASF69
- 1550 0581 05       		.byte	0x5
- 1551 0582 4E       		.byte	0x4e
- 1552 0583 1A       		.uleb128 0x1a
- 1553 0584 8D000000 		.4byte	.LASF70
- 1554 0588 8D000000 		.4byte	.LASF70
- 1555 058c 06       		.byte	0x6
- 1556 058d 13       		.byte	0x13
- 1557 058e 1A       		.uleb128 0x1a
- 1558 058f B4020000 		.4byte	.LASF71
- 1559 0593 B4020000 		.4byte	.LASF71
- 1560 0597 07       		.byte	0x7
- 1561 0598 30       		.byte	0x30
- 1562 0599 00       		.byte	0
- 1563              		.section	.debug_abbrev,"",%progbits
- 1564              	.Ldebug_abbrev0:
- 1565 0000 01       		.uleb128 0x1
- 1566 0001 11       		.uleb128 0x11
- 1567 0002 01       		.byte	0x1
- 1568 0003 25       		.uleb128 0x25
- 1569 0004 0E       		.uleb128 0xe
- 1570 0005 13       		.uleb128 0x13
- 1571 0006 0B       		.uleb128 0xb
- 1572 0007 03       		.uleb128 0x3
- 1573 0008 0E       		.uleb128 0xe
- 1574 0009 1B       		.uleb128 0x1b
- 1575 000a 0E       		.uleb128 0xe
- 1576 000b 55       		.uleb128 0x55
- 1577 000c 17       		.uleb128 0x17
- 1578 000d 11       		.uleb128 0x11
- 1579 000e 01       		.uleb128 0x1
- 1580 000f 10       		.uleb128 0x10
- 1581 0010 17       		.uleb128 0x17
- 1582 0011 00       		.byte	0
- 1583 0012 00       		.byte	0
- 1584 0013 02       		.uleb128 0x2
- 1585 0014 24       		.uleb128 0x24
- 1586 0015 00       		.byte	0
- 1587 0016 0B       		.uleb128 0xb
- 1588 0017 0B       		.uleb128 0xb
- 1589 0018 3E       		.uleb128 0x3e
- 1590 0019 0B       		.uleb128 0xb
- 1591 001a 03       		.uleb128 0x3
- 1592 001b 0E       		.uleb128 0xe
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 32
+ 1533 055a DB000000 		.4byte	0xdb
+ 1534 055e 05       		.uleb128 0x5
+ 1535 055f 03       		.byte	0x3
+ 1536 0560 00000000 		.4byte	maxPWM
+ 1537 0564 16       		.uleb128 0x16
+ 1538 0565 B6010000 		.4byte	.LASF69
+ 1539 0569 01       		.byte	0x1
+ 1540 056a 29       		.byte	0x29
+ 1541 056b 97000000 		.4byte	0x97
+ 1542 056f 05       		.uleb128 0x5
+ 1543 0570 03       		.byte	0x3
+ 1544 0571 00000000 		.4byte	enabledPID
+ 1545 0575 19       		.uleb128 0x19
+ 1546 0576 7A000000 		.4byte	.LASF70
+ 1547 057a 7A000000 		.4byte	.LASF70
+ 1548 057e 05       		.byte	0x5
+ 1549 057f 13       		.byte	0x13
+ 1550 0580 19       		.uleb128 0x19
+ 1551 0581 A9020000 		.4byte	.LASF71
+ 1552 0585 A9020000 		.4byte	.LASF71
+ 1553 0589 06       		.byte	0x6
+ 1554 058a 30       		.byte	0x30
+ 1555 058b 00       		.byte	0
+ 1556              		.section	.debug_abbrev,"",%progbits
+ 1557              	.Ldebug_abbrev0:
+ 1558 0000 01       		.uleb128 0x1
+ 1559 0001 11       		.uleb128 0x11
+ 1560 0002 01       		.byte	0x1
+ 1561 0003 25       		.uleb128 0x25
+ 1562 0004 0E       		.uleb128 0xe
+ 1563 0005 13       		.uleb128 0x13
+ 1564 0006 0B       		.uleb128 0xb
+ 1565 0007 03       		.uleb128 0x3
+ 1566 0008 0E       		.uleb128 0xe
+ 1567 0009 1B       		.uleb128 0x1b
+ 1568 000a 0E       		.uleb128 0xe
+ 1569 000b 55       		.uleb128 0x55
+ 1570 000c 17       		.uleb128 0x17
+ 1571 000d 11       		.uleb128 0x11
+ 1572 000e 01       		.uleb128 0x1
+ 1573 000f 10       		.uleb128 0x10
+ 1574 0010 17       		.uleb128 0x17
+ 1575 0011 00       		.byte	0
+ 1576 0012 00       		.byte	0
+ 1577 0013 02       		.uleb128 0x2
+ 1578 0014 24       		.uleb128 0x24
+ 1579 0015 00       		.byte	0
+ 1580 0016 0B       		.uleb128 0xb
+ 1581 0017 0B       		.uleb128 0xb
+ 1582 0018 3E       		.uleb128 0x3e
+ 1583 0019 0B       		.uleb128 0xb
+ 1584 001a 03       		.uleb128 0x3
+ 1585 001b 0E       		.uleb128 0xe
+ 1586 001c 00       		.byte	0
+ 1587 001d 00       		.byte	0
+ 1588 001e 03       		.uleb128 0x3
+ 1589 001f 16       		.uleb128 0x16
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 32
 
 
- 1593 001c 00       		.byte	0
- 1594 001d 00       		.byte	0
- 1595 001e 03       		.uleb128 0x3
- 1596 001f 16       		.uleb128 0x16
- 1597 0020 00       		.byte	0
- 1598 0021 03       		.uleb128 0x3
- 1599 0022 0E       		.uleb128 0xe
- 1600 0023 3A       		.uleb128 0x3a
- 1601 0024 0B       		.uleb128 0xb
- 1602 0025 3B       		.uleb128 0x3b
- 1603 0026 0B       		.uleb128 0xb
- 1604 0027 49       		.uleb128 0x49
- 1605 0028 13       		.uleb128 0x13
- 1606 0029 00       		.byte	0
- 1607 002a 00       		.byte	0
- 1608 002b 04       		.uleb128 0x4
- 1609 002c 24       		.uleb128 0x24
- 1610 002d 00       		.byte	0
- 1611 002e 0B       		.uleb128 0xb
- 1612 002f 0B       		.uleb128 0xb
- 1613 0030 3E       		.uleb128 0x3e
- 1614 0031 0B       		.uleb128 0xb
- 1615 0032 03       		.uleb128 0x3
- 1616 0033 08       		.uleb128 0x8
- 1617 0034 00       		.byte	0
- 1618 0035 00       		.byte	0
- 1619 0036 05       		.uleb128 0x5
- 1620 0037 16       		.uleb128 0x16
- 1621 0038 00       		.byte	0
- 1622 0039 03       		.uleb128 0x3
- 1623 003a 0E       		.uleb128 0xe
- 1624 003b 3A       		.uleb128 0x3a
- 1625 003c 0B       		.uleb128 0xb
- 1626 003d 3B       		.uleb128 0x3b
- 1627 003e 05       		.uleb128 0x5
- 1628 003f 49       		.uleb128 0x49
- 1629 0040 13       		.uleb128 0x13
- 1630 0041 00       		.byte	0
- 1631 0042 00       		.byte	0
- 1632 0043 06       		.uleb128 0x6
- 1633 0044 2E       		.uleb128 0x2e
- 1634 0045 00       		.byte	0
- 1635 0046 3F       		.uleb128 0x3f
- 1636 0047 19       		.uleb128 0x19
- 1637 0048 03       		.uleb128 0x3
- 1638 0049 0E       		.uleb128 0xe
- 1639 004a 3A       		.uleb128 0x3a
- 1640 004b 0B       		.uleb128 0xb
- 1641 004c 3B       		.uleb128 0x3b
- 1642 004d 0B       		.uleb128 0xb
- 1643 004e 11       		.uleb128 0x11
- 1644 004f 01       		.uleb128 0x1
- 1645 0050 12       		.uleb128 0x12
- 1646 0051 06       		.uleb128 0x6
- 1647 0052 40       		.uleb128 0x40
- 1648 0053 18       		.uleb128 0x18
- 1649 0054 9742     		.uleb128 0x2117
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 33
+ 1590 0020 00       		.byte	0
+ 1591 0021 03       		.uleb128 0x3
+ 1592 0022 0E       		.uleb128 0xe
+ 1593 0023 3A       		.uleb128 0x3a
+ 1594 0024 0B       		.uleb128 0xb
+ 1595 0025 3B       		.uleb128 0x3b
+ 1596 0026 0B       		.uleb128 0xb
+ 1597 0027 49       		.uleb128 0x49
+ 1598 0028 13       		.uleb128 0x13
+ 1599 0029 00       		.byte	0
+ 1600 002a 00       		.byte	0
+ 1601 002b 04       		.uleb128 0x4
+ 1602 002c 24       		.uleb128 0x24
+ 1603 002d 00       		.byte	0
+ 1604 002e 0B       		.uleb128 0xb
+ 1605 002f 0B       		.uleb128 0xb
+ 1606 0030 3E       		.uleb128 0x3e
+ 1607 0031 0B       		.uleb128 0xb
+ 1608 0032 03       		.uleb128 0x3
+ 1609 0033 08       		.uleb128 0x8
+ 1610 0034 00       		.byte	0
+ 1611 0035 00       		.byte	0
+ 1612 0036 05       		.uleb128 0x5
+ 1613 0037 16       		.uleb128 0x16
+ 1614 0038 00       		.byte	0
+ 1615 0039 03       		.uleb128 0x3
+ 1616 003a 0E       		.uleb128 0xe
+ 1617 003b 3A       		.uleb128 0x3a
+ 1618 003c 0B       		.uleb128 0xb
+ 1619 003d 3B       		.uleb128 0x3b
+ 1620 003e 05       		.uleb128 0x5
+ 1621 003f 49       		.uleb128 0x49
+ 1622 0040 13       		.uleb128 0x13
+ 1623 0041 00       		.byte	0
+ 1624 0042 00       		.byte	0
+ 1625 0043 06       		.uleb128 0x6
+ 1626 0044 2E       		.uleb128 0x2e
+ 1627 0045 00       		.byte	0
+ 1628 0046 3F       		.uleb128 0x3f
+ 1629 0047 19       		.uleb128 0x19
+ 1630 0048 03       		.uleb128 0x3
+ 1631 0049 0E       		.uleb128 0xe
+ 1632 004a 3A       		.uleb128 0x3a
+ 1633 004b 0B       		.uleb128 0xb
+ 1634 004c 3B       		.uleb128 0x3b
+ 1635 004d 0B       		.uleb128 0xb
+ 1636 004e 11       		.uleb128 0x11
+ 1637 004f 01       		.uleb128 0x1
+ 1638 0050 12       		.uleb128 0x12
+ 1639 0051 06       		.uleb128 0x6
+ 1640 0052 40       		.uleb128 0x40
+ 1641 0053 18       		.uleb128 0x18
+ 1642 0054 9742     		.uleb128 0x2117
+ 1643 0056 19       		.uleb128 0x19
+ 1644 0057 00       		.byte	0
+ 1645 0058 00       		.byte	0
+ 1646 0059 07       		.uleb128 0x7
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 33
 
 
- 1650 0056 19       		.uleb128 0x19
- 1651 0057 00       		.byte	0
- 1652 0058 00       		.byte	0
- 1653 0059 07       		.uleb128 0x7
- 1654 005a 2E       		.uleb128 0x2e
- 1655 005b 00       		.byte	0
- 1656 005c 3F       		.uleb128 0x3f
- 1657 005d 19       		.uleb128 0x19
- 1658 005e 03       		.uleb128 0x3
- 1659 005f 0E       		.uleb128 0xe
- 1660 0060 3A       		.uleb128 0x3a
- 1661 0061 0B       		.uleb128 0xb
- 1662 0062 3B       		.uleb128 0x3b
- 1663 0063 0B       		.uleb128 0xb
- 1664 0064 49       		.uleb128 0x49
- 1665 0065 13       		.uleb128 0x13
- 1666 0066 11       		.uleb128 0x11
- 1667 0067 01       		.uleb128 0x1
- 1668 0068 12       		.uleb128 0x12
- 1669 0069 06       		.uleb128 0x6
- 1670 006a 40       		.uleb128 0x40
- 1671 006b 18       		.uleb128 0x18
- 1672 006c 9742     		.uleb128 0x2117
- 1673 006e 19       		.uleb128 0x19
- 1674 006f 00       		.byte	0
- 1675 0070 00       		.byte	0
- 1676 0071 08       		.uleb128 0x8
- 1677 0072 2E       		.uleb128 0x2e
- 1678 0073 01       		.byte	0x1
- 1679 0074 3F       		.uleb128 0x3f
- 1680 0075 19       		.uleb128 0x19
- 1681 0076 03       		.uleb128 0x3
- 1682 0077 0E       		.uleb128 0xe
- 1683 0078 3A       		.uleb128 0x3a
- 1684 0079 0B       		.uleb128 0xb
- 1685 007a 3B       		.uleb128 0x3b
- 1686 007b 0B       		.uleb128 0xb
- 1687 007c 27       		.uleb128 0x27
- 1688 007d 19       		.uleb128 0x19
- 1689 007e 11       		.uleb128 0x11
- 1690 007f 01       		.uleb128 0x1
- 1691 0080 12       		.uleb128 0x12
- 1692 0081 06       		.uleb128 0x6
- 1693 0082 40       		.uleb128 0x40
- 1694 0083 18       		.uleb128 0x18
- 1695 0084 9742     		.uleb128 0x2117
- 1696 0086 19       		.uleb128 0x19
- 1697 0087 01       		.uleb128 0x1
- 1698 0088 13       		.uleb128 0x13
- 1699 0089 00       		.byte	0
- 1700 008a 00       		.byte	0
- 1701 008b 09       		.uleb128 0x9
- 1702 008c 05       		.uleb128 0x5
- 1703 008d 00       		.byte	0
- 1704 008e 03       		.uleb128 0x3
- 1705 008f 08       		.uleb128 0x8
- 1706 0090 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 34
+ 1647 005a 2E       		.uleb128 0x2e
+ 1648 005b 00       		.byte	0
+ 1649 005c 3F       		.uleb128 0x3f
+ 1650 005d 19       		.uleb128 0x19
+ 1651 005e 03       		.uleb128 0x3
+ 1652 005f 0E       		.uleb128 0xe
+ 1653 0060 3A       		.uleb128 0x3a
+ 1654 0061 0B       		.uleb128 0xb
+ 1655 0062 3B       		.uleb128 0x3b
+ 1656 0063 0B       		.uleb128 0xb
+ 1657 0064 49       		.uleb128 0x49
+ 1658 0065 13       		.uleb128 0x13
+ 1659 0066 11       		.uleb128 0x11
+ 1660 0067 01       		.uleb128 0x1
+ 1661 0068 12       		.uleb128 0x12
+ 1662 0069 06       		.uleb128 0x6
+ 1663 006a 40       		.uleb128 0x40
+ 1664 006b 18       		.uleb128 0x18
+ 1665 006c 9742     		.uleb128 0x2117
+ 1666 006e 19       		.uleb128 0x19
+ 1667 006f 00       		.byte	0
+ 1668 0070 00       		.byte	0
+ 1669 0071 08       		.uleb128 0x8
+ 1670 0072 2E       		.uleb128 0x2e
+ 1671 0073 01       		.byte	0x1
+ 1672 0074 3F       		.uleb128 0x3f
+ 1673 0075 19       		.uleb128 0x19
+ 1674 0076 03       		.uleb128 0x3
+ 1675 0077 0E       		.uleb128 0xe
+ 1676 0078 3A       		.uleb128 0x3a
+ 1677 0079 0B       		.uleb128 0xb
+ 1678 007a 3B       		.uleb128 0x3b
+ 1679 007b 0B       		.uleb128 0xb
+ 1680 007c 27       		.uleb128 0x27
+ 1681 007d 19       		.uleb128 0x19
+ 1682 007e 11       		.uleb128 0x11
+ 1683 007f 01       		.uleb128 0x1
+ 1684 0080 12       		.uleb128 0x12
+ 1685 0081 06       		.uleb128 0x6
+ 1686 0082 40       		.uleb128 0x40
+ 1687 0083 18       		.uleb128 0x18
+ 1688 0084 9742     		.uleb128 0x2117
+ 1689 0086 19       		.uleb128 0x19
+ 1690 0087 01       		.uleb128 0x1
+ 1691 0088 13       		.uleb128 0x13
+ 1692 0089 00       		.byte	0
+ 1693 008a 00       		.byte	0
+ 1694 008b 09       		.uleb128 0x9
+ 1695 008c 05       		.uleb128 0x5
+ 1696 008d 00       		.byte	0
+ 1697 008e 03       		.uleb128 0x3
+ 1698 008f 08       		.uleb128 0x8
+ 1699 0090 3A       		.uleb128 0x3a
+ 1700 0091 0B       		.uleb128 0xb
+ 1701 0092 3B       		.uleb128 0x3b
+ 1702 0093 0B       		.uleb128 0xb
+ 1703 0094 49       		.uleb128 0x49
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 34
 
 
- 1707 0091 0B       		.uleb128 0xb
- 1708 0092 3B       		.uleb128 0x3b
- 1709 0093 0B       		.uleb128 0xb
- 1710 0094 49       		.uleb128 0x49
- 1711 0095 13       		.uleb128 0x13
- 1712 0096 02       		.uleb128 0x2
- 1713 0097 18       		.uleb128 0x18
- 1714 0098 00       		.byte	0
- 1715 0099 00       		.byte	0
- 1716 009a 0A       		.uleb128 0xa
- 1717 009b 05       		.uleb128 0x5
- 1718 009c 00       		.byte	0
- 1719 009d 03       		.uleb128 0x3
- 1720 009e 0E       		.uleb128 0xe
- 1721 009f 3A       		.uleb128 0x3a
- 1722 00a0 0B       		.uleb128 0xb
- 1723 00a1 3B       		.uleb128 0x3b
- 1724 00a2 0B       		.uleb128 0xb
- 1725 00a3 49       		.uleb128 0x49
- 1726 00a4 13       		.uleb128 0x13
- 1727 00a5 02       		.uleb128 0x2
- 1728 00a6 18       		.uleb128 0x18
- 1729 00a7 00       		.byte	0
- 1730 00a8 00       		.byte	0
- 1731 00a9 0B       		.uleb128 0xb
- 1732 00aa 2E       		.uleb128 0x2e
- 1733 00ab 01       		.byte	0x1
- 1734 00ac 3F       		.uleb128 0x3f
- 1735 00ad 19       		.uleb128 0x19
- 1736 00ae 03       		.uleb128 0x3
- 1737 00af 0E       		.uleb128 0xe
- 1738 00b0 3A       		.uleb128 0x3a
- 1739 00b1 0B       		.uleb128 0xb
- 1740 00b2 3B       		.uleb128 0x3b
- 1741 00b3 0B       		.uleb128 0xb
- 1742 00b4 49       		.uleb128 0x49
- 1743 00b5 13       		.uleb128 0x13
- 1744 00b6 11       		.uleb128 0x11
- 1745 00b7 01       		.uleb128 0x1
- 1746 00b8 12       		.uleb128 0x12
- 1747 00b9 06       		.uleb128 0x6
- 1748 00ba 40       		.uleb128 0x40
- 1749 00bb 18       		.uleb128 0x18
- 1750 00bc 9742     		.uleb128 0x2117
- 1751 00be 19       		.uleb128 0x19
- 1752 00bf 01       		.uleb128 0x1
- 1753 00c0 13       		.uleb128 0x13
- 1754 00c1 00       		.byte	0
- 1755 00c2 00       		.byte	0
- 1756 00c3 0C       		.uleb128 0xc
- 1757 00c4 898201   		.uleb128 0x4109
- 1758 00c7 00       		.byte	0
- 1759 00c8 11       		.uleb128 0x11
- 1760 00c9 01       		.uleb128 0x1
- 1761 00ca 31       		.uleb128 0x31
- 1762 00cb 13       		.uleb128 0x13
- 1763 00cc 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 35
+ 1704 0095 13       		.uleb128 0x13
+ 1705 0096 02       		.uleb128 0x2
+ 1706 0097 18       		.uleb128 0x18
+ 1707 0098 00       		.byte	0
+ 1708 0099 00       		.byte	0
+ 1709 009a 0A       		.uleb128 0xa
+ 1710 009b 05       		.uleb128 0x5
+ 1711 009c 00       		.byte	0
+ 1712 009d 03       		.uleb128 0x3
+ 1713 009e 0E       		.uleb128 0xe
+ 1714 009f 3A       		.uleb128 0x3a
+ 1715 00a0 0B       		.uleb128 0xb
+ 1716 00a1 3B       		.uleb128 0x3b
+ 1717 00a2 0B       		.uleb128 0xb
+ 1718 00a3 49       		.uleb128 0x49
+ 1719 00a4 13       		.uleb128 0x13
+ 1720 00a5 02       		.uleb128 0x2
+ 1721 00a6 18       		.uleb128 0x18
+ 1722 00a7 00       		.byte	0
+ 1723 00a8 00       		.byte	0
+ 1724 00a9 0B       		.uleb128 0xb
+ 1725 00aa 2E       		.uleb128 0x2e
+ 1726 00ab 01       		.byte	0x1
+ 1727 00ac 3F       		.uleb128 0x3f
+ 1728 00ad 19       		.uleb128 0x19
+ 1729 00ae 03       		.uleb128 0x3
+ 1730 00af 0E       		.uleb128 0xe
+ 1731 00b0 3A       		.uleb128 0x3a
+ 1732 00b1 0B       		.uleb128 0xb
+ 1733 00b2 3B       		.uleb128 0x3b
+ 1734 00b3 0B       		.uleb128 0xb
+ 1735 00b4 11       		.uleb128 0x11
+ 1736 00b5 01       		.uleb128 0x1
+ 1737 00b6 12       		.uleb128 0x12
+ 1738 00b7 06       		.uleb128 0x6
+ 1739 00b8 40       		.uleb128 0x40
+ 1740 00b9 18       		.uleb128 0x18
+ 1741 00ba 9742     		.uleb128 0x2117
+ 1742 00bc 19       		.uleb128 0x19
+ 1743 00bd 01       		.uleb128 0x1
+ 1744 00be 13       		.uleb128 0x13
+ 1745 00bf 00       		.byte	0
+ 1746 00c0 00       		.byte	0
+ 1747 00c1 0C       		.uleb128 0xc
+ 1748 00c2 898201   		.uleb128 0x4109
+ 1749 00c5 01       		.byte	0x1
+ 1750 00c6 11       		.uleb128 0x11
+ 1751 00c7 01       		.uleb128 0x1
+ 1752 00c8 31       		.uleb128 0x31
+ 1753 00c9 13       		.uleb128 0x13
+ 1754 00ca 01       		.uleb128 0x1
+ 1755 00cb 13       		.uleb128 0x13
+ 1756 00cc 00       		.byte	0
+ 1757 00cd 00       		.byte	0
+ 1758 00ce 0D       		.uleb128 0xd
+ 1759 00cf 8A8201   		.uleb128 0x410a
+ 1760 00d2 00       		.byte	0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 35
 
 
- 1764 00cd 00       		.byte	0
- 1765 00ce 0D       		.uleb128 0xd
- 1766 00cf 2E       		.uleb128 0x2e
- 1767 00d0 01       		.byte	0x1
- 1768 00d1 3F       		.uleb128 0x3f
- 1769 00d2 19       		.uleb128 0x19
- 1770 00d3 03       		.uleb128 0x3
- 1771 00d4 0E       		.uleb128 0xe
- 1772 00d5 3A       		.uleb128 0x3a
- 1773 00d6 0B       		.uleb128 0xb
- 1774 00d7 3B       		.uleb128 0x3b
- 1775 00d8 0B       		.uleb128 0xb
- 1776 00d9 11       		.uleb128 0x11
- 1777 00da 01       		.uleb128 0x1
- 1778 00db 12       		.uleb128 0x12
- 1779 00dc 06       		.uleb128 0x6
- 1780 00dd 40       		.uleb128 0x40
- 1781 00de 18       		.uleb128 0x18
- 1782 00df 9742     		.uleb128 0x2117
- 1783 00e1 19       		.uleb128 0x19
- 1784 00e2 01       		.uleb128 0x1
- 1785 00e3 13       		.uleb128 0x13
- 1786 00e4 00       		.byte	0
- 1787 00e5 00       		.byte	0
- 1788 00e6 0E       		.uleb128 0xe
- 1789 00e7 898201   		.uleb128 0x4109
- 1790 00ea 01       		.byte	0x1
- 1791 00eb 11       		.uleb128 0x11
- 1792 00ec 01       		.uleb128 0x1
- 1793 00ed 31       		.uleb128 0x31
- 1794 00ee 13       		.uleb128 0x13
- 1795 00ef 01       		.uleb128 0x1
- 1796 00f0 13       		.uleb128 0x13
- 1797 00f1 00       		.byte	0
- 1798 00f2 00       		.byte	0
- 1799 00f3 0F       		.uleb128 0xf
- 1800 00f4 8A8201   		.uleb128 0x410a
- 1801 00f7 00       		.byte	0
- 1802 00f8 02       		.uleb128 0x2
- 1803 00f9 18       		.uleb128 0x18
- 1804 00fa 9142     		.uleb128 0x2111
- 1805 00fc 18       		.uleb128 0x18
- 1806 00fd 00       		.byte	0
- 1807 00fe 00       		.byte	0
- 1808 00ff 10       		.uleb128 0x10
- 1809 0100 2E       		.uleb128 0x2e
- 1810 0101 01       		.byte	0x1
- 1811 0102 3F       		.uleb128 0x3f
- 1812 0103 19       		.uleb128 0x19
- 1813 0104 03       		.uleb128 0x3
- 1814 0105 0E       		.uleb128 0xe
- 1815 0106 3A       		.uleb128 0x3a
- 1816 0107 0B       		.uleb128 0xb
- 1817 0108 3B       		.uleb128 0x3b
- 1818 0109 0B       		.uleb128 0xb
- 1819 010a 49       		.uleb128 0x49
- 1820 010b 13       		.uleb128 0x13
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 36
+ 1761 00d3 02       		.uleb128 0x2
+ 1762 00d4 18       		.uleb128 0x18
+ 1763 00d5 9142     		.uleb128 0x2111
+ 1764 00d7 18       		.uleb128 0x18
+ 1765 00d8 00       		.byte	0
+ 1766 00d9 00       		.byte	0
+ 1767 00da 0E       		.uleb128 0xe
+ 1768 00db 898201   		.uleb128 0x4109
+ 1769 00de 00       		.byte	0
+ 1770 00df 11       		.uleb128 0x11
+ 1771 00e0 01       		.uleb128 0x1
+ 1772 00e1 31       		.uleb128 0x31
+ 1773 00e2 13       		.uleb128 0x13
+ 1774 00e3 00       		.byte	0
+ 1775 00e4 00       		.byte	0
+ 1776 00e5 0F       		.uleb128 0xf
+ 1777 00e6 2E       		.uleb128 0x2e
+ 1778 00e7 01       		.byte	0x1
+ 1779 00e8 3F       		.uleb128 0x3f
+ 1780 00e9 19       		.uleb128 0x19
+ 1781 00ea 03       		.uleb128 0x3
+ 1782 00eb 0E       		.uleb128 0xe
+ 1783 00ec 3A       		.uleb128 0x3a
+ 1784 00ed 0B       		.uleb128 0xb
+ 1785 00ee 3B       		.uleb128 0x3b
+ 1786 00ef 0B       		.uleb128 0xb
+ 1787 00f0 49       		.uleb128 0x49
+ 1788 00f1 13       		.uleb128 0x13
+ 1789 00f2 11       		.uleb128 0x11
+ 1790 00f3 01       		.uleb128 0x1
+ 1791 00f4 12       		.uleb128 0x12
+ 1792 00f5 06       		.uleb128 0x6
+ 1793 00f6 40       		.uleb128 0x40
+ 1794 00f7 18       		.uleb128 0x18
+ 1795 00f8 9642     		.uleb128 0x2116
+ 1796 00fa 19       		.uleb128 0x19
+ 1797 00fb 01       		.uleb128 0x1
+ 1798 00fc 13       		.uleb128 0x13
+ 1799 00fd 00       		.byte	0
+ 1800 00fe 00       		.byte	0
+ 1801 00ff 10       		.uleb128 0x10
+ 1802 0100 2E       		.uleb128 0x2e
+ 1803 0101 01       		.byte	0x1
+ 1804 0102 3F       		.uleb128 0x3f
+ 1805 0103 19       		.uleb128 0x19
+ 1806 0104 03       		.uleb128 0x3
+ 1807 0105 0E       		.uleb128 0xe
+ 1808 0106 3A       		.uleb128 0x3a
+ 1809 0107 0B       		.uleb128 0xb
+ 1810 0108 3B       		.uleb128 0x3b
+ 1811 0109 0B       		.uleb128 0xb
+ 1812 010a 27       		.uleb128 0x27
+ 1813 010b 19       		.uleb128 0x19
+ 1814 010c 49       		.uleb128 0x49
+ 1815 010d 13       		.uleb128 0x13
+ 1816 010e 11       		.uleb128 0x11
+ 1817 010f 01       		.uleb128 0x1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 36
 
 
- 1821 010c 11       		.uleb128 0x11
- 1822 010d 01       		.uleb128 0x1
- 1823 010e 12       		.uleb128 0x12
- 1824 010f 06       		.uleb128 0x6
- 1825 0110 40       		.uleb128 0x40
- 1826 0111 18       		.uleb128 0x18
- 1827 0112 9642     		.uleb128 0x2116
- 1828 0114 19       		.uleb128 0x19
- 1829 0115 01       		.uleb128 0x1
- 1830 0116 13       		.uleb128 0x13
- 1831 0117 00       		.byte	0
- 1832 0118 00       		.byte	0
- 1833 0119 11       		.uleb128 0x11
- 1834 011a 2E       		.uleb128 0x2e
- 1835 011b 01       		.byte	0x1
- 1836 011c 3F       		.uleb128 0x3f
- 1837 011d 19       		.uleb128 0x19
- 1838 011e 03       		.uleb128 0x3
- 1839 011f 0E       		.uleb128 0xe
- 1840 0120 3A       		.uleb128 0x3a
- 1841 0121 0B       		.uleb128 0xb
- 1842 0122 3B       		.uleb128 0x3b
- 1843 0123 0B       		.uleb128 0xb
- 1844 0124 27       		.uleb128 0x27
- 1845 0125 19       		.uleb128 0x19
- 1846 0126 49       		.uleb128 0x49
- 1847 0127 13       		.uleb128 0x13
- 1848 0128 11       		.uleb128 0x11
- 1849 0129 01       		.uleb128 0x1
- 1850 012a 12       		.uleb128 0x12
- 1851 012b 06       		.uleb128 0x6
- 1852 012c 40       		.uleb128 0x40
- 1853 012d 18       		.uleb128 0x18
- 1854 012e 9642     		.uleb128 0x2116
- 1855 0130 19       		.uleb128 0x19
- 1856 0131 01       		.uleb128 0x1
- 1857 0132 13       		.uleb128 0x13
- 1858 0133 00       		.byte	0
- 1859 0134 00       		.byte	0
- 1860 0135 12       		.uleb128 0x12
- 1861 0136 05       		.uleb128 0x5
- 1862 0137 00       		.byte	0
- 1863 0138 03       		.uleb128 0x3
- 1864 0139 0E       		.uleb128 0xe
- 1865 013a 3A       		.uleb128 0x3a
- 1866 013b 0B       		.uleb128 0xb
- 1867 013c 3B       		.uleb128 0x3b
- 1868 013d 0B       		.uleb128 0xb
- 1869 013e 49       		.uleb128 0x49
- 1870 013f 13       		.uleb128 0x13
- 1871 0140 02       		.uleb128 0x2
- 1872 0141 17       		.uleb128 0x17
- 1873 0142 00       		.byte	0
- 1874 0143 00       		.byte	0
- 1875 0144 13       		.uleb128 0x13
- 1876 0145 34       		.uleb128 0x34
- 1877 0146 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 37
+ 1818 0110 12       		.uleb128 0x12
+ 1819 0111 06       		.uleb128 0x6
+ 1820 0112 40       		.uleb128 0x40
+ 1821 0113 18       		.uleb128 0x18
+ 1822 0114 9642     		.uleb128 0x2116
+ 1823 0116 19       		.uleb128 0x19
+ 1824 0117 01       		.uleb128 0x1
+ 1825 0118 13       		.uleb128 0x13
+ 1826 0119 00       		.byte	0
+ 1827 011a 00       		.byte	0
+ 1828 011b 11       		.uleb128 0x11
+ 1829 011c 05       		.uleb128 0x5
+ 1830 011d 00       		.byte	0
+ 1831 011e 03       		.uleb128 0x3
+ 1832 011f 0E       		.uleb128 0xe
+ 1833 0120 3A       		.uleb128 0x3a
+ 1834 0121 0B       		.uleb128 0xb
+ 1835 0122 3B       		.uleb128 0x3b
+ 1836 0123 0B       		.uleb128 0xb
+ 1837 0124 49       		.uleb128 0x49
+ 1838 0125 13       		.uleb128 0x13
+ 1839 0126 02       		.uleb128 0x2
+ 1840 0127 17       		.uleb128 0x17
+ 1841 0128 00       		.byte	0
+ 1842 0129 00       		.byte	0
+ 1843 012a 12       		.uleb128 0x12
+ 1844 012b 34       		.uleb128 0x34
+ 1845 012c 00       		.byte	0
+ 1846 012d 03       		.uleb128 0x3
+ 1847 012e 0E       		.uleb128 0xe
+ 1848 012f 3A       		.uleb128 0x3a
+ 1849 0130 0B       		.uleb128 0xb
+ 1850 0131 3B       		.uleb128 0x3b
+ 1851 0132 0B       		.uleb128 0xb
+ 1852 0133 49       		.uleb128 0x49
+ 1853 0134 13       		.uleb128 0x13
+ 1854 0135 02       		.uleb128 0x2
+ 1855 0136 18       		.uleb128 0x18
+ 1856 0137 00       		.byte	0
+ 1857 0138 00       		.byte	0
+ 1858 0139 13       		.uleb128 0x13
+ 1859 013a 34       		.uleb128 0x34
+ 1860 013b 00       		.byte	0
+ 1861 013c 03       		.uleb128 0x3
+ 1862 013d 0E       		.uleb128 0xe
+ 1863 013e 3A       		.uleb128 0x3a
+ 1864 013f 0B       		.uleb128 0xb
+ 1865 0140 3B       		.uleb128 0x3b
+ 1866 0141 0B       		.uleb128 0xb
+ 1867 0142 49       		.uleb128 0x49
+ 1868 0143 13       		.uleb128 0x13
+ 1869 0144 02       		.uleb128 0x2
+ 1870 0145 17       		.uleb128 0x17
+ 1871 0146 00       		.byte	0
+ 1872 0147 00       		.byte	0
+ 1873 0148 14       		.uleb128 0x14
+ 1874 0149 35       		.uleb128 0x35
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 37
 
 
- 1878 0147 03       		.uleb128 0x3
- 1879 0148 0E       		.uleb128 0xe
- 1880 0149 3A       		.uleb128 0x3a
- 1881 014a 0B       		.uleb128 0xb
- 1882 014b 3B       		.uleb128 0x3b
- 1883 014c 0B       		.uleb128 0xb
- 1884 014d 49       		.uleb128 0x49
- 1885 014e 13       		.uleb128 0x13
- 1886 014f 02       		.uleb128 0x2
- 1887 0150 18       		.uleb128 0x18
- 1888 0151 00       		.byte	0
- 1889 0152 00       		.byte	0
- 1890 0153 14       		.uleb128 0x14
- 1891 0154 34       		.uleb128 0x34
- 1892 0155 00       		.byte	0
- 1893 0156 03       		.uleb128 0x3
- 1894 0157 0E       		.uleb128 0xe
- 1895 0158 3A       		.uleb128 0x3a
- 1896 0159 0B       		.uleb128 0xb
- 1897 015a 3B       		.uleb128 0x3b
- 1898 015b 0B       		.uleb128 0xb
- 1899 015c 49       		.uleb128 0x49
- 1900 015d 13       		.uleb128 0x13
- 1901 015e 02       		.uleb128 0x2
- 1902 015f 17       		.uleb128 0x17
- 1903 0160 00       		.byte	0
- 1904 0161 00       		.byte	0
- 1905 0162 15       		.uleb128 0x15
- 1906 0163 35       		.uleb128 0x35
- 1907 0164 00       		.byte	0
- 1908 0165 49       		.uleb128 0x49
- 1909 0166 13       		.uleb128 0x13
- 1910 0167 00       		.byte	0
- 1911 0168 00       		.byte	0
- 1912 0169 16       		.uleb128 0x16
- 1913 016a 898201   		.uleb128 0x4109
- 1914 016d 01       		.byte	0x1
- 1915 016e 11       		.uleb128 0x11
- 1916 016f 01       		.uleb128 0x1
- 1917 0170 31       		.uleb128 0x31
- 1918 0171 13       		.uleb128 0x13
- 1919 0172 00       		.byte	0
- 1920 0173 00       		.byte	0
- 1921 0174 17       		.uleb128 0x17
- 1922 0175 34       		.uleb128 0x34
- 1923 0176 00       		.byte	0
- 1924 0177 03       		.uleb128 0x3
- 1925 0178 0E       		.uleb128 0xe
- 1926 0179 3A       		.uleb128 0x3a
- 1927 017a 0B       		.uleb128 0xb
- 1928 017b 3B       		.uleb128 0x3b
- 1929 017c 0B       		.uleb128 0xb
- 1930 017d 49       		.uleb128 0x49
- 1931 017e 13       		.uleb128 0x13
- 1932 017f 3F       		.uleb128 0x3f
- 1933 0180 19       		.uleb128 0x19
- 1934 0181 02       		.uleb128 0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 38
+ 1875 014a 00       		.byte	0
+ 1876 014b 49       		.uleb128 0x49
+ 1877 014c 13       		.uleb128 0x13
+ 1878 014d 00       		.byte	0
+ 1879 014e 00       		.byte	0
+ 1880 014f 15       		.uleb128 0x15
+ 1881 0150 898201   		.uleb128 0x4109
+ 1882 0153 01       		.byte	0x1
+ 1883 0154 11       		.uleb128 0x11
+ 1884 0155 01       		.uleb128 0x1
+ 1885 0156 31       		.uleb128 0x31
+ 1886 0157 13       		.uleb128 0x13
+ 1887 0158 00       		.byte	0
+ 1888 0159 00       		.byte	0
+ 1889 015a 16       		.uleb128 0x16
+ 1890 015b 34       		.uleb128 0x34
+ 1891 015c 00       		.byte	0
+ 1892 015d 03       		.uleb128 0x3
+ 1893 015e 0E       		.uleb128 0xe
+ 1894 015f 3A       		.uleb128 0x3a
+ 1895 0160 0B       		.uleb128 0xb
+ 1896 0161 3B       		.uleb128 0x3b
+ 1897 0162 0B       		.uleb128 0xb
+ 1898 0163 49       		.uleb128 0x49
+ 1899 0164 13       		.uleb128 0x13
+ 1900 0165 3F       		.uleb128 0x3f
+ 1901 0166 19       		.uleb128 0x19
+ 1902 0167 02       		.uleb128 0x2
+ 1903 0168 18       		.uleb128 0x18
+ 1904 0169 00       		.byte	0
+ 1905 016a 00       		.byte	0
+ 1906 016b 17       		.uleb128 0x17
+ 1907 016c 34       		.uleb128 0x34
+ 1908 016d 00       		.byte	0
+ 1909 016e 03       		.uleb128 0x3
+ 1910 016f 08       		.uleb128 0x8
+ 1911 0170 3A       		.uleb128 0x3a
+ 1912 0171 0B       		.uleb128 0xb
+ 1913 0172 3B       		.uleb128 0x3b
+ 1914 0173 0B       		.uleb128 0xb
+ 1915 0174 49       		.uleb128 0x49
+ 1916 0175 13       		.uleb128 0x13
+ 1917 0176 3F       		.uleb128 0x3f
+ 1918 0177 19       		.uleb128 0x19
+ 1919 0178 02       		.uleb128 0x2
+ 1920 0179 18       		.uleb128 0x18
+ 1921 017a 00       		.byte	0
+ 1922 017b 00       		.byte	0
+ 1923 017c 18       		.uleb128 0x18
+ 1924 017d 34       		.uleb128 0x34
+ 1925 017e 00       		.byte	0
+ 1926 017f 03       		.uleb128 0x3
+ 1927 0180 0E       		.uleb128 0xe
+ 1928 0181 3A       		.uleb128 0x3a
+ 1929 0182 0B       		.uleb128 0xb
+ 1930 0183 3B       		.uleb128 0x3b
+ 1931 0184 0B       		.uleb128 0xb
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 38
 
 
- 1935 0182 18       		.uleb128 0x18
- 1936 0183 00       		.byte	0
- 1937 0184 00       		.byte	0
- 1938 0185 18       		.uleb128 0x18
- 1939 0186 34       		.uleb128 0x34
- 1940 0187 00       		.byte	0
- 1941 0188 03       		.uleb128 0x3
- 1942 0189 08       		.uleb128 0x8
- 1943 018a 3A       		.uleb128 0x3a
- 1944 018b 0B       		.uleb128 0xb
- 1945 018c 3B       		.uleb128 0x3b
- 1946 018d 0B       		.uleb128 0xb
- 1947 018e 49       		.uleb128 0x49
- 1948 018f 13       		.uleb128 0x13
- 1949 0190 3F       		.uleb128 0x3f
- 1950 0191 19       		.uleb128 0x19
- 1951 0192 02       		.uleb128 0x2
- 1952 0193 18       		.uleb128 0x18
- 1953 0194 00       		.byte	0
- 1954 0195 00       		.byte	0
- 1955 0196 19       		.uleb128 0x19
- 1956 0197 34       		.uleb128 0x34
- 1957 0198 00       		.byte	0
- 1958 0199 03       		.uleb128 0x3
- 1959 019a 0E       		.uleb128 0xe
- 1960 019b 3A       		.uleb128 0x3a
- 1961 019c 0B       		.uleb128 0xb
- 1962 019d 3B       		.uleb128 0x3b
- 1963 019e 0B       		.uleb128 0xb
- 1964 019f 49       		.uleb128 0x49
- 1965 01a0 13       		.uleb128 0x13
- 1966 01a1 3F       		.uleb128 0x3f
- 1967 01a2 19       		.uleb128 0x19
- 1968 01a3 3C       		.uleb128 0x3c
- 1969 01a4 19       		.uleb128 0x19
- 1970 01a5 00       		.byte	0
- 1971 01a6 00       		.byte	0
- 1972 01a7 1A       		.uleb128 0x1a
- 1973 01a8 2E       		.uleb128 0x2e
- 1974 01a9 00       		.byte	0
- 1975 01aa 3F       		.uleb128 0x3f
- 1976 01ab 19       		.uleb128 0x19
- 1977 01ac 3C       		.uleb128 0x3c
- 1978 01ad 19       		.uleb128 0x19
- 1979 01ae 6E       		.uleb128 0x6e
- 1980 01af 0E       		.uleb128 0xe
- 1981 01b0 03       		.uleb128 0x3
- 1982 01b1 0E       		.uleb128 0xe
- 1983 01b2 3A       		.uleb128 0x3a
- 1984 01b3 0B       		.uleb128 0xb
- 1985 01b4 3B       		.uleb128 0x3b
- 1986 01b5 0B       		.uleb128 0xb
- 1987 01b6 00       		.byte	0
- 1988 01b7 00       		.byte	0
- 1989 01b8 00       		.byte	0
- 1990              		.section	.debug_loc,"",%progbits
- 1991              	.Ldebug_loc0:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 39
+ 1932 0185 49       		.uleb128 0x49
+ 1933 0186 13       		.uleb128 0x13
+ 1934 0187 3F       		.uleb128 0x3f
+ 1935 0188 19       		.uleb128 0x19
+ 1936 0189 3C       		.uleb128 0x3c
+ 1937 018a 19       		.uleb128 0x19
+ 1938 018b 00       		.byte	0
+ 1939 018c 00       		.byte	0
+ 1940 018d 19       		.uleb128 0x19
+ 1941 018e 2E       		.uleb128 0x2e
+ 1942 018f 00       		.byte	0
+ 1943 0190 3F       		.uleb128 0x3f
+ 1944 0191 19       		.uleb128 0x19
+ 1945 0192 3C       		.uleb128 0x3c
+ 1946 0193 19       		.uleb128 0x19
+ 1947 0194 6E       		.uleb128 0x6e
+ 1948 0195 0E       		.uleb128 0xe
+ 1949 0196 03       		.uleb128 0x3
+ 1950 0197 0E       		.uleb128 0xe
+ 1951 0198 3A       		.uleb128 0x3a
+ 1952 0199 0B       		.uleb128 0xb
+ 1953 019a 3B       		.uleb128 0x3b
+ 1954 019b 0B       		.uleb128 0xb
+ 1955 019c 00       		.byte	0
+ 1956 019d 00       		.byte	0
+ 1957 019e 00       		.byte	0
+ 1958              		.section	.debug_loc,"",%progbits
+ 1959              	.Ldebug_loc0:
+ 1960              	.LLST0:
+ 1961 0000 00000000 		.4byte	.LVL11
+ 1962 0004 08000000 		.4byte	.LVL12
+ 1963 0008 0100     		.2byte	0x1
+ 1964 000a 50       		.byte	0x50
+ 1965 000b 08000000 		.4byte	.LVL12
+ 1966 000f 18000000 		.4byte	.LFE55
+ 1967 0013 0400     		.2byte	0x4
+ 1968 0015 F3       		.byte	0xf3
+ 1969 0016 01       		.uleb128 0x1
+ 1970 0017 50       		.byte	0x50
+ 1971 0018 9F       		.byte	0x9f
+ 1972 0019 00000000 		.4byte	0
+ 1973 001d 00000000 		.4byte	0
+ 1974              	.LLST1:
+ 1975 0021 00000000 		.4byte	.LVL14
+ 1976 0025 09000000 		.4byte	.LVL15-1
+ 1977 0029 0100     		.2byte	0x1
+ 1978 002b 50       		.byte	0x50
+ 1979 002c 09000000 		.4byte	.LVL15-1
+ 1980 0030 42000000 		.4byte	.LVL18
+ 1981 0034 0100     		.2byte	0x1
+ 1982 0036 55       		.byte	0x55
+ 1983 0037 42000000 		.4byte	.LVL18
+ 1984 003b 70000000 		.4byte	.LVL24
+ 1985 003f 0400     		.2byte	0x4
+ 1986 0041 F3       		.byte	0xf3
+ 1987 0042 01       		.uleb128 0x1
+ 1988 0043 50       		.byte	0x50
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 39
 
 
- 1992              	.LLST0:
- 1993 0000 00000000 		.4byte	.LVL12
- 1994 0004 08000000 		.4byte	.LVL13
- 1995 0008 0100     		.2byte	0x1
- 1996 000a 50       		.byte	0x50
- 1997 000b 08000000 		.4byte	.LVL13
- 1998 000f 18000000 		.4byte	.LFE55
- 1999 0013 0400     		.2byte	0x4
- 2000 0015 F3       		.byte	0xf3
- 2001 0016 01       		.uleb128 0x1
- 2002 0017 50       		.byte	0x50
- 2003 0018 9F       		.byte	0x9f
- 2004 0019 00000000 		.4byte	0
- 2005 001d 00000000 		.4byte	0
- 2006              	.LLST1:
- 2007 0021 00000000 		.4byte	.LVL15
- 2008 0025 09000000 		.4byte	.LVL16-1
- 2009 0029 0100     		.2byte	0x1
- 2010 002b 50       		.byte	0x50
- 2011 002c 09000000 		.4byte	.LVL16-1
- 2012 0030 42000000 		.4byte	.LVL19
- 2013 0034 0100     		.2byte	0x1
- 2014 0036 55       		.byte	0x55
- 2015 0037 42000000 		.4byte	.LVL19
- 2016 003b 70000000 		.4byte	.LVL25
- 2017 003f 0400     		.2byte	0x4
- 2018 0041 F3       		.byte	0xf3
- 2019 0042 01       		.uleb128 0x1
- 2020 0043 50       		.byte	0x50
- 2021 0044 9F       		.byte	0x9f
- 2022 0045 70000000 		.4byte	.LVL25
- 2023 0049 76000000 		.4byte	.LVL27
- 2024 004d 0100     		.2byte	0x1
- 2025 004f 55       		.byte	0x55
- 2026 0050 76000000 		.4byte	.LVL27
- 2027 0054 84000000 		.4byte	.LFE56
- 2028 0058 0400     		.2byte	0x4
- 2029 005a F3       		.byte	0xf3
- 2030 005b 01       		.uleb128 0x1
- 2031 005c 50       		.byte	0x50
- 2032 005d 9F       		.byte	0x9f
- 2033 005e 00000000 		.4byte	0
- 2034 0062 00000000 		.4byte	0
- 2035              	.LLST2:
- 2036 0066 18000000 		.4byte	.LVL18
- 2037 006a 70000000 		.4byte	.LVL25
- 2038 006e 0100     		.2byte	0x1
- 2039 0070 54       		.byte	0x54
- 2040 0071 74000000 		.4byte	.LVL26
- 2041 0075 76000000 		.4byte	.LVL27
- 2042 0079 0100     		.2byte	0x1
- 2043 007b 54       		.byte	0x54
- 2044 007c 00000000 		.4byte	0
- 2045 0080 00000000 		.4byte	0
- 2046              	.LLST3:
- 2047 0084 46000000 		.4byte	.LVL20
- 2048 0088 70000000 		.4byte	.LVL25
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 40
+ 1989 0044 9F       		.byte	0x9f
+ 1990 0045 70000000 		.4byte	.LVL24
+ 1991 0049 76000000 		.4byte	.LVL26
+ 1992 004d 0100     		.2byte	0x1
+ 1993 004f 55       		.byte	0x55
+ 1994 0050 76000000 		.4byte	.LVL26
+ 1995 0054 84000000 		.4byte	.LFE56
+ 1996 0058 0400     		.2byte	0x4
+ 1997 005a F3       		.byte	0xf3
+ 1998 005b 01       		.uleb128 0x1
+ 1999 005c 50       		.byte	0x50
+ 2000 005d 9F       		.byte	0x9f
+ 2001 005e 00000000 		.4byte	0
+ 2002 0062 00000000 		.4byte	0
+ 2003              	.LLST2:
+ 2004 0066 18000000 		.4byte	.LVL17
+ 2005 006a 70000000 		.4byte	.LVL24
+ 2006 006e 0100     		.2byte	0x1
+ 2007 0070 54       		.byte	0x54
+ 2008 0071 74000000 		.4byte	.LVL25
+ 2009 0075 76000000 		.4byte	.LVL26
+ 2010 0079 0100     		.2byte	0x1
+ 2011 007b 54       		.byte	0x54
+ 2012 007c 00000000 		.4byte	0
+ 2013 0080 00000000 		.4byte	0
+ 2014              	.LLST3:
+ 2015 0084 46000000 		.4byte	.LVL19
+ 2016 0088 70000000 		.4byte	.LVL24
+ 2017 008c 0100     		.2byte	0x1
+ 2018 008e 57       		.byte	0x57
+ 2019 008f 00000000 		.4byte	0
+ 2020 0093 00000000 		.4byte	0
+ 2021              	.LLST4:
+ 2022 0097 6A000000 		.4byte	.LVL22
+ 2023 009b 6E000000 		.4byte	.LVL23
+ 2024 009f 0600     		.2byte	0x6
+ 2025 00a1 76       		.byte	0x76
+ 2026 00a2 00       		.sleb128 0
+ 2027 00a3 70       		.byte	0x70
+ 2028 00a4 00       		.sleb128 0
+ 2029 00a5 22       		.byte	0x22
+ 2030 00a6 9F       		.byte	0x9f
+ 2031 00a7 6E000000 		.4byte	.LVL23
+ 2032 00ab 70000000 		.4byte	.LVL24
+ 2033 00af 0100     		.2byte	0x1
+ 2034 00b1 50       		.byte	0x50
+ 2035 00b2 00000000 		.4byte	0
+ 2036 00b6 00000000 		.4byte	0
+ 2037              	.LLST5:
+ 2038 00ba 00000000 		.4byte	.LVL27
+ 2039 00be 05000000 		.4byte	.LVL28-1
+ 2040 00c2 0100     		.2byte	0x1
+ 2041 00c4 50       		.byte	0x50
+ 2042 00c5 05000000 		.4byte	.LVL28-1
+ 2043 00c9 68000000 		.4byte	.LFE54
+ 2044 00cd 0400     		.2byte	0x4
+ 2045 00cf F3       		.byte	0xf3
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 40
 
 
- 2049 008c 0100     		.2byte	0x1
- 2050 008e 57       		.byte	0x57
- 2051 008f 00000000 		.4byte	0
- 2052 0093 00000000 		.4byte	0
- 2053              	.LLST4:
- 2054 0097 6A000000 		.4byte	.LVL23
- 2055 009b 6E000000 		.4byte	.LVL24
- 2056 009f 0600     		.2byte	0x6
- 2057 00a1 76       		.byte	0x76
- 2058 00a2 00       		.sleb128 0
- 2059 00a3 70       		.byte	0x70
- 2060 00a4 00       		.sleb128 0
- 2061 00a5 22       		.byte	0x22
- 2062 00a6 9F       		.byte	0x9f
- 2063 00a7 6E000000 		.4byte	.LVL24
- 2064 00ab 70000000 		.4byte	.LVL25
- 2065 00af 0100     		.2byte	0x1
- 2066 00b1 50       		.byte	0x50
- 2067 00b2 00000000 		.4byte	0
- 2068 00b6 00000000 		.4byte	0
- 2069              	.LLST5:
- 2070 00ba 00000000 		.4byte	.LVL28
- 2071 00be 05000000 		.4byte	.LVL29-1
- 2072 00c2 0100     		.2byte	0x1
- 2073 00c4 50       		.byte	0x50
- 2074 00c5 05000000 		.4byte	.LVL29-1
- 2075 00c9 68000000 		.4byte	.LFE54
- 2076 00cd 0400     		.2byte	0x4
- 2077 00cf F3       		.byte	0xf3
- 2078 00d0 01       		.uleb128 0x1
- 2079 00d1 50       		.byte	0x50
- 2080 00d2 9F       		.byte	0x9f
- 2081 00d3 00000000 		.4byte	0
- 2082 00d7 00000000 		.4byte	0
- 2083              		.section	.debug_aranges,"",%progbits
- 2084 0000 C4000000 		.4byte	0xc4
- 2085 0004 0200     		.2byte	0x2
- 2086 0006 00000000 		.4byte	.Ldebug_info0
- 2087 000a 04       		.byte	0x4
- 2088 000b 00       		.byte	0
- 2089 000c 0000     		.2byte	0
- 2090 000e 0000     		.2byte	0
- 2091 0010 00000000 		.4byte	.LFB35
- 2092 0014 10000000 		.4byte	.LFE35-.LFB35
- 2093 0018 00000000 		.4byte	.LFB36
- 2094 001c 0C000000 		.4byte	.LFE36-.LFB36
- 2095 0020 00000000 		.4byte	.LFB37
- 2096 0024 0C000000 		.4byte	.LFE37-.LFB37
- 2097 0028 00000000 		.4byte	.LFB38
- 2098 002c 0C000000 		.4byte	.LFE38-.LFB38
- 2099 0030 00000000 		.4byte	.LFB40
- 2100 0034 0C000000 		.4byte	.LFE40-.LFB40
- 2101 0038 00000000 		.4byte	.LFB41
- 2102 003c 0C000000 		.4byte	.LFE41-.LFB41
- 2103 0040 00000000 		.4byte	.LFB42
- 2104 0044 0C000000 		.4byte	.LFE42-.LFB42
- 2105 0048 00000000 		.4byte	.LFB43
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 41
+ 2046 00d0 01       		.uleb128 0x1
+ 2047 00d1 50       		.byte	0x50
+ 2048 00d2 9F       		.byte	0x9f
+ 2049 00d3 00000000 		.4byte	0
+ 2050 00d7 00000000 		.4byte	0
+ 2051              		.section	.debug_aranges,"",%progbits
+ 2052 0000 C4000000 		.4byte	0xc4
+ 2053 0004 0200     		.2byte	0x2
+ 2054 0006 00000000 		.4byte	.Ldebug_info0
+ 2055 000a 04       		.byte	0x4
+ 2056 000b 00       		.byte	0
+ 2057 000c 0000     		.2byte	0
+ 2058 000e 0000     		.2byte	0
+ 2059 0010 00000000 		.4byte	.LFB35
+ 2060 0014 10000000 		.4byte	.LFE35-.LFB35
+ 2061 0018 00000000 		.4byte	.LFB36
+ 2062 001c 0C000000 		.4byte	.LFE36-.LFB36
+ 2063 0020 00000000 		.4byte	.LFB37
+ 2064 0024 0C000000 		.4byte	.LFE37-.LFB37
+ 2065 0028 00000000 		.4byte	.LFB38
+ 2066 002c 0C000000 		.4byte	.LFE38-.LFB38
+ 2067 0030 00000000 		.4byte	.LFB40
+ 2068 0034 0C000000 		.4byte	.LFE40-.LFB40
+ 2069 0038 00000000 		.4byte	.LFB41
+ 2070 003c 0C000000 		.4byte	.LFE41-.LFB41
+ 2071 0040 00000000 		.4byte	.LFB42
+ 2072 0044 0C000000 		.4byte	.LFE42-.LFB42
+ 2073 0048 00000000 		.4byte	.LFB43
+ 2074 004c 0C000000 		.4byte	.LFE43-.LFB43
+ 2075 0050 00000000 		.4byte	.LFB44
+ 2076 0054 0C000000 		.4byte	.LFE44-.LFB44
+ 2077 0058 00000000 		.4byte	.LFB45
+ 2078 005c 0C000000 		.4byte	.LFE45-.LFB45
+ 2079 0060 00000000 		.4byte	.LFB46
+ 2080 0064 0C000000 		.4byte	.LFE46-.LFB46
+ 2081 0068 00000000 		.4byte	.LFB47
+ 2082 006c 0C000000 		.4byte	.LFE47-.LFB47
+ 2083 0070 00000000 		.4byte	.LFB48
+ 2084 0074 0C000000 		.4byte	.LFE48-.LFB48
+ 2085 0078 00000000 		.4byte	.LFB49
+ 2086 007c 0C000000 		.4byte	.LFE49-.LFB49
+ 2087 0080 00000000 		.4byte	.LFB50
+ 2088 0084 18000000 		.4byte	.LFE50-.LFB50
+ 2089 0088 00000000 		.4byte	.LFB39
+ 2090 008c 24000000 		.4byte	.LFE39-.LFB39
+ 2091 0090 00000000 		.4byte	.LFB51
+ 2092 0094 0C000000 		.4byte	.LFE51-.LFB51
+ 2093 0098 00000000 		.4byte	.LFB52
+ 2094 009c 0C000000 		.4byte	.LFE52-.LFB52
+ 2095 00a0 00000000 		.4byte	.LFB53
+ 2096 00a4 28000000 		.4byte	.LFE53-.LFB53
+ 2097 00a8 00000000 		.4byte	.LFB55
+ 2098 00ac 18000000 		.4byte	.LFE55-.LFB55
+ 2099 00b0 00000000 		.4byte	.LFB56
+ 2100 00b4 84000000 		.4byte	.LFE56-.LFB56
+ 2101 00b8 00000000 		.4byte	.LFB54
+ 2102 00bc 68000000 		.4byte	.LFE54-.LFB54
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 41
 
 
- 2106 004c 0C000000 		.4byte	.LFE43-.LFB43
- 2107 0050 00000000 		.4byte	.LFB44
- 2108 0054 0C000000 		.4byte	.LFE44-.LFB44
- 2109 0058 00000000 		.4byte	.LFB45
- 2110 005c 0C000000 		.4byte	.LFE45-.LFB45
- 2111 0060 00000000 		.4byte	.LFB46
- 2112 0064 0C000000 		.4byte	.LFE46-.LFB46
- 2113 0068 00000000 		.4byte	.LFB47
- 2114 006c 0C000000 		.4byte	.LFE47-.LFB47
- 2115 0070 00000000 		.4byte	.LFB48
- 2116 0074 0C000000 		.4byte	.LFE48-.LFB48
- 2117 0078 00000000 		.4byte	.LFB49
- 2118 007c 0C000000 		.4byte	.LFE49-.LFB49
- 2119 0080 00000000 		.4byte	.LFB50
- 2120 0084 14000000 		.4byte	.LFE50-.LFB50
- 2121 0088 00000000 		.4byte	.LFB39
- 2122 008c 24000000 		.4byte	.LFE39-.LFB39
- 2123 0090 00000000 		.4byte	.LFB51
- 2124 0094 0C000000 		.4byte	.LFE51-.LFB51
- 2125 0098 00000000 		.4byte	.LFB52
- 2126 009c 0C000000 		.4byte	.LFE52-.LFB52
- 2127 00a0 00000000 		.4byte	.LFB53
- 2128 00a4 24000000 		.4byte	.LFE53-.LFB53
- 2129 00a8 00000000 		.4byte	.LFB55
- 2130 00ac 18000000 		.4byte	.LFE55-.LFB55
- 2131 00b0 00000000 		.4byte	.LFB56
- 2132 00b4 84000000 		.4byte	.LFE56-.LFB56
- 2133 00b8 00000000 		.4byte	.LFB54
- 2134 00bc 68000000 		.4byte	.LFE54-.LFB54
- 2135 00c0 00000000 		.4byte	0
- 2136 00c4 00000000 		.4byte	0
- 2137              		.section	.debug_ranges,"",%progbits
- 2138              	.Ldebug_ranges0:
- 2139 0000 00000000 		.4byte	.LFB35
- 2140 0004 10000000 		.4byte	.LFE35
- 2141 0008 00000000 		.4byte	.LFB36
- 2142 000c 0C000000 		.4byte	.LFE36
- 2143 0010 00000000 		.4byte	.LFB37
- 2144 0014 0C000000 		.4byte	.LFE37
- 2145 0018 00000000 		.4byte	.LFB38
- 2146 001c 0C000000 		.4byte	.LFE38
- 2147 0020 00000000 		.4byte	.LFB40
- 2148 0024 0C000000 		.4byte	.LFE40
- 2149 0028 00000000 		.4byte	.LFB41
- 2150 002c 0C000000 		.4byte	.LFE41
- 2151 0030 00000000 		.4byte	.LFB42
- 2152 0034 0C000000 		.4byte	.LFE42
- 2153 0038 00000000 		.4byte	.LFB43
- 2154 003c 0C000000 		.4byte	.LFE43
- 2155 0040 00000000 		.4byte	.LFB44
- 2156 0044 0C000000 		.4byte	.LFE44
- 2157 0048 00000000 		.4byte	.LFB45
- 2158 004c 0C000000 		.4byte	.LFE45
- 2159 0050 00000000 		.4byte	.LFB46
- 2160 0054 0C000000 		.4byte	.LFE46
- 2161 0058 00000000 		.4byte	.LFB47
- 2162 005c 0C000000 		.4byte	.LFE47
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 42
+ 2103 00c0 00000000 		.4byte	0
+ 2104 00c4 00000000 		.4byte	0
+ 2105              		.section	.debug_ranges,"",%progbits
+ 2106              	.Ldebug_ranges0:
+ 2107 0000 00000000 		.4byte	.LFB35
+ 2108 0004 10000000 		.4byte	.LFE35
+ 2109 0008 00000000 		.4byte	.LFB36
+ 2110 000c 0C000000 		.4byte	.LFE36
+ 2111 0010 00000000 		.4byte	.LFB37
+ 2112 0014 0C000000 		.4byte	.LFE37
+ 2113 0018 00000000 		.4byte	.LFB38
+ 2114 001c 0C000000 		.4byte	.LFE38
+ 2115 0020 00000000 		.4byte	.LFB40
+ 2116 0024 0C000000 		.4byte	.LFE40
+ 2117 0028 00000000 		.4byte	.LFB41
+ 2118 002c 0C000000 		.4byte	.LFE41
+ 2119 0030 00000000 		.4byte	.LFB42
+ 2120 0034 0C000000 		.4byte	.LFE42
+ 2121 0038 00000000 		.4byte	.LFB43
+ 2122 003c 0C000000 		.4byte	.LFE43
+ 2123 0040 00000000 		.4byte	.LFB44
+ 2124 0044 0C000000 		.4byte	.LFE44
+ 2125 0048 00000000 		.4byte	.LFB45
+ 2126 004c 0C000000 		.4byte	.LFE45
+ 2127 0050 00000000 		.4byte	.LFB46
+ 2128 0054 0C000000 		.4byte	.LFE46
+ 2129 0058 00000000 		.4byte	.LFB47
+ 2130 005c 0C000000 		.4byte	.LFE47
+ 2131 0060 00000000 		.4byte	.LFB48
+ 2132 0064 0C000000 		.4byte	.LFE48
+ 2133 0068 00000000 		.4byte	.LFB49
+ 2134 006c 0C000000 		.4byte	.LFE49
+ 2135 0070 00000000 		.4byte	.LFB50
+ 2136 0074 18000000 		.4byte	.LFE50
+ 2137 0078 00000000 		.4byte	.LFB39
+ 2138 007c 24000000 		.4byte	.LFE39
+ 2139 0080 00000000 		.4byte	.LFB51
+ 2140 0084 0C000000 		.4byte	.LFE51
+ 2141 0088 00000000 		.4byte	.LFB52
+ 2142 008c 0C000000 		.4byte	.LFE52
+ 2143 0090 00000000 		.4byte	.LFB53
+ 2144 0094 28000000 		.4byte	.LFE53
+ 2145 0098 00000000 		.4byte	.LFB55
+ 2146 009c 18000000 		.4byte	.LFE55
+ 2147 00a0 00000000 		.4byte	.LFB56
+ 2148 00a4 84000000 		.4byte	.LFE56
+ 2149 00a8 00000000 		.4byte	.LFB54
+ 2150 00ac 68000000 		.4byte	.LFE54
+ 2151 00b0 00000000 		.4byte	0
+ 2152 00b4 00000000 		.4byte	0
+ 2153              		.section	.debug_line,"",%progbits
+ 2154              	.Ldebug_line0:
+ 2155 0000 17030000 		.section	.debug_str,"MS",%progbits,1
+ 2155      02006E01 
+ 2155      00000201 
+ 2155      FB0E0D00 
+ 2155      01010101 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 42
 
 
- 2163 0060 00000000 		.4byte	.LFB48
- 2164 0064 0C000000 		.4byte	.LFE48
- 2165 0068 00000000 		.4byte	.LFB49
- 2166 006c 0C000000 		.4byte	.LFE49
- 2167 0070 00000000 		.4byte	.LFB50
- 2168 0074 14000000 		.4byte	.LFE50
- 2169 0078 00000000 		.4byte	.LFB39
- 2170 007c 24000000 		.4byte	.LFE39
- 2171 0080 00000000 		.4byte	.LFB51
- 2172 0084 0C000000 		.4byte	.LFE51
- 2173 0088 00000000 		.4byte	.LFB52
- 2174 008c 0C000000 		.4byte	.LFE52
- 2175 0090 00000000 		.4byte	.LFB53
- 2176 0094 24000000 		.4byte	.LFE53
- 2177 0098 00000000 		.4byte	.LFB55
- 2178 009c 18000000 		.4byte	.LFE55
- 2179 00a0 00000000 		.4byte	.LFB56
- 2180 00a4 84000000 		.4byte	.LFE56
- 2181 00a8 00000000 		.4byte	.LFB54
- 2182 00ac 68000000 		.4byte	.LFE54
- 2183 00b0 00000000 		.4byte	0
- 2184 00b4 00000000 		.4byte	0
- 2185              		.section	.debug_line,"",%progbits
- 2186              	.Ldebug_line0:
- 2187 0000 23030000 		.section	.debug_str,"MS",%progbits,1
- 2187      02007B01 
- 2187      00000201 
- 2187      FB0E0D00 
- 2187      01010101 
- 2188              	.LASF49:
- 2189 0000 7469636B 		.ascii	"ticks\000"
- 2189      7300
- 2190              	.LASF69:
- 2191 0006 51756164 		.ascii	"QuadDec_GetCounter\000"
- 2191      4465635F 
- 2191      47657443 
- 2191      6F756E74 
- 2191      657200
- 2192              	.LASF29:
- 2193 0019 5365746B 		.ascii	"SetkIntegral\000"
- 2193      496E7465 
- 2193      6772616C 
- 2193      00
- 2194              	.LASF28:
- 2195 0026 5365746B 		.ascii	"SetkPosition\000"
- 2195      506F7369 
- 2195      74696F6E 
- 2195      00
- 2196              	.LASF47:
- 2197 0033 506F7369 		.ascii	"Position_PID\000"
- 2197      74696F6E 
- 2197      5F504944 
- 2197      00
- 2198              	.LASF54:
- 2199 0040 53657450 		.ascii	"SetPosition\000"
- 2199      6F736974 
- 2199      696F6E00 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 43
+ 2156              	.LASF49:
+ 2157 0000 7469636B 		.ascii	"ticks\000"
+ 2157      7300
+ 2158              	.LASF29:
+ 2159 0006 5365746B 		.ascii	"SetkIntegral\000"
+ 2159      496E7465 
+ 2159      6772616C 
+ 2159      00
+ 2160              	.LASF28:
+ 2161 0013 5365746B 		.ascii	"SetkPosition\000"
+ 2161      506F7369 
+ 2161      74696F6E 
+ 2161      00
+ 2162              	.LASF47:
+ 2163 0020 506F7369 		.ascii	"Position_PID\000"
+ 2163      74696F6E 
+ 2163      5F504944 
+ 2163      00
+ 2164              	.LASF54:
+ 2165 002d 53657450 		.ascii	"SetPosition\000"
+ 2165      6F736974 
+ 2165      696F6E00 
+ 2166              	.LASF2:
+ 2167 0039 73686F72 		.ascii	"short int\000"
+ 2167      7420696E 
+ 2167      7400
+ 2168              	.LASF24:
+ 2169 0043 73697A65 		.ascii	"sizetype\000"
+ 2169      74797065 
+ 2169      00
+ 2170              	.LASF58:
+ 2171 004c 6B50504A 		.ascii	"kPPJR\000"
+ 2171      5200
+ 2172              	.LASF73:
+ 2173 0052 506F7369 		.ascii	"PositionPID.c\000"
+ 2173      74696F6E 
+ 2173      5049442E 
+ 2173      6300
+ 2174              	.LASF38:
+ 2175 0060 5365744D 		.ascii	"SetMaxPIDPWM\000"
+ 2175      61785049 
+ 2175      4450574D 
+ 2175      00
+ 2176              	.LASF34:
+ 2177 006d 4765746B 		.ascii	"GetkPosition\000"
+ 2177      506F7369 
+ 2177      74696F6E 
+ 2177      00
+ 2178              	.LASF70:
+ 2179 007a 7365745F 		.ascii	"set_PWM_M2\000"
+ 2179      50574D5F 
+ 2179      4D3200
+ 2180              	.LASF8:
+ 2181 0085 5F5F7569 		.ascii	"__uint32_t\000"
+ 2181      6E743332 
+ 2181      5F7400
+ 2182              	.LASF62:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 43
 
 
- 2200              	.LASF2:
- 2201 004c 73686F72 		.ascii	"short int\000"
- 2201      7420696E 
- 2201      7400
- 2202              	.LASF24:
- 2203 0056 73697A65 		.ascii	"sizetype\000"
- 2203      74797065 
- 2203      00
- 2204              	.LASF58:
- 2205 005f 6B50504A 		.ascii	"kPPJR\000"
- 2205      5200
- 2206              	.LASF73:
- 2207 0065 506F7369 		.ascii	"PositionPID.c\000"
- 2207      74696F6E 
- 2207      5049442E 
- 2207      6300
- 2208              	.LASF38:
- 2209 0073 5365744D 		.ascii	"SetMaxPIDPWM\000"
- 2209      61785049 
- 2209      4450574D 
+ 2183 0090 7573696E 		.ascii	"usingPot\000"
+ 2183      67506F74 
+ 2183      00
+ 2184              	.LASF56:
+ 2185 0099 6B496E74 		.ascii	"kIntegral\000"
+ 2185      65677261 
+ 2185      6C00
+ 2186              	.LASF4:
+ 2187 00a3 5F5F7569 		.ascii	"__uint16_t\000"
+ 2187      6E743136 
+ 2187      5F7400
+ 2188              	.LASF51:
+ 2189 00ae 706F7369 		.ascii	"position\000"
+ 2189      74696F6E 
+ 2189      00
+ 2190              	.LASF64:
+ 2191 00b7 6C617374 		.ascii	"lastPosition\000"
+ 2191      506F7369 
+ 2191      74696F6E 
+ 2191      00
+ 2192              	.LASF30:
+ 2193 00c4 5365746B 		.ascii	"SetkDerivative\000"
+ 2193      44657269 
+ 2193      76617469 
+ 2193      766500
+ 2194              	.LASF52:
+ 2195 00d3 64657269 		.ascii	"derivative\000"
+ 2195      76617469 
+ 2195      766500
+ 2196              	.LASF26:
+ 2197 00de 44697361 		.ascii	"DisablePID\000"
+ 2197      626C6550 
+ 2197      494400
+ 2198              	.LASF72:
+ 2199 00e9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2199      43313120 
+ 2199      352E342E 
+ 2199      31203230 
+ 2199      31363036 
+ 2200 011c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 2200      20726576 
+ 2200      6973696F 
+ 2200      6E203233 
+ 2200      37373135 
+ 2201 014f 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2201      66756E63 
+ 2201      74696F6E 
+ 2201      2D736563 
+ 2201      74696F6E 
+ 2202              	.LASF13:
+ 2203 0177 75696E74 		.ascii	"uint8_t\000"
+ 2203      385F7400 
+ 2204              	.LASF17:
+ 2205 017f 75696E74 		.ascii	"uint8\000"
+ 2205      3800
+ 2206              	.LASF59:
+ 2207 0185 69676E6F 		.ascii	"ignoreLimSw_M2\000"
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 44
+
+
+ 2207      72654C69 
+ 2207      6D53775F 
+ 2207      4D3200
+ 2208              	.LASF31:
+ 2209 0194 5365746B 		.ascii	"SetkPPJR\000"
+ 2209      50504A52 
  2209      00
- 2210              	.LASF34:
- 2211 0080 4765746B 		.ascii	"GetkPosition\000"
- 2211      506F7369 
- 2211      74696F6E 
- 2211      00
- 2212              	.LASF70:
- 2213 008d 7365745F 		.ascii	"set_PWM_M2\000"
- 2213      50574D5F 
- 2213      4D3200
- 2214              	.LASF8:
- 2215 0098 5F5F7569 		.ascii	"__uint32_t\000"
- 2215      6E743332 
- 2215      5F7400
- 2216              	.LASF61:
- 2217 00a3 7573696E 		.ascii	"usingPot\000"
- 2217      67506F74 
- 2217      00
- 2218              	.LASF56:
- 2219 00ac 6B496E74 		.ascii	"kIntegral\000"
- 2219      65677261 
- 2219      6C00
- 2220              	.LASF4:
- 2221 00b6 5F5F7569 		.ascii	"__uint16_t\000"
- 2221      6E743136 
- 2221      5F7400
- 2222              	.LASF51:
- 2223 00c1 706F7369 		.ascii	"position\000"
- 2223      74696F6E 
- 2223      00
+ 2210              	.LASF20:
+ 2211 019d 666C6F61 		.ascii	"float\000"
+ 2211      7400
+ 2212              	.LASF10:
+ 2213 01a3 6C6F6E67 		.ascii	"long long int\000"
+ 2213      206C6F6E 
+ 2213      6720696E 
+ 2213      7400
+ 2214              	.LASF18:
+ 2215 01b1 696E7438 		.ascii	"int8\000"
+ 2215      00
+ 2216              	.LASF69:
+ 2217 01b6 656E6162 		.ascii	"enabledPID\000"
+ 2217      6C656450 
+ 2217      494400
+ 2218              	.LASF65:
+ 2219 01c1 696E7465 		.ascii	"integralClamp\000"
+ 2219      6772616C 
+ 2219      436C616D 
+ 2219      7000
+ 2220              	.LASF7:
+ 2221 01cf 6C6F6E67 		.ascii	"long int\000"
+ 2221      20696E74 
+ 2221      00
+ 2222              	.LASF32:
+ 2223 01d8 6B70706A 		.ascii	"kppjr\000"
+ 2223      7200
  2224              	.LASF63:
- 2225 00ca 6C617374 		.ascii	"lastPosition\000"
- 2225      506F7369 
- 2225      74696F6E 
+ 2225 01de 696E7465 		.ascii	"integral\000"
+ 2225      6772616C 
  2225      00
- 2226              	.LASF30:
- 2227 00d7 5365746B 		.ascii	"SetkDerivative\000"
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 44
+ 2226              	.LASF3:
+ 2227 01e7 5F5F7569 		.ascii	"__uint8_t\000"
+ 2227      6E74385F 
+ 2227      7400
+ 2228              	.LASF57:
+ 2229 01f1 6B446572 		.ascii	"kDerivative\000"
+ 2229      69766174 
+ 2229      69766500 
+ 2230              	.LASF41:
+ 2231 01fd 47657445 		.ascii	"GetEncoderValWithFlip\000"
+ 2231      6E636F64 
+ 2231      65725661 
+ 2231      6C576974 
+ 2231      68466C69 
+ 2232              	.LASF61:
+ 2233 0213 666C6970 		.ascii	"flipEncoder\000"
+ 2233      456E636F 
+ 2233      64657200 
+ 2234              	.LASF23:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 45
 
 
- 2227      44657269 
- 2227      76617469 
- 2227      766500
- 2228              	.LASF52:
- 2229 00e6 64657269 		.ascii	"derivative\000"
- 2229      76617469 
- 2229      766500
- 2230              	.LASF26:
- 2231 00f1 44697361 		.ascii	"DisablePID\000"
- 2231      626C6550 
- 2231      494400
- 2232              	.LASF72:
- 2233 00fc 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 2233      43313120 
- 2233      352E342E 
- 2233      31203230 
- 2233      31363036 
- 2234 012f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 2234      20726576 
- 2234      6973696F 
- 2234      6E203233 
- 2234      37373135 
- 2235 0162 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 2235      66756E63 
- 2235      74696F6E 
- 2235      2D736563 
- 2235      74696F6E 
- 2236              	.LASF13:
- 2237 018a 75696E74 		.ascii	"uint8_t\000"
- 2237      385F7400 
- 2238              	.LASF17:
- 2239 0192 75696E74 		.ascii	"uint8\000"
- 2239      3800
- 2240              	.LASF59:
- 2241 0198 69676E6F 		.ascii	"ignoreLimSw_M2\000"
- 2241      72654C69 
- 2241      6D53775F 
- 2241      4D3200
- 2242              	.LASF31:
- 2243 01a7 5365746B 		.ascii	"SetkPPJR\000"
- 2243      50504A52 
- 2243      00
- 2244              	.LASF20:
- 2245 01b0 666C6F61 		.ascii	"float\000"
- 2245      7400
- 2246              	.LASF10:
- 2247 01b6 6C6F6E67 		.ascii	"long long int\000"
+ 2235 021f 6C6F6E67 		.ascii	"long double\000"
+ 2235      20646F75 
+ 2235      626C6500 
+ 2236              	.LASF1:
+ 2237 022b 756E7369 		.ascii	"unsigned char\000"
+ 2237      676E6564 
+ 2237      20636861 
+ 2237      7200
+ 2238              	.LASF25:
+ 2239 0239 436C6561 		.ascii	"ClearPIDProgress\000"
+ 2239      72504944 
+ 2239      50726F67 
+ 2239      72657373 
+ 2239      00
+ 2240              	.LASF60:
+ 2241 024a 636F756E 		.ascii	"counter\000"
+ 2241      74657200 
+ 2242              	.LASF0:
+ 2243 0252 7369676E 		.ascii	"signed char\000"
+ 2243      65642063 
+ 2243      68617200 
+ 2244              	.LASF15:
+ 2245 025e 696E7433 		.ascii	"int32_t\000"
+ 2245      325F7400 
+ 2246              	.LASF11:
+ 2247 0266 6C6F6E67 		.ascii	"long long unsigned int\000"
  2247      206C6F6E 
- 2247      6720696E 
- 2247      7400
- 2248              	.LASF18:
- 2249 01c4 696E7438 		.ascii	"int8\000"
+ 2247      6720756E 
+ 2247      7369676E 
+ 2247      65642069 
+ 2248              	.LASF16:
+ 2249 027d 75696E74 		.ascii	"uint32_t\000"
+ 2249      33325F74 
  2249      00
- 2250              	.LASF68:
- 2251 01c9 656E6162 		.ascii	"enabledPID\000"
- 2251      6C656450 
- 2251      494400
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 45
-
-
- 2252              	.LASF64:
- 2253 01d4 696E7465 		.ascii	"integralClamp\000"
- 2253      6772616C 
- 2253      436C616D 
- 2253      7000
- 2254              	.LASF7:
- 2255 01e2 6C6F6E67 		.ascii	"long int\000"
- 2255      20696E74 
+ 2250              	.LASF12:
+ 2251 0286 756E7369 		.ascii	"unsigned int\000"
+ 2251      676E6564 
+ 2251      20696E74 
+ 2251      00
+ 2252              	.LASF14:
+ 2253 0293 75696E74 		.ascii	"uint16_t\000"
+ 2253      31365F74 
+ 2253      00
+ 2254              	.LASF33:
+ 2255 029c 50494449 		.ascii	"PIDIsEnabled\000"
+ 2255      73456E61 
+ 2255      626C6564 
  2255      00
- 2256              	.LASF32:
- 2257 01eb 6B70706A 		.ascii	"kppjr\000"
- 2257      7200
- 2258              	.LASF62:
- 2259 01f1 696E7465 		.ascii	"integral\000"
- 2259      6772616C 
- 2259      00
- 2260              	.LASF3:
- 2261 01fa 5F5F7569 		.ascii	"__uint8_t\000"
- 2261      6E74385F 
- 2261      7400
- 2262              	.LASF57:
- 2263 0204 6B446572 		.ascii	"kDerivative\000"
- 2263      69766174 
- 2263      69766500 
- 2264              	.LASF41:
- 2265 0210 47657445 		.ascii	"GetEncoderValWithFlip\000"
- 2265      6E636F64 
- 2265      65725661 
- 2265      6C576974 
- 2265      68466C69 
- 2266              	.LASF60:
- 2267 0226 666C6970 		.ascii	"flipEncoder\000"
- 2267      456E636F 
- 2267      64657200 
- 2268              	.LASF23:
- 2269 0232 6C6F6E67 		.ascii	"long double\000"
- 2269      20646F75 
- 2269      626C6500 
- 2270              	.LASF1:
- 2271 023e 756E7369 		.ascii	"unsigned char\000"
- 2271      676E6564 
- 2271      20636861 
- 2271      7200
- 2272              	.LASF25:
- 2273 024c 436C6561 		.ascii	"ClearPIDProgress\000"
- 2273      72504944 
- 2273      50726F67 
- 2273      72657373 
+ 2256              	.LASF71:
+ 2257 02a9 53746174 		.ascii	"Status_Reg_Switches_Read\000"
+ 2257      75735F52 
+ 2257      65675F53 
+ 2257      77697463 
+ 2257      6865735F 
+ 2258              	.LASF50:
+ 2259 02c2 63757272 		.ascii	"current\000"
+ 2259      656E7400 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 46
+
+
+ 2260              	.LASF43:
+ 2261 02ca 53657445 		.ascii	"SetEncoderDirReverse\000"
+ 2261      6E636F64 
+ 2261      65724469 
+ 2261      72526576 
+ 2261      65727365 
+ 2262              	.LASF5:
+ 2263 02df 73686F72 		.ascii	"short unsigned int\000"
+ 2263      7420756E 
+ 2263      7369676E 
+ 2263      65642069 
+ 2263      6E7400
+ 2264              	.LASF67:
+ 2265 02f2 636F6D70 		.ascii	"complete\000"
+ 2265      6C657465 
+ 2265      00
+ 2266              	.LASF35:
+ 2267 02fb 4765746B 		.ascii	"GetkIntegral\000"
+ 2267      496E7465 
+ 2267      6772616C 
+ 2267      00
+ 2268              	.LASF22:
+ 2269 0308 63686172 		.ascii	"char\000"
+ 2269      00
+ 2270              	.LASF39:
+ 2271 030d 73657456 		.ascii	"setValue\000"
+ 2271      616C7565 
+ 2271      00
+ 2272              	.LASF40:
+ 2273 0316 4765744D 		.ascii	"GetMaxPIDPWM\000"
+ 2273      61785049 
+ 2273      4450574D 
  2273      00
- 2274              	.LASF0:
- 2275 025d 7369676E 		.ascii	"signed char\000"
- 2275      65642063 
- 2275      68617200 
- 2276              	.LASF15:
- 2277 0269 696E7433 		.ascii	"int32_t\000"
- 2277      325F7400 
- 2278              	.LASF11:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 46
+ 2274              	.LASF37:
+ 2275 0323 4765746B 		.ascii	"GetkPPJR\000"
+ 2275      50504A52 
+ 2275      00
+ 2276              	.LASF55:
+ 2277 032c 6B506F73 		.ascii	"kPosition\000"
+ 2277      6974696F 
+ 2277      6E00
+ 2278              	.LASF42:
+ 2279 0336 53657445 		.ascii	"SetEncoderDirDefault\000"
+ 2279      6E636F64 
+ 2279      65724469 
+ 2279      72446566 
+ 2279      61756C74 
+ 2280              	.LASF44:
+ 2281 034b 43757272 		.ascii	"CurrentPositionMiliDegree\000"
+ 2281      656E7450 
+ 2281      6F736974 
+ 2281      696F6E4D 
+ 2281      696C6944 
+ 2282              	.LASF66:
+ 2283 0365 72617469 		.ascii	"ratio\000"
+ 2283      6F00
+ 2284              	.LASF9:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 47
 
 
- 2279 0271 6C6F6E67 		.ascii	"long long unsigned int\000"
- 2279      206C6F6E 
- 2279      6720756E 
- 2279      7369676E 
- 2279      65642069 
- 2280              	.LASF16:
- 2281 0288 75696E74 		.ascii	"uint32_t\000"
- 2281      33325F74 
- 2281      00
- 2282              	.LASF12:
- 2283 0291 756E7369 		.ascii	"unsigned int\000"
- 2283      676E6564 
- 2283      20696E74 
- 2283      00
- 2284              	.LASF14:
- 2285 029e 75696E74 		.ascii	"uint16_t\000"
- 2285      31365F74 
- 2285      00
- 2286              	.LASF33:
- 2287 02a7 50494449 		.ascii	"PIDIsEnabled\000"
- 2287      73456E61 
- 2287      626C6564 
- 2287      00
- 2288              	.LASF71:
- 2289 02b4 53746174 		.ascii	"Status_Reg_Switches_Read\000"
- 2289      75735F52 
- 2289      65675F53 
- 2289      77697463 
- 2289      6865735F 
- 2290              	.LASF50:
- 2291 02cd 63757272 		.ascii	"current\000"
- 2291      656E7400 
- 2292              	.LASF43:
- 2293 02d5 53657445 		.ascii	"SetEncoderDirReverse\000"
- 2293      6E636F64 
- 2293      65724469 
- 2293      72526576 
- 2293      65727365 
- 2294              	.LASF5:
- 2295 02ea 73686F72 		.ascii	"short unsigned int\000"
- 2295      7420756E 
- 2295      7369676E 
- 2295      65642069 
- 2295      6E7400
- 2296              	.LASF66:
- 2297 02fd 636F6D70 		.ascii	"complete\000"
- 2297      6C657465 
- 2297      00
- 2298              	.LASF35:
- 2299 0306 4765746B 		.ascii	"GetkIntegral\000"
- 2299      496E7465 
- 2299      6772616C 
- 2299      00
- 2300              	.LASF22:
- 2301 0313 63686172 		.ascii	"char\000"
- 2301      00
- 2302              	.LASF39:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 47
+ 2285 036b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2285      20756E73 
+ 2285      69676E65 
+ 2285      6420696E 
+ 2285      7400
+ 2286              	.LASF19:
+ 2287 037d 696E7433 		.ascii	"int32\000"
+ 2287      3200
+ 2288              	.LASF75:
+ 2289 0383 496E6974 		.ascii	"InitializePID\000"
+ 2289      69616C69 
+ 2289      7A655049 
+ 2289      4400
+ 2290              	.LASF45:
+ 2291 0391 6D696C69 		.ascii	"miliDegrees\000"
+ 2291      44656772 
+ 2291      65657300 
+ 2292              	.LASF53:
+ 2293 039d 50574D4F 		.ascii	"PWMOut\000"
+ 2293      757400
+ 2294              	.LASF6:
+ 2295 03a4 5F5F696E 		.ascii	"__int32_t\000"
+ 2295      7433325F 
+ 2295      7400
+ 2296              	.LASF48:
+ 2297 03ae 74617267 		.ascii	"targetTick\000"
+ 2297      65745469 
+ 2297      636B00
+ 2298              	.LASF74:
+ 2299 03b9 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
+ 2299      73657273 
+ 2299      5C6D6577 
+ 2299      696E5C4F 
+ 2299      6E654472 
+ 2300 03e7 5C537765 		.ascii	"\\Swerve Motor Board 2023\\Swerve_Motor_Board_PY202"
+ 2300      72766520 
+ 2300      4D6F746F 
+ 2300      7220426F 
+ 2300      61726420 
+ 2301 0418 335C5377 		.ascii	"3\\SwerveMotorFirmware.cydsn\000"
+ 2301      65727665 
+ 2301      4D6F746F 
+ 2301      72466972 
+ 2301      6D776172 
+ 2302              	.LASF46:
+ 2303 0434 4D696C69 		.ascii	"MiliDegreesToTicks\000"
+ 2303      44656772 
+ 2303      65657354 
+ 2303      6F546963 
+ 2303      6B7300
+ 2304              	.LASF27:
+ 2305 0447 456E6162 		.ascii	"EnablePID\000"
+ 2305      6C655049 
+ 2305      4400
+ 2306              	.LASF21:
+ 2307 0451 646F7562 		.ascii	"double\000"
+ 2307      6C6500
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cci3BMdk.s 			page 48
 
 
- 2303 0318 73657456 		.ascii	"setValue\000"
- 2303      616C7565 
- 2303      00
- 2304              	.LASF40:
- 2305 0321 4765744D 		.ascii	"GetMaxPIDPWM\000"
- 2305      61785049 
- 2305      4450574D 
- 2305      00
- 2306              	.LASF37:
- 2307 032e 4765746B 		.ascii	"GetkPPJR\000"
- 2307      50504A52 
- 2307      00
- 2308              	.LASF55:
- 2309 0337 6B506F73 		.ascii	"kPosition\000"
- 2309      6974696F 
- 2309      6E00
- 2310              	.LASF42:
- 2311 0341 53657445 		.ascii	"SetEncoderDirDefault\000"
- 2311      6E636F64 
- 2311      65724469 
- 2311      72446566 
- 2311      61756C74 
- 2312              	.LASF44:
- 2313 0356 43757272 		.ascii	"CurrentPositionMiliDegree\000"
- 2313      656E7450 
- 2313      6F736974 
- 2313      696F6E4D 
- 2313      696C6944 
- 2314              	.LASF65:
- 2315 0370 72617469 		.ascii	"ratio\000"
- 2315      6F00
- 2316              	.LASF9:
- 2317 0376 6C6F6E67 		.ascii	"long unsigned int\000"
- 2317      20756E73 
- 2317      69676E65 
- 2317      6420696E 
- 2317      7400
- 2318              	.LASF19:
- 2319 0388 696E7433 		.ascii	"int32\000"
- 2319      3200
- 2320              	.LASF75:
- 2321 038e 496E6974 		.ascii	"InitializePID\000"
- 2321      69616C69 
- 2321      7A655049 
- 2321      4400
- 2322              	.LASF45:
- 2323 039c 6D696C69 		.ascii	"miliDegrees\000"
- 2323      44656772 
- 2323      65657300 
- 2324              	.LASF53:
- 2325 03a8 50574D4F 		.ascii	"PWMOut\000"
- 2325      757400
- 2326              	.LASF6:
- 2327 03af 5F5F696E 		.ascii	"__int32_t\000"
- 2327      7433325F 
- 2327      7400
- 2328              	.LASF48:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccXzce2y.s 			page 48
-
-
- 2329 03b9 74617267 		.ascii	"targetTick\000"
- 2329      65745469 
- 2329      636B00
- 2330              	.LASF74:
- 2331 03c4 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
- 2331      73657273 
- 2331      5C6D6577 
- 2331      696E5C4F 
- 2331      6E654472 
- 2332 03f2 5C537765 		.ascii	"\\Swerve Motor Board 2023\\Swerve_Motor_Board_PY202"
- 2332      72766520 
- 2332      4D6F746F 
- 2332      7220426F 
- 2332      61726420 
- 2333 0423 335C5377 		.ascii	"3\\SwerveMotorFirmware.cydsn\000"
- 2333      65727665 
- 2333      4D6F746F 
- 2333      72466972 
- 2333      6D776172 
- 2334              	.LASF46:
- 2335 043f 4D696C69 		.ascii	"MiliDegreesToTicks\000"
- 2335      44656772 
- 2335      65657354 
- 2335      6F546963 
- 2335      6B7300
- 2336              	.LASF27:
- 2337 0452 456E6162 		.ascii	"EnablePID\000"
- 2337      6C655049 
- 2337      4400
- 2338              	.LASF21:
- 2339 045c 646F7562 		.ascii	"double\000"
- 2339      6C6500
- 2340              	.LASF36:
- 2341 0463 4765746B 		.ascii	"GetkDerivative\000"
- 2341      44657269 
- 2341      76617469 
- 2341      766500
- 2342              	.LASF67:
- 2343 0472 6D617850 		.ascii	"maxPWM\000"
- 2343      574D00
- 2344              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 2308              	.LASF36:
+ 2309 0458 4765746B 		.ascii	"GetkDerivative\000"
+ 2309      44657269 
+ 2309      76617469 
+ 2309      766500
+ 2310              	.LASF68:
+ 2311 0467 6D617850 		.ascii	"maxPWM\000"
+ 2311      574D00
+ 2312              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

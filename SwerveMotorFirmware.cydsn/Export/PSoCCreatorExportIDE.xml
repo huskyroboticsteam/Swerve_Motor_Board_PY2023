@@ -109,9 +109,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Potentiometer.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Potentiometer_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Potentiometer_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\QuadDec.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\QuadDec.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\QuadDec_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_Encoder_A.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_Encoder_A.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_Encoder_A_aliases.h</File>
@@ -230,9 +227,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2Direction.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2Direction_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2Direction_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\QuadDec_Cnt16.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\QuadDec_Cnt16.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\QuadDec_Cnt16_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\ADC_SAR_Seq_1_IRQ.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\ADC_SAR_Seq_1_IRQ.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\ADC_SAR_Seq_1_intClock.c</File>
@@ -301,6 +295,10 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\isr_enc_count.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\isr_enc_count.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Status_Reg_Switches_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Status_Reg_Switches_1.h</File>
         </Files>
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\codegentemp">

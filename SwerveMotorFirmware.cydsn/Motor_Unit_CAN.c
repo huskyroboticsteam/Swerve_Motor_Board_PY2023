@@ -30,6 +30,7 @@ extern uint8_t bound_set1;
 extern uint8_t bound_set2;
 extern int32_t enc_Count_Lim1; //TODO 
 extern int32_t enc_Count_Lim2;
+extern int32_t counter;
 
 extern int16_t nextPWM_M1;
 extern int16_t nextPWM_M2;
@@ -100,7 +101,8 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
 //                    DisablePID();
 //                }
                 if(GetEncoderZeroFromPacket(receivedPacket)) {
-                    QuadDec_SetCounter(0);                        
+                    //QuadDec_SetCounter(0);
+                    counter = 0;
                 }
                 if(GetEncoderDirectionFromPacket(receivedPacket)) {
                     SetEncoderDirReverse();
@@ -235,7 +237,8 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     DisablePID();
                 }
                 if(GetEncoderZeroFromPacket(receivedPacket)) {
-                    QuadDec_SetCounter(0);                        
+                    counter = 0;
+                    //QuadDec_SetCounter(0);                     
                 }
                 if(GetEncoderDirectionFromPacket(receivedPacket)) {
                     SetEncoderDirReverse();

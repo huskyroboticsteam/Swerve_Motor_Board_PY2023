@@ -23,6 +23,9 @@ int32_t kPPJR = 0;
 int32_t PWM = 0;
 extern uint8_t ignoreLimSw_M2;
 
+//encoder counter
+extern int32_t counter;
+
 extern char txData[TX_DATA_SIZE];
 int8 flipEncoder = 1;
 uint8_t usingPot = 0;
@@ -90,7 +93,7 @@ int32_t GetMaxPIDPWM(){
 }
 
 int32_t GetEncoderValWithFlip() {
-    return flipEncoder * QuadDec_GetCounter();
+    return flipEncoder * counter; //QuadDec_GetCounter();
 }
 void SetEncoderDirDefault(){
     flipEncoder = 1;

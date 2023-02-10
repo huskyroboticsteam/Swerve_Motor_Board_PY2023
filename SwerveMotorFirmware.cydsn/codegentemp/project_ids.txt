@@ -1,8 +1,8 @@
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj|9b05eccb-e836-43df-8b09-8b9b2334694e
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLightLib.cyprj|76218e54-2f06-4985-8d51-a323d0971a4e
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|8b25cf8d-2bcd-489f-8e68-19c62adf77f3
-C:\Users\mewin\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|0eb2ec5c-1b48-4b86-812f-30fb083e88b6
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|1ca0e097-6348-4705-bfa2-14afd4e1d4a9
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|f73311ca-4065-40fa-a5d0-1661226785d6
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|a170074f-403d-4b38-8aad-5c753b51b441
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|91c45524-4568-4dfa-9348-b703497c5cbe
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj|7a87cdda-6e35-4507-8da6-477856eee6a9
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLightLib.cyprj|b57a8248-221d-4a2a-8928-e9deaa9bbccd
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|00c378f5-c5be-4fb1-862e-01a98075969d
+C:\Users\mewin\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|9833a7c8-44f8-42ae-a298-37ca40a2d425
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|8da00288-1614-49ed-aee8-8046fb02fa22
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|466111cd-bfc1-401f-b881-efa9d31fd202
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|fc4e7838-6f41-42f1-b25c-1172fe78acca
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|9de25f08-5c5f-4e98-b9f4-275fac7645e1
