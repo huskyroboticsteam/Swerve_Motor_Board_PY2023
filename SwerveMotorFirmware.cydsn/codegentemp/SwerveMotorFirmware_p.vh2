@@ -1,5 +1,5 @@
 -- Project:   SwerveMotorFirmware
--- Generated: 02/09/2023 18:54:39
+-- Generated: 02/16/2023 17:28:04
 -- PSoC Creator  4.4
 
 ENTITY SwerveMotorFirmware IS
@@ -27,8 +27,8 @@ ENTITY SwerveMotorFirmware IS
         Motor1Direction(0)_PAD : OUT std_ulogic;
         Motor2PWM(0)_PAD : OUT std_ulogic;
         Motor2Direction(0)_PAD : OUT std_ulogic;
-        Motor1CurrentSense(0)_PAD : IN std_ulogic;
-        Motor2CurrentSense(0)_PAD : IN std_ulogic);
+        Motor1CurrentSense(0)_PAD : INOUT std_ulogic;
+        Motor2CurrentSense(0)_PAD : INOUT std_ulogic);
     ATTRIBUTE voltage_VDDIO_A_1 OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_0 OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CTB OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -103,7 +103,6 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     SIGNAL Net_258 : bit;
     SIGNAL Net_259 : bit;
     SIGNAL Net_30 : bit;
-    SIGNAL Net_379 : bit;
     SIGNAL Net_39 : bit;
     SIGNAL Net_3_ff11 : bit;
     ATTRIBUTE global_signal OF Net_3_ff11 : SIGNAL IS true;
@@ -213,8 +212,6 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
     ATTRIBUTE GROUND OF __ZERO__ : SIGNAL IS true;
-    SIGNAL bus_1_0 : bit;
-    SIGNAL bus_1_1 : bit;
     SIGNAL dclk_to_genclk : bit;
     SIGNAL dclk_to_genclk_1 : bit;
     SIGNAL tmpOE__Limit1_net_0 : bit;
@@ -256,7 +253,9 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE lib_model OF Potentiometer(0) : LABEL IS "iocell4";
     ATTRIBUTE Location OF Potentiometer(0) : LABEL IS "P2[4]";
     ATTRIBUTE lib_model OF Pin_Encoder_A(0) : LABEL IS "iocell5";
+    ATTRIBUTE Location OF Pin_Encoder_A(0) : LABEL IS "P6[4]";
     ATTRIBUTE lib_model OF Pin_Encoder_B(0) : LABEL IS "iocell6";
+    ATTRIBUTE Location OF Pin_Encoder_B(0) : LABEL IS "P6[2]";
     ATTRIBUTE lib_model OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "iocell7";
     ATTRIBUTE Location OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "P1[7]";
     ATTRIBUTE lib_model OF CANRX(0) : LABEL IS "iocell8";
@@ -319,7 +318,6 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE lib_model OF \StripLights:B_WS2811:StatusReg\ : LABEL IS "statuscell2";
     ATTRIBUTE lib_model OF \StripLights:B_WS2811:dshifter:u0\ : LABEL IS "datapathcell4";
     ATTRIBUTE lib_model OF \StripLights:B_WS2811:pwm8:u0\ : LABEL IS "datapathcell5";
-    ATTRIBUTE lib_model OF \Status_Reg_Switches_1:sts_intr:sts_reg\ : LABEL IS "statusicell3";
     ATTRIBUTE lib_model OF Net_966_0 : LABEL IS "macrocell9";
     ATTRIBUTE lib_model OF Net_966_1 : LABEL IS "macrocell10";
     ATTRIBUTE lib_model OF \StripLights:Net_64\ : LABEL IS "macrocell11";
@@ -1262,11 +1260,10 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Pin_Encoder_A",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000101")
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
         PORT MAP(
             pa_out => Pin_Encoder_A(0)__PA,
             oe => open,
-            fb => bus_1_1,
             pad_in => Pin_Encoder_A(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
@@ -1353,11 +1350,10 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Pin_Encoder_B",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000101")
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
         PORT MAP(
             pa_out => Pin_Encoder_B(0)__PA,
             oe => open,
-            fb => bus_1_0,
             pad_in => Pin_Encoder_B(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
@@ -3092,12 +3088,12 @@ BEGIN
     Motor1CurrentSense:logicalport
         GENERIC MAP(
             drive_mode => "010",
-            ibuf_enabled => "1",
+            ibuf_enabled => "0",
             id => "8829216b-445e-4d72-b278-d966a69e3b5d",
             init_dr_st => "1",
             input_buffer_sel => "00",
             input_clk_en => 0,
-            input_sync => "0",
+            input_sync => "1",
             input_sync_mode => "0",
             intr_mode => "00",
             invert_in_clock => 0,
@@ -3127,7 +3123,7 @@ BEGIN
             pa_out_clock_en => -1,
             pa_out_reset => -1,
             pin_aliases => "",
-            pin_mode => "I",
+            pin_mode => "A",
             por_state => 4,
             port_alias_group => "",
             port_alias_required => 0,
@@ -3144,7 +3140,7 @@ BEGIN
             spanning => 0,
             sw_only => 0,
             use_annotation => "0",
-            vtrip => "00",
+            vtrip => "10",
             width => 1,
             in_clk_inv => 0,
             in_clken_inv => 0,
@@ -3167,7 +3163,7 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Motor1CurrentSense",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
         PORT MAP(
             pa_out => Motor1CurrentSense(0)__PA,
             oe => open,
@@ -3182,12 +3178,12 @@ BEGIN
     Motor2CurrentSense:logicalport
         GENERIC MAP(
             drive_mode => "010",
-            ibuf_enabled => "1",
+            ibuf_enabled => "0",
             id => "389dd4c6-cea3-43b8-9b5b-35d4e0cf00e7",
             init_dr_st => "1",
             input_buffer_sel => "00",
             input_clk_en => 0,
-            input_sync => "0",
+            input_sync => "1",
             input_sync_mode => "0",
             intr_mode => "00",
             invert_in_clock => 0,
@@ -3217,7 +3213,7 @@ BEGIN
             pa_out_clock_en => -1,
             pa_out_reset => -1,
             pin_aliases => "",
-            pin_mode => "I",
+            pin_mode => "A",
             por_state => 4,
             port_alias_group => "",
             port_alias_required => 0,
@@ -3234,7 +3230,7 @@ BEGIN
             spanning => 0,
             sw_only => 0,
             use_annotation => "0",
-            vtrip => "00",
+            vtrip => "10",
             width => 1,
             in_clk_inv => 0,
             in_clken_inv => 0,
@@ -3257,7 +3253,7 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Motor2CurrentSense",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
         PORT MAP(
             pa_out => Motor2CurrentSense(0)__PA,
             oe => open,
@@ -3373,14 +3369,6 @@ BEGIN
             is_nmi => 0)
         PORT MAP(
             interrupt => Net_12,
-            clock => ClockBlock_HFClk);
-
-    isr_enc_count:interrupt
-        GENERIC MAP(
-            int_type => "10",
-            is_nmi => 0)
-        PORT MAP(
-            interrupt => Net_379,
             clock => ClockBlock_HFClk);
 
     \Status_Reg_Switches:sts_intr:sts_reg\:statusicell
@@ -3868,23 +3856,6 @@ BEGIN
             line => Net_167,
             line_compl => Net_168,
             interrupt => Net_166);
-
-    \Status_Reg_Switches_1:sts_intr:sts_reg\:statusicell
-        GENERIC MAP(
-            cy_force_order => 1,
-            cy_int_mask => "0000011",
-            cy_md_select => "0000000",
-            clken_mode => 1)
-        PORT MAP(
-            clock => open,
-            status_6 => open,
-            status_5 => open,
-            status_4 => open,
-            status_3 => open,
-            status_2 => open,
-            status_1 => bus_1_1,
-            status_0 => bus_1_0,
-            interrupt => Net_379);
 
     Net_966_0:macrocell
         GENERIC MAP(

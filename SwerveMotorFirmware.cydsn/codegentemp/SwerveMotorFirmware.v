@@ -1,6 +1,6 @@
 // ======================================================================
 // SwerveMotorFirmware.v generated from TopDesign.cysch
-// 02/09/2023 at 18:54
+// 02/16/2023 at 17:28
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1926,14 +1926,8 @@ endmodule
 // top
 module top ;
 
-          wire  Net_295;
-          wire  Net_294;
-          wire  Net_293;
-          wire  Net_292;
-          wire  Net_291;
-          wire  Net_290;
-          wire  Net_289;
-          wire  Net_288;
+    electrical  Net_398;
+    electrical  Net_397;
           wire  Net_194;
           wire  Net_173;
           wire  Net_172;
@@ -2020,14 +2014,14 @@ module top ;
           wire  Net_29;
           wire  Net_28;
           wire  Net_27;
-          wire [1:0] bus_1;
           wire  Net_26;
           wire  Net_25;
           wire  Net_24;
           wire [1:0] Net_23;
           wire [1:0] Net_22;
           wire [1:0] Net_21;
-          wire  Net_395;
+          wire  Net_356;
+          wire  Net_396;
           wire  Net_107;
           wire  Net_12;
           wire  Net_183;
@@ -2042,8 +2036,6 @@ module top ;
           wire  Net_3;
           wire  Net_175;
           wire  Net_174;
-          wire  Net_387;
-          wire  Net_379;
     electrical  Net_390;
           wire  Net_1416;
           wire  Net_1314;
@@ -2432,13 +2424,6 @@ module top ;
     defparam GND_2.port_names = "T1";
     defparam GND_2.width = 1;
 
-
-	cy_isr_v1_0
-		#(.int_type(2'b10))
-		isr_enc_count
-		 (.int_signal(Net_379));
-
-
 	wire [0:0] tmpOE__Pin_Encoder_A_net;
 	wire [0:0] tmpIO_0__Pin_Encoder_A_net;
 	wire [0:0] tmpINTERRUPT_0__Pin_Encoder_A_net;
@@ -2500,7 +2485,7 @@ module top ;
 		Pin_Encoder_A
 		 (.oe(tmpOE__Pin_Encoder_A_net),
 		  .y({1'b0}),
-		  .fb({bus_1[1]}),
+		  .fb({Net_396}),
 		  .io({tmpIO_0__Pin_Encoder_A_net[0:0]}),
 		  .siovref(tmpSIOVREF__Pin_Encoder_A_net),
 		  .interrupt({tmpINTERRUPT_0__Pin_Encoder_A_net[0:0]}),
@@ -2574,7 +2559,7 @@ module top ;
 		Pin_Encoder_B
 		 (.oe(tmpOE__Pin_Encoder_B_net),
 		  .y({1'b0}),
-		  .fb({bus_1[0]}),
+		  .fb({Net_356}),
 		  .io({tmpIO_0__Pin_Encoder_B_net[0:0]}),
 		  .siovref(tmpSIOVREF__Pin_Encoder_B_net),
 		  .interrupt({tmpINTERRUPT_0__Pin_Encoder_B_net[0:0]}),
@@ -2586,18 +2571,6 @@ module top ;
 		  .out_reset({1'b0}));
 
 	assign tmpOE__Pin_Encoder_B_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
-
-
-	cy_clock_v1_0
-		#(.id("5062d211-2277-450d-bf70-6d1bb3ddce76"),
-		  .source_clock_id("413DE2EF-D9F2-4233-A808-DFAF137FD877"),
-		  .divisor(2),
-		  .period("0"),
-		  .is_direct(0),
-		  .is_digital(0))
-		Clock_1
-		 (.clock_out(Net_387));
-
 
     Debouncer_v1_0 Debouncer_1 (
         .clock(Net_156),
@@ -4017,10 +3990,10 @@ module top ;
 	cy_psoc3_pins_v1_10
 		#(.id("8829216b-445e-4d72-b278-d966a69e3b5d"),
 		  .drive_mode(3'b010),
-		  .ibuf_enabled(1'b1),
+		  .ibuf_enabled(1'b0),
 		  .init_dr_st(1'b1),
 		  .input_clk_en(0),
-		  .input_sync(1'b0),
+		  .input_sync(1'b1),
 		  .input_sync_mode(1'b0),
 		  .intr_mode(2'b00),
 		  .invert_in_clock(0),
@@ -4047,7 +4020,7 @@ module top ;
 		  .pa_out_clock_en(-1),
 		  .pa_out_reset(-1),
 		  .pin_aliases(""),
-		  .pin_mode("I"),
+		  .pin_mode("A"),
 		  .por_state(4),
 		  .sio_group_cnt(0),
 		  .sio_hyst(1'b1),
@@ -4061,7 +4034,7 @@ module top ;
 		  .slew_rate(1'b0),
 		  .spanning(0),
 		  .use_annotation(1'b0),
-		  .vtrip(2'b00),
+		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
 		  .ovt_needed(1'b0),
@@ -4071,6 +4044,7 @@ module top ;
 		 (.oe(tmpOE__Motor1CurrentSense_net),
 		  .y({1'b0}),
 		  .fb({tmpFB_0__Motor1CurrentSense_net[0:0]}),
+		  .analog({Net_397}),
 		  .io({tmpIO_0__Motor1CurrentSense_net[0:0]}),
 		  .siovref(tmpSIOVREF__Motor1CurrentSense_net),
 		  .interrupt({tmpINTERRUPT_0__Motor1CurrentSense_net[0:0]}),
@@ -4092,10 +4066,10 @@ module top ;
 	cy_psoc3_pins_v1_10
 		#(.id("389dd4c6-cea3-43b8-9b5b-35d4e0cf00e7"),
 		  .drive_mode(3'b010),
-		  .ibuf_enabled(1'b1),
+		  .ibuf_enabled(1'b0),
 		  .init_dr_st(1'b1),
 		  .input_clk_en(0),
-		  .input_sync(1'b0),
+		  .input_sync(1'b1),
 		  .input_sync_mode(1'b0),
 		  .intr_mode(2'b00),
 		  .invert_in_clock(0),
@@ -4122,7 +4096,7 @@ module top ;
 		  .pa_out_clock_en(-1),
 		  .pa_out_reset(-1),
 		  .pin_aliases(""),
-		  .pin_mode("I"),
+		  .pin_mode("A"),
 		  .por_state(4),
 		  .sio_group_cnt(0),
 		  .sio_hyst(1'b1),
@@ -4136,7 +4110,7 @@ module top ;
 		  .slew_rate(1'b0),
 		  .spanning(0),
 		  .use_annotation(1'b0),
-		  .vtrip(2'b00),
+		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
 		  .ovt_needed(1'b0),
@@ -4146,6 +4120,7 @@ module top ;
 		 (.oe(tmpOE__Motor2CurrentSense_net),
 		  .y({1'b0}),
 		  .fb({tmpFB_0__Motor2CurrentSense_net[0:0]}),
+		  .analog({Net_398}),
 		  .io({tmpIO_0__Motor2CurrentSense_net[0:0]}),
 		  .siovref(tmpSIOVREF__Motor2CurrentSense_net),
 		  .interrupt({tmpINTERRUPT_0__Motor2CurrentSense_net[0:0]}),
@@ -4157,31 +4132,6 @@ module top ;
 		  .out_reset({1'b0}));
 
 	assign tmpOE__Motor2CurrentSense_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
-
-    CyStatusReg_v1_90 Status_Reg_Switches_1 (
-        .clock(Net_387),
-        .intr(Net_379),
-        .status_0(1'b0),
-        .status_1(1'b0),
-        .status_2(1'b0),
-        .status_3(1'b0),
-        .status_4(1'b0),
-        .status_5(1'b0),
-        .status_6(1'b0),
-        .status_7(1'b0),
-        .status_bus(bus_1[1:0]));
-    defparam Status_Reg_Switches_1.Bit0Mode = 0;
-    defparam Status_Reg_Switches_1.Bit1Mode = 0;
-    defparam Status_Reg_Switches_1.Bit2Mode = 0;
-    defparam Status_Reg_Switches_1.Bit3Mode = 0;
-    defparam Status_Reg_Switches_1.Bit4Mode = 0;
-    defparam Status_Reg_Switches_1.Bit5Mode = 0;
-    defparam Status_Reg_Switches_1.Bit6Mode = 0;
-    defparam Status_Reg_Switches_1.Bit7Mode = 0;
-    defparam Status_Reg_Switches_1.BusDisplay = 1;
-    defparam Status_Reg_Switches_1.Interrupt = 1;
-    defparam Status_Reg_Switches_1.MaskValue = 3;
-    defparam Status_Reg_Switches_1.NumInputs = 2;
 
 
 

@@ -130,27 +130,27 @@ CY_ISR(Pin_Limit_Handler){
     }
 }
 
-CY_ISR(Enc_Count_Handler) {
-    //Read Encoder pin A current state
-    currStatePinA = Pin_Encoder_A_Read();
-    
-    //if last and current state of pin A differ, then pulse occur
-    if (currStatePinA != lastStatePinA  && currStatePinA == 1){
-        // If the DT (B) state is different than the CLK (A) state then
-    	// the encoder is rotating CCW so decrement
-        if (Pin_Encoder_B_Read() != currStatePinA) {
-    			counter --;
-    			//currentDir ="CCW";
-		} else {
-			// Encoder is rotating CW so increment
-			counter ++;
-			//currentDir ="CW";
-		}
-        //can print here for testing
-    }
-	// Remember last CLK state
-	lastStatePinA = currStatePinA;
-}
+//CY_ISR(Enc_Count_Handler) {
+//    //Read Encoder pin A current state
+//    currStatePinA = Pin_Encoder_A_Read();
+//    
+//    //if last and current state of pin A differ, then pulse occur
+//    if (currStatePinA != lastStatePinA  && currStatePinA == 1){
+//        // If the DT (B) state is different than the CLK (A) state then
+//    	// the encoder is rotating CCW so decrement
+//        if (Pin_Encoder_B_Read() != currStatePinA) {
+//    			counter --;
+//    			//currentDir ="CCW";
+//		} else {
+//			// Encoder is rotating CW so increment
+//			counter ++;
+//			//currentDir ="CW";
+//		}
+//        //can print here for testing
+//    }
+//	// Remember last CLK state
+//	lastStatePinA = currStatePinA;
+//}
 
 int main(void)
 { 
@@ -194,6 +194,7 @@ int main(void)
                 break;
 
         }
+        
         #ifdef PRINT_FSM_STATE_MODE
         sprintf(txData, "Mode: %x State:%x \r\n", GetMode(), GetState());
         UART_UartPutString(txData);
@@ -207,11 +208,32 @@ int main(void)
         sprintf(txData, "Encoder Value: %d  \r\n", QuadDec_GetCounter());
         UART_UartPutString(txData);
         #endif
+        
+        
+        //this should be in an interrupt but we cant do that for pin assignment complication
+        //Read Encoder pin A current state
+        currStatePinA = Pin_Encoder_A_Read();
+        //if last and current state of pin A differ, then pulse occur
+        if (currStatePinA != lastStatePinA  && currStatePinA == 1){
+            // If the DT (B) state is different than the CLK (A) state then
+        	// the encoder is rotating CCW so decrement
+            if (Pin_Encoder_B_Read() != currStatePinA) {
+        			counter--;
+        			//currentDir ="CCW";
+    		} else {
+    			// Encoder is rotating CW so increment
+    			counter++;
+    			//currentDir ="CW";
+    		}
+            //can print here for testing
+        }
+    	// Remember last CLK state
+    	lastStatePinA = currStatePinA;
     }
 }
  
 
-//not initializing CAN with two motors correctly yet ok
+// not initializing CAN with two motors correctly yet ok
 void Initialize(void) {
     CyGlobalIntEnable; /* Enable global interrupts. LED arrays need this first */
     
@@ -249,7 +271,7 @@ void Initialize(void) {
     PWM_Motor1_Start();
     PWM_Motor2_Start();
     
-    isr_enc_count_StartEx(Enc_Count_Handler);
+    //isr_enc_count_StartEx(Enc_Count_Handler); // specific pins dont work with interrupt :(
     isr_Limit_1_StartEx(Pin_Limit_Handler);
     isr_period_StartEx(Period_Reset_Handler);
     

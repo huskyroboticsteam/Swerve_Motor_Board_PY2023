@@ -2,7 +2,7 @@
 --	Conversion of SwerveMotorFirmware.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu Feb 09 18:54:37 2023
+--	Thu Feb 16 17:28:02 2023
 --
 
 USE cypress.cypress.all;
@@ -53,18 +53,16 @@ TERMINAL tmpSIOVREF__Potentiometer_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Potentiometer_net_0 : bit;
 TERMINAL Net_49 : bit;
 TERMINAL Net_52 : bit;
-SIGNAL Net_379 : bit;
 SIGNAL tmpOE__Pin_Encoder_A_net_0 : bit;
-SIGNAL bus_1_1 : bit;
+SIGNAL Net_396 : bit;
 SIGNAL tmpIO_0__Pin_Encoder_A_net_0 : bit;
 TERMINAL tmpSIOVREF__Pin_Encoder_A_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Pin_Encoder_A_net_0 : bit;
 SIGNAL tmpOE__Pin_Encoder_B_net_0 : bit;
-SIGNAL bus_1_0 : bit;
+SIGNAL Net_356 : bit;
 SIGNAL tmpIO_0__Pin_Encoder_B_net_0 : bit;
 TERMINAL tmpSIOVREF__Pin_Encoder_B_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Pin_Encoder_B_net_0 : bit;
-SIGNAL Net_387 : bit;
 SIGNAL Net_156 : bit;
 SIGNAL \Debouncer_1:op_clk\ : bit;
 SIGNAL \Debouncer_1:DEBOUNCER[0]:d_sync_0\ : bit;
@@ -896,22 +894,16 @@ TERMINAL tmpSIOVREF__Motor2Direction_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Motor2Direction_net_0 : bit;
 SIGNAL tmpOE__Motor1CurrentSense_net_0 : bit;
 SIGNAL tmpFB_0__Motor1CurrentSense_net_0 : bit;
+TERMINAL Net_397 : bit;
 SIGNAL tmpIO_0__Motor1CurrentSense_net_0 : bit;
 TERMINAL tmpSIOVREF__Motor1CurrentSense_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Motor1CurrentSense_net_0 : bit;
 SIGNAL tmpOE__Motor2CurrentSense_net_0 : bit;
 SIGNAL tmpFB_0__Motor2CurrentSense_net_0 : bit;
+TERMINAL Net_398 : bit;
 SIGNAL tmpIO_0__Motor2CurrentSense_net_0 : bit;
 TERMINAL tmpSIOVREF__Motor2CurrentSense_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__Motor2CurrentSense_net_0 : bit;
-SIGNAL \Status_Reg_Switches_1:status_7\ : bit;
-SIGNAL \Status_Reg_Switches_1:status_6\ : bit;
-SIGNAL \Status_Reg_Switches_1:status_5\ : bit;
-SIGNAL \Status_Reg_Switches_1:status_4\ : bit;
-SIGNAL \Status_Reg_Switches_1:status_3\ : bit;
-SIGNAL \Status_Reg_Switches_1:status_2\ : bit;
-SIGNAL \Status_Reg_Switches_1:status_1\ : bit;
-SIGNAL \Status_Reg_Switches_1:status_0\ : bit;
 SIGNAL \Debouncer_1:DEBOUNCER[0]:d_sync_0\\D\ : bit;
 SIGNAL \Debouncer_1:DEBOUNCER[0]:d_sync_1\\D\ : bit;
 SIGNAL Net_23_0D : bit;
@@ -1337,10 +1329,6 @@ GND_2:cy_annotation_universal_v1_0
 		port_names=>"T1",
 		width=>1)
 	PORT MAP(connect=>Net_52);
-isr_enc_count:cy_isr_v1_0
-	GENERIC MAP(int_type=>"10",
-		is_nmi=>'0')
-	PORT MAP(int_signal=>Net_379);
 Pin_Encoder_A:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"25b04494-a57f-496e-aea7-3fa1bf9424cf",
 		drive_mode=>"001",
@@ -1399,7 +1387,7 @@ Pin_Encoder_A:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__Limit1_net_0),
 		y=>(zero),
-		fb=>bus_1_1,
+		fb=>Net_396,
 		analog=>(open),
 		io=>(tmpIO_0__Pin_Encoder_A_net_0),
 		siovref=>(tmpSIOVREF__Pin_Encoder_A_net_0),
@@ -1469,7 +1457,7 @@ Pin_Encoder_B:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__Limit1_net_0),
 		y=>(zero),
-		fb=>bus_1_0,
+		fb=>Net_356,
 		analog=>(open),
 		io=>(tmpIO_0__Pin_Encoder_B_net_0),
 		siovref=>(tmpSIOVREF__Pin_Encoder_B_net_0),
@@ -1481,16 +1469,6 @@ Pin_Encoder_B:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__Limit1_net_0,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__Pin_Encoder_B_net_0);
-Clock_1:cy_clock_v1_0
-	GENERIC MAP(cy_registers=>"",
-		id=>"5062d211-2277-450d-bf70-6d1bb3ddce76",
-		source_clock_id=>"413DE2EF-D9F2-4233-A808-DFAF137FD877",
-		divisor=>2,
-		period=>"0",
-		is_direct=>'0',
-		is_digital=>'0')
-	PORT MAP(clock_out=>Net_387,
-		dig_domain_out=>open);
 \Debouncer_1:ClkSync\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
 	PORT MAP(clock_in=>Net_156,
@@ -3798,9 +3776,9 @@ Motor2Direction:cy_psoc3_pins_v1_10
 Motor1CurrentSense:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"8829216b-445e-4d72-b278-d966a69e3b5d",
 		drive_mode=>"010",
-		ibuf_enabled=>"1",
+		ibuf_enabled=>"0",
 		init_dr_st=>"1",
-		input_sync=>"0",
+		input_sync=>"1",
 		input_clk_en=>'0',
 		input_sync_mode=>"0",
 		intr_mode=>"00",
@@ -3822,7 +3800,7 @@ Motor1CurrentSense:cy_psoc3_pins_v1_10
 		oe_conn=>"0",
 		oe_reset=>'0',
 		pin_aliases=>"",
-		pin_mode=>"I",
+		pin_mode=>"A",
 		por_state=>4,
 		sio_group_cnt=>0,
 		sio_hifreq=>"00000000",
@@ -3836,7 +3814,7 @@ Motor1CurrentSense:cy_psoc3_pins_v1_10
 		slew_rate=>"0",
 		spanning=>'0',
 		sw_only=>'0',
-		vtrip=>"00",
+		vtrip=>"10",
 		width=>1,
 		port_alias_required=>'0',
 		port_alias_group=>"",
@@ -3854,7 +3832,7 @@ Motor1CurrentSense:cy_psoc3_pins_v1_10
 	PORT MAP(oe=>(tmpOE__Limit1_net_0),
 		y=>(zero),
 		fb=>(tmpFB_0__Motor1CurrentSense_net_0),
-		analog=>(open),
+		analog=>Net_397,
 		io=>(tmpIO_0__Motor1CurrentSense_net_0),
 		siovref=>(tmpSIOVREF__Motor1CurrentSense_net_0),
 		annotation=>(open),
@@ -3868,9 +3846,9 @@ Motor1CurrentSense:cy_psoc3_pins_v1_10
 Motor2CurrentSense:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"389dd4c6-cea3-43b8-9b5b-35d4e0cf00e7",
 		drive_mode=>"010",
-		ibuf_enabled=>"1",
+		ibuf_enabled=>"0",
 		init_dr_st=>"1",
-		input_sync=>"0",
+		input_sync=>"1",
 		input_clk_en=>'0',
 		input_sync_mode=>"0",
 		intr_mode=>"00",
@@ -3892,7 +3870,7 @@ Motor2CurrentSense:cy_psoc3_pins_v1_10
 		oe_conn=>"0",
 		oe_reset=>'0',
 		pin_aliases=>"",
-		pin_mode=>"I",
+		pin_mode=>"A",
 		por_state=>4,
 		sio_group_cnt=>0,
 		sio_hifreq=>"00000000",
@@ -3906,7 +3884,7 @@ Motor2CurrentSense:cy_psoc3_pins_v1_10
 		slew_rate=>"0",
 		spanning=>'0',
 		sw_only=>'0',
-		vtrip=>"00",
+		vtrip=>"10",
 		width=>1,
 		port_alias_required=>'0',
 		port_alias_group=>"",
@@ -3924,7 +3902,7 @@ Motor2CurrentSense:cy_psoc3_pins_v1_10
 	PORT MAP(oe=>(tmpOE__Limit1_net_0),
 		y=>(zero),
 		fb=>(tmpFB_0__Motor2CurrentSense_net_0),
-		analog=>(open),
+		analog=>Net_398,
 		io=>(tmpIO_0__Motor2CurrentSense_net_0),
 		siovref=>(tmpSIOVREF__Motor2CurrentSense_net_0),
 		annotation=>(open),
@@ -3935,15 +3913,6 @@ Motor2CurrentSense:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__Limit1_net_0,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__Motor2CurrentSense_net_0);
-\Status_Reg_Switches_1:sts_intr:sts_reg\:cy_psoc3_statusi
-	GENERIC MAP(cy_force_order=>'1',
-		cy_md_select=>"0000000",
-		cy_int_mask=>"0000011")
-	PORT MAP(reset=>zero,
-		clock=>Net_387,
-		status=>(zero, zero, zero, zero,
-			zero, bus_1_1, bus_1_0),
-		interrupt=>Net_379);
 \Debouncer_1:DEBOUNCER[0]:d_sync_0\:cy_dff
 	PORT MAP(d=>Net_1096_0,
 		clk=>\Debouncer_1:op_clk\,

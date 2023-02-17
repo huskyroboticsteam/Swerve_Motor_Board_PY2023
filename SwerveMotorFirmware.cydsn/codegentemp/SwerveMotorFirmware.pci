@@ -1,5 +1,5 @@
 # SwerveMotorFirmware
-# 2023-02-10 02:54:39Z
+# 2023-02-17 01:28:04Z
 
 # IO_6@[IOP=(0)][IoId=(6)] is reserved: ExtClkEnabled
 dont_use_io iocell 0 6
@@ -12,6 +12,8 @@ set_io "Limit1(0)" iocell 2 3
 set_io "Limit2(0)" iocell 2 2
 set_io "Motor1PWM(0)" iocell 5 2
 set_io "Potentiometer(0)" iocell 2 4
+set_io "Pin_Encoder_A(0)" iocell 6 4
+set_io "Pin_Encoder_B(0)" iocell 6 2
 set_io "\ADC_SAR_Seq_1:Bypass(0)\" iocell 1 7
 set_io "CANRX(0)" iocell 4 0
 set_io "CANTX(0)" iocell 4 1

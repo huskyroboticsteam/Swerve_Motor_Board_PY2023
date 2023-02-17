@@ -27,7 +27,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -80,7 +79,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -113,7 +111,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -136,7 +133,6 @@
 <file name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <file name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <file name=".\Generated_Source\PSoC4\Can_addr.h" />
-<file name=".\Generated_Source\PSoC4\Clock_1.h" />
 <file name=".\Generated_Source\PSoC4\Clock_2.h" />
 <file name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <file name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -189,7 +185,6 @@
 <file name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <file name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <file name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<file name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <file name=".\Generated_Source\PSoC4\StripLights.h" />
 <file name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <file name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -222,13 +217,23 @@
 <file name=".\Generated_Source\PSoC4\cypins.h" />
 <file name=".\Generated_Source\PSoC4\cytypes.h" />
 <file name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<file name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <file name=".\Generated_Source\PSoC4\isr_period.h" />
 <file name=".\Generated_Source\PSoC4\project.h" />
 <file name=".\Generated_Source\PSoC4\timer_clock.h" />
 <file name="..\CANLib\Port_swerve.h" />
 <file name="..\CANLib\PortFiles\PortPSOC_swerve.c" />
 <file name=".\cyapicallbacks.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o">
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter_cfg.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter_cfg.c" />
+<dep name=".\cyapicallbacks.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\cyfitter_cfg.c" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\MotorDrive.o">
 <dep name=".\CortexM0\ARM_GCC_541\CANLib\CANCommon.h" />
 <dep name=".\CortexM0\ARM_GCC_541\CANLib\CANGPIO.h" />
@@ -251,7 +256,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -304,7 +308,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -337,7 +340,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -379,7 +381,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -432,7 +433,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -465,7 +465,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -506,7 +505,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -559,7 +557,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -592,7 +589,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -626,7 +622,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -679,7 +674,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -712,7 +706,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -912,14 +905,6 @@
 <dep name=".\Generated_Source\PSoC4\Can_addr.c" />
 </file>
 <file name=".\Generated_Source\PSoC4\Can_addr.c" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\Clock_1.o">
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.c" />
-</file>
-<file name=".\Generated_Source\PSoC4\Clock_1.c" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\Clock_2.o">
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
@@ -1464,16 +1449,6 @@
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.c" />
 </file>
 <file name=".\Generated_Source\PSoC4\Status_Reg_Switches.c" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\Status_Reg_Switches_1.o">
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.c" />
-</file>
-<file name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.c" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\StripLights.o">
 <dep name=".\Generated_Source\PSoC4\ADC_SAR_Seq_1.h" />
 <dep name=".\Generated_Source\PSoC4\ADC_SAR_Seq_1_IRQ.h" />
@@ -1488,7 +1463,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -1541,7 +1515,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -1574,7 +1547,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -1634,7 +1606,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -1687,7 +1658,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -1720,7 +1690,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -1972,17 +1941,6 @@
 <dep name=".\Generated_Source\PSoC4\cy_em_eeprom.c" />
 </file>
 <file name=".\Generated_Source\PSoC4\cy_em_eeprom.c" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o">
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter_cfg.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter_cfg.c" />
-<dep name=".\cyapicallbacks.h" />
-</file>
-<file name=".\Generated_Source\PSoC4\cyfitter_cfg.c" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\cyutils.o">
 <dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
 <dep name=".\Generated_Source\PSoC4\cyfitter.h" />
@@ -2001,17 +1959,6 @@
 <dep name=".\cyapicallbacks.h" />
 </file>
 <file name=".\Generated_Source\PSoC4\isr_Limit_1.c" />
-<file name=".\CortexM0\ARM_GCC_541\Debug\isr_enc_count.o">
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.c" />
-<dep name=".\cyapicallbacks.h" />
-</file>
-<file name=".\Generated_Source\PSoC4\isr_enc_count.c" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\isr_period.o">
 <dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
 <dep name=".\Generated_Source\PSoC4\CyLib.h" />
@@ -2045,7 +1992,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -2098,7 +2044,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -2131,7 +2076,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -2154,7 +2098,6 @@
 <dep name=".\Generated_Source\PSoC4\CAN_HFCLK.h" />
 <dep name=".\Generated_Source\PSoC4\CAN_isr.h" />
 <dep name=".\Generated_Source\PSoC4\Can_addr.h" />
-<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_2.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM1.h" />
 <dep name=".\Generated_Source\PSoC4\Clock_PWM2.h" />
@@ -2207,7 +2150,6 @@
 <dep name=".\Generated_Source\PSoC4\Potentiometer.h" />
 <dep name=".\Generated_Source\PSoC4\Potentiometer_aliases.h" />
 <dep name=".\Generated_Source\PSoC4\Status_Reg_Switches.h" />
-<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_StringSel.h" />
 <dep name=".\Generated_Source\PSoC4\StripLights_cisr.h" />
@@ -2240,7 +2182,6 @@
 <dep name=".\Generated_Source\PSoC4\cypins.h" />
 <dep name=".\Generated_Source\PSoC4\cytypes.h" />
 <dep name=".\Generated_Source\PSoC4\isr_Limit_1.h" />
-<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
 <dep name=".\Generated_Source\PSoC4\isr_period.h" />
 <dep name=".\Generated_Source\PSoC4\project.h" />
 <dep name=".\Generated_Source\PSoC4\timer_clock.h" />
@@ -2259,6 +2200,38 @@
 <file name=".\Generated_Source\PSoC4\CyBootAsmGnu.s" />
 <file name=".\Generated_Source\PSoC4\cydevicegnu_trm.inc" />
 <file name=".\Generated_Source\PSoC4\cyfittergnu.inc" />
+<file name=".\Generated_Source\PSoC4\Clock_1.h" />
+<file name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
+<file name=".\Generated_Source\PSoC4\isr_enc_count.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\Clock_1.o">
+<dep name=".\Generated_Source\PSoC4\Clock_1.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+<dep name=".\Generated_Source\PSoC4\Clock_1.c" />
+</file>
+<file name=".\Generated_Source\PSoC4\Clock_1.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\Status_Reg_Switches_1.o">
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+<dep name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.c" />
+</file>
+<file name=".\Generated_Source\PSoC4\Status_Reg_Switches_1.c" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\isr_enc_count.o">
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+<dep name=".\Generated_Source\PSoC4\isr_enc_count.h" />
+<dep name=".\Generated_Source\PSoC4\isr_enc_count.c" />
+<dep name=".\cyapicallbacks.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\isr_enc_count.c" />
 <file name=".\Generated_Source\PSoC4\QuadDec.h" />
 <file name=".\Generated_Source\PSoC4\QuadDec_Cnt16.h" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\QuadDec.o">
@@ -2752,7 +2725,6 @@
 <dep name=".\CortexM0\ARM_GCC_541\Debug\Pin_Encoder_A_PM.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\Pin_Encoder_B.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\Pin_Encoder_B_PM.o" />
-<dep name=".\CortexM0\ARM_GCC_541\Debug\Clock_1.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\Status_Reg_Switches.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\Clock_2.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\ADC_SAR_Seq_1.o" />
@@ -2838,8 +2810,6 @@
 <dep name=".\CortexM0\ARM_GCC_541\Debug\Motor1CurrentSense_PM.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\Motor2CurrentSense.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\Motor2CurrentSense_PM.o" />
-<dep name=".\CortexM0\ARM_GCC_541\Debug\isr_enc_count.o" />
-<dep name=".\CortexM0\ARM_GCC_541\Debug\Status_Reg_Switches_1.o" />
 <dep name=".\CortexM0\ARM_GCC_541\Debug\SwerveMotorFirmware.a" />
 </file>
 </CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021>
@@ -3624,7 +3594,7 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="133204712883929953" />
+<deps_time v="133210708938084913" />
 <top_block v="TopDesign" />
 <last_generation v="1" />
 <pdl_path v="" />
@@ -3634,7 +3604,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="133204716726963581" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="133210708967757148" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>

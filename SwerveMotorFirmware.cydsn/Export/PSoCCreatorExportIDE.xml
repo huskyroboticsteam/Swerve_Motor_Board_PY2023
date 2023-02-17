@@ -117,8 +117,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_Encoder_B.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_Encoder_B_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Pin_Encoder_B_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Clock_1.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Clock_1.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Status_Reg_Switches.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Status_Reg_Switches.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Clock_2.c</File>
@@ -295,10 +293,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\isr_enc_count.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\isr_enc_count.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Status_Reg_Switches_1.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Status_Reg_Switches_1.h</File>
         </Files>
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\codegentemp">
