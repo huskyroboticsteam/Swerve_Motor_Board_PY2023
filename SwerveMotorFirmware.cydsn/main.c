@@ -69,6 +69,8 @@ uint8_t CAN_check_delay = 0;
 CANPacket can_recieve;
 CANPacket can_send;
 
+void updateEncCount();
+
 //stops motor every 20ms or so if no new packet was received. software might want this removed
 CY_ISR(Period_Reset_Handler) {
     int timer = Timer_1_ReadStatusRegister();
@@ -130,27 +132,13 @@ CY_ISR(Pin_Limit_Handler){
     }
 }
 
-//CY_ISR(Enc_Count_Handler) {
-//    //Read Encoder pin A current state
-//    currStatePinA = Pin_Encoder_A_Read();
-//    
-//    //if last and current state of pin A differ, then pulse occur
-//    if (currStatePinA != lastStatePinA  && currStatePinA == 1){
-//        // If the DT (B) state is different than the CLK (A) state then
-//    	// the encoder is rotating CCW so decrement
-//        if (Pin_Encoder_B_Read() != currStatePinA) {
-//    			counter --;
-//    			//currentDir ="CCW";
-//		} else {
-//			// Encoder is rotating CW so increment
-//			counter ++;
-//			//currentDir ="CW";
-//		}
-//        //can print here for testing
-//    }
-//	// Remember last CLK state
-//	lastStatePinA = currStatePinA;
-//}
+CY_ISR(EncA_Change_Handler) {
+    updateEncCount();
+}
+
+CY_ISR(EncB_Change_Handler) {
+    updateEncCount();
+}
 
 int main(void)
 { 
@@ -208,27 +196,6 @@ int main(void)
         sprintf(txData, "Encoder Value: %d  \r\n", QuadDec_GetCounter());
         UART_UartPutString(txData);
         #endif
-        
-        
-        //this should be in an interrupt but we cant do that for pin assignment complication
-        //Read Encoder pin A current state
-        currStatePinA = Pin_Encoder_A_Read();
-        //if last and current state of pin A differ, then pulse occur
-        if (currStatePinA != lastStatePinA  && currStatePinA == 1){
-            // If the DT (B) state is different than the CLK (A) state then
-        	// the encoder is rotating CCW so decrement
-            if (Pin_Encoder_B_Read() != currStatePinA) {
-        			counter--;
-        			//currentDir ="CCW";
-    		} else {
-    			// Encoder is rotating CW so increment
-    			counter++;
-    			//currentDir ="CW";
-    		}
-            //can print here for testing
-        }
-    	// Remember last CLK state
-    	lastStatePinA = currStatePinA;
     }
 }
  
@@ -271,7 +238,8 @@ void Initialize(void) {
     PWM_Motor1_Start();
     PWM_Motor2_Start();
     
-    //isr_enc_count_StartEx(Enc_Count_Handler); // specific pins dont work with interrupt :(
+    isr_encA_StartEx(EncA_Change_Handler);
+    isr_encB_StartEx(EncB_Change_Handler);
     isr_Limit_1_StartEx(Pin_Limit_Handler);
     isr_period_StartEx(Period_Reset_Handler);
     
@@ -364,6 +332,28 @@ int getSerialAddress() {
         address = DEVICE_SERIAL_TELEM_LOCALIZATION;
  
     return address;
+}
+
+void updateEncCount() {
+    //Read Encoder pin A current state
+    currStatePinA = Pin_Encoder_A_Read();
+
+    //if last and current state of pin A differ, then pulse occur
+    if (currStatePinA != lastStatePinA  && currStatePinA == 1){
+        // If the DT (B) state is different than the CLK (A) state then
+    	// the encoder is rotating CCW so decrement
+        if (Pin_Encoder_B_Read() != currStatePinA) {
+    			counter --;
+    			//currentDir ="CCW";
+    	} else {
+    		// Encoder is rotating CW so increment
+    		counter ++;
+    		//currentDir ="CW";
+    	}
+        //can print here for testing
+    }
+    // Remember last CLK state
+    lastStatePinA = currStatePinA;
 }
 
 

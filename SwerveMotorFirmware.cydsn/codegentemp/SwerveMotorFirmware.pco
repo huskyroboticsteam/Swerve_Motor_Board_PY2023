@@ -1,5 +1,5 @@
 # SwerveMotorFirmware
-# 2023-02-17 01:28:06Z
+# 2023-02-21 01:44:41Z
 
 # IO_6@[IOP=(0)][IoId=(6)] is reserved: ExtClkEnabled
 dont_use_io iocell 0 6
@@ -13,8 +13,10 @@ set_io "Limit1(0)" iocell 2 3
 set_io "Limit2(0)" iocell 2 2
 set_io "Motor1PWM(0)" iocell 5 2
 set_io "Potentiometer(0)" iocell 2 4
+set_location "Pin_Encoder_A" logicalport -1 -1 6
 set_io "Pin_Encoder_A(0)" iocell 6 4
-set_io "Pin_Encoder_B(0)" iocell 6 2
+set_location "Pin_Encoder_B" logicalport -1 -1 12
+set_io "Pin_Encoder_B(0)" iocell 12 1
 set_io "\ADC_SAR_Seq_1:Bypass(0)\" iocell 1 7
 set_io "CANRX(0)" iocell 4 0
 set_io "CANTX(0)" iocell 4 1
@@ -41,25 +43,25 @@ set_location "Net_1416" 0 3 1 1
 set_location "\StripLights:Net_159\" 0 3 1 2
 set_location "Net_115" 0 3 1 0
 set_location "Net_69" 0 1 0 2
-set_location "Net_70" 0 1 1 0
+set_location "Net_70" 0 1 1 2
 set_location "Net_71" 0 1 0 3
-set_location "Net_72" 0 0 0 0
+set_location "Net_72" 0 1 1 0
 set_location "\PWM_Motor1:cy_m0s8_tcpwm_1\" m0s8tcpwmcell -1 -1 5
 set_location "isr_Limit_1" interrupt -1 -1 2
-set_location "\Status_Reg_Switches:sts_intr:sts_reg\" 0 1 4
+set_location "\Status_Reg_Switches:sts_intr:sts_reg\" 1 1 4
 set_location "\ADC_SAR_Seq_1:IRQ\" interrupt -1 -1 17
 set_location "\ADC_SAR_Seq_1:cy_psoc4_sar\" p4sarcell -1 -1 0
 set_location "\CAN:isr\" interrupt -1 -1 28
 set_location "\CAN:CanIP\" cancell -1 -1 0
 set_location "\UART:SCB_IRQ\" interrupt -1 -1 10
 set_location "\UART:SCB\" m0s8scbcell -1 -1 1
-set_location "\Can_addr:sts:sts_reg\" 0 0 3
+set_location "\Can_addr:sts:sts_reg\" 0 1 3
 set_location "\Timer_1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" 1 1 6
 set_location "\Timer_1:TimerUDB:rstSts:stsreg\" 1 0 4
 set_location "\Timer_1:TimerUDB:sT24:timerdp:u0\" 0 1 2
 set_location "\Timer_1:TimerUDB:sT24:timerdp:u1\" 1 1 2
 set_location "\Timer_1:TimerUDB:sT24:timerdp:u2\" 1 0 2
-set_location "isr_period" interrupt -1 -1 3
+set_location "isr_period" interrupt -1 -1 5
 set_location "\StripLights:StringSel:Sync:ctrl_reg\" 0 3 6
 set_location "\StripLights:cisr\" interrupt -1 -1 0
 set_location "\StripLights:fisr\" interrupt -1 -1 1
@@ -68,8 +70,10 @@ set_location "\StripLights:B_WS2811:StatusReg\" 1 3 3
 set_location "\StripLights:B_WS2811:dshifter:u0\" 1 3 2
 set_location "\StripLights:B_WS2811:pwm8:u0\" 0 3 2
 set_location "\PWM_Motor2:cy_m0s8_tcpwm_1\" m0s8tcpwmcell -1 -1 4
-set_location "Net_966_0" 0 1 0 1
-set_location "Net_966_1" 0 1 0 0
+set_location "isr_encB" interrupt -1 -1 4
+set_location "isr_encA" interrupt -1 -1 3
+set_location "Net_966_0" 1 1 1 1
+set_location "Net_966_1" 1 1 1 3
 set_location "\StripLights:Net_64\" 0 3 0 0
 set_location "\StripLights:B_WS2811:status_6\" 0 3 0 2
 set_location "\StripLights:B_WS2811:bitCount_2\" 1 3 0 2

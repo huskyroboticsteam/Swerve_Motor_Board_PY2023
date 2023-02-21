@@ -1,6 +1,6 @@
 // ======================================================================
 // SwerveMotorFirmware.v generated from TopDesign.cysch
-// 02/16/2023 at 17:28
+// 02/20/2023 at 17:44
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1957,14 +1957,14 @@ module top ;
           wire  Net_117;
           wire  Net_116;
           wire  Net_115;
-          wire  Net_89;
+          wire  Net_423;
           wire  Net_88;
           wire  Net_87;
           wire  Net_86;
           wire  Net_85;
           wire  Net_84;
           wire  Net_83;
-          wire  Net_114;
+          wire  Net_452;
           wire  Net_81;
           wire  Net_80;
           wire  Net_79;
@@ -2020,8 +2020,6 @@ module top ;
           wire [1:0] Net_23;
           wire [1:0] Net_22;
           wire [1:0] Net_21;
-          wire  Net_356;
-          wire  Net_396;
           wire  Net_107;
           wire  Net_12;
           wire  Net_183;
@@ -2036,9 +2034,11 @@ module top ;
           wire  Net_3;
           wire  Net_175;
           wire  Net_174;
+          wire  Net_434;
+          wire  Net_436;
+          wire  Net_1314;
     electrical  Net_390;
           wire  Net_1416;
-          wire  Net_1314;
           wire [1:0] Net_966;
           wire  Net_1291;
           wire  Net_156;
@@ -2425,8 +2425,8 @@ module top ;
     defparam GND_2.width = 1;
 
 	wire [0:0] tmpOE__Pin_Encoder_A_net;
+	wire [0:0] tmpFB_0__Pin_Encoder_A_net;
 	wire [0:0] tmpIO_0__Pin_Encoder_A_net;
-	wire [0:0] tmpINTERRUPT_0__Pin_Encoder_A_net;
 	electrical [0:0] tmpSIOVREF__Pin_Encoder_A_net;
 
 	cy_psoc3_pins_v1_10
@@ -2437,7 +2437,7 @@ module top ;
 		  .input_clk_en(0),
 		  .input_sync(1'b0),
 		  .input_sync_mode(1'b0),
-		  .intr_mode(2'b00),
+		  .intr_mode(2'b11),
 		  .invert_in_clock(0),
 		  .invert_in_clock_en(0),
 		  .invert_in_reset(0),
@@ -2485,10 +2485,10 @@ module top ;
 		Pin_Encoder_A
 		 (.oe(tmpOE__Pin_Encoder_A_net),
 		  .y({1'b0}),
-		  .fb({Net_396}),
+		  .fb({tmpFB_0__Pin_Encoder_A_net[0:0]}),
 		  .io({tmpIO_0__Pin_Encoder_A_net[0:0]}),
 		  .siovref(tmpSIOVREF__Pin_Encoder_A_net),
-		  .interrupt({tmpINTERRUPT_0__Pin_Encoder_A_net[0:0]}),
+		  .interrupt({Net_436}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -2499,8 +2499,8 @@ module top ;
 	assign tmpOE__Pin_Encoder_A_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
 	wire [0:0] tmpOE__Pin_Encoder_B_net;
+	wire [0:0] tmpFB_0__Pin_Encoder_B_net;
 	wire [0:0] tmpIO_0__Pin_Encoder_B_net;
-	wire [0:0] tmpINTERRUPT_0__Pin_Encoder_B_net;
 	electrical [0:0] tmpSIOVREF__Pin_Encoder_B_net;
 
 	cy_psoc3_pins_v1_10
@@ -2511,7 +2511,7 @@ module top ;
 		  .input_clk_en(0),
 		  .input_sync(1'b0),
 		  .input_sync_mode(1'b0),
-		  .intr_mode(2'b00),
+		  .intr_mode(2'b11),
 		  .invert_in_clock(0),
 		  .invert_in_clock_en(0),
 		  .invert_in_reset(0),
@@ -2559,10 +2559,10 @@ module top ;
 		Pin_Encoder_B
 		 (.oe(tmpOE__Pin_Encoder_B_net),
 		  .y({1'b0}),
-		  .fb({Net_356}),
+		  .fb({tmpFB_0__Pin_Encoder_B_net[0:0]}),
 		  .io({tmpIO_0__Pin_Encoder_B_net[0:0]}),
 		  .siovref(tmpSIOVREF__Pin_Encoder_B_net),
-		  .interrupt({tmpINTERRUPT_0__Pin_Encoder_B_net[0:0]}),
+		  .interrupt({Net_434}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -4132,6 +4132,20 @@ module top ;
 		  .out_reset({1'b0}));
 
 	assign tmpOE__Motor2CurrentSense_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+
+
+	cy_isr_v1_0
+		#(.int_type(2'b10))
+		isr_encB
+		 (.int_signal(Net_434));
+
+
+
+	cy_isr_v1_0
+		#(.int_type(2'b10))
+		isr_encA
+		 (.int_signal(Net_436));
+
 
 
 

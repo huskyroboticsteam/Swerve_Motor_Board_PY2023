@@ -1,5 +1,5 @@
 -- Project:   SwerveMotorFirmware
--- Generated: 02/16/2023 17:28:04
+-- Generated: 02/20/2023 17:44:38
 -- PSoC Creator  4.4
 
 ENTITY SwerveMotorFirmware IS
@@ -39,7 +39,7 @@ ENTITY SwerveMotorFirmware IS
     ATTRIBUTE voltage_VDDIO_4 OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO OF __DEFAULT__ : ENTITY IS 3.3e0;
-    ATTRIBUTE voltage_VBUS OF __DEFAULT__ : ENTITY IS 5e0;
+    ATTRIBUTE voltage_VBUS OF __DEFAULT__ : ENTITY IS 3.3e0;
 END SwerveMotorFirmware;
 
 ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
@@ -109,6 +109,8 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     SIGNAL Net_40 : bit;
     SIGNAL Net_41 : bit;
     SIGNAL Net_42 : bit;
+    SIGNAL Net_434 : bit;
+    SIGNAL Net_436 : bit;
     SIGNAL Net_45 : bit;
     SIGNAL Net_57 : bit;
     SIGNAL Net_66 : bit;
@@ -255,7 +257,7 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE lib_model OF Pin_Encoder_A(0) : LABEL IS "iocell5";
     ATTRIBUTE Location OF Pin_Encoder_A(0) : LABEL IS "P6[4]";
     ATTRIBUTE lib_model OF Pin_Encoder_B(0) : LABEL IS "iocell6";
-    ATTRIBUTE Location OF Pin_Encoder_B(0) : LABEL IS "P6[2]";
+    ATTRIBUTE Location OF Pin_Encoder_B(0) : LABEL IS "P12[1]";
     ATTRIBUTE lib_model OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "iocell7";
     ATTRIBUTE Location OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "P1[7]";
     ATTRIBUTE lib_model OF CANRX(0) : LABEL IS "iocell8";
@@ -1192,7 +1194,7 @@ BEGIN
             input_clk_en => 0,
             input_sync => "0",
             input_sync_mode => "0",
-            intr_mode => "00",
+            intr_mode => "11",
             invert_in_clock => 0,
             invert_in_clock_en => 0,
             invert_in_reset => 0,
@@ -1251,7 +1253,8 @@ BEGIN
             in_clock_en => open,
             in_reset => open,
             out_clock_en => open,
-            out_reset => open);
+            out_reset => open,
+            interrupt => Net_436);
 
     Pin_Encoder_A(0):iocell
         GENERIC MAP(
@@ -1260,7 +1263,7 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Pin_Encoder_A",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+            io_capabilities => "0000000000000000000000000001000000000000000000000000000000000001")
         PORT MAP(
             pa_out => Pin_Encoder_A(0)__PA,
             oe => open,
@@ -1282,7 +1285,7 @@ BEGIN
             input_clk_en => 0,
             input_sync => "0",
             input_sync_mode => "0",
-            intr_mode => "00",
+            intr_mode => "11",
             invert_in_clock => 0,
             invert_in_clock_en => 0,
             invert_in_reset => 0,
@@ -1341,7 +1344,8 @@ BEGIN
             in_clock_en => open,
             in_reset => open,
             out_clock_en => open,
-            out_reset => open);
+            out_reset => open,
+            interrupt => Net_434);
 
     Pin_Encoder_B(0):iocell
         GENERIC MAP(
@@ -1350,7 +1354,7 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Pin_Encoder_B",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+            io_capabilities => "0000000000000000000000000001000000000000000000000000000000000001")
         PORT MAP(
             pa_out => Pin_Encoder_B(0)__PA,
             oe => open,
@@ -3856,6 +3860,22 @@ BEGIN
             line => Net_167,
             line_compl => Net_168,
             interrupt => Net_166);
+
+    isr_encB:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_434,
+            clock => ClockBlock_HFClk);
+
+    isr_encA:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_436,
+            clock => ClockBlock_HFClk);
 
     Net_966_0:macrocell
         GENERIC MAP(

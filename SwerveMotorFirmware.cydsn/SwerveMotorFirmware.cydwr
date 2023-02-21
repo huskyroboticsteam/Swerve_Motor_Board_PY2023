@@ -3919,7 +3919,7 @@
     </Group>
     <Group key="69dbbfed-7e82-43d0-aea3-4a98e23e044b">
       <Group key="0">
-        <Data key="Port Format" value="6,2" />
+        <Data key="Port Format" value="12,1" />
       </Group>
     </Group>
     <Group key="99a54865-2e0c-4e8b-8979-f2d08319ddba">
@@ -4021,7 +4021,7 @@
     <Data key="CYDEV_TEMPERATURE" value="-40C - 85C" />
     <Data key="CYDEV_USE_BUNDLED_CMSIS" value="True" />
     <Data key="CYDEV_VARIABLE_VDDA" value="True" />
-    <Data key="CYDEV_VBUS" value="5.0" />
+    <Data key="CYDEV_VBUS" value="5" />
     <Data key="CYDEV_VDDA" value="3.3" />
     <Data key="CYDEV_VDDD" value="3.3" />
     <Data key="CYDEV_VDDIO" value="3.3" />

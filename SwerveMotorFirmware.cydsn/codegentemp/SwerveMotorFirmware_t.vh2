@@ -1,5 +1,5 @@
 -- Project:   C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj
--- Generated: 02/16/2023 17:28:08
+-- Generated: 02/20/2023 17:44:43
 -- PSoC Creator  4.4
 
 ENTITY SwerveMotorFirmware IS
@@ -39,7 +39,7 @@ ENTITY SwerveMotorFirmware IS
     ATTRIBUTE voltage_VDDIO_4 OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO OF __DEFAULT__ : ENTITY IS 3.3e0;
-    ATTRIBUTE voltage_VBUS OF __DEFAULT__ : ENTITY IS 5e0;
+    ATTRIBUTE voltage_VBUS OF __DEFAULT__ : ENTITY IS 3.3e0;
 END SwerveMotorFirmware;
 
 ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
@@ -111,26 +111,28 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     SIGNAL Net_40 : bit;
     SIGNAL Net_41 : bit;
     SIGNAL Net_42 : bit;
+    SIGNAL Net_434 : bit;
+    SIGNAL Net_436 : bit;
     SIGNAL Net_45 : bit;
     SIGNAL Net_57 : bit;
     SIGNAL Net_66 : bit;
     SIGNAL Net_69 : bit;
     ATTRIBUTE placement_force OF Net_69 : SIGNAL IS "U(0,1,A)2";
     SIGNAL Net_70 : bit;
-    ATTRIBUTE placement_force OF Net_70 : SIGNAL IS "U(0,1,B)0";
+    ATTRIBUTE placement_force OF Net_70 : SIGNAL IS "U(0,1,B)2";
     SIGNAL Net_71 : bit;
     ATTRIBUTE placement_force OF Net_71 : SIGNAL IS "U(0,1,A)3";
     SIGNAL Net_72 : bit;
-    ATTRIBUTE placement_force OF Net_72 : SIGNAL IS "U(0,0,A)0";
+    ATTRIBUTE placement_force OF Net_72 : SIGNAL IS "U(0,1,B)0";
     SIGNAL Net_78 : bit;
     SIGNAL Net_79 : bit;
     SIGNAL Net_80 : bit;
     SIGNAL Net_81 : bit;
     SIGNAL Net_86 : bit;
     SIGNAL Net_966_0 : bit;
-    ATTRIBUTE placement_force OF Net_966_0 : SIGNAL IS "U(0,1,A)1";
+    ATTRIBUTE placement_force OF Net_966_0 : SIGNAL IS "U(1,1,B)1";
     SIGNAL Net_966_1 : bit;
-    ATTRIBUTE placement_force OF Net_966_1 : SIGNAL IS "U(0,1,A)0";
+    ATTRIBUTE placement_force OF Net_966_1 : SIGNAL IS "U(1,1,B)3";
     SIGNAL Pin_Encoder_A(0)__PA : bit;
     SIGNAL Pin_Encoder_B(0)__PA : bit;
     SIGNAL Potentiometer(0)__PA : bit;
@@ -273,10 +275,12 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE Location OF Motor1PWM(0) : LABEL IS "P5[2]";
     ATTRIBUTE lib_model OF Potentiometer(0) : LABEL IS "iocell4";
     ATTRIBUTE Location OF Potentiometer(0) : LABEL IS "P2[4]";
+    ATTRIBUTE Location OF Pin_Encoder_A : LABEL IS "F(PICU,6)";
     ATTRIBUTE lib_model OF Pin_Encoder_A(0) : LABEL IS "iocell5";
     ATTRIBUTE Location OF Pin_Encoder_A(0) : LABEL IS "P6[4]";
+    ATTRIBUTE Location OF Pin_Encoder_B : LABEL IS "F(PICU,12)";
     ATTRIBUTE lib_model OF Pin_Encoder_B(0) : LABEL IS "iocell6";
-    ATTRIBUTE Location OF Pin_Encoder_B(0) : LABEL IS "P6[2]";
+    ATTRIBUTE Location OF Pin_Encoder_B(0) : LABEL IS "P12[1]";
     ATTRIBUTE lib_model OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "iocell7";
     ATTRIBUTE Location OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "P1[7]";
     ATTRIBUTE lib_model OF CANRX(0) : LABEL IS "iocell8";
@@ -334,11 +338,11 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE lib_model OF Net_71 : LABEL IS "macrocell7";
     ATTRIBUTE Location OF Net_71 : LABEL IS "U(0,1)";
     ATTRIBUTE lib_model OF Net_72 : LABEL IS "macrocell8";
-    ATTRIBUTE Location OF Net_72 : LABEL IS "U(0,0)";
+    ATTRIBUTE Location OF Net_72 : LABEL IS "U(0,1)";
     ATTRIBUTE Location OF \PWM_Motor1:cy_m0s8_tcpwm_1\ : LABEL IS "F(TCPWM,5)";
     ATTRIBUTE Location OF isr_Limit_1 : LABEL IS "[IntrContainer=(0)][IntrId=(2)]";
     ATTRIBUTE lib_model OF \Status_Reg_Switches:sts_intr:sts_reg\ : LABEL IS "statusicell1";
-    ATTRIBUTE Location OF \Status_Reg_Switches:sts_intr:sts_reg\ : LABEL IS "U(0,1)";
+    ATTRIBUTE Location OF \Status_Reg_Switches:sts_intr:sts_reg\ : LABEL IS "U(1,1)";
     ATTRIBUTE Location OF \ADC_SAR_Seq_1:IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(17)]";
     ATTRIBUTE Location OF \ADC_SAR_Seq_1:cy_psoc4_sar\ : LABEL IS "F(SARADC,0)";
     ATTRIBUTE Location OF \CAN:isr\ : LABEL IS "[IntrContainer=(0)][IntrId=(28)]";
@@ -346,7 +350,7 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE Location OF \UART:SCB_IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(10)]";
     ATTRIBUTE Location OF \UART:SCB\ : LABEL IS "F(SCB,1)";
     ATTRIBUTE lib_model OF \Can_addr:sts:sts_reg\ : LABEL IS "statuscell1";
-    ATTRIBUTE Location OF \Can_addr:sts:sts_reg\ : LABEL IS "U(0,0)";
+    ATTRIBUTE Location OF \Can_addr:sts:sts_reg\ : LABEL IS "U(0,1)";
     ATTRIBUTE lib_model OF \Timer_1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell1";
     ATTRIBUTE Location OF \Timer_1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \Timer_1:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell2";
@@ -357,7 +361,7 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE Location OF \Timer_1:TimerUDB:sT24:timerdp:u1\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \Timer_1:TimerUDB:sT24:timerdp:u2\ : LABEL IS "datapathcell3";
     ATTRIBUTE Location OF \Timer_1:TimerUDB:sT24:timerdp:u2\ : LABEL IS "U(1,0)";
-    ATTRIBUTE Location OF isr_period : LABEL IS "[IntrContainer=(0)][IntrId=(3)]";
+    ATTRIBUTE Location OF isr_period : LABEL IS "[IntrContainer=(0)][IntrId=(5)]";
     ATTRIBUTE lib_model OF \StripLights:StringSel:Sync:ctrl_reg\ : LABEL IS "controlcell2";
     ATTRIBUTE Location OF \StripLights:StringSel:Sync:ctrl_reg\ : LABEL IS "U(0,3)";
     ATTRIBUTE Location OF \StripLights:cisr\ : LABEL IS "[IntrContainer=(0)][IntrId=(0)]";
@@ -371,10 +375,12 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE lib_model OF \StripLights:B_WS2811:pwm8:u0\ : LABEL IS "datapathcell5";
     ATTRIBUTE Location OF \StripLights:B_WS2811:pwm8:u0\ : LABEL IS "U(0,3)";
     ATTRIBUTE Location OF \PWM_Motor2:cy_m0s8_tcpwm_1\ : LABEL IS "F(TCPWM,4)";
+    ATTRIBUTE Location OF isr_encB : LABEL IS "[IntrContainer=(0)][IntrId=(4)]";
+    ATTRIBUTE Location OF isr_encA : LABEL IS "[IntrContainer=(0)][IntrId=(3)]";
     ATTRIBUTE lib_model OF Net_966_0 : LABEL IS "macrocell9";
-    ATTRIBUTE Location OF Net_966_0 : LABEL IS "U(0,1)";
+    ATTRIBUTE Location OF Net_966_0 : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF Net_966_1 : LABEL IS "macrocell10";
-    ATTRIBUTE Location OF Net_966_1 : LABEL IS "U(0,1)";
+    ATTRIBUTE Location OF Net_966_1 : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \StripLights:Net_64\ : LABEL IS "macrocell11";
     ATTRIBUTE Location OF \StripLights:Net_64\ : LABEL IS "U(0,3)";
     ATTRIBUTE lib_model OF \StripLights:B_WS2811:status_6\ : LABEL IS "macrocell12";
@@ -1251,7 +1257,7 @@ BEGIN
             input_clk_en => 0,
             input_sync => "0",
             input_sync_mode => "0",
-            intr_mode => "00",
+            intr_mode => "11",
             invert_in_clock => 0,
             invert_in_clock_en => 0,
             invert_in_reset => 0,
@@ -1310,7 +1316,8 @@ BEGIN
             in_clock_en => open,
             in_reset => open,
             out_clock_en => open,
-            out_reset => open);
+            out_reset => open,
+            interrupt => Net_436);
 
     Pin_Encoder_A(0):iocell
         GENERIC MAP(
@@ -1319,7 +1326,7 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Pin_Encoder_A",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+            io_capabilities => "0000000000000000000000000001000000000000000000000000000000000001")
         PORT MAP(
             pa_out => Pin_Encoder_A(0)__PA,
             oe => open,
@@ -1341,7 +1348,7 @@ BEGIN
             input_clk_en => 0,
             input_sync => "0",
             input_sync_mode => "0",
-            intr_mode => "00",
+            intr_mode => "11",
             invert_in_clock => 0,
             invert_in_clock_en => 0,
             invert_in_reset => 0,
@@ -1400,7 +1407,8 @@ BEGIN
             in_clock_en => open,
             in_reset => open,
             out_clock_en => open,
-            out_reset => open);
+            out_reset => open,
+            interrupt => Net_434);
 
     Pin_Encoder_B(0):iocell
         GENERIC MAP(
@@ -1409,7 +1417,7 @@ BEGIN
             oe_sync_mode => 0,
             logicalport => "Pin_Encoder_B",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+            io_capabilities => "0000000000000000000000000001000000000000000000000000000000000001")
         PORT MAP(
             pa_out => Pin_Encoder_B(0)__PA,
             oe => open,
@@ -3915,6 +3923,22 @@ BEGIN
             line => Net_167,
             line_compl => Net_168,
             interrupt => Net_166);
+
+    isr_encB:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_434,
+            clock => ClockBlock_HFClk);
+
+    isr_encA:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_436,
+            clock => ClockBlock_HFClk);
 
     Net_966_0:macrocell
         GENERIC MAP(

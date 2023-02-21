@@ -116,7 +116,6 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\LED_Array.c</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\main.c</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\Motor_Unit_CAN.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\Source Files\Motor_Unit_FSM.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -188,6 +187,8 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip3_PM.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip4.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip4_PM.lst</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_encA.lst</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_encB.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_Limit_1.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_period.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_Array.lst</v>
@@ -313,7 +314,6 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip1.lst</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip1_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip2.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -415,6 +415,7 @@
 <name v=".\SwerveMotorFirmware.cydsn\MotorDrive.c" />
 <name v=".\SwerveMotorFirmware.cydsn\PositionPID.c" />
 <name v=".\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" />
+<name v=".\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -422,7 +423,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1477, 624" SelectedTabbedMdiWindow="f767b4fd-4fc6-4ee4-8d73-4f336e9624fe"><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="43ce8fe7-5ae1-4d10-a251-254bb06f7d1e" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\LED_Array.c" Guid="9a2b47e6-b9a8-4407-b47c-9d9203e88c2f" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" Guid="716a374d-015a-4475-b5f1-a65f2098ee26" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_FSM.c" Guid="44051121-ad49-4a44-a511-943230e17df7" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.c" Guid="85317ef6-2563-41df-8123-c2ee0a9ca14d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="6d8b2d7d-2a88-4412-9cd7-4c7274ab9fd8" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="ea4087bb-e838-44b2-94b7-2bea84f5f49d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="f767b4fd-4fc6-4ee4-8d73-4f336e9624fe" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1271, 608" SelectedTabbedMdiWindow="f767b4fd-4fc6-4ee4-8d73-4f336e9624fe"><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="43ce8fe7-5ae1-4d10-a251-254bb06f7d1e" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\LED_Array.c" Guid="9a2b47e6-b9a8-4407-b47c-9d9203e88c2f" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" Guid="716a374d-015a-4475-b5f1-a65f2098ee26" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_FSM.c" Guid="44051121-ad49-4a44-a511-943230e17df7" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.c" Guid="85317ef6-2563-41df-8123-c2ee0a9ca14d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="6d8b2d7d-2a88-4412-9cd7-4c7274ab9fd8" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="ea4087bb-e838-44b2-94b7-2bea84f5f49d" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="f767b4fd-4fc6-4ee4-8d73-4f336e9624fe" /><DocumentWindow Key="C:\Users\mewin\OneDrive\Documents\PSoC Creator\Swerve Motor Board 2023\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="03f9d599-457b-431f-8e8f-cad928c62ed4" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

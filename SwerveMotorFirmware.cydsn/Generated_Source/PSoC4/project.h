@@ -87,6 +87,8 @@
 #include "Motor1CurrentSense_aliases.h"
 #include "Motor2CurrentSense.h"
 #include "Motor2CurrentSense_aliases.h"
+#include "isr_encB.h"
+#include "isr_encA.h"
 #include "ADC_SAR_Seq_1_IRQ.h"
 #include "ADC_SAR_Seq_1_intClock.h"
 #include "CAN_isr.h"

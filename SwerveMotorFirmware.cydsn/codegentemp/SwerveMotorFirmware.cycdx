@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
+  <block name="Motor1Fault" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Array_LED" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="StripLights" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
     <block name="demux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -12,11 +13,11 @@
     </block>
     <block name="cisr" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   </block>
-  <block name="LED_Error" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="not_4" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="not_3" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Motor1Fault" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="LED_CAN" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="not_6" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="not_5" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="not_4" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="isr_period" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Timer_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
     <block name="TimerUDB" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <register name="Timer_1_COUNTER" address="0x400F0004" bitWidth="24" desc="UDB.A0 - Current Down Counter Value" hidden="false" />
@@ -62,14 +63,14 @@
     </register>
   </block>
   <block name="ZeroTerminal_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="timer_clock" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="LED_Debug2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="LED_Debug1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="isr_period" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="not_5" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="LED_Error" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="LED_CAN" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="LED_Debug2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="isr_encA" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="isr_encB" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Motor2CurrentSense" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Motor1CurrentSense" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Em_EEPROM_Dynamic" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="cy_lfclk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="DMAC" BASE="0x0" SIZE="0x0" desc="DMAC Registers" visible="true" hidden="false">
@@ -4379,7 +4380,7 @@
       <field name="CURR_DATA_NR" from="15" to="0" access="RW" resetVal="" desc="Specifies the index of the current data transfer. This value increases from 0 to CONTROL.DATA_NR. HW sets this field: &#xA; - When a descriptor is done (RESPONSE is DONE), the field is set to '0' when PING_CTL.INV_DESCR is '0' and the field is set to PING_CTL.DATA_NR when PING_CTL.INV_DESCR is '1'.                                                                 &#xA; - When a descriptor is not done (RESPONSE is NO_ERROR), the field reflects the progress of a data transfer.                                                                 &#xA; - In case of erroneous behavior (RESPONSE is neither DONE or NO_ERROR), the field is not updated, but keeps its value to ease debugging.                                                                 &#xA; HW only modifies this field for an active descriptor (STATUS.VALID to be '1'). At descriptor initialization, SW should set this field to '0'.                                                                 &#xA; This field allows software to read the progress of the data transfer. Note that SRC.ADDR and DST.ADDR represent base addresses and are not modified during data transfer. However, STATUS.CURR_DATA_NR is modified during data transfer and provides an offset wrt. the base addresses." hidden="false" />
     </register>
   </block>
-  <block name="Motor2Direction" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Motor1Direction" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="PWM_Motor2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
     <block name="VMux_count" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="VMux_reload" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -4395,18 +4396,18 @@
     <register name="PERIOD_BUF" address="0x40200218" bitWidth="32" desc="Period buffer value" hidden="false" />
   </block>
   <block name="Motor2Fault" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="not_6" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Clock_PWM2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Motor2PWM" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Motor1Direction" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Dip4" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Motor1CurrentSense" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Motor2Direction" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Clock_PWM2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="timer_clock" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="SW_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="GND_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="SW_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="GND_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Debouncer_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Pin_Encoder_B" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Pin_Encoder_A" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="GND_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Potentiometer" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="PWM_Motor1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
     <block name="VMux_count" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="VMux_reload" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -4423,14 +4424,14 @@
   </block>
   <block name="Limit2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Limit1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="isr_Limit_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Potentiometer" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Clock_PWM1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Motor1PWM" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="isr_Limit_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Debouncer_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Can_addr" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="Can_addr_STATUS_REG" address="0x400F0067" bitWidth="8" desc="" hidden="false" />
-    <register name="Can_addr_MASK_REG" address="0x400F0087" bitWidth="8" desc="" hidden="false" />
-    <register name="Can_addr_STATUS_AUX_CTL_REG" address="0x400F0097" bitWidth="8" desc="" hidden="false">
+    <register name="Can_addr_STATUS_REG" address="0x400F0064" bitWidth="8" desc="" hidden="false" />
+    <register name="Can_addr_MASK_REG" address="0x400F0084" bitWidth="8" desc="" hidden="false" />
+    <register name="Can_addr_STATUS_AUX_CTL_REG" address="0x400F0094" bitWidth="8" desc="" hidden="false">
       <field name="FIFO0" from="5" to="5" access="RW" resetVal="" desc="FIFO0 clear" hidden="false">
         <value name="ENABLED" value="1" desc="Enable counter" />
         <value name="DISABLED" value="0" desc="Disable counter" />
@@ -5099,16 +5100,16 @@
       <field name="DATA_LOW" from="31" to="0" access="RW" resetVal="" desc="Lower Data Bytes" hidden="false" />
     </register>
   </block>
+  <block name="Dip1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Dip4" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Dip3" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Dip2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Dip1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="CANTX" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Clock_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Status_Reg_Switches" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <register name="Status_Reg_Switches_STATUS_REG" address="0x400F0064" bitWidth="8" desc="" hidden="false" />
-    <register name="Status_Reg_Switches_MASK_REG" address="0x400F0084" bitWidth="8" desc="" hidden="false" />
-    <register name="Status_Reg_Switches_STATUS_AUX_CTL_REG" address="0x400F0094" bitWidth="8" desc="" hidden="false">
+    <register name="Status_Reg_Switches_STATUS_REG" address="0x400F0065" bitWidth="8" desc="" hidden="false" />
+    <register name="Status_Reg_Switches_MASK_REG" address="0x400F0085" bitWidth="8" desc="" hidden="false" />
+    <register name="Status_Reg_Switches_STATUS_AUX_CTL_REG" address="0x400F0095" bitWidth="8" desc="" hidden="false">
       <field name="FIFO0" from="5" to="5" access="RW" resetVal="" desc="FIFO0 clear" hidden="false">
         <value name="ENABLED" value="1" desc="Enable counter" />
         <value name="DISABLED" value="0" desc="Disable counter" />
@@ -5135,6 +5136,8 @@
       </field>
     </register>
   </block>
+  <block name="not_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="CANTX" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="CANRX" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="ADC_SAR_Seq_1" BASE="0x0" SIZE="0x0" desc="Sequencing SAR ADC" visible="true" hidden="false">
     <block name="cy_analog_noconnect_31" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
@@ -5524,5 +5527,4 @@
       <field name="WOUND_RESOLUTION" from="1" to="0" access="R" resetVal="" desc="Maximum SAR resolution allowed" hidden="false" />
     </register>
   </block>
-  <block name="not_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
 </blockRegMap>

@@ -22692,7 +22692,7 @@
         <register>
           <name>Can_addr_STATUS_REG</name>
           <description>No description available</description>
-          <addressOffset>0x400F0067</addressOffset>
+          <addressOffset>0x400F0064</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -22701,7 +22701,7 @@
         <register>
           <name>Can_addr_MASK_REG</name>
           <description>No description available</description>
-          <addressOffset>0x400F0087</addressOffset>
+          <addressOffset>0x400F0084</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -22710,7 +22710,7 @@
         <register>
           <name>Can_addr_STATUS_AUX_CTL_REG</name>
           <description>No description available</description>
-          <addressOffset>0x400F0097</addressOffset>
+          <addressOffset>0x400F0094</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -26830,7 +26830,7 @@
         <register>
           <name>Status_Reg_Switches_STATUS_REG</name>
           <description>No description available</description>
-          <addressOffset>0x400F0064</addressOffset>
+          <addressOffset>0x400F0065</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -26839,7 +26839,7 @@
         <register>
           <name>Status_Reg_Switches_MASK_REG</name>
           <description>No description available</description>
-          <addressOffset>0x400F0084</addressOffset>
+          <addressOffset>0x400F0085</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -26848,7 +26848,7 @@
         <register>
           <name>Status_Reg_Switches_STATUS_AUX_CTL_REG</name>
           <description>No description available</description>
-          <addressOffset>0x400F0094</addressOffset>
+          <addressOffset>0x400F0095</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>

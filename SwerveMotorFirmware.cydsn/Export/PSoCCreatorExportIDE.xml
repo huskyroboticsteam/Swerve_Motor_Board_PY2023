@@ -293,6 +293,10 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\Motor2CurrentSense_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\isr_encA.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\isr_encA.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\isr_encB.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC4\isr_encB.h</File>
         </Files>
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\codegentemp">
