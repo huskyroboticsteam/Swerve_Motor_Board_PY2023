@@ -18,6 +18,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "main.h"
 #include "Motor_Unit_Debug.h"
@@ -150,6 +151,7 @@ int main(void)
     for(;;)
     {
         switch(GetState()) {
+            
             case(UNINIT):
                 //idle animation
                 SetStateTo(CHECK_CAN);
@@ -232,7 +234,7 @@ void Initialize(void) {
     LED_CAN_Write(~address & 1);
     #endif
     
-    InitCAN_swerve(0x4, (int)address, (int)address + 1); //group, drive, swivel
+    InitCAN_swerve(0x4, (int)address, (int)address + 16); //group, drive, swivel plus 16 becuz wiki
     Timer_1_Start();
     //QuadDec_Start();
     PWM_Motor1_Start();
@@ -266,6 +268,7 @@ uint16_t ReadCAN(CANPacket *receivedPacket){
         CAN_time_LED = 0;
         return receivedPacket->data[0];
     }
+    //PrintCanPacket(*receivedPacket);
     return NO_NEW_CAN_PACKET; //Means no Packet
 }
 
@@ -328,8 +331,6 @@ int getSerialAddress() {
         address += 4;
     if (Dip4_Read()==0)
         address += 8;
-    if (address == 0)
-        address = DEVICE_SERIAL_TELEM_LOCALIZATION;
  
     return address;
 }

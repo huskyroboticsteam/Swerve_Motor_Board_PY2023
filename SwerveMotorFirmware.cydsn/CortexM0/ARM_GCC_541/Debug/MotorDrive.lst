@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 1
 
 
    1              		.syntax unified
@@ -42,7 +42,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 1
   12:MotorDrive.c  **** #include <project.h>
   13:MotorDrive.c  **** #include <stdio.h>
   14:MotorDrive.c  **** #include <stdint.h>
-  15:MotorDrive.c  **** 
+  15:MotorDrive.c  **** #include <stdlib.h>
   16:MotorDrive.c  **** #include "main.h"
   17:MotorDrive.c  **** #include "MotorDrive.h"
   18:MotorDrive.c  **** 
@@ -58,1299 +58,1470 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 1
   28:MotorDrive.c  **** void set_PWM_M1(int16_t compare, uint8_t disable_limit, uint8_t limitSW) {  //limitSw prev uint8
   28              		.loc 1 28 0
   29              		.cfi_startproc
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 2
 
 
-  30              		@ args = 0, pretend = 0, frame = 0
+  30              		@ args = 0, pretend = 0, frame = 32
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              	.LVL0:
-  33 0000 10B5     		push	{r4, lr}
-  34              		.cfi_def_cfa_offset 8
-  35              		.cfi_offset 4, -8
-  36              		.cfi_offset 14, -4
-  37 0002 0400     		movs	r4, r0
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 4, -16
+  36              		.cfi_offset 5, -12
+  37              		.cfi_offset 6, -8
+  38              		.cfi_offset 14, -4
+  39 0002 88B0     		sub	sp, sp, #32
+  40              		.cfi_def_cfa_offset 48
+  41 0004 0400     		movs	r4, r0
+  42 0006 0E00     		movs	r6, r1
+  43 0008 1500     		movs	r5, r2
   29:MotorDrive.c  ****     #ifdef PRINT_PWM_COMMAND
   30:MotorDrive.c  ****     sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
   31:MotorDrive.c  ****     UART_UartPutString(txData); 
   32:MotorDrive.c  ****     #endif
-  33:MotorDrive.c  ****     
-  34:MotorDrive.c  ****     invalidate = 0;     
-  38              		.loc 1 34 0
-  39 0004 0020     		movs	r0, #0
-  40              	.LVL1:
-  41 0006 134B     		ldr	r3, .L7
-  42 0008 1870     		strb	r0, [r3]
-  35:MotorDrive.c  ****     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
-  43              		.loc 1 35 0
-  44 000a 002C     		cmp	r4, #0
-  45 000c 0CDA     		bge	.L2
-  46              		.loc 1 35 0 is_stmt 0 discriminator 1
-  47 000e D307     		lsls	r3, r2, #31
-  48 0010 01D5     		bpl	.L3
-  49              		.loc 1 35 0 discriminator 2
-  50 0012 0029     		cmp	r1, #0
-  51 0014 08D0     		beq	.L2
-  52              	.L3:
-  36:MotorDrive.c  ****         Motor1Direction_Write(0);
-  53              		.loc 1 36 0 is_stmt 1
-  54 0016 0020     		movs	r0, #0
-  55 0018 FFF7FEFF 		bl	Motor1Direction_Write
-  56              	.LVL2:
-  37:MotorDrive.c  ****         currPWM_Drive = compare;
+  33:MotorDrive.c  ****     //test
+  34:MotorDrive.c  ****     char out[32];
+  35:MotorDrive.c  ****     UART_UartPutString("compare val m1: ");
+  44              		.loc 1 35 0
+  45 000a 1B48     		ldr	r0, .L7
+  46              	.LVL1:
+  47 000c FFF7FEFF 		bl	UART_UartPutString
+  48              	.LVL2:
+  36:MotorDrive.c  ****     UART_UartPutString(itoa(compare, out, 10));
+  49              		.loc 1 36 0
+  50 0010 0A22     		movs	r2, #10
+  51 0012 6946     		mov	r1, sp
+  52 0014 2000     		movs	r0, r4
+  53 0016 FFF7FEFF 		bl	itoa
+  54              	.LVL3:
+  55 001a FFF7FEFF 		bl	UART_UartPutString
+  56              	.LVL4:
+  37:MotorDrive.c  ****     UART_UartPutString("\n\r");
   57              		.loc 1 37 0
-  58 001c 0D4B     		ldr	r3, .L7
-  59 001e 5C60     		str	r4, [r3, #4]
-  38:MotorDrive.c  ****         PWM_Motor1_WriteCompare(-compare);
-  60              		.loc 1 38 0
-  61 0020 6042     		rsbs	r0, r4, #0
-  62 0022 FFF7FEFF 		bl	PWM_Motor1_WriteCompare
-  63              	.LVL3:
-  64 0026 14E0     		b	.L1
-  65              	.LVL4:
-  66              	.L2:
-  39:MotorDrive.c  ****     } else if (compare > 0 && (!(limitSW & 0b10) || disable_limit) ){
-  67              		.loc 1 39 0
-  68 0028 002C     		cmp	r4, #0
-  69 002a 0CDD     		ble	.L5
-  70              		.loc 1 39 0 is_stmt 0 discriminator 1
-  71 002c 9307     		lsls	r3, r2, #30
-  72 002e 01D5     		bpl	.L6
-  73              		.loc 1 39 0 discriminator 2
-  74 0030 0029     		cmp	r1, #0
-  75 0032 08D0     		beq	.L5
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 3
+  58 001e 1748     		ldr	r0, .L7+4
+  59 0020 FFF7FEFF 		bl	UART_UartPutString
+  60              	.LVL5:
+  38:MotorDrive.c  ****         //show results
+  39:MotorDrive.c  **** //        UART_UartPutString(itoa(Hum_val, out1, 10));
+  40:MotorDrive.c  ****         //UART_UartPutString("\n\r");
+  41:MotorDrive.c  **** //        UART_UartPutString(itoa(Temp_val, out1, 10));
+  42:MotorDrive.c  ****     invalidate = 0;     
+  61              		.loc 1 42 0
+  62 0024 0022     		movs	r2, #0
+  63 0026 164B     		ldr	r3, .L7+8
+  64 0028 1A70     		strb	r2, [r3]
+  43:MotorDrive.c  ****     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
+  65              		.loc 1 43 0
+  66 002a 002C     		cmp	r4, #0
+  67 002c 0CDA     		bge	.L2
+  68              		.loc 1 43 0 is_stmt 0 discriminator 1
+  69 002e EB07     		lsls	r3, r5, #31
+  70 0030 01D5     		bpl	.L3
+  71              		.loc 1 43 0 discriminator 2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 3
 
 
-  76              	.L6:
-  40:MotorDrive.c  ****         Motor1Direction_Write(1);
-  77              		.loc 1 40 0 is_stmt 1
-  78 0034 0120     		movs	r0, #1
-  79 0036 FFF7FEFF 		bl	Motor1Direction_Write
-  80              	.LVL5:
-  41:MotorDrive.c  ****         currPWM_Drive = compare;
-  81              		.loc 1 41 0
-  82 003a 064B     		ldr	r3, .L7
-  83 003c 5C60     		str	r4, [r3, #4]
-  42:MotorDrive.c  ****         PWM_Motor1_WriteCompare(compare);
-  84              		.loc 1 42 0
-  85 003e 2000     		movs	r0, r4
-  86 0040 FFF7FEFF 		bl	PWM_Motor1_WriteCompare
-  87              	.LVL6:
-  88 0044 05E0     		b	.L1
-  89              	.LVL7:
-  90              	.L5:
-  43:MotorDrive.c  ****     } else {
-  44:MotorDrive.c  ****         currPWM_Drive = 0;
-  91              		.loc 1 44 0
-  92 0046 0022     		movs	r2, #0
-  93              	.LVL8:
-  94 0048 024B     		ldr	r3, .L7
-  95 004a 5A60     		str	r2, [r3, #4]
-  45:MotorDrive.c  ****         PWM_Motor1_WriteCompare(0);
-  96              		.loc 1 45 0
-  97 004c 0020     		movs	r0, #0
-  98 004e FFF7FEFF 		bl	PWM_Motor1_WriteCompare
-  99              	.LVL9:
- 100              	.L1:
-  46:MotorDrive.c  ****     }
-  47:MotorDrive.c  **** }
- 101              		.loc 1 47 0
- 102              		@ sp needed
- 103 0052 10BD     		pop	{r4, pc}
- 104              	.L8:
- 105              		.align	2
- 106              	.L7:
- 107 0054 00000000 		.word	.LANCHOR0
- 108              		.cfi_endproc
- 109              	.LFE35:
- 110              		.size	set_PWM_M1, .-set_PWM_M1
- 111              		.section	.text.set_PWM_M2,"ax",%progbits
- 112              		.align	2
- 113              		.global	set_PWM_M2
- 114              		.code	16
- 115              		.thumb_func
- 116              		.type	set_PWM_M2, %function
- 117              	set_PWM_M2:
- 118              	.LFB36:
-  48:MotorDrive.c  **** 
-  49:MotorDrive.c  **** //  Swivel Motor, Motor 2 in Top Design
-  50:MotorDrive.c  **** void set_PWM_M2(int16_t compare, uint8_t disable_limit, uint8_t limitSW) { 
- 119              		.loc 1 50 0
- 120              		.cfi_startproc
- 121              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 4
+  72 0032 002E     		cmp	r6, #0
+  73 0034 08D0     		beq	.L2
+  74              	.L3:
+  44:MotorDrive.c  ****         Motor1Direction_Write(0);
+  75              		.loc 1 44 0 is_stmt 1
+  76 0036 0020     		movs	r0, #0
+  77 0038 FFF7FEFF 		bl	Motor1Direction_Write
+  78              	.LVL6:
+  45:MotorDrive.c  ****         currPWM_Drive = compare;
+  79              		.loc 1 45 0
+  80 003c 104B     		ldr	r3, .L7+8
+  81 003e 5C60     		str	r4, [r3, #4]
+  46:MotorDrive.c  ****         PWM_Motor1_WriteCompare(-compare);
+  82              		.loc 1 46 0
+  83 0040 6042     		rsbs	r0, r4, #0
+  84 0042 FFF7FEFF 		bl	PWM_Motor1_WriteCompare
+  85              	.LVL7:
+  86 0046 14E0     		b	.L1
+  87              	.L2:
+  47:MotorDrive.c  ****     } else if (compare > 0 && (!(limitSW & 0b10) || disable_limit) ){
+  88              		.loc 1 47 0
+  89 0048 002C     		cmp	r4, #0
+  90 004a 0CDD     		ble	.L5
+  91              		.loc 1 47 0 is_stmt 0 discriminator 1
+  92 004c AB07     		lsls	r3, r5, #30
+  93 004e 01D5     		bpl	.L6
+  94              		.loc 1 47 0 discriminator 2
+  95 0050 002E     		cmp	r6, #0
+  96 0052 08D0     		beq	.L5
+  97              	.L6:
+  48:MotorDrive.c  ****         Motor1Direction_Write(1);
+  98              		.loc 1 48 0 is_stmt 1
+  99 0054 0120     		movs	r0, #1
+ 100 0056 FFF7FEFF 		bl	Motor1Direction_Write
+ 101              	.LVL8:
+  49:MotorDrive.c  ****         currPWM_Drive = compare;
+ 102              		.loc 1 49 0
+ 103 005a 094B     		ldr	r3, .L7+8
+ 104 005c 5C60     		str	r4, [r3, #4]
+  50:MotorDrive.c  ****         PWM_Motor1_WriteCompare(compare);
+ 105              		.loc 1 50 0
+ 106 005e 2000     		movs	r0, r4
+ 107 0060 FFF7FEFF 		bl	PWM_Motor1_WriteCompare
+ 108              	.LVL9:
+ 109 0064 05E0     		b	.L1
+ 110              	.L5:
+  51:MotorDrive.c  ****     } else {
+  52:MotorDrive.c  ****         currPWM_Drive = 0;
+ 111              		.loc 1 52 0
+ 112 0066 0022     		movs	r2, #0
+ 113 0068 054B     		ldr	r3, .L7+8
+ 114 006a 5A60     		str	r2, [r3, #4]
+  53:MotorDrive.c  ****         PWM_Motor1_WriteCompare(0);
+ 115              		.loc 1 53 0
+ 116 006c 0020     		movs	r0, #0
+ 117 006e FFF7FEFF 		bl	PWM_Motor1_WriteCompare
+ 118              	.LVL10:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 4
 
 
- 122              		@ frame_needed = 0, uses_anonymous_args = 0
- 123              	.LVL10:
- 124 0000 10B5     		push	{r4, lr}
- 125              		.cfi_def_cfa_offset 8
- 126              		.cfi_offset 4, -8
- 127              		.cfi_offset 14, -4
- 128 0002 0400     		movs	r4, r0
-  51:MotorDrive.c  ****     #ifdef PRINT_PWM_COMMAND
-  52:MotorDrive.c  ****     sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
-  53:MotorDrive.c  ****     UART_UartPutString(txData); 
-  54:MotorDrive.c  ****     #endif
-  55:MotorDrive.c  ****     
-  56:MotorDrive.c  ****     invalidate = 0;     
- 129              		.loc 1 56 0
- 130 0004 0020     		movs	r0, #0
- 131              	.LVL11:
- 132 0006 134B     		ldr	r3, .L15
- 133 0008 1870     		strb	r0, [r3]
-  57:MotorDrive.c  ****     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
- 134              		.loc 1 57 0
- 135 000a 002C     		cmp	r4, #0
- 136 000c 0CDA     		bge	.L10
- 137              		.loc 1 57 0 is_stmt 0 discriminator 1
- 138 000e D307     		lsls	r3, r2, #31
- 139 0010 01D5     		bpl	.L11
- 140              		.loc 1 57 0 discriminator 2
- 141 0012 0029     		cmp	r1, #0
- 142 0014 08D0     		beq	.L10
- 143              	.L11:
-  58:MotorDrive.c  ****         Motor2Direction_Write(0);
- 144              		.loc 1 58 0 is_stmt 1
- 145 0016 0020     		movs	r0, #0
- 146 0018 FFF7FEFF 		bl	Motor2Direction_Write
- 147              	.LVL12:
-  59:MotorDrive.c  ****         currPWM_Swivel = compare;
- 148              		.loc 1 59 0
- 149 001c 0D4B     		ldr	r3, .L15
- 150 001e 9C60     		str	r4, [r3, #8]
-  60:MotorDrive.c  ****         PWM_Motor2_WriteCompare(-compare);
- 151              		.loc 1 60 0
- 152 0020 6042     		rsbs	r0, r4, #0
- 153 0022 FFF7FEFF 		bl	PWM_Motor2_WriteCompare
- 154              	.LVL13:
- 155 0026 14E0     		b	.L9
- 156              	.LVL14:
- 157              	.L10:
-  61:MotorDrive.c  ****     } else if (compare > 0 && (!(limitSW & 0b10) || disable_limit) ){
- 158              		.loc 1 61 0
- 159 0028 002C     		cmp	r4, #0
- 160 002a 0CDD     		ble	.L13
- 161              		.loc 1 61 0 is_stmt 0 discriminator 1
- 162 002c 9307     		lsls	r3, r2, #30
- 163 002e 01D5     		bpl	.L14
- 164              		.loc 1 61 0 discriminator 2
- 165 0030 0029     		cmp	r1, #0
- 166 0032 08D0     		beq	.L13
- 167              	.L14:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 5
+ 119              	.L1:
+  54:MotorDrive.c  ****     }
+  55:MotorDrive.c  **** }
+ 120              		.loc 1 55 0
+ 121 0072 08B0     		add	sp, sp, #32
+ 122              		@ sp needed
+ 123 0074 70BD     		pop	{r4, r5, r6, pc}
+ 124              	.L8:
+ 125 0076 C046     		.align	2
+ 126              	.L7:
+ 127 0078 00000000 		.word	.LC0
+ 128 007c 14000000 		.word	.LC2
+ 129 0080 00000000 		.word	.LANCHOR0
+ 130              		.cfi_endproc
+ 131              	.LFE35:
+ 132              		.size	set_PWM_M1, .-set_PWM_M1
+ 133              		.section	.text.set_PWM_M2,"ax",%progbits
+ 134              		.align	2
+ 135              		.global	set_PWM_M2
+ 136              		.code	16
+ 137              		.thumb_func
+ 138              		.type	set_PWM_M2, %function
+ 139              	set_PWM_M2:
+ 140              	.LFB36:
+  56:MotorDrive.c  **** 
+  57:MotorDrive.c  **** //  Swivel Motor, Motor 2 in Top Design
+  58:MotorDrive.c  **** void set_PWM_M2(int16_t compare, uint8_t disable_limit, uint8_t limitSW) { 
+ 141              		.loc 1 58 0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 32
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145              	.LVL11:
+ 146 0000 70B5     		push	{r4, r5, r6, lr}
+ 147              		.cfi_def_cfa_offset 16
+ 148              		.cfi_offset 4, -16
+ 149              		.cfi_offset 5, -12
+ 150              		.cfi_offset 6, -8
+ 151              		.cfi_offset 14, -4
+ 152 0002 88B0     		sub	sp, sp, #32
+ 153              		.cfi_def_cfa_offset 48
+ 154 0004 0400     		movs	r4, r0
+ 155 0006 0E00     		movs	r6, r1
+ 156 0008 1500     		movs	r5, r2
+  59:MotorDrive.c  ****     #ifdef PRINT_PWM_COMMAND
+  60:MotorDrive.c  ****     sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
+  61:MotorDrive.c  ****     UART_UartPutString(txData); 
+  62:MotorDrive.c  ****     #endif
+  63:MotorDrive.c  ****     
+  64:MotorDrive.c  ****     invalidate = 0;    
+ 157              		.loc 1 64 0
+ 158 000a 0022     		movs	r2, #0
+ 159              	.LVL12:
+ 160 000c 1A4B     		ldr	r3, .L15
+ 161 000e 1A70     		strb	r2, [r3]
+  65:MotorDrive.c  ****     char out[32];
+  66:MotorDrive.c  ****     UART_UartPutString("compare val m2: ");
+ 162              		.loc 1 66 0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 5
 
 
-  62:MotorDrive.c  ****         Motor2Direction_Write(1);
- 168              		.loc 1 62 0 is_stmt 1
- 169 0034 0120     		movs	r0, #1
- 170 0036 FFF7FEFF 		bl	Motor2Direction_Write
- 171              	.LVL15:
-  63:MotorDrive.c  ****         currPWM_Swivel = compare;
- 172              		.loc 1 63 0
- 173 003a 064B     		ldr	r3, .L15
- 174 003c 9C60     		str	r4, [r3, #8]
-  64:MotorDrive.c  ****         PWM_Motor2_WriteCompare(compare);
- 175              		.loc 1 64 0
- 176 003e 2000     		movs	r0, r4
- 177 0040 FFF7FEFF 		bl	PWM_Motor2_WriteCompare
- 178              	.LVL16:
- 179 0044 05E0     		b	.L9
- 180              	.LVL17:
- 181              	.L13:
-  65:MotorDrive.c  ****     } else {
-  66:MotorDrive.c  ****         currPWM_Swivel = 0;
- 182              		.loc 1 66 0
- 183 0046 0022     		movs	r2, #0
- 184              	.LVL18:
- 185 0048 024B     		ldr	r3, .L15
- 186 004a 9A60     		str	r2, [r3, #8]
-  67:MotorDrive.c  ****         PWM_Motor2_WriteCompare(0);
- 187              		.loc 1 67 0
- 188 004c 0020     		movs	r0, #0
- 189 004e FFF7FEFF 		bl	PWM_Motor2_WriteCompare
- 190              	.LVL19:
- 191              	.L9:
-  68:MotorDrive.c  ****     }
-  69:MotorDrive.c  **** }
- 192              		.loc 1 69 0
- 193              		@ sp needed
- 194 0052 10BD     		pop	{r4, pc}
- 195              	.L16:
- 196              		.align	2
- 197              	.L15:
- 198 0054 00000000 		.word	.LANCHOR0
- 199              		.cfi_endproc
- 200              	.LFE36:
- 201              		.size	set_PWM_M2, .-set_PWM_M2
- 202              		.section	.text.GetCurrentPWM_M1,"ax",%progbits
- 203              		.align	2
- 204              		.global	GetCurrentPWM_M1
- 205              		.code	16
- 206              		.thumb_func
- 207              		.type	GetCurrentPWM_M1, %function
- 208              	GetCurrentPWM_M1:
- 209              	.LFB37:
-  70:MotorDrive.c  **** 
-  71:MotorDrive.c  **** int16_t GetCurrentPWM_M1() {
- 210              		.loc 1 71 0
- 211              		.cfi_startproc
- 212              		@ args = 0, pretend = 0, frame = 0
- 213              		@ frame_needed = 0, uses_anonymous_args = 0
- 214              		@ link register save eliminated.
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 6
+ 163 0010 1A48     		ldr	r0, .L15+4
+ 164              	.LVL13:
+ 165 0012 FFF7FEFF 		bl	UART_UartPutString
+ 166              	.LVL14:
+  67:MotorDrive.c  ****     UART_UartPutString(itoa(compare, out, 10));
+ 167              		.loc 1 67 0
+ 168 0016 0A22     		movs	r2, #10
+ 169 0018 6946     		mov	r1, sp
+ 170 001a 2000     		movs	r0, r4
+ 171 001c FFF7FEFF 		bl	itoa
+ 172              	.LVL15:
+ 173 0020 FFF7FEFF 		bl	UART_UartPutString
+ 174              	.LVL16:
+  68:MotorDrive.c  ****     UART_UartPutString("\n\r");
+ 175              		.loc 1 68 0
+ 176 0024 1648     		ldr	r0, .L15+8
+ 177 0026 FFF7FEFF 		bl	UART_UartPutString
+ 178              	.LVL17:
+  69:MotorDrive.c  ****     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
+ 179              		.loc 1 69 0
+ 180 002a 002C     		cmp	r4, #0
+ 181 002c 0CDA     		bge	.L10
+ 182              		.loc 1 69 0 is_stmt 0 discriminator 1
+ 183 002e EB07     		lsls	r3, r5, #31
+ 184 0030 01D5     		bpl	.L11
+ 185              		.loc 1 69 0 discriminator 2
+ 186 0032 002E     		cmp	r6, #0
+ 187 0034 08D0     		beq	.L10
+ 188              	.L11:
+  70:MotorDrive.c  ****         Motor2Direction_Write(0);
+ 189              		.loc 1 70 0 is_stmt 1
+ 190 0036 0020     		movs	r0, #0
+ 191 0038 FFF7FEFF 		bl	Motor2Direction_Write
+ 192              	.LVL18:
+  71:MotorDrive.c  ****         currPWM_Swivel = compare;
+ 193              		.loc 1 71 0
+ 194 003c 0E4B     		ldr	r3, .L15
+ 195 003e 9C60     		str	r4, [r3, #8]
+  72:MotorDrive.c  ****         PWM_Motor2_WriteCompare(-compare);
+ 196              		.loc 1 72 0
+ 197 0040 6042     		rsbs	r0, r4, #0
+ 198 0042 FFF7FEFF 		bl	PWM_Motor2_WriteCompare
+ 199              	.LVL19:
+ 200 0046 14E0     		b	.L9
+ 201              	.L10:
+  73:MotorDrive.c  ****     } else if (compare > 0 && (!(limitSW & 0b10) || disable_limit) ){
+ 202              		.loc 1 73 0
+ 203 0048 002C     		cmp	r4, #0
+ 204 004a 0CDD     		ble	.L13
+ 205              		.loc 1 73 0 is_stmt 0 discriminator 1
+ 206 004c AB07     		lsls	r3, r5, #30
+ 207 004e 01D5     		bpl	.L14
+ 208              		.loc 1 73 0 discriminator 2
+ 209 0050 002E     		cmp	r6, #0
+ 210 0052 08D0     		beq	.L13
+ 211              	.L14:
+  74:MotorDrive.c  ****         Motor2Direction_Write(1);
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 6
 
 
-  72:MotorDrive.c  ****     return currPWM_Drive;
- 215              		.loc 1 72 0
- 216 0000 014B     		ldr	r3, .L18
- 217 0002 0420     		movs	r0, #4
- 218 0004 185E     		ldrsh	r0, [r3, r0]
-  73:MotorDrive.c  **** }
- 219              		.loc 1 73 0
- 220              		@ sp needed
- 221 0006 7047     		bx	lr
- 222              	.L19:
- 223              		.align	2
- 224              	.L18:
- 225 0008 00000000 		.word	.LANCHOR0
- 226              		.cfi_endproc
- 227              	.LFE37:
- 228              		.size	GetCurrentPWM_M1, .-GetCurrentPWM_M1
- 229              		.section	.text.GetCurrentPWM_M2,"ax",%progbits
- 230              		.align	2
- 231              		.global	GetCurrentPWM_M2
- 232              		.code	16
- 233              		.thumb_func
- 234              		.type	GetCurrentPWM_M2, %function
- 235              	GetCurrentPWM_M2:
- 236              	.LFB38:
-  74:MotorDrive.c  **** 
-  75:MotorDrive.c  **** int16_t GetCurrentPWM_M2() {
- 237              		.loc 1 75 0
- 238              		.cfi_startproc
- 239              		@ args = 0, pretend = 0, frame = 0
- 240              		@ frame_needed = 0, uses_anonymous_args = 0
- 241              		@ link register save eliminated.
-  76:MotorDrive.c  ****     return currPWM_Swivel;
- 242              		.loc 1 76 0
- 243 0000 014B     		ldr	r3, .L21
- 244 0002 0820     		movs	r0, #8
- 245 0004 185E     		ldrsh	r0, [r3, r0]
-  77:MotorDrive.c  **** }
- 246              		.loc 1 77 0
- 247              		@ sp needed
- 248 0006 7047     		bx	lr
- 249              	.L22:
- 250              		.align	2
- 251              	.L21:
- 252 0008 00000000 		.word	.LANCHOR0
- 253              		.cfi_endproc
- 254              	.LFE38:
- 255              		.size	GetCurrentPWM_M2, .-GetCurrentPWM_M2
- 256              		.global	currPWM_Swivel
- 257              		.global	currPWM_Drive
- 258              		.global	invalidate
- 259              		.bss
- 260              		.align	2
- 261              		.set	.LANCHOR0,. + 0
- 262              		.type	invalidate, %object
- 263              		.size	invalidate, 1
- 264              	invalidate:
- 265 0000 00       		.space	1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 7
+ 212              		.loc 1 74 0 is_stmt 1
+ 213 0054 0120     		movs	r0, #1
+ 214 0056 FFF7FEFF 		bl	Motor2Direction_Write
+ 215              	.LVL20:
+  75:MotorDrive.c  ****         currPWM_Swivel = compare;
+ 216              		.loc 1 75 0
+ 217 005a 074B     		ldr	r3, .L15
+ 218 005c 9C60     		str	r4, [r3, #8]
+  76:MotorDrive.c  ****         PWM_Motor2_WriteCompare(compare);
+ 219              		.loc 1 76 0
+ 220 005e 2000     		movs	r0, r4
+ 221 0060 FFF7FEFF 		bl	PWM_Motor2_WriteCompare
+ 222              	.LVL21:
+ 223 0064 05E0     		b	.L9
+ 224              	.L13:
+  77:MotorDrive.c  ****     } else {
+  78:MotorDrive.c  ****         currPWM_Swivel = 0;
+ 225              		.loc 1 78 0
+ 226 0066 0022     		movs	r2, #0
+ 227 0068 034B     		ldr	r3, .L15
+ 228 006a 9A60     		str	r2, [r3, #8]
+  79:MotorDrive.c  ****         PWM_Motor2_WriteCompare(0);
+ 229              		.loc 1 79 0
+ 230 006c 0020     		movs	r0, #0
+ 231 006e FFF7FEFF 		bl	PWM_Motor2_WriteCompare
+ 232              	.LVL22:
+ 233              	.L9:
+  80:MotorDrive.c  ****     }
+  81:MotorDrive.c  **** }
+ 234              		.loc 1 81 0
+ 235 0072 08B0     		add	sp, sp, #32
+ 236              		@ sp needed
+ 237 0074 70BD     		pop	{r4, r5, r6, pc}
+ 238              	.L16:
+ 239 0076 C046     		.align	2
+ 240              	.L15:
+ 241 0078 00000000 		.word	.LANCHOR0
+ 242 007c 18000000 		.word	.LC6
+ 243 0080 14000000 		.word	.LC2
+ 244              		.cfi_endproc
+ 245              	.LFE36:
+ 246              		.size	set_PWM_M2, .-set_PWM_M2
+ 247              		.section	.text.GetCurrentPWM_M1,"ax",%progbits
+ 248              		.align	2
+ 249              		.global	GetCurrentPWM_M1
+ 250              		.code	16
+ 251              		.thumb_func
+ 252              		.type	GetCurrentPWM_M1, %function
+ 253              	GetCurrentPWM_M1:
+ 254              	.LFB37:
+  82:MotorDrive.c  **** 
+  83:MotorDrive.c  **** int16_t GetCurrentPWM_M1() {
+ 255              		.loc 1 83 0
+ 256              		.cfi_startproc
+ 257              		@ args = 0, pretend = 0, frame = 0
+ 258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 259              		@ link register save eliminated.
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 7
 
 
- 266 0001 000000   		.space	3
- 267              		.type	currPWM_Drive, %object
- 268              		.size	currPWM_Drive, 4
- 269              	currPWM_Drive:
- 270 0004 00000000 		.space	4
- 271              		.type	currPWM_Swivel, %object
- 272              		.size	currPWM_Swivel, 4
- 273              	currPWM_Swivel:
- 274 0008 00000000 		.space	4
- 275              		.text
- 276              	.Letext0:
- 277              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 278              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 279              		.file 4 "Generated_Source\\PSoC4/Motor1Direction.h"
- 280              		.file 5 "Generated_Source\\PSoC4/PWM_Motor1.h"
- 281              		.file 6 "Generated_Source\\PSoC4/Motor2Direction.h"
- 282              		.file 7 "Generated_Source\\PSoC4/PWM_Motor2.h"
- 283              		.section	.debug_info,"",%progbits
- 284              	.Ldebug_info0:
- 285 0000 9A020000 		.4byte	0x29a
- 286 0004 0400     		.2byte	0x4
- 287 0006 00000000 		.4byte	.Ldebug_abbrev0
- 288 000a 04       		.byte	0x4
- 289 000b 01       		.uleb128 0x1
- 290 000c 23010000 		.4byte	.LASF34
- 291 0010 0C       		.byte	0xc
- 292 0011 58000000 		.4byte	.LASF35
- 293 0015 45020000 		.4byte	.LASF36
- 294 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 295 001d 00000000 		.4byte	0
- 296 0021 00000000 		.4byte	.Ldebug_line0
- 297 0025 02       		.uleb128 0x2
- 298 0026 01       		.byte	0x1
- 299 0027 06       		.byte	0x6
- 300 0028 03020000 		.4byte	.LASF0
- 301 002c 03       		.uleb128 0x3
- 302 002d 11000000 		.4byte	.LASF2
- 303 0031 02       		.byte	0x2
- 304 0032 1D       		.byte	0x1d
- 305 0033 37000000 		.4byte	0x37
- 306 0037 02       		.uleb128 0x2
- 307 0038 01       		.byte	0x1
- 308 0039 08       		.byte	0x8
- 309 003a 87000000 		.4byte	.LASF1
- 310 003e 03       		.uleb128 0x3
- 311 003f 1B000000 		.4byte	.LASF3
- 312 0043 02       		.byte	0x2
- 313 0044 29       		.byte	0x29
- 314 0045 49000000 		.4byte	0x49
- 315 0049 02       		.uleb128 0x2
- 316 004a 02       		.byte	0x2
- 317 004b 05       		.byte	0x5
- 318 004c D5010000 		.4byte	.LASF4
- 319 0050 02       		.uleb128 0x2
- 320 0051 02       		.byte	0x2
- 321 0052 07       		.byte	0x7
- 322 0053 45000000 		.4byte	.LASF5
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 8
+  84:MotorDrive.c  ****     return currPWM_Drive;
+ 260              		.loc 1 84 0
+ 261 0000 014B     		ldr	r3, .L18
+ 262 0002 0420     		movs	r0, #4
+ 263 0004 185E     		ldrsh	r0, [r3, r0]
+  85:MotorDrive.c  **** }
+ 264              		.loc 1 85 0
+ 265              		@ sp needed
+ 266 0006 7047     		bx	lr
+ 267              	.L19:
+ 268              		.align	2
+ 269              	.L18:
+ 270 0008 00000000 		.word	.LANCHOR0
+ 271              		.cfi_endproc
+ 272              	.LFE37:
+ 273              		.size	GetCurrentPWM_M1, .-GetCurrentPWM_M1
+ 274              		.section	.text.GetCurrentPWM_M2,"ax",%progbits
+ 275              		.align	2
+ 276              		.global	GetCurrentPWM_M2
+ 277              		.code	16
+ 278              		.thumb_func
+ 279              		.type	GetCurrentPWM_M2, %function
+ 280              	GetCurrentPWM_M2:
+ 281              	.LFB38:
+  86:MotorDrive.c  **** 
+  87:MotorDrive.c  **** int16_t GetCurrentPWM_M2() {
+ 282              		.loc 1 87 0
+ 283              		.cfi_startproc
+ 284              		@ args = 0, pretend = 0, frame = 0
+ 285              		@ frame_needed = 0, uses_anonymous_args = 0
+ 286              		@ link register save eliminated.
+  88:MotorDrive.c  ****     return currPWM_Swivel;
+ 287              		.loc 1 88 0
+ 288 0000 014B     		ldr	r3, .L21
+ 289 0002 0820     		movs	r0, #8
+ 290 0004 185E     		ldrsh	r0, [r3, r0]
+  89:MotorDrive.c  **** }
+ 291              		.loc 1 89 0
+ 292              		@ sp needed
+ 293 0006 7047     		bx	lr
+ 294              	.L22:
+ 295              		.align	2
+ 296              	.L21:
+ 297 0008 00000000 		.word	.LANCHOR0
+ 298              		.cfi_endproc
+ 299              	.LFE38:
+ 300              		.size	GetCurrentPWM_M2, .-GetCurrentPWM_M2
+ 301              		.global	currPWM_Swivel
+ 302              		.global	currPWM_Drive
+ 303              		.global	invalidate
+ 304              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 305              		.align	2
+ 306              	.LC0:
+ 307 0000 636F6D70 		.ascii	"compare val m1: \000"
+ 307      61726520 
+ 307      76616C20 
+ 307      6D313A20 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 8
 
 
- 323 0057 03       		.uleb128 0x3
- 324 0058 3B000000 		.4byte	.LASF6
- 325 005c 02       		.byte	0x2
- 326 005d 3F       		.byte	0x3f
- 327 005e 62000000 		.4byte	0x62
- 328 0062 02       		.uleb128 0x2
- 329 0063 04       		.byte	0x4
- 330 0064 05       		.byte	0x5
- 331 0065 EE010000 		.4byte	.LASF7
- 332 0069 02       		.uleb128 0x2
- 333 006a 04       		.byte	0x4
- 334 006b 07       		.byte	0x7
- 335 006c 95000000 		.4byte	.LASF8
- 336 0070 02       		.uleb128 0x2
- 337 0071 08       		.byte	0x8
- 338 0072 05       		.byte	0x5
- 339 0073 C2010000 		.4byte	.LASF9
- 340 0077 02       		.uleb128 0x2
- 341 0078 08       		.byte	0x8
- 342 0079 07       		.byte	0x7
- 343 007a FC000000 		.4byte	.LASF10
- 344 007e 04       		.uleb128 0x4
- 345 007f 04       		.byte	0x4
- 346 0080 05       		.byte	0x5
- 347 0081 696E7400 		.ascii	"int\000"
- 348 0085 02       		.uleb128 0x2
- 349 0086 04       		.byte	0x4
- 350 0087 07       		.byte	0x7
- 351 0088 EF000000 		.4byte	.LASF11
- 352 008c 03       		.uleb128 0x3
- 353 008d 13010000 		.4byte	.LASF12
- 354 0091 03       		.byte	0x3
- 355 0092 18       		.byte	0x18
- 356 0093 2C000000 		.4byte	0x2c
- 357 0097 03       		.uleb128 0x3
- 358 0098 1B010000 		.4byte	.LASF13
- 359 009c 03       		.byte	0x3
- 360 009d 20       		.byte	0x20
- 361 009e 3E000000 		.4byte	0x3e
- 362 00a2 03       		.uleb128 0x3
- 363 00a3 B1010000 		.4byte	.LASF14
- 364 00a7 03       		.byte	0x3
- 365 00a8 2C       		.byte	0x2c
- 366 00a9 57000000 		.4byte	0x57
- 367 00ad 02       		.uleb128 0x2
- 368 00ae 04       		.byte	0x4
- 369 00af 04       		.byte	0x4
- 370 00b0 73000000 		.4byte	.LASF15
- 371 00b4 02       		.uleb128 0x2
- 372 00b5 08       		.byte	0x8
- 373 00b6 04       		.byte	0x4
- 374 00b7 E8000000 		.4byte	.LASF16
- 375 00bb 02       		.uleb128 0x2
- 376 00bc 01       		.byte	0x1
- 377 00bd 08       		.byte	0x8
- 378 00be D0010000 		.4byte	.LASF17
- 379 00c2 02       		.uleb128 0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 9
+ 307      00
+ 308 0011 000000   		.space	3
+ 309              	.LC2:
+ 310 0014 0A0D00   		.ascii	"\012\015\000"
+ 311 0017 00       		.space	1
+ 312              	.LC6:
+ 313 0018 636F6D70 		.ascii	"compare val m2: \000"
+ 313      61726520 
+ 313      76616C20 
+ 313      6D323A20 
+ 313      00
+ 314              		.bss
+ 315              		.align	2
+ 316              		.set	.LANCHOR0,. + 0
+ 317              		.type	invalidate, %object
+ 318              		.size	invalidate, 1
+ 319              	invalidate:
+ 320 0000 00       		.space	1
+ 321 0001 000000   		.space	3
+ 322              		.type	currPWM_Drive, %object
+ 323              		.size	currPWM_Drive, 4
+ 324              	currPWM_Drive:
+ 325 0004 00000000 		.space	4
+ 326              		.type	currPWM_Swivel, %object
+ 327              		.size	currPWM_Swivel, 4
+ 328              	currPWM_Swivel:
+ 329 0008 00000000 		.space	4
+ 330              		.text
+ 331              	.Letext0:
+ 332              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 333              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 334              		.file 4 "Generated_Source\\PSoC4/UART_SPI_UART.h"
+ 335              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 336              		.file 6 "Generated_Source\\PSoC4/Motor1Direction.h"
+ 337              		.file 7 "Generated_Source\\PSoC4/PWM_Motor1.h"
+ 338              		.file 8 "Generated_Source\\PSoC4/Motor2Direction.h"
+ 339              		.file 9 "Generated_Source\\PSoC4/PWM_Motor2.h"
+ 340              		.section	.debug_info,"",%progbits
+ 341              	.Ldebug_info0:
+ 342 0000 89030000 		.4byte	0x389
+ 343 0004 0400     		.2byte	0x4
+ 344 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 345 000a 04       		.byte	0x4
+ 346 000b 01       		.uleb128 0x1
+ 347 000c 82010000 		.4byte	.LASF36
+ 348 0010 0C       		.byte	0xc
+ 349 0011 58000000 		.4byte	.LASF37
+ 350 0015 F4000000 		.4byte	.LASF38
+ 351 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 352 001d 00000000 		.4byte	0
+ 353 0021 00000000 		.4byte	.Ldebug_line0
+ 354 0025 02       		.uleb128 0x2
+ 355 0026 01       		.byte	0x1
+ 356 0027 06       		.byte	0x6
+ 357 0028 75020000 		.4byte	.LASF0
+ 358 002c 03       		.uleb128 0x3
+ 359 002d 11000000 		.4byte	.LASF2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 9
 
 
- 380 00c3 08       		.byte	0x8
- 381 00c4 04       		.byte	0x4
- 382 00c5 F7010000 		.4byte	.LASF18
- 383 00c9 02       		.uleb128 0x2
- 384 00ca 04       		.byte	0x4
- 385 00cb 07       		.byte	0x7
- 386 00cc B9010000 		.4byte	.LASF19
- 387 00d0 05       		.uleb128 0x5
- 388 00d1 17020000 		.4byte	.LASF23
- 389 00d5 01       		.byte	0x1
- 390 00d6 1C       		.byte	0x1c
- 391 00d7 00000000 		.4byte	.LFB35
- 392 00db 58000000 		.4byte	.LFE35-.LFB35
- 393 00df 01       		.uleb128 0x1
- 394 00e0 9C       		.byte	0x9c
- 395 00e1 71010000 		.4byte	0x171
- 396 00e5 06       		.uleb128 0x6
- 397 00e6 0F020000 		.4byte	.LASF20
- 398 00ea 01       		.byte	0x1
- 399 00eb 1C       		.byte	0x1c
- 400 00ec 97000000 		.4byte	0x97
- 401 00f0 00000000 		.4byte	.LLST0
- 402 00f4 06       		.uleb128 0x6
- 403 00f5 79000000 		.4byte	.LASF21
- 404 00f9 01       		.byte	0x1
- 405 00fa 1C       		.byte	0x1c
- 406 00fb 8C000000 		.4byte	0x8c
- 407 00ff 21000000 		.4byte	.LLST1
- 408 0103 06       		.uleb128 0x6
- 409 0104 C8000000 		.4byte	.LASF22
- 410 0108 01       		.byte	0x1
- 411 0109 1C       		.byte	0x1c
- 412 010a 8C000000 		.4byte	0x8c
- 413 010e 74000000 		.4byte	.LLST2
- 414 0112 07       		.uleb128 0x7
- 415 0113 1C000000 		.4byte	.LVL2
- 416 0117 6F020000 		.4byte	0x26f
- 417 011b 25010000 		.4byte	0x125
- 418 011f 08       		.uleb128 0x8
- 419 0120 01       		.uleb128 0x1
- 420 0121 50       		.byte	0x50
- 421 0122 01       		.uleb128 0x1
- 422 0123 30       		.byte	0x30
- 423 0124 00       		.byte	0
- 424 0125 07       		.uleb128 0x7
- 425 0126 26000000 		.4byte	.LVL3
- 426 012a 7A020000 		.4byte	0x27a
- 427 012e 3A010000 		.4byte	0x13a
- 428 0132 08       		.uleb128 0x8
- 429 0133 01       		.uleb128 0x1
- 430 0134 50       		.byte	0x50
- 431 0135 03       		.uleb128 0x3
- 432 0136 74       		.byte	0x74
- 433 0137 00       		.sleb128 0
- 434 0138 1F       		.byte	0x1f
- 435 0139 00       		.byte	0
- 436 013a 07       		.uleb128 0x7
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 10
+ 360 0031 02       		.byte	0x2
+ 361 0032 1D       		.byte	0x1d
+ 362 0033 37000000 		.4byte	0x37
+ 363 0037 02       		.uleb128 0x2
+ 364 0038 01       		.byte	0x1
+ 365 0039 08       		.byte	0x8
+ 366 003a 8C000000 		.4byte	.LASF1
+ 367 003e 03       		.uleb128 0x3
+ 368 003f 1B000000 		.4byte	.LASF3
+ 369 0043 02       		.byte	0x2
+ 370 0044 29       		.byte	0x29
+ 371 0045 49000000 		.4byte	0x49
+ 372 0049 02       		.uleb128 0x2
+ 373 004a 02       		.byte	0x2
+ 374 004b 05       		.byte	0x5
+ 375 004c 47020000 		.4byte	.LASF4
+ 376 0050 02       		.uleb128 0x2
+ 377 0051 02       		.byte	0x2
+ 378 0052 07       		.byte	0x7
+ 379 0053 45000000 		.4byte	.LASF5
+ 380 0057 03       		.uleb128 0x3
+ 381 0058 3B000000 		.4byte	.LASF6
+ 382 005c 02       		.byte	0x2
+ 383 005d 3F       		.byte	0x3f
+ 384 005e 62000000 		.4byte	0x62
+ 385 0062 02       		.uleb128 0x2
+ 386 0063 04       		.byte	0x4
+ 387 0064 05       		.byte	0x5
+ 388 0065 60020000 		.4byte	.LASF7
+ 389 0069 02       		.uleb128 0x2
+ 390 006a 04       		.byte	0x4
+ 391 006b 07       		.byte	0x7
+ 392 006c 9A000000 		.4byte	.LASF8
+ 393 0070 02       		.uleb128 0x2
+ 394 0071 08       		.byte	0x8
+ 395 0072 05       		.byte	0x5
+ 396 0073 34020000 		.4byte	.LASF9
+ 397 0077 02       		.uleb128 0x2
+ 398 0078 08       		.byte	0x8
+ 399 0079 07       		.byte	0x7
+ 400 007a 5B010000 		.4byte	.LASF10
+ 401 007e 04       		.uleb128 0x4
+ 402 007f 04       		.byte	0x4
+ 403 0080 05       		.byte	0x5
+ 404 0081 696E7400 		.ascii	"int\000"
+ 405 0085 02       		.uleb128 0x2
+ 406 0086 04       		.byte	0x4
+ 407 0087 07       		.byte	0x7
+ 408 0088 4E010000 		.4byte	.LASF11
+ 409 008c 03       		.uleb128 0x3
+ 410 008d 72010000 		.4byte	.LASF12
+ 411 0091 03       		.byte	0x3
+ 412 0092 18       		.byte	0x18
+ 413 0093 2C000000 		.4byte	0x2c
+ 414 0097 03       		.uleb128 0x3
+ 415 0098 7A010000 		.4byte	.LASF13
+ 416 009c 03       		.byte	0x3
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 10
 
 
- 437 013b 3A000000 		.4byte	.LVL5
- 438 013f 6F020000 		.4byte	0x26f
- 439 0143 4D010000 		.4byte	0x14d
- 440 0147 08       		.uleb128 0x8
- 441 0148 01       		.uleb128 0x1
- 442 0149 50       		.byte	0x50
- 443 014a 01       		.uleb128 0x1
- 444 014b 31       		.byte	0x31
- 445 014c 00       		.byte	0
- 446 014d 07       		.uleb128 0x7
- 447 014e 44000000 		.4byte	.LVL6
- 448 0152 7A020000 		.4byte	0x27a
- 449 0156 61010000 		.4byte	0x161
- 450 015a 08       		.uleb128 0x8
- 451 015b 01       		.uleb128 0x1
- 452 015c 50       		.byte	0x50
- 453 015d 02       		.uleb128 0x2
- 454 015e 74       		.byte	0x74
- 455 015f 00       		.sleb128 0
- 456 0160 00       		.byte	0
- 457 0161 09       		.uleb128 0x9
- 458 0162 52000000 		.4byte	.LVL9
- 459 0166 7A020000 		.4byte	0x27a
- 460 016a 08       		.uleb128 0x8
- 461 016b 01       		.uleb128 0x1
- 462 016c 50       		.byte	0x50
- 463 016d 01       		.uleb128 0x1
- 464 016e 30       		.byte	0x30
- 465 016f 00       		.byte	0
- 466 0170 00       		.byte	0
- 467 0171 05       		.uleb128 0x5
- 468 0172 22020000 		.4byte	.LASF24
- 469 0176 01       		.byte	0x1
- 470 0177 32       		.byte	0x32
- 471 0178 00000000 		.4byte	.LFB36
- 472 017c 58000000 		.4byte	.LFE36-.LFB36
- 473 0180 01       		.uleb128 0x1
- 474 0181 9C       		.byte	0x9c
- 475 0182 12020000 		.4byte	0x212
- 476 0186 06       		.uleb128 0x6
- 477 0187 0F020000 		.4byte	.LASF20
- 478 018b 01       		.byte	0x1
- 479 018c 32       		.byte	0x32
- 480 018d 97000000 		.4byte	0x97
- 481 0191 C7000000 		.4byte	.LLST3
- 482 0195 06       		.uleb128 0x6
- 483 0196 79000000 		.4byte	.LASF21
- 484 019a 01       		.byte	0x1
- 485 019b 32       		.byte	0x32
- 486 019c 8C000000 		.4byte	0x8c
- 487 01a0 E8000000 		.4byte	.LLST4
- 488 01a4 06       		.uleb128 0x6
- 489 01a5 C8000000 		.4byte	.LASF22
- 490 01a9 01       		.byte	0x1
- 491 01aa 32       		.byte	0x32
- 492 01ab 8C000000 		.4byte	0x8c
- 493 01af 3B010000 		.4byte	.LLST5
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 11
+ 417 009d 20       		.byte	0x20
+ 418 009e 3E000000 		.4byte	0x3e
+ 419 00a2 03       		.uleb128 0x3
+ 420 00a3 23020000 		.4byte	.LASF14
+ 421 00a7 03       		.byte	0x3
+ 422 00a8 2C       		.byte	0x2c
+ 423 00a9 57000000 		.4byte	0x57
+ 424 00ad 02       		.uleb128 0x2
+ 425 00ae 04       		.byte	0x4
+ 426 00af 04       		.byte	0x4
+ 427 00b0 73000000 		.4byte	.LASF15
+ 428 00b4 02       		.uleb128 0x2
+ 429 00b5 08       		.byte	0x8
+ 430 00b6 04       		.byte	0x4
+ 431 00b7 ED000000 		.4byte	.LASF16
+ 432 00bb 02       		.uleb128 0x2
+ 433 00bc 01       		.byte	0x1
+ 434 00bd 08       		.byte	0x8
+ 435 00be 42020000 		.4byte	.LASF17
+ 436 00c2 02       		.uleb128 0x2
+ 437 00c3 08       		.byte	0x8
+ 438 00c4 04       		.byte	0x4
+ 439 00c5 69020000 		.4byte	.LASF18
+ 440 00c9 02       		.uleb128 0x2
+ 441 00ca 04       		.byte	0x4
+ 442 00cb 07       		.byte	0x7
+ 443 00cc 2B020000 		.4byte	.LASF19
+ 444 00d0 05       		.uleb128 0x5
+ 445 00d1 89020000 		.4byte	.LASF23
+ 446 00d5 01       		.byte	0x1
+ 447 00d6 1C       		.byte	0x1c
+ 448 00d7 00000000 		.4byte	.LFB35
+ 449 00db 84000000 		.4byte	.LFE35-.LFB35
+ 450 00df 01       		.uleb128 0x1
+ 451 00e0 9C       		.byte	0x9c
+ 452 00e1 D5010000 		.4byte	0x1d5
+ 453 00e5 06       		.uleb128 0x6
+ 454 00e6 81020000 		.4byte	.LASF20
+ 455 00ea 01       		.byte	0x1
+ 456 00eb 1C       		.byte	0x1c
+ 457 00ec 97000000 		.4byte	0x97
+ 458 00f0 00000000 		.4byte	.LLST0
+ 459 00f4 06       		.uleb128 0x6
+ 460 00f5 7E000000 		.4byte	.LASF21
+ 461 00f9 01       		.byte	0x1
+ 462 00fa 1C       		.byte	0x1c
+ 463 00fb 8C000000 		.4byte	0x8c
+ 464 00ff 21000000 		.4byte	.LLST1
+ 465 0103 06       		.uleb128 0x6
+ 466 0104 CD000000 		.4byte	.LASF22
+ 467 0108 01       		.byte	0x1
+ 468 0109 1C       		.byte	0x1c
+ 469 010a 8C000000 		.4byte	0x8c
+ 470 010e 42000000 		.4byte	.LLST2
+ 471 0112 07       		.uleb128 0x7
+ 472 0113 6F757400 		.ascii	"out\000"
+ 473 0117 01       		.byte	0x1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 11
 
 
- 494 01b3 07       		.uleb128 0x7
- 495 01b4 1C000000 		.4byte	.LVL12
- 496 01b8 86020000 		.4byte	0x286
- 497 01bc C6010000 		.4byte	0x1c6
- 498 01c0 08       		.uleb128 0x8
- 499 01c1 01       		.uleb128 0x1
- 500 01c2 50       		.byte	0x50
- 501 01c3 01       		.uleb128 0x1
- 502 01c4 30       		.byte	0x30
- 503 01c5 00       		.byte	0
- 504 01c6 07       		.uleb128 0x7
- 505 01c7 26000000 		.4byte	.LVL13
- 506 01cb 91020000 		.4byte	0x291
- 507 01cf DB010000 		.4byte	0x1db
- 508 01d3 08       		.uleb128 0x8
- 509 01d4 01       		.uleb128 0x1
- 510 01d5 50       		.byte	0x50
- 511 01d6 03       		.uleb128 0x3
- 512 01d7 74       		.byte	0x74
- 513 01d8 00       		.sleb128 0
- 514 01d9 1F       		.byte	0x1f
- 515 01da 00       		.byte	0
- 516 01db 07       		.uleb128 0x7
- 517 01dc 3A000000 		.4byte	.LVL15
- 518 01e0 86020000 		.4byte	0x286
- 519 01e4 EE010000 		.4byte	0x1ee
- 520 01e8 08       		.uleb128 0x8
- 521 01e9 01       		.uleb128 0x1
- 522 01ea 50       		.byte	0x50
- 523 01eb 01       		.uleb128 0x1
- 524 01ec 31       		.byte	0x31
- 525 01ed 00       		.byte	0
- 526 01ee 07       		.uleb128 0x7
- 527 01ef 44000000 		.4byte	.LVL16
- 528 01f3 91020000 		.4byte	0x291
- 529 01f7 02020000 		.4byte	0x202
- 530 01fb 08       		.uleb128 0x8
- 531 01fc 01       		.uleb128 0x1
- 532 01fd 50       		.byte	0x50
- 533 01fe 02       		.uleb128 0x2
- 534 01ff 74       		.byte	0x74
- 535 0200 00       		.sleb128 0
- 536 0201 00       		.byte	0
- 537 0202 09       		.uleb128 0x9
- 538 0203 52000000 		.4byte	.LVL19
- 539 0207 91020000 		.4byte	0x291
- 540 020b 08       		.uleb128 0x8
- 541 020c 01       		.uleb128 0x1
- 542 020d 50       		.byte	0x50
- 543 020e 01       		.uleb128 0x1
- 544 020f 30       		.byte	0x30
- 545 0210 00       		.byte	0
- 546 0211 00       		.byte	0
- 547 0212 0A       		.uleb128 0xa
- 548 0213 C0020000 		.4byte	.LASF25
- 549 0217 01       		.byte	0x1
- 550 0218 47       		.byte	0x47
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 12
+ 474 0118 22       		.byte	0x22
+ 475 0119 D5010000 		.4byte	0x1d5
+ 476 011d 02       		.uleb128 0x2
+ 477 011e 91       		.byte	0x91
+ 478 011f 50       		.sleb128 -48
+ 479 0120 08       		.uleb128 0x8
+ 480 0121 10000000 		.4byte	.LVL2
+ 481 0125 47030000 		.4byte	0x347
+ 482 0129 37010000 		.4byte	0x137
+ 483 012d 09       		.uleb128 0x9
+ 484 012e 01       		.uleb128 0x1
+ 485 012f 50       		.byte	0x50
+ 486 0130 05       		.uleb128 0x5
+ 487 0131 03       		.byte	0x3
+ 488 0132 00000000 		.4byte	.LC0
+ 489 0136 00       		.byte	0
+ 490 0137 08       		.uleb128 0x8
+ 491 0138 1A000000 		.4byte	.LVL3
+ 492 013c 53030000 		.4byte	0x353
+ 493 0140 56010000 		.4byte	0x156
+ 494 0144 09       		.uleb128 0x9
+ 495 0145 01       		.uleb128 0x1
+ 496 0146 50       		.byte	0x50
+ 497 0147 02       		.uleb128 0x2
+ 498 0148 74       		.byte	0x74
+ 499 0149 00       		.sleb128 0
+ 500 014a 09       		.uleb128 0x9
+ 501 014b 01       		.uleb128 0x1
+ 502 014c 51       		.byte	0x51
+ 503 014d 02       		.uleb128 0x2
+ 504 014e 7D       		.byte	0x7d
+ 505 014f 00       		.sleb128 0
+ 506 0150 09       		.uleb128 0x9
+ 507 0151 01       		.uleb128 0x1
+ 508 0152 52       		.byte	0x52
+ 509 0153 01       		.uleb128 0x1
+ 510 0154 3A       		.byte	0x3a
+ 511 0155 00       		.byte	0
+ 512 0156 0A       		.uleb128 0xa
+ 513 0157 1E000000 		.4byte	.LVL4
+ 514 015b 47030000 		.4byte	0x347
+ 515 015f 08       		.uleb128 0x8
+ 516 0160 24000000 		.4byte	.LVL5
+ 517 0164 47030000 		.4byte	0x347
+ 518 0168 76010000 		.4byte	0x176
+ 519 016c 09       		.uleb128 0x9
+ 520 016d 01       		.uleb128 0x1
+ 521 016e 50       		.byte	0x50
+ 522 016f 05       		.uleb128 0x5
+ 523 0170 03       		.byte	0x3
+ 524 0171 14000000 		.4byte	.LC2
+ 525 0175 00       		.byte	0
+ 526 0176 08       		.uleb128 0x8
+ 527 0177 3C000000 		.4byte	.LVL6
+ 528 017b 5E030000 		.4byte	0x35e
+ 529 017f 89010000 		.4byte	0x189
+ 530 0183 09       		.uleb128 0x9
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 12
 
 
- 551 0219 97000000 		.4byte	0x97
- 552 021d 00000000 		.4byte	.LFB37
- 553 0221 0C000000 		.4byte	.LFE37-.LFB37
- 554 0225 01       		.uleb128 0x1
- 555 0226 9C       		.byte	0x9c
- 556 0227 0A       		.uleb128 0xa
- 557 0228 00000000 		.4byte	.LASF26
- 558 022c 01       		.byte	0x1
- 559 022d 4B       		.byte	0x4b
- 560 022e 97000000 		.4byte	0x97
- 561 0232 00000000 		.4byte	.LFB38
- 562 0236 0C000000 		.4byte	.LFE38-.LFB38
- 563 023a 01       		.uleb128 0x1
- 564 023b 9C       		.byte	0x9c
- 565 023c 0B       		.uleb128 0xb
- 566 023d A7000000 		.4byte	.LASF27
- 567 0241 01       		.byte	0x1
- 568 0242 13       		.byte	0x13
- 569 0243 8C000000 		.4byte	0x8c
- 570 0247 05       		.uleb128 0x5
- 571 0248 03       		.byte	0x3
- 572 0249 00000000 		.4byte	invalidate
- 573 024d 0B       		.uleb128 0xb
- 574 024e 65000000 		.4byte	.LASF28
- 575 0252 01       		.byte	0x1
- 576 0253 16       		.byte	0x16
- 577 0254 A2000000 		.4byte	0xa2
- 578 0258 05       		.uleb128 0x5
- 579 0259 03       		.byte	0x3
- 580 025a 00000000 		.4byte	currPWM_Drive
- 581 025e 0B       		.uleb128 0xb
- 582 025f DF010000 		.4byte	.LASF29
- 583 0263 01       		.byte	0x1
- 584 0264 17       		.byte	0x17
- 585 0265 A2000000 		.4byte	0xa2
- 586 0269 05       		.uleb128 0x5
- 587 026a 03       		.byte	0x3
- 588 026b 00000000 		.4byte	currPWM_Swivel
- 589 026f 0C       		.uleb128 0xc
- 590 0270 25000000 		.4byte	.LASF30
- 591 0274 25000000 		.4byte	.LASF30
- 592 0278 04       		.byte	0x4
- 593 0279 33       		.byte	0x33
- 594 027a 0D       		.uleb128 0xd
- 595 027b D0000000 		.4byte	.LASF31
- 596 027f D0000000 		.4byte	.LASF31
- 597 0283 05       		.byte	0x5
- 598 0284 5501     		.2byte	0x155
- 599 0286 0C       		.uleb128 0xc
- 600 0287 B2000000 		.4byte	.LASF32
- 601 028b B2000000 		.4byte	.LASF32
- 602 028f 06       		.byte	0x6
- 603 0290 33       		.byte	0x33
- 604 0291 0D       		.uleb128 0xd
- 605 0292 2D020000 		.4byte	.LASF33
- 606 0296 2D020000 		.4byte	.LASF33
- 607 029a 07       		.byte	0x7
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 13
+ 531 0184 01       		.uleb128 0x1
+ 532 0185 50       		.byte	0x50
+ 533 0186 01       		.uleb128 0x1
+ 534 0187 30       		.byte	0x30
+ 535 0188 00       		.byte	0
+ 536 0189 08       		.uleb128 0x8
+ 537 018a 46000000 		.4byte	.LVL7
+ 538 018e 69030000 		.4byte	0x369
+ 539 0192 9E010000 		.4byte	0x19e
+ 540 0196 09       		.uleb128 0x9
+ 541 0197 01       		.uleb128 0x1
+ 542 0198 50       		.byte	0x50
+ 543 0199 03       		.uleb128 0x3
+ 544 019a 74       		.byte	0x74
+ 545 019b 00       		.sleb128 0
+ 546 019c 1F       		.byte	0x1f
+ 547 019d 00       		.byte	0
+ 548 019e 08       		.uleb128 0x8
+ 549 019f 5A000000 		.4byte	.LVL8
+ 550 01a3 5E030000 		.4byte	0x35e
+ 551 01a7 B1010000 		.4byte	0x1b1
+ 552 01ab 09       		.uleb128 0x9
+ 553 01ac 01       		.uleb128 0x1
+ 554 01ad 50       		.byte	0x50
+ 555 01ae 01       		.uleb128 0x1
+ 556 01af 31       		.byte	0x31
+ 557 01b0 00       		.byte	0
+ 558 01b1 08       		.uleb128 0x8
+ 559 01b2 64000000 		.4byte	.LVL9
+ 560 01b6 69030000 		.4byte	0x369
+ 561 01ba C5010000 		.4byte	0x1c5
+ 562 01be 09       		.uleb128 0x9
+ 563 01bf 01       		.uleb128 0x1
+ 564 01c0 50       		.byte	0x50
+ 565 01c1 02       		.uleb128 0x2
+ 566 01c2 74       		.byte	0x74
+ 567 01c3 00       		.sleb128 0
+ 568 01c4 00       		.byte	0
+ 569 01c5 0B       		.uleb128 0xb
+ 570 01c6 72000000 		.4byte	.LVL10
+ 571 01ca 69030000 		.4byte	0x369
+ 572 01ce 09       		.uleb128 0x9
+ 573 01cf 01       		.uleb128 0x1
+ 574 01d0 50       		.byte	0x50
+ 575 01d1 01       		.uleb128 0x1
+ 576 01d2 30       		.byte	0x30
+ 577 01d3 00       		.byte	0
+ 578 01d4 00       		.byte	0
+ 579 01d5 0C       		.uleb128 0xc
+ 580 01d6 BB000000 		.4byte	0xbb
+ 581 01da E5010000 		.4byte	0x1e5
+ 582 01de 0D       		.uleb128 0xd
+ 583 01df C9000000 		.4byte	0xc9
+ 584 01e3 1F       		.byte	0x1f
+ 585 01e4 00       		.byte	0
+ 586 01e5 05       		.uleb128 0x5
+ 587 01e6 94020000 		.4byte	.LASF24
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 13
 
 
- 608 029b 5501     		.2byte	0x155
- 609 029d 00       		.byte	0
- 610              		.section	.debug_abbrev,"",%progbits
- 611              	.Ldebug_abbrev0:
- 612 0000 01       		.uleb128 0x1
- 613 0001 11       		.uleb128 0x11
- 614 0002 01       		.byte	0x1
- 615 0003 25       		.uleb128 0x25
- 616 0004 0E       		.uleb128 0xe
- 617 0005 13       		.uleb128 0x13
- 618 0006 0B       		.uleb128 0xb
- 619 0007 03       		.uleb128 0x3
- 620 0008 0E       		.uleb128 0xe
- 621 0009 1B       		.uleb128 0x1b
- 622 000a 0E       		.uleb128 0xe
- 623 000b 55       		.uleb128 0x55
- 624 000c 17       		.uleb128 0x17
- 625 000d 11       		.uleb128 0x11
- 626 000e 01       		.uleb128 0x1
- 627 000f 10       		.uleb128 0x10
- 628 0010 17       		.uleb128 0x17
- 629 0011 00       		.byte	0
- 630 0012 00       		.byte	0
- 631 0013 02       		.uleb128 0x2
- 632 0014 24       		.uleb128 0x24
- 633 0015 00       		.byte	0
- 634 0016 0B       		.uleb128 0xb
- 635 0017 0B       		.uleb128 0xb
- 636 0018 3E       		.uleb128 0x3e
- 637 0019 0B       		.uleb128 0xb
- 638 001a 03       		.uleb128 0x3
- 639 001b 0E       		.uleb128 0xe
- 640 001c 00       		.byte	0
- 641 001d 00       		.byte	0
- 642 001e 03       		.uleb128 0x3
- 643 001f 16       		.uleb128 0x16
- 644 0020 00       		.byte	0
- 645 0021 03       		.uleb128 0x3
- 646 0022 0E       		.uleb128 0xe
- 647 0023 3A       		.uleb128 0x3a
- 648 0024 0B       		.uleb128 0xb
- 649 0025 3B       		.uleb128 0x3b
- 650 0026 0B       		.uleb128 0xb
- 651 0027 49       		.uleb128 0x49
- 652 0028 13       		.uleb128 0x13
- 653 0029 00       		.byte	0
- 654 002a 00       		.byte	0
- 655 002b 04       		.uleb128 0x4
- 656 002c 24       		.uleb128 0x24
- 657 002d 00       		.byte	0
- 658 002e 0B       		.uleb128 0xb
- 659 002f 0B       		.uleb128 0xb
- 660 0030 3E       		.uleb128 0x3e
- 661 0031 0B       		.uleb128 0xb
- 662 0032 03       		.uleb128 0x3
- 663 0033 08       		.uleb128 0x8
- 664 0034 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 14
+ 588 01ea 01       		.byte	0x1
+ 589 01eb 3A       		.byte	0x3a
+ 590 01ec 00000000 		.4byte	.LFB36
+ 591 01f0 84000000 		.4byte	.LFE36-.LFB36
+ 592 01f4 01       		.uleb128 0x1
+ 593 01f5 9C       		.byte	0x9c
+ 594 01f6 EA020000 		.4byte	0x2ea
+ 595 01fa 06       		.uleb128 0x6
+ 596 01fb 81020000 		.4byte	.LASF20
+ 597 01ff 01       		.byte	0x1
+ 598 0200 3A       		.byte	0x3a
+ 599 0201 97000000 		.4byte	0x97
+ 600 0205 63000000 		.4byte	.LLST3
+ 601 0209 06       		.uleb128 0x6
+ 602 020a 7E000000 		.4byte	.LASF21
+ 603 020e 01       		.byte	0x1
+ 604 020f 3A       		.byte	0x3a
+ 605 0210 8C000000 		.4byte	0x8c
+ 606 0214 84000000 		.4byte	.LLST4
+ 607 0218 06       		.uleb128 0x6
+ 608 0219 CD000000 		.4byte	.LASF22
+ 609 021d 01       		.byte	0x1
+ 610 021e 3A       		.byte	0x3a
+ 611 021f 8C000000 		.4byte	0x8c
+ 612 0223 A5000000 		.4byte	.LLST5
+ 613 0227 07       		.uleb128 0x7
+ 614 0228 6F757400 		.ascii	"out\000"
+ 615 022c 01       		.byte	0x1
+ 616 022d 41       		.byte	0x41
+ 617 022e D5010000 		.4byte	0x1d5
+ 618 0232 02       		.uleb128 0x2
+ 619 0233 91       		.byte	0x91
+ 620 0234 50       		.sleb128 -48
+ 621 0235 08       		.uleb128 0x8
+ 622 0236 16000000 		.4byte	.LVL14
+ 623 023a 47030000 		.4byte	0x347
+ 624 023e 4C020000 		.4byte	0x24c
+ 625 0242 09       		.uleb128 0x9
+ 626 0243 01       		.uleb128 0x1
+ 627 0244 50       		.byte	0x50
+ 628 0245 05       		.uleb128 0x5
+ 629 0246 03       		.byte	0x3
+ 630 0247 18000000 		.4byte	.LC6
+ 631 024b 00       		.byte	0
+ 632 024c 08       		.uleb128 0x8
+ 633 024d 20000000 		.4byte	.LVL15
+ 634 0251 53030000 		.4byte	0x353
+ 635 0255 6B020000 		.4byte	0x26b
+ 636 0259 09       		.uleb128 0x9
+ 637 025a 01       		.uleb128 0x1
+ 638 025b 50       		.byte	0x50
+ 639 025c 02       		.uleb128 0x2
+ 640 025d 74       		.byte	0x74
+ 641 025e 00       		.sleb128 0
+ 642 025f 09       		.uleb128 0x9
+ 643 0260 01       		.uleb128 0x1
+ 644 0261 51       		.byte	0x51
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 14
 
 
- 665 0035 00       		.byte	0
- 666 0036 05       		.uleb128 0x5
- 667 0037 2E       		.uleb128 0x2e
- 668 0038 01       		.byte	0x1
- 669 0039 3F       		.uleb128 0x3f
- 670 003a 19       		.uleb128 0x19
- 671 003b 03       		.uleb128 0x3
- 672 003c 0E       		.uleb128 0xe
- 673 003d 3A       		.uleb128 0x3a
- 674 003e 0B       		.uleb128 0xb
- 675 003f 3B       		.uleb128 0x3b
- 676 0040 0B       		.uleb128 0xb
- 677 0041 27       		.uleb128 0x27
- 678 0042 19       		.uleb128 0x19
- 679 0043 11       		.uleb128 0x11
- 680 0044 01       		.uleb128 0x1
- 681 0045 12       		.uleb128 0x12
- 682 0046 06       		.uleb128 0x6
- 683 0047 40       		.uleb128 0x40
- 684 0048 18       		.uleb128 0x18
- 685 0049 9742     		.uleb128 0x2117
- 686 004b 19       		.uleb128 0x19
- 687 004c 01       		.uleb128 0x1
- 688 004d 13       		.uleb128 0x13
- 689 004e 00       		.byte	0
- 690 004f 00       		.byte	0
- 691 0050 06       		.uleb128 0x6
- 692 0051 05       		.uleb128 0x5
- 693 0052 00       		.byte	0
- 694 0053 03       		.uleb128 0x3
- 695 0054 0E       		.uleb128 0xe
- 696 0055 3A       		.uleb128 0x3a
- 697 0056 0B       		.uleb128 0xb
- 698 0057 3B       		.uleb128 0x3b
- 699 0058 0B       		.uleb128 0xb
- 700 0059 49       		.uleb128 0x49
- 701 005a 13       		.uleb128 0x13
- 702 005b 02       		.uleb128 0x2
- 703 005c 17       		.uleb128 0x17
- 704 005d 00       		.byte	0
- 705 005e 00       		.byte	0
- 706 005f 07       		.uleb128 0x7
- 707 0060 898201   		.uleb128 0x4109
- 708 0063 01       		.byte	0x1
- 709 0064 11       		.uleb128 0x11
- 710 0065 01       		.uleb128 0x1
- 711 0066 31       		.uleb128 0x31
- 712 0067 13       		.uleb128 0x13
- 713 0068 01       		.uleb128 0x1
- 714 0069 13       		.uleb128 0x13
- 715 006a 00       		.byte	0
- 716 006b 00       		.byte	0
- 717 006c 08       		.uleb128 0x8
- 718 006d 8A8201   		.uleb128 0x410a
- 719 0070 00       		.byte	0
- 720 0071 02       		.uleb128 0x2
- 721 0072 18       		.uleb128 0x18
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 15
+ 645 0262 02       		.uleb128 0x2
+ 646 0263 7D       		.byte	0x7d
+ 647 0264 00       		.sleb128 0
+ 648 0265 09       		.uleb128 0x9
+ 649 0266 01       		.uleb128 0x1
+ 650 0267 52       		.byte	0x52
+ 651 0268 01       		.uleb128 0x1
+ 652 0269 3A       		.byte	0x3a
+ 653 026a 00       		.byte	0
+ 654 026b 0A       		.uleb128 0xa
+ 655 026c 24000000 		.4byte	.LVL16
+ 656 0270 47030000 		.4byte	0x347
+ 657 0274 08       		.uleb128 0x8
+ 658 0275 2A000000 		.4byte	.LVL17
+ 659 0279 47030000 		.4byte	0x347
+ 660 027d 8B020000 		.4byte	0x28b
+ 661 0281 09       		.uleb128 0x9
+ 662 0282 01       		.uleb128 0x1
+ 663 0283 50       		.byte	0x50
+ 664 0284 05       		.uleb128 0x5
+ 665 0285 03       		.byte	0x3
+ 666 0286 14000000 		.4byte	.LC2
+ 667 028a 00       		.byte	0
+ 668 028b 08       		.uleb128 0x8
+ 669 028c 3C000000 		.4byte	.LVL18
+ 670 0290 75030000 		.4byte	0x375
+ 671 0294 9E020000 		.4byte	0x29e
+ 672 0298 09       		.uleb128 0x9
+ 673 0299 01       		.uleb128 0x1
+ 674 029a 50       		.byte	0x50
+ 675 029b 01       		.uleb128 0x1
+ 676 029c 30       		.byte	0x30
+ 677 029d 00       		.byte	0
+ 678 029e 08       		.uleb128 0x8
+ 679 029f 46000000 		.4byte	.LVL19
+ 680 02a3 80030000 		.4byte	0x380
+ 681 02a7 B3020000 		.4byte	0x2b3
+ 682 02ab 09       		.uleb128 0x9
+ 683 02ac 01       		.uleb128 0x1
+ 684 02ad 50       		.byte	0x50
+ 685 02ae 03       		.uleb128 0x3
+ 686 02af 74       		.byte	0x74
+ 687 02b0 00       		.sleb128 0
+ 688 02b1 1F       		.byte	0x1f
+ 689 02b2 00       		.byte	0
+ 690 02b3 08       		.uleb128 0x8
+ 691 02b4 5A000000 		.4byte	.LVL20
+ 692 02b8 75030000 		.4byte	0x375
+ 693 02bc C6020000 		.4byte	0x2c6
+ 694 02c0 09       		.uleb128 0x9
+ 695 02c1 01       		.uleb128 0x1
+ 696 02c2 50       		.byte	0x50
+ 697 02c3 01       		.uleb128 0x1
+ 698 02c4 31       		.byte	0x31
+ 699 02c5 00       		.byte	0
+ 700 02c6 08       		.uleb128 0x8
+ 701 02c7 64000000 		.4byte	.LVL21
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 15
 
 
- 722 0073 9142     		.uleb128 0x2111
- 723 0075 18       		.uleb128 0x18
- 724 0076 00       		.byte	0
- 725 0077 00       		.byte	0
- 726 0078 09       		.uleb128 0x9
- 727 0079 898201   		.uleb128 0x4109
- 728 007c 01       		.byte	0x1
- 729 007d 11       		.uleb128 0x11
- 730 007e 01       		.uleb128 0x1
- 731 007f 31       		.uleb128 0x31
- 732 0080 13       		.uleb128 0x13
- 733 0081 00       		.byte	0
- 734 0082 00       		.byte	0
- 735 0083 0A       		.uleb128 0xa
- 736 0084 2E       		.uleb128 0x2e
- 737 0085 00       		.byte	0
- 738 0086 3F       		.uleb128 0x3f
- 739 0087 19       		.uleb128 0x19
- 740 0088 03       		.uleb128 0x3
- 741 0089 0E       		.uleb128 0xe
- 742 008a 3A       		.uleb128 0x3a
- 743 008b 0B       		.uleb128 0xb
- 744 008c 3B       		.uleb128 0x3b
- 745 008d 0B       		.uleb128 0xb
- 746 008e 49       		.uleb128 0x49
- 747 008f 13       		.uleb128 0x13
- 748 0090 11       		.uleb128 0x11
- 749 0091 01       		.uleb128 0x1
- 750 0092 12       		.uleb128 0x12
- 751 0093 06       		.uleb128 0x6
- 752 0094 40       		.uleb128 0x40
- 753 0095 18       		.uleb128 0x18
- 754 0096 9742     		.uleb128 0x2117
- 755 0098 19       		.uleb128 0x19
- 756 0099 00       		.byte	0
- 757 009a 00       		.byte	0
- 758 009b 0B       		.uleb128 0xb
- 759 009c 34       		.uleb128 0x34
- 760 009d 00       		.byte	0
- 761 009e 03       		.uleb128 0x3
- 762 009f 0E       		.uleb128 0xe
- 763 00a0 3A       		.uleb128 0x3a
- 764 00a1 0B       		.uleb128 0xb
- 765 00a2 3B       		.uleb128 0x3b
- 766 00a3 0B       		.uleb128 0xb
- 767 00a4 49       		.uleb128 0x49
- 768 00a5 13       		.uleb128 0x13
- 769 00a6 3F       		.uleb128 0x3f
- 770 00a7 19       		.uleb128 0x19
- 771 00a8 02       		.uleb128 0x2
- 772 00a9 18       		.uleb128 0x18
- 773 00aa 00       		.byte	0
- 774 00ab 00       		.byte	0
- 775 00ac 0C       		.uleb128 0xc
- 776 00ad 2E       		.uleb128 0x2e
- 777 00ae 00       		.byte	0
- 778 00af 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 16
+ 702 02cb 80030000 		.4byte	0x380
+ 703 02cf DA020000 		.4byte	0x2da
+ 704 02d3 09       		.uleb128 0x9
+ 705 02d4 01       		.uleb128 0x1
+ 706 02d5 50       		.byte	0x50
+ 707 02d6 02       		.uleb128 0x2
+ 708 02d7 74       		.byte	0x74
+ 709 02d8 00       		.sleb128 0
+ 710 02d9 00       		.byte	0
+ 711 02da 0B       		.uleb128 0xb
+ 712 02db 72000000 		.4byte	.LVL22
+ 713 02df 80030000 		.4byte	0x380
+ 714 02e3 09       		.uleb128 0x9
+ 715 02e4 01       		.uleb128 0x1
+ 716 02e5 50       		.byte	0x50
+ 717 02e6 01       		.uleb128 0x1
+ 718 02e7 30       		.byte	0x30
+ 719 02e8 00       		.byte	0
+ 720 02e9 00       		.byte	0
+ 721 02ea 0E       		.uleb128 0xe
+ 722 02eb B7020000 		.4byte	.LASF25
+ 723 02ef 01       		.byte	0x1
+ 724 02f0 53       		.byte	0x53
+ 725 02f1 97000000 		.4byte	0x97
+ 726 02f5 00000000 		.4byte	.LFB37
+ 727 02f9 0C000000 		.4byte	.LFE37-.LFB37
+ 728 02fd 01       		.uleb128 0x1
+ 729 02fe 9C       		.byte	0x9c
+ 730 02ff 0E       		.uleb128 0xe
+ 731 0300 00000000 		.4byte	.LASF26
+ 732 0304 01       		.byte	0x1
+ 733 0305 57       		.byte	0x57
+ 734 0306 97000000 		.4byte	0x97
+ 735 030a 00000000 		.4byte	.LFB38
+ 736 030e 0C000000 		.4byte	.LFE38-.LFB38
+ 737 0312 01       		.uleb128 0x1
+ 738 0313 9C       		.byte	0x9c
+ 739 0314 0F       		.uleb128 0xf
+ 740 0315 AC000000 		.4byte	.LASF27
+ 741 0319 01       		.byte	0x1
+ 742 031a 13       		.byte	0x13
+ 743 031b 8C000000 		.4byte	0x8c
+ 744 031f 05       		.uleb128 0x5
+ 745 0320 03       		.byte	0x3
+ 746 0321 00000000 		.4byte	invalidate
+ 747 0325 0F       		.uleb128 0xf
+ 748 0326 65000000 		.4byte	.LASF28
+ 749 032a 01       		.byte	0x1
+ 750 032b 16       		.byte	0x16
+ 751 032c A2000000 		.4byte	0xa2
+ 752 0330 05       		.uleb128 0x5
+ 753 0331 03       		.byte	0x3
+ 754 0332 00000000 		.4byte	currPWM_Drive
+ 755 0336 0F       		.uleb128 0xf
+ 756 0337 51020000 		.4byte	.LASF29
+ 757 033b 01       		.byte	0x1
+ 758 033c 17       		.byte	0x17
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 16
 
 
- 779 00b0 19       		.uleb128 0x19
- 780 00b1 3C       		.uleb128 0x3c
- 781 00b2 19       		.uleb128 0x19
- 782 00b3 6E       		.uleb128 0x6e
- 783 00b4 0E       		.uleb128 0xe
- 784 00b5 03       		.uleb128 0x3
- 785 00b6 0E       		.uleb128 0xe
- 786 00b7 3A       		.uleb128 0x3a
- 787 00b8 0B       		.uleb128 0xb
- 788 00b9 3B       		.uleb128 0x3b
- 789 00ba 0B       		.uleb128 0xb
- 790 00bb 00       		.byte	0
- 791 00bc 00       		.byte	0
- 792 00bd 0D       		.uleb128 0xd
- 793 00be 2E       		.uleb128 0x2e
- 794 00bf 00       		.byte	0
- 795 00c0 3F       		.uleb128 0x3f
- 796 00c1 19       		.uleb128 0x19
- 797 00c2 3C       		.uleb128 0x3c
- 798 00c3 19       		.uleb128 0x19
- 799 00c4 6E       		.uleb128 0x6e
- 800 00c5 0E       		.uleb128 0xe
- 801 00c6 03       		.uleb128 0x3
- 802 00c7 0E       		.uleb128 0xe
- 803 00c8 3A       		.uleb128 0x3a
- 804 00c9 0B       		.uleb128 0xb
- 805 00ca 3B       		.uleb128 0x3b
- 806 00cb 05       		.uleb128 0x5
- 807 00cc 00       		.byte	0
- 808 00cd 00       		.byte	0
- 809 00ce 00       		.byte	0
- 810              		.section	.debug_loc,"",%progbits
- 811              	.Ldebug_loc0:
- 812              	.LLST0:
- 813 0000 00000000 		.4byte	.LVL0
- 814 0004 06000000 		.4byte	.LVL1
- 815 0008 0100     		.2byte	0x1
- 816 000a 50       		.byte	0x50
- 817 000b 06000000 		.4byte	.LVL1
- 818 000f 58000000 		.4byte	.LFE35
- 819 0013 0400     		.2byte	0x4
- 820 0015 F3       		.byte	0xf3
- 821 0016 01       		.uleb128 0x1
- 822 0017 50       		.byte	0x50
- 823 0018 9F       		.byte	0x9f
- 824 0019 00000000 		.4byte	0
- 825 001d 00000000 		.4byte	0
- 826              	.LLST1:
- 827 0021 00000000 		.4byte	.LVL0
- 828 0025 1B000000 		.4byte	.LVL2-1
- 829 0029 0100     		.2byte	0x1
- 830 002b 51       		.byte	0x51
- 831 002c 1B000000 		.4byte	.LVL2-1
- 832 0030 28000000 		.4byte	.LVL4
- 833 0034 0400     		.2byte	0x4
- 834 0036 F3       		.byte	0xf3
- 835 0037 01       		.uleb128 0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 17
+ 759 033d A2000000 		.4byte	0xa2
+ 760 0341 05       		.uleb128 0x5
+ 761 0342 03       		.byte	0x3
+ 762 0343 00000000 		.4byte	currPWM_Swivel
+ 763 0347 10       		.uleb128 0x10
+ 764 0348 10020000 		.4byte	.LASF30
+ 765 034c 10020000 		.4byte	.LASF30
+ 766 0350 04       		.byte	0x4
+ 767 0351 2A03     		.2byte	0x32a
+ 768 0353 11       		.uleb128 0x11
+ 769 0354 79000000 		.4byte	.LASF31
+ 770 0358 79000000 		.4byte	.LASF31
+ 771 035c 05       		.byte	0x5
+ 772 035d CB       		.byte	0xcb
+ 773 035e 11       		.uleb128 0x11
+ 774 035f 25000000 		.4byte	.LASF32
+ 775 0363 25000000 		.4byte	.LASF32
+ 776 0367 06       		.byte	0x6
+ 777 0368 33       		.byte	0x33
+ 778 0369 10       		.uleb128 0x10
+ 779 036a D5000000 		.4byte	.LASF33
+ 780 036e D5000000 		.4byte	.LASF33
+ 781 0372 07       		.byte	0x7
+ 782 0373 5501     		.2byte	0x155
+ 783 0375 11       		.uleb128 0x11
+ 784 0376 B7000000 		.4byte	.LASF34
+ 785 037a B7000000 		.4byte	.LASF34
+ 786 037e 08       		.byte	0x8
+ 787 037f 33       		.byte	0x33
+ 788 0380 10       		.uleb128 0x10
+ 789 0381 9F020000 		.4byte	.LASF35
+ 790 0385 9F020000 		.4byte	.LASF35
+ 791 0389 09       		.byte	0x9
+ 792 038a 5501     		.2byte	0x155
+ 793 038c 00       		.byte	0
+ 794              		.section	.debug_abbrev,"",%progbits
+ 795              	.Ldebug_abbrev0:
+ 796 0000 01       		.uleb128 0x1
+ 797 0001 11       		.uleb128 0x11
+ 798 0002 01       		.byte	0x1
+ 799 0003 25       		.uleb128 0x25
+ 800 0004 0E       		.uleb128 0xe
+ 801 0005 13       		.uleb128 0x13
+ 802 0006 0B       		.uleb128 0xb
+ 803 0007 03       		.uleb128 0x3
+ 804 0008 0E       		.uleb128 0xe
+ 805 0009 1B       		.uleb128 0x1b
+ 806 000a 0E       		.uleb128 0xe
+ 807 000b 55       		.uleb128 0x55
+ 808 000c 17       		.uleb128 0x17
+ 809 000d 11       		.uleb128 0x11
+ 810 000e 01       		.uleb128 0x1
+ 811 000f 10       		.uleb128 0x10
+ 812 0010 17       		.uleb128 0x17
+ 813 0011 00       		.byte	0
+ 814 0012 00       		.byte	0
+ 815 0013 02       		.uleb128 0x2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 17
 
 
- 836 0038 51       		.byte	0x51
- 837 0039 9F       		.byte	0x9f
- 838 003a 28000000 		.4byte	.LVL4
- 839 003e 39000000 		.4byte	.LVL5-1
- 840 0042 0100     		.2byte	0x1
- 841 0044 51       		.byte	0x51
- 842 0045 39000000 		.4byte	.LVL5-1
- 843 0049 46000000 		.4byte	.LVL7
- 844 004d 0400     		.2byte	0x4
- 845 004f F3       		.byte	0xf3
- 846 0050 01       		.uleb128 0x1
- 847 0051 51       		.byte	0x51
- 848 0052 9F       		.byte	0x9f
- 849 0053 46000000 		.4byte	.LVL7
- 850 0057 51000000 		.4byte	.LVL9-1
- 851 005b 0100     		.2byte	0x1
- 852 005d 51       		.byte	0x51
- 853 005e 51000000 		.4byte	.LVL9-1
- 854 0062 58000000 		.4byte	.LFE35
- 855 0066 0400     		.2byte	0x4
- 856 0068 F3       		.byte	0xf3
- 857 0069 01       		.uleb128 0x1
- 858 006a 51       		.byte	0x51
- 859 006b 9F       		.byte	0x9f
- 860 006c 00000000 		.4byte	0
- 861 0070 00000000 		.4byte	0
- 862              	.LLST2:
- 863 0074 00000000 		.4byte	.LVL0
- 864 0078 1B000000 		.4byte	.LVL2-1
- 865 007c 0100     		.2byte	0x1
- 866 007e 52       		.byte	0x52
- 867 007f 1B000000 		.4byte	.LVL2-1
- 868 0083 28000000 		.4byte	.LVL4
- 869 0087 0400     		.2byte	0x4
- 870 0089 F3       		.byte	0xf3
- 871 008a 01       		.uleb128 0x1
- 872 008b 52       		.byte	0x52
- 873 008c 9F       		.byte	0x9f
- 874 008d 28000000 		.4byte	.LVL4
- 875 0091 39000000 		.4byte	.LVL5-1
- 876 0095 0100     		.2byte	0x1
- 877 0097 52       		.byte	0x52
- 878 0098 39000000 		.4byte	.LVL5-1
- 879 009c 46000000 		.4byte	.LVL7
- 880 00a0 0400     		.2byte	0x4
- 881 00a2 F3       		.byte	0xf3
- 882 00a3 01       		.uleb128 0x1
- 883 00a4 52       		.byte	0x52
- 884 00a5 9F       		.byte	0x9f
- 885 00a6 46000000 		.4byte	.LVL7
- 886 00aa 48000000 		.4byte	.LVL8
- 887 00ae 0100     		.2byte	0x1
- 888 00b0 52       		.byte	0x52
- 889 00b1 48000000 		.4byte	.LVL8
- 890 00b5 58000000 		.4byte	.LFE35
- 891 00b9 0400     		.2byte	0x4
- 892 00bb F3       		.byte	0xf3
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 18
+ 816 0014 24       		.uleb128 0x24
+ 817 0015 00       		.byte	0
+ 818 0016 0B       		.uleb128 0xb
+ 819 0017 0B       		.uleb128 0xb
+ 820 0018 3E       		.uleb128 0x3e
+ 821 0019 0B       		.uleb128 0xb
+ 822 001a 03       		.uleb128 0x3
+ 823 001b 0E       		.uleb128 0xe
+ 824 001c 00       		.byte	0
+ 825 001d 00       		.byte	0
+ 826 001e 03       		.uleb128 0x3
+ 827 001f 16       		.uleb128 0x16
+ 828 0020 00       		.byte	0
+ 829 0021 03       		.uleb128 0x3
+ 830 0022 0E       		.uleb128 0xe
+ 831 0023 3A       		.uleb128 0x3a
+ 832 0024 0B       		.uleb128 0xb
+ 833 0025 3B       		.uleb128 0x3b
+ 834 0026 0B       		.uleb128 0xb
+ 835 0027 49       		.uleb128 0x49
+ 836 0028 13       		.uleb128 0x13
+ 837 0029 00       		.byte	0
+ 838 002a 00       		.byte	0
+ 839 002b 04       		.uleb128 0x4
+ 840 002c 24       		.uleb128 0x24
+ 841 002d 00       		.byte	0
+ 842 002e 0B       		.uleb128 0xb
+ 843 002f 0B       		.uleb128 0xb
+ 844 0030 3E       		.uleb128 0x3e
+ 845 0031 0B       		.uleb128 0xb
+ 846 0032 03       		.uleb128 0x3
+ 847 0033 08       		.uleb128 0x8
+ 848 0034 00       		.byte	0
+ 849 0035 00       		.byte	0
+ 850 0036 05       		.uleb128 0x5
+ 851 0037 2E       		.uleb128 0x2e
+ 852 0038 01       		.byte	0x1
+ 853 0039 3F       		.uleb128 0x3f
+ 854 003a 19       		.uleb128 0x19
+ 855 003b 03       		.uleb128 0x3
+ 856 003c 0E       		.uleb128 0xe
+ 857 003d 3A       		.uleb128 0x3a
+ 858 003e 0B       		.uleb128 0xb
+ 859 003f 3B       		.uleb128 0x3b
+ 860 0040 0B       		.uleb128 0xb
+ 861 0041 27       		.uleb128 0x27
+ 862 0042 19       		.uleb128 0x19
+ 863 0043 11       		.uleb128 0x11
+ 864 0044 01       		.uleb128 0x1
+ 865 0045 12       		.uleb128 0x12
+ 866 0046 06       		.uleb128 0x6
+ 867 0047 40       		.uleb128 0x40
+ 868 0048 18       		.uleb128 0x18
+ 869 0049 9742     		.uleb128 0x2117
+ 870 004b 19       		.uleb128 0x19
+ 871 004c 01       		.uleb128 0x1
+ 872 004d 13       		.uleb128 0x13
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 18
 
 
- 893 00bc 01       		.uleb128 0x1
- 894 00bd 52       		.byte	0x52
- 895 00be 9F       		.byte	0x9f
- 896 00bf 00000000 		.4byte	0
- 897 00c3 00000000 		.4byte	0
- 898              	.LLST3:
- 899 00c7 00000000 		.4byte	.LVL10
- 900 00cb 06000000 		.4byte	.LVL11
- 901 00cf 0100     		.2byte	0x1
- 902 00d1 50       		.byte	0x50
- 903 00d2 06000000 		.4byte	.LVL11
- 904 00d6 58000000 		.4byte	.LFE36
- 905 00da 0400     		.2byte	0x4
- 906 00dc F3       		.byte	0xf3
- 907 00dd 01       		.uleb128 0x1
- 908 00de 50       		.byte	0x50
- 909 00df 9F       		.byte	0x9f
- 910 00e0 00000000 		.4byte	0
- 911 00e4 00000000 		.4byte	0
- 912              	.LLST4:
- 913 00e8 00000000 		.4byte	.LVL10
- 914 00ec 1B000000 		.4byte	.LVL12-1
- 915 00f0 0100     		.2byte	0x1
- 916 00f2 51       		.byte	0x51
- 917 00f3 1B000000 		.4byte	.LVL12-1
- 918 00f7 28000000 		.4byte	.LVL14
- 919 00fb 0400     		.2byte	0x4
- 920 00fd F3       		.byte	0xf3
- 921 00fe 01       		.uleb128 0x1
- 922 00ff 51       		.byte	0x51
- 923 0100 9F       		.byte	0x9f
- 924 0101 28000000 		.4byte	.LVL14
- 925 0105 39000000 		.4byte	.LVL15-1
- 926 0109 0100     		.2byte	0x1
- 927 010b 51       		.byte	0x51
- 928 010c 39000000 		.4byte	.LVL15-1
- 929 0110 46000000 		.4byte	.LVL17
- 930 0114 0400     		.2byte	0x4
- 931 0116 F3       		.byte	0xf3
- 932 0117 01       		.uleb128 0x1
- 933 0118 51       		.byte	0x51
- 934 0119 9F       		.byte	0x9f
- 935 011a 46000000 		.4byte	.LVL17
- 936 011e 51000000 		.4byte	.LVL19-1
- 937 0122 0100     		.2byte	0x1
- 938 0124 51       		.byte	0x51
- 939 0125 51000000 		.4byte	.LVL19-1
- 940 0129 58000000 		.4byte	.LFE36
- 941 012d 0400     		.2byte	0x4
- 942 012f F3       		.byte	0xf3
- 943 0130 01       		.uleb128 0x1
- 944 0131 51       		.byte	0x51
- 945 0132 9F       		.byte	0x9f
- 946 0133 00000000 		.4byte	0
- 947 0137 00000000 		.4byte	0
- 948              	.LLST5:
- 949 013b 00000000 		.4byte	.LVL10
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 19
+ 873 004e 00       		.byte	0
+ 874 004f 00       		.byte	0
+ 875 0050 06       		.uleb128 0x6
+ 876 0051 05       		.uleb128 0x5
+ 877 0052 00       		.byte	0
+ 878 0053 03       		.uleb128 0x3
+ 879 0054 0E       		.uleb128 0xe
+ 880 0055 3A       		.uleb128 0x3a
+ 881 0056 0B       		.uleb128 0xb
+ 882 0057 3B       		.uleb128 0x3b
+ 883 0058 0B       		.uleb128 0xb
+ 884 0059 49       		.uleb128 0x49
+ 885 005a 13       		.uleb128 0x13
+ 886 005b 02       		.uleb128 0x2
+ 887 005c 17       		.uleb128 0x17
+ 888 005d 00       		.byte	0
+ 889 005e 00       		.byte	0
+ 890 005f 07       		.uleb128 0x7
+ 891 0060 34       		.uleb128 0x34
+ 892 0061 00       		.byte	0
+ 893 0062 03       		.uleb128 0x3
+ 894 0063 08       		.uleb128 0x8
+ 895 0064 3A       		.uleb128 0x3a
+ 896 0065 0B       		.uleb128 0xb
+ 897 0066 3B       		.uleb128 0x3b
+ 898 0067 0B       		.uleb128 0xb
+ 899 0068 49       		.uleb128 0x49
+ 900 0069 13       		.uleb128 0x13
+ 901 006a 02       		.uleb128 0x2
+ 902 006b 18       		.uleb128 0x18
+ 903 006c 00       		.byte	0
+ 904 006d 00       		.byte	0
+ 905 006e 08       		.uleb128 0x8
+ 906 006f 898201   		.uleb128 0x4109
+ 907 0072 01       		.byte	0x1
+ 908 0073 11       		.uleb128 0x11
+ 909 0074 01       		.uleb128 0x1
+ 910 0075 31       		.uleb128 0x31
+ 911 0076 13       		.uleb128 0x13
+ 912 0077 01       		.uleb128 0x1
+ 913 0078 13       		.uleb128 0x13
+ 914 0079 00       		.byte	0
+ 915 007a 00       		.byte	0
+ 916 007b 09       		.uleb128 0x9
+ 917 007c 8A8201   		.uleb128 0x410a
+ 918 007f 00       		.byte	0
+ 919 0080 02       		.uleb128 0x2
+ 920 0081 18       		.uleb128 0x18
+ 921 0082 9142     		.uleb128 0x2111
+ 922 0084 18       		.uleb128 0x18
+ 923 0085 00       		.byte	0
+ 924 0086 00       		.byte	0
+ 925 0087 0A       		.uleb128 0xa
+ 926 0088 898201   		.uleb128 0x4109
+ 927 008b 00       		.byte	0
+ 928 008c 11       		.uleb128 0x11
+ 929 008d 01       		.uleb128 0x1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 19
 
 
- 950 013f 1B000000 		.4byte	.LVL12-1
- 951 0143 0100     		.2byte	0x1
- 952 0145 52       		.byte	0x52
- 953 0146 1B000000 		.4byte	.LVL12-1
- 954 014a 28000000 		.4byte	.LVL14
- 955 014e 0400     		.2byte	0x4
- 956 0150 F3       		.byte	0xf3
- 957 0151 01       		.uleb128 0x1
- 958 0152 52       		.byte	0x52
- 959 0153 9F       		.byte	0x9f
- 960 0154 28000000 		.4byte	.LVL14
- 961 0158 39000000 		.4byte	.LVL15-1
- 962 015c 0100     		.2byte	0x1
- 963 015e 52       		.byte	0x52
- 964 015f 39000000 		.4byte	.LVL15-1
- 965 0163 46000000 		.4byte	.LVL17
- 966 0167 0400     		.2byte	0x4
- 967 0169 F3       		.byte	0xf3
- 968 016a 01       		.uleb128 0x1
- 969 016b 52       		.byte	0x52
- 970 016c 9F       		.byte	0x9f
- 971 016d 46000000 		.4byte	.LVL17
- 972 0171 48000000 		.4byte	.LVL18
- 973 0175 0100     		.2byte	0x1
- 974 0177 52       		.byte	0x52
- 975 0178 48000000 		.4byte	.LVL18
- 976 017c 58000000 		.4byte	.LFE36
- 977 0180 0400     		.2byte	0x4
- 978 0182 F3       		.byte	0xf3
- 979 0183 01       		.uleb128 0x1
- 980 0184 52       		.byte	0x52
- 981 0185 9F       		.byte	0x9f
- 982 0186 00000000 		.4byte	0
- 983 018a 00000000 		.4byte	0
- 984              		.section	.debug_aranges,"",%progbits
- 985 0000 34000000 		.4byte	0x34
- 986 0004 0200     		.2byte	0x2
- 987 0006 00000000 		.4byte	.Ldebug_info0
- 988 000a 04       		.byte	0x4
- 989 000b 00       		.byte	0
- 990 000c 0000     		.2byte	0
- 991 000e 0000     		.2byte	0
- 992 0010 00000000 		.4byte	.LFB35
- 993 0014 58000000 		.4byte	.LFE35-.LFB35
- 994 0018 00000000 		.4byte	.LFB36
- 995 001c 58000000 		.4byte	.LFE36-.LFB36
- 996 0020 00000000 		.4byte	.LFB37
- 997 0024 0C000000 		.4byte	.LFE37-.LFB37
- 998 0028 00000000 		.4byte	.LFB38
- 999 002c 0C000000 		.4byte	.LFE38-.LFB38
- 1000 0030 00000000 		.4byte	0
- 1001 0034 00000000 		.4byte	0
- 1002              		.section	.debug_ranges,"",%progbits
- 1003              	.Ldebug_ranges0:
- 1004 0000 00000000 		.4byte	.LFB35
- 1005 0004 58000000 		.4byte	.LFE35
- 1006 0008 00000000 		.4byte	.LFB36
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 20
+ 930 008e 31       		.uleb128 0x31
+ 931 008f 13       		.uleb128 0x13
+ 932 0090 00       		.byte	0
+ 933 0091 00       		.byte	0
+ 934 0092 0B       		.uleb128 0xb
+ 935 0093 898201   		.uleb128 0x4109
+ 936 0096 01       		.byte	0x1
+ 937 0097 11       		.uleb128 0x11
+ 938 0098 01       		.uleb128 0x1
+ 939 0099 31       		.uleb128 0x31
+ 940 009a 13       		.uleb128 0x13
+ 941 009b 00       		.byte	0
+ 942 009c 00       		.byte	0
+ 943 009d 0C       		.uleb128 0xc
+ 944 009e 01       		.uleb128 0x1
+ 945 009f 01       		.byte	0x1
+ 946 00a0 49       		.uleb128 0x49
+ 947 00a1 13       		.uleb128 0x13
+ 948 00a2 01       		.uleb128 0x1
+ 949 00a3 13       		.uleb128 0x13
+ 950 00a4 00       		.byte	0
+ 951 00a5 00       		.byte	0
+ 952 00a6 0D       		.uleb128 0xd
+ 953 00a7 21       		.uleb128 0x21
+ 954 00a8 00       		.byte	0
+ 955 00a9 49       		.uleb128 0x49
+ 956 00aa 13       		.uleb128 0x13
+ 957 00ab 2F       		.uleb128 0x2f
+ 958 00ac 0B       		.uleb128 0xb
+ 959 00ad 00       		.byte	0
+ 960 00ae 00       		.byte	0
+ 961 00af 0E       		.uleb128 0xe
+ 962 00b0 2E       		.uleb128 0x2e
+ 963 00b1 00       		.byte	0
+ 964 00b2 3F       		.uleb128 0x3f
+ 965 00b3 19       		.uleb128 0x19
+ 966 00b4 03       		.uleb128 0x3
+ 967 00b5 0E       		.uleb128 0xe
+ 968 00b6 3A       		.uleb128 0x3a
+ 969 00b7 0B       		.uleb128 0xb
+ 970 00b8 3B       		.uleb128 0x3b
+ 971 00b9 0B       		.uleb128 0xb
+ 972 00ba 49       		.uleb128 0x49
+ 973 00bb 13       		.uleb128 0x13
+ 974 00bc 11       		.uleb128 0x11
+ 975 00bd 01       		.uleb128 0x1
+ 976 00be 12       		.uleb128 0x12
+ 977 00bf 06       		.uleb128 0x6
+ 978 00c0 40       		.uleb128 0x40
+ 979 00c1 18       		.uleb128 0x18
+ 980 00c2 9742     		.uleb128 0x2117
+ 981 00c4 19       		.uleb128 0x19
+ 982 00c5 00       		.byte	0
+ 983 00c6 00       		.byte	0
+ 984 00c7 0F       		.uleb128 0xf
+ 985 00c8 34       		.uleb128 0x34
+ 986 00c9 00       		.byte	0
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 20
 
 
- 1007 000c 58000000 		.4byte	.LFE36
- 1008 0010 00000000 		.4byte	.LFB37
- 1009 0014 0C000000 		.4byte	.LFE37
- 1010 0018 00000000 		.4byte	.LFB38
- 1011 001c 0C000000 		.4byte	.LFE38
- 1012 0020 00000000 		.4byte	0
- 1013 0024 00000000 		.4byte	0
- 1014              		.section	.debug_line,"",%progbits
- 1015              	.Ldebug_line0:
- 1016 0000 11020000 		.section	.debug_str,"MS",%progbits,1
- 1016      02008101 
- 1016      00000201 
- 1016      FB0E0D00 
- 1016      01010101 
- 1017              	.LASF26:
- 1018 0000 47657443 		.ascii	"GetCurrentPWM_M2\000"
- 1018      75727265 
- 1018      6E745057 
- 1018      4D5F4D32 
- 1018      00
- 1019              	.LASF2:
- 1020 0011 5F5F7569 		.ascii	"__uint8_t\000"
- 1020      6E74385F 
- 1020      7400
- 1021              	.LASF3:
- 1022 001b 5F5F696E 		.ascii	"__int16_t\000"
- 1022      7431365F 
- 1022      7400
- 1023              	.LASF30:
- 1024 0025 4D6F746F 		.ascii	"Motor1Direction_Write\000"
- 1024      72314469 
- 1024      72656374 
- 1024      696F6E5F 
- 1024      57726974 
- 1025              	.LASF6:
- 1026 003b 5F5F696E 		.ascii	"__int32_t\000"
- 1026      7433325F 
- 1026      7400
- 1027              	.LASF5:
- 1028 0045 73686F72 		.ascii	"short unsigned int\000"
- 1028      7420756E 
- 1028      7369676E 
- 1028      65642069 
- 1028      6E7400
- 1029              	.LASF35:
- 1030 0058 4D6F746F 		.ascii	"MotorDrive.c\000"
- 1030      72447269 
- 1030      76652E63 
- 1030      00
- 1031              	.LASF28:
- 1032 0065 63757272 		.ascii	"currPWM_Drive\000"
- 1032      50574D5F 
- 1032      44726976 
- 1032      6500
- 1033              	.LASF15:
- 1034 0073 666C6F61 		.ascii	"float\000"
- 1034      7400
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 21
+ 987 00ca 03       		.uleb128 0x3
+ 988 00cb 0E       		.uleb128 0xe
+ 989 00cc 3A       		.uleb128 0x3a
+ 990 00cd 0B       		.uleb128 0xb
+ 991 00ce 3B       		.uleb128 0x3b
+ 992 00cf 0B       		.uleb128 0xb
+ 993 00d0 49       		.uleb128 0x49
+ 994 00d1 13       		.uleb128 0x13
+ 995 00d2 3F       		.uleb128 0x3f
+ 996 00d3 19       		.uleb128 0x19
+ 997 00d4 02       		.uleb128 0x2
+ 998 00d5 18       		.uleb128 0x18
+ 999 00d6 00       		.byte	0
+ 1000 00d7 00       		.byte	0
+ 1001 00d8 10       		.uleb128 0x10
+ 1002 00d9 2E       		.uleb128 0x2e
+ 1003 00da 00       		.byte	0
+ 1004 00db 3F       		.uleb128 0x3f
+ 1005 00dc 19       		.uleb128 0x19
+ 1006 00dd 3C       		.uleb128 0x3c
+ 1007 00de 19       		.uleb128 0x19
+ 1008 00df 6E       		.uleb128 0x6e
+ 1009 00e0 0E       		.uleb128 0xe
+ 1010 00e1 03       		.uleb128 0x3
+ 1011 00e2 0E       		.uleb128 0xe
+ 1012 00e3 3A       		.uleb128 0x3a
+ 1013 00e4 0B       		.uleb128 0xb
+ 1014 00e5 3B       		.uleb128 0x3b
+ 1015 00e6 05       		.uleb128 0x5
+ 1016 00e7 00       		.byte	0
+ 1017 00e8 00       		.byte	0
+ 1018 00e9 11       		.uleb128 0x11
+ 1019 00ea 2E       		.uleb128 0x2e
+ 1020 00eb 00       		.byte	0
+ 1021 00ec 3F       		.uleb128 0x3f
+ 1022 00ed 19       		.uleb128 0x19
+ 1023 00ee 3C       		.uleb128 0x3c
+ 1024 00ef 19       		.uleb128 0x19
+ 1025 00f0 6E       		.uleb128 0x6e
+ 1026 00f1 0E       		.uleb128 0xe
+ 1027 00f2 03       		.uleb128 0x3
+ 1028 00f3 0E       		.uleb128 0xe
+ 1029 00f4 3A       		.uleb128 0x3a
+ 1030 00f5 0B       		.uleb128 0xb
+ 1031 00f6 3B       		.uleb128 0x3b
+ 1032 00f7 0B       		.uleb128 0xb
+ 1033 00f8 00       		.byte	0
+ 1034 00f9 00       		.byte	0
+ 1035 00fa 00       		.byte	0
+ 1036              		.section	.debug_loc,"",%progbits
+ 1037              	.Ldebug_loc0:
+ 1038              	.LLST0:
+ 1039 0000 00000000 		.4byte	.LVL0
+ 1040 0004 0C000000 		.4byte	.LVL1
+ 1041 0008 0100     		.2byte	0x1
+ 1042 000a 50       		.byte	0x50
+ 1043 000b 0C000000 		.4byte	.LVL1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 21
 
 
- 1035              	.LASF21:
- 1036 0079 64697361 		.ascii	"disable_limit\000"
- 1036      626C655F 
- 1036      6C696D69 
- 1036      7400
- 1037              	.LASF1:
- 1038 0087 756E7369 		.ascii	"unsigned char\000"
- 1038      676E6564 
- 1038      20636861 
- 1038      7200
- 1039              	.LASF8:
- 1040 0095 6C6F6E67 		.ascii	"long unsigned int\000"
- 1040      20756E73 
- 1040      69676E65 
- 1040      6420696E 
- 1040      7400
- 1041              	.LASF27:
- 1042 00a7 696E7661 		.ascii	"invalidate\000"
- 1042      6C696461 
- 1042      746500
- 1043              	.LASF32:
- 1044 00b2 4D6F746F 		.ascii	"Motor2Direction_Write\000"
- 1044      72324469 
- 1044      72656374 
- 1044      696F6E5F 
- 1044      57726974 
- 1045              	.LASF22:
- 1046 00c8 6C696D69 		.ascii	"limitSW\000"
- 1046      74535700 
- 1047              	.LASF31:
- 1048 00d0 50574D5F 		.ascii	"PWM_Motor1_WriteCompare\000"
- 1048      4D6F746F 
- 1048      72315F57 
- 1048      72697465 
- 1048      436F6D70 
- 1049              	.LASF16:
- 1050 00e8 646F7562 		.ascii	"double\000"
- 1050      6C6500
- 1051              	.LASF11:
- 1052 00ef 756E7369 		.ascii	"unsigned int\000"
- 1052      676E6564 
- 1052      20696E74 
- 1052      00
- 1053              	.LASF10:
- 1054 00fc 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1054      206C6F6E 
- 1054      6720756E 
- 1054      7369676E 
- 1054      65642069 
- 1055              	.LASF12:
- 1056 0113 75696E74 		.ascii	"uint8_t\000"
- 1056      385F7400 
- 1057              	.LASF13:
- 1058 011b 696E7431 		.ascii	"int16_t\000"
- 1058      365F7400 
- 1059              	.LASF34:
- 1060 0123 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 22
+ 1044 000f 84000000 		.4byte	.LFE35
+ 1045 0013 0400     		.2byte	0x4
+ 1046 0015 F3       		.byte	0xf3
+ 1047 0016 01       		.uleb128 0x1
+ 1048 0017 50       		.byte	0x50
+ 1049 0018 9F       		.byte	0x9f
+ 1050 0019 00000000 		.4byte	0
+ 1051 001d 00000000 		.4byte	0
+ 1052              	.LLST1:
+ 1053 0021 00000000 		.4byte	.LVL0
+ 1054 0025 0F000000 		.4byte	.LVL2-1
+ 1055 0029 0100     		.2byte	0x1
+ 1056 002b 51       		.byte	0x51
+ 1057 002c 0F000000 		.4byte	.LVL2-1
+ 1058 0030 84000000 		.4byte	.LFE35
+ 1059 0034 0400     		.2byte	0x4
+ 1060 0036 F3       		.byte	0xf3
+ 1061 0037 01       		.uleb128 0x1
+ 1062 0038 51       		.byte	0x51
+ 1063 0039 9F       		.byte	0x9f
+ 1064 003a 00000000 		.4byte	0
+ 1065 003e 00000000 		.4byte	0
+ 1066              	.LLST2:
+ 1067 0042 00000000 		.4byte	.LVL0
+ 1068 0046 0F000000 		.4byte	.LVL2-1
+ 1069 004a 0100     		.2byte	0x1
+ 1070 004c 52       		.byte	0x52
+ 1071 004d 0F000000 		.4byte	.LVL2-1
+ 1072 0051 84000000 		.4byte	.LFE35
+ 1073 0055 0400     		.2byte	0x4
+ 1074 0057 F3       		.byte	0xf3
+ 1075 0058 01       		.uleb128 0x1
+ 1076 0059 52       		.byte	0x52
+ 1077 005a 9F       		.byte	0x9f
+ 1078 005b 00000000 		.4byte	0
+ 1079 005f 00000000 		.4byte	0
+ 1080              	.LLST3:
+ 1081 0063 00000000 		.4byte	.LVL11
+ 1082 0067 12000000 		.4byte	.LVL13
+ 1083 006b 0100     		.2byte	0x1
+ 1084 006d 50       		.byte	0x50
+ 1085 006e 12000000 		.4byte	.LVL13
+ 1086 0072 84000000 		.4byte	.LFE36
+ 1087 0076 0400     		.2byte	0x4
+ 1088 0078 F3       		.byte	0xf3
+ 1089 0079 01       		.uleb128 0x1
+ 1090 007a 50       		.byte	0x50
+ 1091 007b 9F       		.byte	0x9f
+ 1092 007c 00000000 		.4byte	0
+ 1093 0080 00000000 		.4byte	0
+ 1094              	.LLST4:
+ 1095 0084 00000000 		.4byte	.LVL11
+ 1096 0088 15000000 		.4byte	.LVL14-1
+ 1097 008c 0100     		.2byte	0x1
+ 1098 008e 51       		.byte	0x51
+ 1099 008f 15000000 		.4byte	.LVL14-1
+ 1100 0093 84000000 		.4byte	.LFE36
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 22
 
 
- 1060      43313120 
- 1060      352E342E 
- 1060      31203230 
- 1060      31363036 
- 1061 0156 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 1061      20726576 
- 1061      6973696F 
- 1061      6E203233 
- 1061      37373135 
- 1062 0189 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1062      66756E63 
- 1062      74696F6E 
- 1062      2D736563 
- 1062      74696F6E 
- 1063              	.LASF14:
- 1064 01b1 696E7433 		.ascii	"int32_t\000"
- 1064      325F7400 
- 1065              	.LASF19:
- 1066 01b9 73697A65 		.ascii	"sizetype\000"
- 1066      74797065 
- 1066      00
- 1067              	.LASF9:
- 1068 01c2 6C6F6E67 		.ascii	"long long int\000"
- 1068      206C6F6E 
- 1068      6720696E 
- 1068      7400
- 1069              	.LASF17:
- 1070 01d0 63686172 		.ascii	"char\000"
- 1070      00
- 1071              	.LASF4:
- 1072 01d5 73686F72 		.ascii	"short int\000"
- 1072      7420696E 
- 1072      7400
- 1073              	.LASF29:
- 1074 01df 63757272 		.ascii	"currPWM_Swivel\000"
- 1074      50574D5F 
- 1074      53776976 
- 1074      656C00
- 1075              	.LASF7:
- 1076 01ee 6C6F6E67 		.ascii	"long int\000"
- 1076      20696E74 
- 1076      00
- 1077              	.LASF18:
- 1078 01f7 6C6F6E67 		.ascii	"long double\000"
- 1078      20646F75 
- 1078      626C6500 
- 1079              	.LASF0:
- 1080 0203 7369676E 		.ascii	"signed char\000"
- 1080      65642063 
- 1080      68617200 
- 1081              	.LASF20:
- 1082 020f 636F6D70 		.ascii	"compare\000"
- 1082      61726500 
- 1083              	.LASF23:
- 1084 0217 7365745F 		.ascii	"set_PWM_M1\000"
- 1084      50574D5F 
- 1084      4D3100
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccJpVHDW.s 			page 23
+ 1101 0097 0400     		.2byte	0x4
+ 1102 0099 F3       		.byte	0xf3
+ 1103 009a 01       		.uleb128 0x1
+ 1104 009b 51       		.byte	0x51
+ 1105 009c 9F       		.byte	0x9f
+ 1106 009d 00000000 		.4byte	0
+ 1107 00a1 00000000 		.4byte	0
+ 1108              	.LLST5:
+ 1109 00a5 00000000 		.4byte	.LVL11
+ 1110 00a9 0C000000 		.4byte	.LVL12
+ 1111 00ad 0100     		.2byte	0x1
+ 1112 00af 52       		.byte	0x52
+ 1113 00b0 0C000000 		.4byte	.LVL12
+ 1114 00b4 84000000 		.4byte	.LFE36
+ 1115 00b8 0400     		.2byte	0x4
+ 1116 00ba F3       		.byte	0xf3
+ 1117 00bb 01       		.uleb128 0x1
+ 1118 00bc 52       		.byte	0x52
+ 1119 00bd 9F       		.byte	0x9f
+ 1120 00be 00000000 		.4byte	0
+ 1121 00c2 00000000 		.4byte	0
+ 1122              		.section	.debug_aranges,"",%progbits
+ 1123 0000 34000000 		.4byte	0x34
+ 1124 0004 0200     		.2byte	0x2
+ 1125 0006 00000000 		.4byte	.Ldebug_info0
+ 1126 000a 04       		.byte	0x4
+ 1127 000b 00       		.byte	0
+ 1128 000c 0000     		.2byte	0
+ 1129 000e 0000     		.2byte	0
+ 1130 0010 00000000 		.4byte	.LFB35
+ 1131 0014 84000000 		.4byte	.LFE35-.LFB35
+ 1132 0018 00000000 		.4byte	.LFB36
+ 1133 001c 84000000 		.4byte	.LFE36-.LFB36
+ 1134 0020 00000000 		.4byte	.LFB37
+ 1135 0024 0C000000 		.4byte	.LFE37-.LFB37
+ 1136 0028 00000000 		.4byte	.LFB38
+ 1137 002c 0C000000 		.4byte	.LFE38-.LFB38
+ 1138 0030 00000000 		.4byte	0
+ 1139 0034 00000000 		.4byte	0
+ 1140              		.section	.debug_ranges,"",%progbits
+ 1141              	.Ldebug_ranges0:
+ 1142 0000 00000000 		.4byte	.LFB35
+ 1143 0004 84000000 		.4byte	.LFE35
+ 1144 0008 00000000 		.4byte	.LFB36
+ 1145 000c 84000000 		.4byte	.LFE36
+ 1146 0010 00000000 		.4byte	.LFB37
+ 1147 0014 0C000000 		.4byte	.LFE37
+ 1148 0018 00000000 		.4byte	.LFB38
+ 1149 001c 0C000000 		.4byte	.LFE38
+ 1150 0020 00000000 		.4byte	0
+ 1151 0024 00000000 		.4byte	0
+ 1152              		.section	.debug_line,"",%progbits
+ 1153              	.Ldebug_line0:
+ 1154 0000 9E020000 		.section	.debug_str,"MS",%progbits,1
+ 1154      02000802 
+ 1154      00000201 
+ 1154      FB0E0D00 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 23
 
 
- 1085              	.LASF24:
- 1086 0222 7365745F 		.ascii	"set_PWM_M2\000"
- 1086      50574D5F 
- 1086      4D3200
- 1087              	.LASF33:
- 1088 022d 50574D5F 		.ascii	"PWM_Motor2_WriteCompare\000"
- 1088      4D6F746F 
- 1088      72325F57 
- 1088      72697465 
- 1088      436F6D70 
- 1089              	.LASF36:
- 1090 0245 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
- 1090      73657273 
- 1090      5C6D6577 
- 1090      696E5C4F 
- 1090      6E654472 
- 1091 0273 5C537765 		.ascii	"\\Swerve Motor Board 2023\\Swerve_Motor_Board_PY202"
- 1091      72766520 
- 1091      4D6F746F 
- 1091      7220426F 
- 1091      61726420 
- 1092 02a4 335C5377 		.ascii	"3\\SwerveMotorFirmware.cydsn\000"
- 1092      65727665 
- 1092      4D6F746F 
- 1092      72466972 
- 1092      6D776172 
- 1093              	.LASF25:
- 1094 02c0 47657443 		.ascii	"GetCurrentPWM_M1\000"
- 1094      75727265 
- 1094      6E745057 
- 1094      4D5F4D31 
- 1094      00
- 1095              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1154      01010101 
+ 1155              	.LASF26:
+ 1156 0000 47657443 		.ascii	"GetCurrentPWM_M2\000"
+ 1156      75727265 
+ 1156      6E745057 
+ 1156      4D5F4D32 
+ 1156      00
+ 1157              	.LASF2:
+ 1158 0011 5F5F7569 		.ascii	"__uint8_t\000"
+ 1158      6E74385F 
+ 1158      7400
+ 1159              	.LASF3:
+ 1160 001b 5F5F696E 		.ascii	"__int16_t\000"
+ 1160      7431365F 
+ 1160      7400
+ 1161              	.LASF32:
+ 1162 0025 4D6F746F 		.ascii	"Motor1Direction_Write\000"
+ 1162      72314469 
+ 1162      72656374 
+ 1162      696F6E5F 
+ 1162      57726974 
+ 1163              	.LASF6:
+ 1164 003b 5F5F696E 		.ascii	"__int32_t\000"
+ 1164      7433325F 
+ 1164      7400
+ 1165              	.LASF5:
+ 1166 0045 73686F72 		.ascii	"short unsigned int\000"
+ 1166      7420756E 
+ 1166      7369676E 
+ 1166      65642069 
+ 1166      6E7400
+ 1167              	.LASF37:
+ 1168 0058 4D6F746F 		.ascii	"MotorDrive.c\000"
+ 1168      72447269 
+ 1168      76652E63 
+ 1168      00
+ 1169              	.LASF28:
+ 1170 0065 63757272 		.ascii	"currPWM_Drive\000"
+ 1170      50574D5F 
+ 1170      44726976 
+ 1170      6500
+ 1171              	.LASF15:
+ 1172 0073 666C6F61 		.ascii	"float\000"
+ 1172      7400
+ 1173              	.LASF31:
+ 1174 0079 69746F61 		.ascii	"itoa\000"
+ 1174      00
+ 1175              	.LASF21:
+ 1176 007e 64697361 		.ascii	"disable_limit\000"
+ 1176      626C655F 
+ 1176      6C696D69 
+ 1176      7400
+ 1177              	.LASF1:
+ 1178 008c 756E7369 		.ascii	"unsigned char\000"
+ 1178      676E6564 
+ 1178      20636861 
+ 1178      7200
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 24
+
+
+ 1179              	.LASF8:
+ 1180 009a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1180      20756E73 
+ 1180      69676E65 
+ 1180      6420696E 
+ 1180      7400
+ 1181              	.LASF27:
+ 1182 00ac 696E7661 		.ascii	"invalidate\000"
+ 1182      6C696461 
+ 1182      746500
+ 1183              	.LASF34:
+ 1184 00b7 4D6F746F 		.ascii	"Motor2Direction_Write\000"
+ 1184      72324469 
+ 1184      72656374 
+ 1184      696F6E5F 
+ 1184      57726974 
+ 1185              	.LASF22:
+ 1186 00cd 6C696D69 		.ascii	"limitSW\000"
+ 1186      74535700 
+ 1187              	.LASF33:
+ 1188 00d5 50574D5F 		.ascii	"PWM_Motor1_WriteCompare\000"
+ 1188      4D6F746F 
+ 1188      72315F57 
+ 1188      72697465 
+ 1188      436F6D70 
+ 1189              	.LASF16:
+ 1190 00ed 646F7562 		.ascii	"double\000"
+ 1190      6C6500
+ 1191              	.LASF38:
+ 1192 00f4 433A5C55 		.ascii	"C:\\Users\\mewin\\Documents\\PSoC Creator\\Swerve_M"
+ 1192      73657273 
+ 1192      5C6D6577 
+ 1192      696E5C44 
+ 1192      6F63756D 
+ 1193 0122 6F746F72 		.ascii	"otor_Board_PY2023\\SwerveMotorFirmware.cydsn\000"
+ 1193      5F426F61 
+ 1193      72645F50 
+ 1193      59323032 
+ 1193      335C5377 
+ 1194              	.LASF11:
+ 1195 014e 756E7369 		.ascii	"unsigned int\000"
+ 1195      676E6564 
+ 1195      20696E74 
+ 1195      00
+ 1196              	.LASF10:
+ 1197 015b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1197      206C6F6E 
+ 1197      6720756E 
+ 1197      7369676E 
+ 1197      65642069 
+ 1198              	.LASF12:
+ 1199 0172 75696E74 		.ascii	"uint8_t\000"
+ 1199      385F7400 
+ 1200              	.LASF13:
+ 1201 017a 696E7431 		.ascii	"int16_t\000"
+ 1201      365F7400 
+ 1202              	.LASF36:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 25
+
+
+ 1203 0182 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1203      43313120 
+ 1203      352E342E 
+ 1203      31203230 
+ 1203      31363036 
+ 1204 01b5 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1204      20726576 
+ 1204      6973696F 
+ 1204      6E203233 
+ 1204      37373135 
+ 1205 01e8 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1205      66756E63 
+ 1205      74696F6E 
+ 1205      2D736563 
+ 1205      74696F6E 
+ 1206              	.LASF30:
+ 1207 0210 55415254 		.ascii	"UART_UartPutString\000"
+ 1207      5F556172 
+ 1207      74507574 
+ 1207      53747269 
+ 1207      6E6700
+ 1208              	.LASF14:
+ 1209 0223 696E7433 		.ascii	"int32_t\000"
+ 1209      325F7400 
+ 1210              	.LASF19:
+ 1211 022b 73697A65 		.ascii	"sizetype\000"
+ 1211      74797065 
+ 1211      00
+ 1212              	.LASF9:
+ 1213 0234 6C6F6E67 		.ascii	"long long int\000"
+ 1213      206C6F6E 
+ 1213      6720696E 
+ 1213      7400
+ 1214              	.LASF17:
+ 1215 0242 63686172 		.ascii	"char\000"
+ 1215      00
+ 1216              	.LASF4:
+ 1217 0247 73686F72 		.ascii	"short int\000"
+ 1217      7420696E 
+ 1217      7400
+ 1218              	.LASF29:
+ 1219 0251 63757272 		.ascii	"currPWM_Swivel\000"
+ 1219      50574D5F 
+ 1219      53776976 
+ 1219      656C00
+ 1220              	.LASF7:
+ 1221 0260 6C6F6E67 		.ascii	"long int\000"
+ 1221      20696E74 
+ 1221      00
+ 1222              	.LASF18:
+ 1223 0269 6C6F6E67 		.ascii	"long double\000"
+ 1223      20646F75 
+ 1223      626C6500 
+ 1224              	.LASF0:
+ 1225 0275 7369676E 		.ascii	"signed char\000"
+ 1225      65642063 
+ 1225      68617200 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccLKSKl0.s 			page 26
+
+
+ 1226              	.LASF20:
+ 1227 0281 636F6D70 		.ascii	"compare\000"
+ 1227      61726500 
+ 1228              	.LASF23:
+ 1229 0289 7365745F 		.ascii	"set_PWM_M1\000"
+ 1229      50574D5F 
+ 1229      4D3100
+ 1230              	.LASF24:
+ 1231 0294 7365745F 		.ascii	"set_PWM_M2\000"
+ 1231      50574D5F 
+ 1231      4D3200
+ 1232              	.LASF35:
+ 1233 029f 50574D5F 		.ascii	"PWM_Motor2_WriteCompare\000"
+ 1233      4D6F746F 
+ 1233      72325F57 
+ 1233      72697465 
+ 1233      436F6D70 
+ 1234              	.LASF25:
+ 1235 02b7 47657443 		.ascii	"GetCurrentPWM_M1\000"
+ 1235      75727265 
+ 1235      6E745057 
+ 1235      4D5F4D31 
+ 1235      00
+ 1236              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
   28:Generated_Source\PSoC4/Can_addr.c **** *  Reads the current value assigned to the Status Register.
   29:Generated_Source\PSoC4/Can_addr.c **** *
   30:Generated_Source\PSoC4/Can_addr.c **** * Parameters:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 2
 
 
   31:Generated_Source\PSoC4/Can_addr.c **** *  None.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
   58:Generated_Source\PSoC4/Can_addr.c **** {
   55              		.loc 1 58 0
   56              		.cfi_startproc
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 3
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 3
 
 
   57              		@ args = 0, pretend = 0, frame = 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
   76:Generated_Source\PSoC4/Can_addr.c **** * Return:
   77:Generated_Source\PSoC4/Can_addr.c **** *  None.
   78:Generated_Source\PSoC4/Can_addr.c **** *
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 4
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 4
 
 
   79:Generated_Source\PSoC4/Can_addr.c **** *******************************************************************************/
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
   95:Generated_Source\PSoC4/Can_addr.c **** *
   96:Generated_Source\PSoC4/Can_addr.c **** * Parameters:
   97:Generated_Source\PSoC4/Can_addr.c **** *  mask:  Value to write into the mask register.
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 5
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 5
 
 
   98:Generated_Source\PSoC4/Can_addr.c **** *
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  121:Generated_Source\PSoC4/Can_addr.c **** *
  122:Generated_Source\PSoC4/Can_addr.c **** * Return:
  123:Generated_Source\PSoC4/Can_addr.c **** *  The value of the interrupt mask of the Status Register.
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 6
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 6
 
 
  124:Generated_Source\PSoC4/Can_addr.c **** *
@@ -340,7 +340,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  193 000c D6000000 		.4byte	.LASF24
  194 0010 0C       		.byte	0xc
  195 0011 7A000000 		.4byte	.LASF25
- 196 0015 DB010000 		.4byte	.LASF26
+ 196 0015 CC010000 		.4byte	.LASF26
  197 0019 00000000 		.4byte	.Ldebug_ranges0+0
  198 001d 00000000 		.4byte	0
  199 0021 00000000 		.4byte	.Ldebug_line0
@@ -355,10 +355,10 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  208 0033 02       		.uleb128 0x2
  209 0034 02       		.byte	0x2
  210 0035 05       		.byte	0x5
- 211 0036 CC010000 		.4byte	.LASF2
+ 211 0036 26020000 		.4byte	.LASF2
  212 003a 02       		.uleb128 0x2
  213 003b 02       		.byte	0x2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 7
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 7
 
 
  214 003c 07       		.byte	0x7
@@ -405,7 +405,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  255 0087 08       		.byte	0x8
  256 0088 AF000000 		.4byte	.LASF11
  257 008c 04       		.uleb128 0x4
- 258 008d D6010000 		.4byte	.LASF13
+ 258 008d 30020000 		.4byte	.LASF13
  259 0091 02       		.byte	0x2
  260 0092 A602     		.2byte	0x2a6
  261 0094 98000000 		.4byte	0x98
@@ -414,16 +414,16 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  264 009d 02       		.uleb128 0x2
  265 009e 08       		.byte	0x8
  266 009f 04       		.byte	0x4
- 267 00a0 C0010000 		.4byte	.LASF14
+ 267 00a0 83010000 		.4byte	.LASF14
  268 00a4 02       		.uleb128 0x2
  269 00a5 04       		.byte	0x4
  270 00a6 07       		.byte	0x7
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 8
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 8
 
 
- 271 00a7 56020000 		.4byte	.LASF15
+ 271 00a7 35020000 		.4byte	.LASF15
  272 00ab 06       		.uleb128 0x6
- 273 00ac B2010000 		.4byte	.LASF20
+ 273 00ac BE010000 		.4byte	.LASF20
  274 00b0 01       		.byte	0x1
  275 00b1 25       		.byte	0x25
  276 00b2 6B000000 		.4byte	0x6b
@@ -432,7 +432,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  279 00be 01       		.uleb128 0x1
  280 00bf 9C       		.byte	0x9c
  281 00c0 07       		.uleb128 0x7
- 282 00c1 83010000 		.4byte	.LASF16
+ 282 00c1 8F010000 		.4byte	.LASF16
  283 00c5 01       		.byte	0x1
  284 00c6 39       		.byte	0x39
  285 00c7 00000000 		.4byte	.LFB2
@@ -441,7 +441,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  288 00d0 9C       		.byte	0x9c
  289 00d1 F7000000 		.4byte	0xf7
  290 00d5 08       		.uleb128 0x8
- 291 00d6 5F020000 		.4byte	.LASF18
+ 291 00d6 3E020000 		.4byte	.LASF18
  292 00da 01       		.byte	0x1
  293 00db 3B       		.byte	0x3b
  294 00dc 6B000000 		.4byte	0x6b
@@ -454,7 +454,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  301 00f2 73010000 		.4byte	0x173
  302 00f6 00       		.byte	0
  303 00f7 07       		.uleb128 0x7
- 304 00f8 6E020000 		.4byte	.LASF17
+ 304 00f8 4D020000 		.4byte	.LASF17
  305 00fc 01       		.byte	0x1
  306 00fd 50       		.byte	0x50
  307 00fe 00000000 		.4byte	.LFB3
@@ -463,7 +463,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  310 0107 9C       		.byte	0x9c
  311 0108 2E010000 		.4byte	0x12e
  312 010c 08       		.uleb128 0x8
- 313 010d 5F020000 		.4byte	.LASF18
+ 313 010d 3E020000 		.4byte	.LASF18
  314 0111 01       		.byte	0x1
  315 0112 52       		.byte	0x52
  316 0113 6B000000 		.4byte	0x6b
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  325 012e 07       		.uleb128 0x7
  326 012f 38000000 		.4byte	.LASF19
  327 0133 01       		.byte	0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 9
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 9
 
 
  328 0134 67       		.byte	0x67
@@ -509,8 +509,8 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  353 0171 03       		.byte	0x3
  354 0172 F8       		.byte	0xf8
  355 0173 0B       		.uleb128 0xb
- 356 0174 9C010000 		.4byte	.LASF23
- 357 0178 9C010000 		.4byte	.LASF23
+ 356 0174 A8010000 		.4byte	.LASF23
+ 357 0178 A8010000 		.4byte	.LASF23
  358 017c 03       		.byte	0x3
  359 017d F9       		.byte	0xf9
  360 017e 00       		.byte	0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  382 0013 02       		.uleb128 0x2
  383 0014 24       		.uleb128 0x24
  384 0015 00       		.byte	0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 10
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 10
 
 
  385 0016 0B       		.uleb128 0xb
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  439 004c 11       		.uleb128 0x11
  440 004d 01       		.uleb128 0x1
  441 004e 12       		.uleb128 0x12
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 11
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 11
 
 
  442 004f 06       		.uleb128 0x6
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  496 0089 00       		.byte	0
  497 008a 00       		.byte	0
  498 008b 0A       		.uleb128 0xa
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 12
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 12
 
 
  499 008c 05       		.uleb128 0x5
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  553 0035 10000000 		.4byte	.LFE4
  554 0039 0100     		.2byte	0x1
  555 003b 50       		.byte	0x50
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 13
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 13
 
 
  556 003c 00000000 		.4byte	0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  600 001b 4379456E 		.ascii	"CyEnterCriticalSection\000"
  600      74657243 
  600      72697469 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 14
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 14
 
 
  600      63616C53 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  624 00cf 646F7562 		.ascii	"double\000"
  624      6C6500
  625              	.LASF24:
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 15
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 15
 
 
  626 00d6 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
@@ -866,66 +866,61 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 1
  632 0177 7369676E 		.ascii	"signed char\000"
  632      65642063 
  632      68617200 
- 633              	.LASF16:
- 634 0183 43616E5F 		.ascii	"Can_addr_InterruptEnable\000"
- 634      61646472 
- 634      5F496E74 
- 634      65727275 
- 634      7074456E 
- 635              	.LASF23:
- 636 019c 43794578 		.ascii	"CyExitCriticalSection\000"
- 636      69744372 
- 636      69746963 
- 636      616C5365 
- 636      6374696F 
- 637              	.LASF20:
- 638 01b2 43616E5F 		.ascii	"Can_addr_Read\000"
- 638      61646472 
- 638      5F526561 
- 638      6400
- 639              	.LASF14:
- 640 01c0 6C6F6E67 		.ascii	"long double\000"
- 640      20646F75 
- 640      626C6500 
- 641              	.LASF2:
- 642 01cc 73686F72 		.ascii	"short int\000"
- 642      7420696E 
- 642      7400
- 643              	.LASF13:
- 644 01d6 72656738 		.ascii	"reg8\000"
- 644      00
- 645              	.LASF26:
- 646 01db 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
- 646      73657273 
- 646      5C6D6577 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc5uLvoZ.s 			page 16
+ 633              	.LASF14:
+ 634 0183 6C6F6E67 		.ascii	"long double\000"
+ 634      20646F75 
+ 634      626C6500 
+ 635              	.LASF16:
+ 636 018f 43616E5F 		.ascii	"Can_addr_InterruptEnable\000"
+ 636      61646472 
+ 636      5F496E74 
+ 636      65727275 
+ 636      7074456E 
+ 637              	.LASF23:
+ 638 01a8 43794578 		.ascii	"CyExitCriticalSection\000"
+ 638      69744372 
+ 638      69746963 
+ 638      616C5365 
+ 638      6374696F 
+ 639              	.LASF20:
+ 640 01be 43616E5F 		.ascii	"Can_addr_Read\000"
+ 640      61646472 
+ 640      5F526561 
+ 640      6400
+ 641              	.LASF26:
+ 642 01cc 433A5C55 		.ascii	"C:\\Users\\mewin\\Documents\\PSoC Creator\\Swerve_M"
+ 642      73657273 
+ 642      5C6D6577 
+ 642      696E5C44 
+ 642      6F63756D 
+ 643 01fa 6F746F72 		.ascii	"otor_Board_PY2023\\SwerveMotorFirmware.cydsn\000"
+ 643      5F426F61 
+ 643      72645F50 
+ 643      59323032 
+ 643      335C5377 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cctiRIUj.s 			page 16
 
 
- 646      696E5C4F 
- 646      6E654472 
- 647 0209 5C537765 		.ascii	"\\Swerve Motor Board 2023\\Swerve_Motor_Board_PY202"
- 647      72766520 
- 647      4D6F746F 
- 647      7220426F 
- 647      61726420 
- 648 023a 335C5377 		.ascii	"3\\SwerveMotorFirmware.cydsn\000"
- 648      65727665 
- 648      4D6F746F 
- 648      72466972 
- 648      6D776172 
- 649              	.LASF15:
- 650 0256 73697A65 		.ascii	"sizetype\000"
- 650      74797065 
- 650      00
- 651              	.LASF18:
- 652 025f 696E7465 		.ascii	"interruptState\000"
- 652      72727570 
- 652      74537461 
- 652      746500
- 653              	.LASF17:
- 654 026e 43616E5F 		.ascii	"Can_addr_InterruptDisable\000"
- 654      61646472 
- 654      5F496E74 
- 654      65727275 
- 654      70744469 
- 655              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 644              	.LASF2:
+ 645 0226 73686F72 		.ascii	"short int\000"
+ 645      7420696E 
+ 645      7400
+ 646              	.LASF13:
+ 647 0230 72656738 		.ascii	"reg8\000"
+ 647      00
+ 648              	.LASF15:
+ 649 0235 73697A65 		.ascii	"sizetype\000"
+ 649      74797065 
+ 649      00
+ 650              	.LASF18:
+ 651 023e 696E7465 		.ascii	"interruptState\000"
+ 651      72727570 
+ 651      74537461 
+ 651      746500
+ 652              	.LASF17:
+ 653 024d 43616E5F 		.ascii	"Can_addr_InterruptDisable\000"
+ 653      61646472 
+ 653      5F496E74 
+ 653      65727275 
+ 653      70744469 
+ 654              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -16880,28 +16880,29 @@ ARM GAS  Generated_Source\PSoC4\CyBootAsmGnu.s 			page 1
  2665              	.set CYDEV_STACK_SIZE, 0x0800
  2666              	.set CYDEV_USE_BUNDLED_CMSIS, 1
  2667              	.set CYDEV_VARIABLE_VDDA, 1
- 2668              	.set CYDEV_VBUS_MV, 3300
- 2669              	.set CYDEV_VDDA_MV, 3300
- 2670              	.set CYDEV_VDDD_MV, 3300
- 2671              	.set CYDEV_VDDIO_MV, 3300
- 2672              	.set CYDEV_WDT_GENERATE_ISR, 1
- 2673              	.set CYIPBLOCK_m0s8can_VERSION, 1
- 2674              	.set CYIPBLOCK_m0s8cpussv2_VERSION, 1
- 2675              	.set CYIPBLOCK_m0s8csd_VERSION, 1
- 2676              	.set CYIPBLOCK_m0s8ioss_VERSION, 1
- 2677              	.set CYIPBLOCK_m0s8lcd_VERSION, 2
- 2678              	.set CYIPBLOCK_m0s8lpcomp_VERSION, 2
- 2679              	.set CYIPBLOCK_m0s8peri_VERSION, 1
- 2680              	.set CYIPBLOCK_m0s8scb_VERSION, 2
- 2681              	.set CYIPBLOCK_m0s8srssv2_VERSION, 2
- 2682              	.set CYIPBLOCK_m0s8tcpwm_VERSION, 2
- 2683              	.set CYIPBLOCK_m0s8udb_VERSION, 1
- 2684              	.set CYIPBLOCK_m0s8usbdss_VERSION, 2
- 2685              	.set CYIPBLOCK_m0s8wco_VERSION, 1
- 2686              	.set CYIPBLOCK_s8pass4al_VERSION, 1
- 2687              	.set DMA_CHANNELS_USED__MASK, 0
- 2688              	.set CYDEV_BOOTLOADER_ENABLE, 0
- 2689              	.endif
+ 2668              	.set CYDEV_VBUS, 5
+ 2669              	.set CYDEV_VBUS_MV, 5000
+ 2670              	.set CYDEV_VDDA_MV, 3300
+ 2671              	.set CYDEV_VDDD_MV, 3300
+ 2672              	.set CYDEV_VDDIO_MV, 3300
+ 2673              	.set CYDEV_WDT_GENERATE_ISR, 1
+ 2674              	.set CYIPBLOCK_m0s8can_VERSION, 1
+ 2675              	.set CYIPBLOCK_m0s8cpussv2_VERSION, 1
+ 2676              	.set CYIPBLOCK_m0s8csd_VERSION, 1
+ 2677              	.set CYIPBLOCK_m0s8ioss_VERSION, 1
+ 2678              	.set CYIPBLOCK_m0s8lcd_VERSION, 2
+ 2679              	.set CYIPBLOCK_m0s8lpcomp_VERSION, 2
+ 2680              	.set CYIPBLOCK_m0s8peri_VERSION, 1
+ 2681              	.set CYIPBLOCK_m0s8scb_VERSION, 2
+ 2682              	.set CYIPBLOCK_m0s8srssv2_VERSION, 2
+ 2683              	.set CYIPBLOCK_m0s8tcpwm_VERSION, 2
+ 2684              	.set CYIPBLOCK_m0s8udb_VERSION, 1
+ 2685              	.set CYIPBLOCK_m0s8usbdss_VERSION, 2
+ 2686              	.set CYIPBLOCK_m0s8wco_VERSION, 1
+ 2687              	.set CYIPBLOCK_s8pass4al_VERSION, 1
+ 2688              	.set DMA_CHANNELS_USED__MASK, 0
+ 2689              	.set CYDEV_BOOTLOADER_ENABLE, 0
+ 2690              	.endif
   19              	
   20              	
   21              	/*******************************************************************************
@@ -16917,10 +16918,10 @@ ARM GAS  Generated_Source\PSoC4\CyBootAsmGnu.s 			page 1
   31              	*
   32              	*******************************************************************************/
   33              	/* void CyDelayCycles(uint32 cycles) */
-  34              	.align 3                    /* Align to 8 byte boundary (2^n) */
 ARM GAS  Generated_Source\PSoC4\CyBootAsmGnu.s 			page 283
 
 
+  34              	.align 3                    /* Align to 8 byte boundary (2^n) */
   35              	.global CyDelayCycles
   36              	.func CyDelayCycles, CyDelayCycles
   37              	.type CyDelayCycles, %function
@@ -16977,10 +16978,10 @@ ARM GAS  Generated_Source\PSoC4\CyBootAsmGnu.s 			page 1
   88              	*  Note Implementation of CyEnterCriticalSection manipulates the IRQ enable bit
   89              	*  with interrupts still enabled. The test and set of the interrupt bits is not
   90              	*  atomic; this is true for both PSoC 3 and PSoC 5. Therefore, to avoid a
-  91              	*  corrupting processor state, it must be the policy that all interrupt routines
 ARM GAS  Generated_Source\PSoC4\CyBootAsmGnu.s 			page 284
 
 
+  91              	*  corrupting processor state, it must be the policy that all interrupt routines
   92              	*  restore the interrupt enable bits as they were found on entry.
   93              	*
   94              	* \return

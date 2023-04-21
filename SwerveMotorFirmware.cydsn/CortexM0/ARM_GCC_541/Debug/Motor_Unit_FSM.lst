@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
   28:Motor_Unit_FSM.c **** 
   29:Motor_Unit_FSM.c **** void GotoUninitState() {
   28              		.loc 1 29 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 2
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 2
 
 
   29              		.cfi_startproc
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
   72              		.loc 1 40 0
   73              		@ sp needed
   74 0004 7047     		bx	lr
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 3
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 3
 
 
   75              	.L6:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  124 0002 5878     		ldrb	r0, [r3, #1]
   46:Motor_Unit_FSM.c **** }
  125              		.loc 1 46 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 4
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 4
 
 
  126              		@ sp needed
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  175 0000 024A     		ldr	r2, .L17
  176 0002 1178     		ldrb	r1, [r2]
  177 0004 0423     		movs	r3, #4
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 5
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 5
 
 
  178 0006 0B43     		orrs	r3, r1
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
   57:Motor_Unit_FSM.c **** 
   58:Motor_Unit_FSM.c **** void DerivativeConstIsSet(){
  227              		.loc 1 58 0
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 6
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 6
 
 
  228              		.cfi_startproc
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  276              		.size	PPJRConstIsSet, .-PPJRConstIsSet
  277              		.section	.text.MaxJointRevIsSet,"ax",%progbits
  278              		.align	2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 7
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 7
 
 
  279              		.global	MaxJointRevIsSet
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  325              		.size	PIDconstsSet, .-PIDconstsSet
  326              		.section	.text.ClearPIDconst,"ax",%progbits
  327              		.align	2
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 8
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 8
 
 
  328              		.global	ClearPIDconst
@@ -478,23 +478,23 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  378              	.Ldebug_info0:
  379 0000 E9010000 		.4byte	0x1e9
  380 0004 0400     		.2byte	0x4
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 9
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 9
 
 
  381 0006 00000000 		.4byte	.Ldebug_abbrev0
  382 000a 04       		.byte	0x4
  383 000b 01       		.uleb128 0x1
- 384 000c 8F010000 		.4byte	.LASF32
+ 384 000c 6E010000 		.4byte	.LASF32
  385 0010 0C       		.byte	0xc
- 386 0011 94020000 		.4byte	.LASF33
- 387 0015 4F000000 		.4byte	.LASF34
+ 386 0011 73020000 		.4byte	.LASF33
+ 387 0015 E3000000 		.4byte	.LASF34
  388 0019 00000000 		.4byte	.Ldebug_ranges0+0
  389 001d 00000000 		.4byte	0
  390 0021 00000000 		.4byte	.Ldebug_line0
  391 0025 02       		.uleb128 0x2
  392 0026 01       		.byte	0x1
  393 0027 06       		.byte	0x6
- 394 0028 A5020000 		.4byte	.LASF0
+ 394 0028 84020000 		.4byte	.LASF0
  395 002c 03       		.uleb128 0x3
  396 002d 26000000 		.4byte	.LASF9
  397 0031 02       		.byte	0x2
@@ -503,31 +503,31 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  400 0037 02       		.uleb128 0x2
  401 0038 01       		.byte	0x1
  402 0039 08       		.byte	0x8
- 403 003a E5000000 		.4byte	.LASF1
+ 403 003a 6A000000 		.4byte	.LASF1
  404 003e 02       		.uleb128 0x2
  405 003f 02       		.byte	0x2
  406 0040 05       		.byte	0x5
- 407 0041 6E020000 		.4byte	.LASF2
+ 407 0041 4D020000 		.4byte	.LASF2
  408 0045 02       		.uleb128 0x2
  409 0046 02       		.byte	0x2
  410 0047 07       		.byte	0x7
- 411 0048 18010000 		.4byte	.LASF3
+ 411 0048 9D000000 		.4byte	.LASF3
  412 004c 02       		.uleb128 0x2
  413 004d 04       		.byte	0x4
  414 004e 05       		.byte	0x5
- 415 004f 8B020000 		.4byte	.LASF4
+ 415 004f 6A020000 		.4byte	.LASF4
  416 0053 02       		.uleb128 0x2
  417 0054 04       		.byte	0x4
  418 0055 07       		.byte	0x7
- 419 0056 F3000000 		.4byte	.LASF5
+ 419 0056 78000000 		.4byte	.LASF5
  420 005a 02       		.uleb128 0x2
  421 005b 08       		.byte	0x8
  422 005c 05       		.byte	0x5
- 423 005d 4E020000 		.4byte	.LASF6
+ 423 005d 2D020000 		.4byte	.LASF6
  424 0061 02       		.uleb128 0x2
  425 0062 08       		.byte	0x8
  426 0063 07       		.byte	0x7
- 427 0064 6B010000 		.4byte	.LASF7
+ 427 0064 4A010000 		.4byte	.LASF7
  428 0068 04       		.uleb128 0x4
  429 0069 04       		.byte	0x4
  430 006a 05       		.byte	0x5
@@ -535,10 +535,10 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  432 006f 02       		.uleb128 0x2
  433 0070 04       		.byte	0x4
  434 0071 07       		.byte	0x7
- 435 0072 5E010000 		.4byte	.LASF8
+ 435 0072 3D010000 		.4byte	.LASF8
  436 0076 03       		.uleb128 0x3
- 437 0077 82010000 		.4byte	.LASF10
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 10
+ 437 0077 61010000 		.4byte	.LASF10
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 10
 
 
  438 007b 03       		.byte	0x3
@@ -547,25 +547,25 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  441 0081 02       		.uleb128 0x2
  442 0082 08       		.byte	0x8
  443 0083 04       		.byte	0x4
- 444 0084 52010000 		.4byte	.LASF11
+ 444 0084 D7000000 		.4byte	.LASF11
  445 0088 02       		.uleb128 0x2
  446 0089 04       		.byte	0x4
  447 008a 07       		.byte	0x7
- 448 008b 3A020000 		.4byte	.LASF12
+ 448 008b 19020000 		.4byte	.LASF12
  449 008f 02       		.uleb128 0x2
  450 0090 01       		.byte	0x1
  451 0091 08       		.byte	0x8
- 452 0092 5C020000 		.4byte	.LASF13
+ 452 0092 3B020000 		.4byte	.LASF13
  453 0096 02       		.uleb128 0x2
  454 0097 04       		.byte	0x4
  455 0098 04       		.byte	0x4
- 456 0099 D0000000 		.4byte	.LASF14
+ 456 0099 55000000 		.4byte	.LASF14
  457 009d 02       		.uleb128 0x2
  458 009e 08       		.byte	0x8
  459 009f 04       		.byte	0x4
- 460 00a0 4B010000 		.4byte	.LASF15
+ 460 00a0 D0000000 		.4byte	.LASF15
  461 00a4 05       		.uleb128 0x5
- 462 00a5 BB020000 		.4byte	.LASF35
+ 462 00a5 9A020000 		.4byte	.LASF35
  463 00a9 01       		.byte	0x1
  464 00aa 1D       		.byte	0x1d
  465 00ab 00000000 		.4byte	.LFB35
@@ -578,7 +578,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  472 00be E1010000 		.4byte	0x1e1
  473 00c2 00       		.byte	0
  474 00c3 07       		.uleb128 0x7
- 475 00c4 43020000 		.4byte	.LASF16
+ 475 00c4 22020000 		.4byte	.LASF16
  476 00c8 01       		.byte	0x1
  477 00c9 26       		.byte	0x26
  478 00ca 00000000 		.4byte	.LFB36
@@ -587,7 +587,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  481 00d3 9C       		.byte	0x9c
  482 00d4 E6000000 		.4byte	0xe6
  483 00d8 08       		.uleb128 0x8
- 484 00d9 CA000000 		.4byte	.LASF18
+ 484 00d9 4F000000 		.4byte	.LASF18
  485 00dd 01       		.byte	0x1
  486 00de 26       		.byte	0x26
  487 00df 76000000 		.4byte	0x76
@@ -595,10 +595,10 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  489 00e4 50       		.byte	0x50
  490 00e5 00       		.byte	0
  491 00e6 07       		.uleb128 0x7
- 492 00e7 B1020000 		.4byte	.LASF17
+ 492 00e7 90020000 		.4byte	.LASF17
  493 00eb 01       		.byte	0x1
  494 00ec 29       		.byte	0x29
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 11
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 11
 
 
  495 00ed 00000000 		.4byte	.LFB37
@@ -607,7 +607,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  498 00f6 9C       		.byte	0x9c
  499 00f7 09010000 		.4byte	0x109
  500 00fb 08       		.uleb128 0x8
- 501 00fc 8A010000 		.4byte	.LASF19
+ 501 00fc 69010000 		.4byte	.LASF19
  502 0100 01       		.byte	0x1
  503 0101 29       		.byte	0x29
  504 0102 76000000 		.4byte	0x76
@@ -633,7 +633,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  524 0131 01       		.uleb128 0x1
  525 0132 9C       		.byte	0x9c
  526 0133 0A       		.uleb128 0xa
- 527 0134 78020000 		.4byte	.LASF22
+ 527 0134 57020000 		.4byte	.LASF22
  528 0138 01       		.byte	0x1
  529 0139 32       		.byte	0x32
  530 013a 00000000 		.4byte	.LFB40
@@ -641,7 +641,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  532 0142 01       		.uleb128 0x1
  533 0143 9C       		.byte	0x9c
  534 0144 0A       		.uleb128 0xa
- 535 0145 05010000 		.4byte	.LASF23
+ 535 0145 8A000000 		.4byte	.LASF23
  536 0149 01       		.byte	0x1
  537 014a 36       		.byte	0x36
  538 014b 00000000 		.4byte	.LFB41
@@ -657,8 +657,8 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  548 0164 01       		.uleb128 0x1
  549 0165 9C       		.byte	0x9c
  550 0166 0A       		.uleb128 0xa
- 551 0167 D6000000 		.4byte	.LASF25
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 12
+ 551 0167 5B000000 		.4byte	.LASF25
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 12
 
 
  552 016b 01       		.byte	0x1
@@ -668,7 +668,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  556 0175 01       		.uleb128 0x1
  557 0176 9C       		.byte	0x9c
  558 0177 0A       		.uleb128 0xa
- 559 0178 2B010000 		.4byte	.LASF26
+ 559 0178 B0000000 		.4byte	.LASF26
  560 017c 01       		.byte	0x1
  561 017d 42       		.byte	0x42
  562 017e 00000000 		.4byte	.LFB44
@@ -676,7 +676,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  564 0186 01       		.uleb128 0x1
  565 0187 9C       		.byte	0x9c
  566 0188 09       		.uleb128 0x9
- 567 0189 61020000 		.4byte	.LASF27
+ 567 0189 40020000 		.4byte	.LASF27
  568 018d 01       		.byte	0x1
  569 018e 46       		.byte	0x46
  570 018f 76000000 		.4byte	0x76
@@ -685,7 +685,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  573 019b 01       		.uleb128 0x1
  574 019c 9C       		.byte	0x9c
  575 019d 0A       		.uleb128 0xa
- 576 019e 2C020000 		.4byte	.LASF28
+ 576 019e 0B020000 		.4byte	.LASF28
  577 01a2 01       		.byte	0x1
  578 01a3 4A       		.byte	0x4a
  579 01a4 00000000 		.4byte	.LFB46
@@ -701,7 +701,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  589 01ba 03       		.byte	0x3
  590 01bb 00000000 		.4byte	motorUnitMode
  591 01bf 0B       		.uleb128 0xb
- 592 01c0 1D020000 		.4byte	.LASF30
+ 592 01c0 FC010000 		.4byte	.LASF30
  593 01c4 01       		.byte	0x1
  594 01c5 18       		.byte	0x18
  595 01c6 76000000 		.4byte	0x76
@@ -709,7 +709,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  597 01cb 03       		.byte	0x3
  598 01cc 00000000 		.4byte	motorUnitState
  599 01d0 0B       		.uleb128 0xb
- 600 01d1 3C010000 		.4byte	.LASF31
+ 600 01d1 C1000000 		.4byte	.LASF31
  601 01d5 01       		.byte	0x1
  602 01d6 19       		.byte	0x19
  603 01d7 76000000 		.4byte	0x76
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  606 01dd 00000000 		.4byte	PIDConstSetReg
  607 01e1 0C       		.uleb128 0xc
  608 01e2 15000000 		.4byte	.LASF36
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 13
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 13
 
 
  609 01e6 15000000 		.4byte	.LASF36
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  663 0030 3E       		.uleb128 0x3e
  664 0031 0B       		.uleb128 0xb
  665 0032 03       		.uleb128 0x3
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 14
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 14
 
 
  666 0033 08       		.uleb128 0x8
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  720 006c 9742     		.uleb128 0x2117
  721 006e 19       		.uleb128 0x19
  722 006f 01       		.uleb128 0x1
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 15
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 15
 
 
  723 0070 13       		.uleb128 0x13
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  777 00a7 12       		.uleb128 0x12
  778 00a8 06       		.uleb128 0x6
  779 00a9 40       		.uleb128 0x40
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 16
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 16
 
 
  780 00aa 18       		.uleb128 0x18
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  834 0028 00000000 		.4byte	.LFB38
  835 002c 0C000000 		.4byte	.LFE38-.LFB38
  836 0030 00000000 		.4byte	.LFB39
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 17
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 17
 
 
  837 0034 0C000000 		.4byte	.LFE39-.LFB39
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  886      76617469 
  886      7665436F 
  886      6E737449 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 18
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 18
 
 
  886      73536574 
@@ -1044,178 +1044,173 @@ ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 1
  896 0046 47657453 		.ascii	"GetState\000"
  896      74617465 
  896      00
- 897              	.LASF34:
- 898 004f 433A5C55 		.ascii	"C:\\Users\\mewin\\OneDrive\\Documents\\PSoC Creator"
- 898      73657273 
- 898      5C6D6577 
- 898      696E5C4F 
- 898      6E654472 
- 899 007d 5C537765 		.ascii	"\\Swerve Motor Board 2023\\Swerve_Motor_Board_PY202"
- 899      72766520 
- 899      4D6F746F 
- 899      7220426F 
- 899      61726420 
- 900 00ae 335C5377 		.ascii	"3\\SwerveMotorFirmware.cydsn\000"
- 900      65727665 
- 900      4D6F746F 
- 900      72466972 
- 900      6D776172 
- 901              	.LASF18:
- 902 00ca 73746174 		.ascii	"state\000"
- 902      6500
- 903              	.LASF14:
- 904 00d0 666C6F61 		.ascii	"float\000"
- 904      7400
- 905              	.LASF25:
- 906 00d6 50504A52 		.ascii	"PPJRConstIsSet\000"
- 906      436F6E73 
- 906      74497353 
- 906      657400
- 907              	.LASF1:
- 908 00e5 756E7369 		.ascii	"unsigned char\000"
- 908      676E6564 
- 908      20636861 
- 908      7200
- 909              	.LASF5:
- 910 00f3 6C6F6E67 		.ascii	"long unsigned int\000"
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 19
+ 897              	.LASF18:
+ 898 004f 73746174 		.ascii	"state\000"
+ 898      6500
+ 899              	.LASF14:
+ 900 0055 666C6F61 		.ascii	"float\000"
+ 900      7400
+ 901              	.LASF25:
+ 902 005b 50504A52 		.ascii	"PPJRConstIsSet\000"
+ 902      436F6E73 
+ 902      74497353 
+ 902      657400
+ 903              	.LASF1:
+ 904 006a 756E7369 		.ascii	"unsigned char\000"
+ 904      676E6564 
+ 904      20636861 
+ 904      7200
+ 905              	.LASF5:
+ 906 0078 6C6F6E67 		.ascii	"long unsigned int\000"
+ 906      20756E73 
+ 906      69676E65 
+ 906      6420696E 
+ 906      7400
+ 907              	.LASF23:
+ 908 008a 496E7465 		.ascii	"IntegralConstIsSet\000"
+ 908      6772616C 
+ 908      436F6E73 
+ 908      74497353 
+ 908      657400
+ 909              	.LASF3:
+ 910 009d 73686F72 		.ascii	"short unsigned int\000"
+ 910      7420756E 
+ 910      7369676E 
+ 910      65642069 
+ 910      6E7400
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 19
 
 
- 910      20756E73 
- 910      69676E65 
- 910      6420696E 
- 910      7400
- 911              	.LASF23:
- 912 0105 496E7465 		.ascii	"IntegralConstIsSet\000"
- 912      6772616C 
- 912      436F6E73 
- 912      74497353 
- 912      657400
- 913              	.LASF3:
- 914 0118 73686F72 		.ascii	"short unsigned int\000"
- 914      7420756E 
- 914      7369676E 
- 914      65642069 
- 914      6E7400
- 915              	.LASF26:
- 916 012b 4D61784A 		.ascii	"MaxJointRevIsSet\000"
- 916      6F696E74 
- 916      52657649 
- 916      73536574 
- 916      00
- 917              	.LASF31:
- 918 013c 50494443 		.ascii	"PIDConstSetReg\000"
- 918      6F6E7374 
- 918      53657452 
- 918      656700
- 919              	.LASF15:
- 920 014b 646F7562 		.ascii	"double\000"
- 920      6C6500
- 921              	.LASF11:
- 922 0152 6C6F6E67 		.ascii	"long double\000"
- 922      20646F75 
- 922      626C6500 
- 923              	.LASF8:
- 924 015e 756E7369 		.ascii	"unsigned int\000"
- 924      676E6564 
- 924      20696E74 
- 924      00
- 925              	.LASF7:
- 926 016b 6C6F6E67 		.ascii	"long long unsigned int\000"
- 926      206C6F6E 
- 926      6720756E 
- 926      7369676E 
- 926      65642069 
- 927              	.LASF10:
- 928 0182 75696E74 		.ascii	"uint8_t\000"
- 928      385F7400 
- 929              	.LASF19:
- 930 018a 6D6F6465 		.ascii	"mode\000"
- 930      00
- 931              	.LASF32:
- 932 018f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 932      43313120 
- 932      352E342E 
- 932      31203230 
- 932      31363036 
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 20
+ 911              	.LASF26:
+ 912 00b0 4D61784A 		.ascii	"MaxJointRevIsSet\000"
+ 912      6F696E74 
+ 912      52657649 
+ 912      73536574 
+ 912      00
+ 913              	.LASF31:
+ 914 00c1 50494443 		.ascii	"PIDConstSetReg\000"
+ 914      6F6E7374 
+ 914      53657452 
+ 914      656700
+ 915              	.LASF15:
+ 916 00d0 646F7562 		.ascii	"double\000"
+ 916      6C6500
+ 917              	.LASF11:
+ 918 00d7 6C6F6E67 		.ascii	"long double\000"
+ 918      20646F75 
+ 918      626C6500 
+ 919              	.LASF34:
+ 920 00e3 433A5C55 		.ascii	"C:\\Users\\mewin\\Documents\\PSoC Creator\\Swerve_M"
+ 920      73657273 
+ 920      5C6D6577 
+ 920      696E5C44 
+ 920      6F63756D 
+ 921 0111 6F746F72 		.ascii	"otor_Board_PY2023\\SwerveMotorFirmware.cydsn\000"
+ 921      5F426F61 
+ 921      72645F50 
+ 921      59323032 
+ 921      335C5377 
+ 922              	.LASF8:
+ 923 013d 756E7369 		.ascii	"unsigned int\000"
+ 923      676E6564 
+ 923      20696E74 
+ 923      00
+ 924              	.LASF7:
+ 925 014a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 925      206C6F6E 
+ 925      6720756E 
+ 925      7369676E 
+ 925      65642069 
+ 926              	.LASF10:
+ 927 0161 75696E74 		.ascii	"uint8_t\000"
+ 927      385F7400 
+ 928              	.LASF19:
+ 929 0169 6D6F6465 		.ascii	"mode\000"
+ 929      00
+ 930              	.LASF32:
+ 931 016e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 931      43313120 
+ 931      352E342E 
+ 931      31203230 
+ 931      31363036 
+ 932 01a1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 932      20726576 
+ 932      6973696F 
+ 932      6E203233 
+ 932      37373135 
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 20
 
 
- 933 01c2 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 933      20726576 
- 933      6973696F 
- 933      6E203233 
- 933      37373135 
- 934 01f5 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 934      66756E63 
- 934      74696F6E 
- 934      2D736563 
- 934      74696F6E 
- 935              	.LASF30:
- 936 021d 6D6F746F 		.ascii	"motorUnitState\000"
- 936      72556E69 
- 936      74537461 
- 936      746500
- 937              	.LASF28:
- 938 022c 436C6561 		.ascii	"ClearPIDconst\000"
- 938      72504944 
- 938      636F6E73 
- 938      7400
- 939              	.LASF12:
- 940 023a 73697A65 		.ascii	"sizetype\000"
- 940      74797065 
- 940      00
- 941              	.LASF16:
- 942 0243 53657453 		.ascii	"SetStateTo\000"
- 942      74617465 
- 942      546F00
- 943              	.LASF6:
- 944 024e 6C6F6E67 		.ascii	"long long int\000"
- 944      206C6F6E 
- 944      6720696E 
- 944      7400
- 945              	.LASF13:
- 946 025c 63686172 		.ascii	"char\000"
- 946      00
- 947              	.LASF27:
- 948 0261 50494463 		.ascii	"PIDconstsSet\000"
- 948      6F6E7374 
- 948      73536574 
- 948      00
- 949              	.LASF2:
- 950 026e 73686F72 		.ascii	"short int\000"
- 950      7420696E 
- 950      7400
- 951              	.LASF22:
- 952 0278 506F7369 		.ascii	"PositionConstIsSet\000"
- 952      74696F6E 
- 952      436F6E73 
- 952      74497353 
- 952      657400
- 953              	.LASF4:
- 954 028b 6C6F6E67 		.ascii	"long int\000"
- 954      20696E74 
- 954      00
- 955              	.LASF33:
- 956 0294 4D6F746F 		.ascii	"Motor_Unit_FSM.c\000"
-ARM GAS  C:\Users\mewin\AppData\Local\Temp\ccC1DctH.s 			page 21
+ 933 01d4 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 933      66756E63 
+ 933      74696F6E 
+ 933      2D736563 
+ 933      74696F6E 
+ 934              	.LASF30:
+ 935 01fc 6D6F746F 		.ascii	"motorUnitState\000"
+ 935      72556E69 
+ 935      74537461 
+ 935      746500
+ 936              	.LASF28:
+ 937 020b 436C6561 		.ascii	"ClearPIDconst\000"
+ 937      72504944 
+ 937      636F6E73 
+ 937      7400
+ 938              	.LASF12:
+ 939 0219 73697A65 		.ascii	"sizetype\000"
+ 939      74797065 
+ 939      00
+ 940              	.LASF16:
+ 941 0222 53657453 		.ascii	"SetStateTo\000"
+ 941      74617465 
+ 941      546F00
+ 942              	.LASF6:
+ 943 022d 6C6F6E67 		.ascii	"long long int\000"
+ 943      206C6F6E 
+ 943      6720696E 
+ 943      7400
+ 944              	.LASF13:
+ 945 023b 63686172 		.ascii	"char\000"
+ 945      00
+ 946              	.LASF27:
+ 947 0240 50494463 		.ascii	"PIDconstsSet\000"
+ 947      6F6E7374 
+ 947      73536574 
+ 947      00
+ 948              	.LASF2:
+ 949 024d 73686F72 		.ascii	"short int\000"
+ 949      7420696E 
+ 949      7400
+ 950              	.LASF22:
+ 951 0257 506F7369 		.ascii	"PositionConstIsSet\000"
+ 951      74696F6E 
+ 951      436F6E73 
+ 951      74497353 
+ 951      657400
+ 952              	.LASF4:
+ 953 026a 6C6F6E67 		.ascii	"long int\000"
+ 953      20696E74 
+ 953      00
+ 954              	.LASF33:
+ 955 0273 4D6F746F 		.ascii	"Motor_Unit_FSM.c\000"
+ 955      725F556E 
+ 955      69745F46 
+ 955      534D2E63 
+ 955      00
+ 956              	.LASF0:
+ARM GAS  C:\Users\mewin\AppData\Local\Temp\cc0Tk8qn.s 			page 21
 
 
- 956      725F556E 
- 956      69745F46 
- 956      534D2E63 
- 956      00
- 957              	.LASF0:
- 958 02a5 7369676E 		.ascii	"signed char\000"
- 958      65642063 
- 958      68617200 
- 959              	.LASF17:
- 960 02b1 5365744D 		.ascii	"SetModeTo\000"
- 960      6F646554 
- 960      6F00
- 961              	.LASF35:
- 962 02bb 476F746F 		.ascii	"GotoUninitState\000"
- 962      556E696E 
- 962      69745374 
- 962      61746500 
- 963              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 957 0284 7369676E 		.ascii	"signed char\000"
+ 957      65642063 
+ 957      68617200 
+ 958              	.LASF17:
+ 959 0290 5365744D 		.ascii	"SetModeTo\000"
+ 959      6F646554 
+ 959      6F00
+ 960              	.LASF35:
+ 961 029a 476F746F 		.ascii	"GotoUninitState\000"
+ 961      556E696E 
+ 961      69745374 
+ 961      61746500 
+ 962              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

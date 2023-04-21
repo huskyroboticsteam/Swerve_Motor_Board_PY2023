@@ -20,6 +20,8 @@
 #include "MotorDrive.h"
 #include "PositionPID.h"
 
+#include <stdlib.h>
+
 #ifdef RGB_LED_ARRAY
 #include "LED_Array.h"
 extern const uint32 StripLights_CLUT[ ];
@@ -55,6 +57,10 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
     //Motor 1: Drive
     if (motor_serial == getSerialAddress()) {
         switch(packageID){
+//            char out[32];
+//            UART_UartPutString("package id : ");
+//            UART_UartPutString(itoa(packageID, out, 10));
+//            UART_UartPutString("\n\r");
             case(ID_MOTOR_UNIT_MODE_SEL):
                 if(GetModeFromPacket(receivedPacket) == MOTOR_UNIT_MODE_PWM) {
                     set_PWM_M1(0, 0, 0);
@@ -154,7 +160,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
         }
         
-    } else if (motor_serial == (getSerialAddress() + 1)) {  //swivel
+    } else if (motor_serial == (getSerialAddress() + 16)) {  //swivel
         switch(packageID){
             case(ID_MOTOR_UNIT_MODE_SEL):
                 if(GetModeFromPacket(receivedPacket) == MOTOR_UNIT_MODE_PWM) {

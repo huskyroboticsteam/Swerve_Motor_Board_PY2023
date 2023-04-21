@@ -1,5 +1,5 @@
 -- Project:   SwerveMotorFirmware
--- Generated: 02/20/2023 17:44:40
+-- Generated: 04/06/2023 18:59:28
 -- PSoC Creator  4.4
 
 ENTITY SwerveMotorFirmware IS
@@ -39,7 +39,7 @@ ENTITY SwerveMotorFirmware IS
     ATTRIBUTE voltage_VDDIO_4 OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO OF __DEFAULT__ : ENTITY IS 3.3e0;
-    ATTRIBUTE voltage_VBUS OF __DEFAULT__ : ENTITY IS 3.3e0;
+    ATTRIBUTE voltage_VBUS OF __DEFAULT__ : ENTITY IS 5e0;
 END SwerveMotorFirmware;
 
 ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS

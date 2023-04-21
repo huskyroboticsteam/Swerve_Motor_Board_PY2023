@@ -12,7 +12,7 @@
 #include <project.h>
 #include <stdio.h>
 #include <stdint.h>
-
+#include <stdlib.h>
 #include "main.h"
 #include "MotorDrive.h"
 
@@ -30,7 +30,15 @@ void set_PWM_M1(int16_t compare, uint8_t disable_limit, uint8_t limitSW) {  //li
     sprintf(txData, "PWM:%d disable_limit: %d\r\n",compare,disable_limit);
     UART_UartPutString(txData); 
     #endif
-    
+    //test
+//    char out[32];
+//    UART_UartPutString("compare val m1: ");
+//    UART_UartPutString(itoa(compare, out, 10));
+//    UART_UartPutString("\n\r");
+        //show results
+//        UART_UartPutString(itoa(Hum_val, out1, 10));
+        //UART_UartPutString("\n\r");
+//        UART_UartPutString(itoa(Temp_val, out1, 10));
     invalidate = 0;     
     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
         Motor1Direction_Write(0);
@@ -53,7 +61,11 @@ void set_PWM_M2(int16_t compare, uint8_t disable_limit, uint8_t limitSW) {
     UART_UartPutString(txData); 
     #endif
     
-    invalidate = 0;     
+    invalidate = 0;    
+//    char out[32];
+//    UART_UartPutString("compare val m2: ");
+//    UART_UartPutString(itoa(compare, out, 10));
+//    UART_UartPutString("\n\r");
     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
         Motor2Direction_Write(0);
         currPWM_Swivel = compare;
