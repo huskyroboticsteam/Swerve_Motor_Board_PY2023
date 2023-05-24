@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Potentiometer.h  
+* File Name: Pin_Pot.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_Potentiometer_ALIASES_H) /* Pins Potentiometer_ALIASES_H */
-#define CY_PINS_Potentiometer_ALIASES_H
+#if !defined(CY_PINS_Pin_Pot_ALIASES_H) /* Pins Pin_Pot_ALIASES_H */
+#define CY_PINS_Pin_Pot_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -26,17 +26,17 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define Potentiometer_0			(Potentiometer__0__PC)
-#define Potentiometer_0_PS		(Potentiometer__0__PS)
-#define Potentiometer_0_PC		(Potentiometer__0__PC)
-#define Potentiometer_0_DR		(Potentiometer__0__DR)
-#define Potentiometer_0_SHIFT	(Potentiometer__0__SHIFT)
-#define Potentiometer_0_INTR	((uint16)((uint16)0x0003u << (Potentiometer__0__SHIFT*2u)))
+#define Pin_Pot_0			(Pin_Pot__0__PC)
+#define Pin_Pot_0_PS		(Pin_Pot__0__PS)
+#define Pin_Pot_0_PC		(Pin_Pot__0__PC)
+#define Pin_Pot_0_DR		(Pin_Pot__0__DR)
+#define Pin_Pot_0_SHIFT	(Pin_Pot__0__SHIFT)
+#define Pin_Pot_0_INTR	((uint16)((uint16)0x0003u << (Pin_Pot__0__SHIFT*2u)))
 
-#define Potentiometer_INTR_ALL	 ((uint16)(Potentiometer_0_INTR))
+#define Pin_Pot_INTR_ALL	 ((uint16)(Pin_Pot_0_INTR))
 
 
-#endif /* End Pins Potentiometer_ALIASES_H */
+#endif /* End Pins Pin_Pot_ALIASES_H */
 
 
 /* [] END OF FILE */

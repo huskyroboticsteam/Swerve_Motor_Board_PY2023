@@ -29,7 +29,6 @@ int32 maxPWM = 32767;
 // double ratio;
 // uint8 complete = 0;
 
-int8 flipEncoder = 1;
 uint8_t usingPot = 0;
 uint8_t enabledPID = 0;
 
@@ -78,10 +77,10 @@ int32_t GetPotVal() {
     }
     return sum/n;
 }
-void setConversion(double conv) {
+void SetConversion(double conv) {
     mDegPerTick = conv;
 }
-double updateConversion() {
+double UpdateConversion() {
     if (mDegMin == mDegMax) return 0;
     mDegPerTick = (double) (tickMax-tickMin)/(mDegMax-mDegMin);
     return mDegPerTick;
@@ -112,16 +111,17 @@ void setTickMax(int32_t val) { tickMax = val; }
 void setmDegMin(int32_t val) { mDegMin = val; }
 void setmDegMax(int32_t val) { mDegMax = val; }
 
-int32_t GetPositionmDeg(){
+int32_t GetPositionmDeg() {
     if (mDegPerTick == 0.0)
         return(0);
     
     if (usingPot) 
         return (GetPotVal()-tickMin) * mDegPerTick + mDegMin;
 
-    return GetEncoderValWithFlip() * mDegPerTick;
+    // return QuadDec_GetCounter() * mDegPerTick;
+    return 0 * mDegPerTick;
 }
-void SetPosition(int32 mDegs) {
+void SetPosition(int32_t mDegs) {
         //TODO: Make Potentiometer Compatible
         PWM = Position_PID(mDegs);
         

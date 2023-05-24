@@ -1,5 +1,5 @@
--- Project:   C:\Users\mewin\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj
--- Generated: 04/20/2023 18:56:38
+-- Project:   C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj
+-- Generated: 05/23/2023 19:05:28
 -- PSoC Creator  4.4
 
 ENTITY SwerveMotorFirmware IS
@@ -102,8 +102,6 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     SIGNAL Net_183 : bit;
     SIGNAL Net_200 : bit;
     SIGNAL Net_223 : bit;
-    SIGNAL Net_258 : bit;
-    SIGNAL Net_259 : bit;
     SIGNAL Net_30 : bit;
     SIGNAL Net_39 : bit;
     SIGNAL Net_3_ff11 : bit;
@@ -114,6 +112,8 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     SIGNAL Net_434 : bit;
     SIGNAL Net_436 : bit;
     SIGNAL Net_45 : bit;
+    SIGNAL Net_532 : bit;
+    SIGNAL Net_533 : bit;
     SIGNAL Net_57 : bit;
     SIGNAL Net_66 : bit;
     SIGNAL Net_69 : bit;
@@ -135,29 +135,28 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE placement_force OF Net_966_1 : SIGNAL IS "U(1,1,B)3";
     SIGNAL Pin_Encoder_A(0)__PA : bit;
     SIGNAL Pin_Encoder_B(0)__PA : bit;
-    SIGNAL Potentiometer(0)__PA : bit;
-    SIGNAL \\\ADC_SAR_Seq_1:Bypass(0)\\__PA\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_1845_ff10\ : bit;
-    ATTRIBUTE global_signal OF \ADC_SAR_Seq_1:Net_1845_ff10\ : SIGNAL IS true;
-    SIGNAL \ADC_SAR_Seq_1:Net_3108\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3109_0\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3109_1\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3109_2\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3109_3\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3110\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_0\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_10\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_11\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_1\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_2\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_3\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_4\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_5\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_6\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_7\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_8\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3111_9\ : bit;
-    SIGNAL \ADC_SAR_Seq_1:Net_3112\ : bit;
+    SIGNAL Pin_Pot(0)__PA : bit;
+    SIGNAL \ADC_Pot:Net_1845_ff10\ : bit;
+    ATTRIBUTE global_signal OF \ADC_Pot:Net_1845_ff10\ : SIGNAL IS true;
+    SIGNAL \ADC_Pot:Net_3108\ : bit;
+    SIGNAL \ADC_Pot:Net_3109_0\ : bit;
+    SIGNAL \ADC_Pot:Net_3109_1\ : bit;
+    SIGNAL \ADC_Pot:Net_3109_2\ : bit;
+    SIGNAL \ADC_Pot:Net_3109_3\ : bit;
+    SIGNAL \ADC_Pot:Net_3110\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_0\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_10\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_11\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_1\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_2\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_3\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_4\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_5\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_6\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_7\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_8\ : bit;
+    SIGNAL \ADC_Pot:Net_3111_9\ : bit;
+    SIGNAL \ADC_Pot:Net_3112\ : bit;
     SIGNAL \StripLights:B_WS2811:bitCount_0\ : bit;
     ATTRIBUTE placement_force OF \StripLights:B_WS2811:bitCount_0\ : SIGNAL IS "U(1,3,B)2";
     SIGNAL \StripLights:B_WS2811:bitCount_1\ : bit;
@@ -273,55 +272,53 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE Location OF Limit2(0) : LABEL IS "P2[2]";
     ATTRIBUTE lib_model OF Motor1PWM(0) : LABEL IS "iocell3";
     ATTRIBUTE Location OF Motor1PWM(0) : LABEL IS "P5[2]";
-    ATTRIBUTE lib_model OF Potentiometer(0) : LABEL IS "iocell4";
-    ATTRIBUTE Location OF Potentiometer(0) : LABEL IS "P2[4]";
+    ATTRIBUTE lib_model OF Pin_Pot(0) : LABEL IS "iocell4";
+    ATTRIBUTE Location OF Pin_Pot(0) : LABEL IS "P2[4]";
     ATTRIBUTE Location OF Pin_Encoder_A : LABEL IS "F(PICU,6)";
     ATTRIBUTE lib_model OF Pin_Encoder_A(0) : LABEL IS "iocell5";
     ATTRIBUTE Location OF Pin_Encoder_A(0) : LABEL IS "P6[4]";
     ATTRIBUTE Location OF Pin_Encoder_B : LABEL IS "F(PICU,12)";
     ATTRIBUTE lib_model OF Pin_Encoder_B(0) : LABEL IS "iocell6";
     ATTRIBUTE Location OF Pin_Encoder_B(0) : LABEL IS "P12[1]";
-    ATTRIBUTE lib_model OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "iocell7";
-    ATTRIBUTE Location OF \ADC_SAR_Seq_1:Bypass(0)\ : LABEL IS "P1[7]";
-    ATTRIBUTE lib_model OF CANRX(0) : LABEL IS "iocell8";
+    ATTRIBUTE lib_model OF CANRX(0) : LABEL IS "iocell7";
     ATTRIBUTE Location OF CANRX(0) : LABEL IS "P4[0]";
-    ATTRIBUTE lib_model OF CANTX(0) : LABEL IS "iocell9";
+    ATTRIBUTE lib_model OF CANTX(0) : LABEL IS "iocell8";
     ATTRIBUTE Location OF CANTX(0) : LABEL IS "P4[1]";
-    ATTRIBUTE lib_model OF \UART:tx(0)\ : LABEL IS "iocell10";
+    ATTRIBUTE lib_model OF \UART:tx(0)\ : LABEL IS "iocell9";
     ATTRIBUTE Location OF \UART:tx(0)\ : LABEL IS "P3[1]";
-    ATTRIBUTE lib_model OF \UART:rx(0)\ : LABEL IS "iocell11";
+    ATTRIBUTE lib_model OF \UART:rx(0)\ : LABEL IS "iocell10";
     ATTRIBUTE Location OF \UART:rx(0)\ : LABEL IS "P3[0]";
-    ATTRIBUTE lib_model OF Dip1(0) : LABEL IS "iocell12";
+    ATTRIBUTE lib_model OF Dip1(0) : LABEL IS "iocell11";
     ATTRIBUTE Location OF Dip1(0) : LABEL IS "P4[2]";
-    ATTRIBUTE lib_model OF Dip2(0) : LABEL IS "iocell13";
+    ATTRIBUTE lib_model OF Dip2(0) : LABEL IS "iocell12";
     ATTRIBUTE Location OF Dip2(0) : LABEL IS "P4[3]";
-    ATTRIBUTE lib_model OF Dip3(0) : LABEL IS "iocell14";
+    ATTRIBUTE lib_model OF Dip3(0) : LABEL IS "iocell13";
     ATTRIBUTE Location OF Dip3(0) : LABEL IS "P4[4]";
-    ATTRIBUTE lib_model OF Dip4(0) : LABEL IS "iocell15";
+    ATTRIBUTE lib_model OF Dip4(0) : LABEL IS "iocell14";
     ATTRIBUTE Location OF Dip4(0) : LABEL IS "P4[5]";
-    ATTRIBUTE lib_model OF LED_Debug1(0) : LABEL IS "iocell16";
+    ATTRIBUTE lib_model OF LED_Debug1(0) : LABEL IS "iocell15";
     ATTRIBUTE Location OF LED_Debug1(0) : LABEL IS "P0[2]";
-    ATTRIBUTE lib_model OF LED_Debug2(0) : LABEL IS "iocell17";
+    ATTRIBUTE lib_model OF LED_Debug2(0) : LABEL IS "iocell16";
     ATTRIBUTE Location OF LED_Debug2(0) : LABEL IS "P0[1]";
-    ATTRIBUTE lib_model OF LED_CAN(0) : LABEL IS "iocell18";
+    ATTRIBUTE lib_model OF LED_CAN(0) : LABEL IS "iocell17";
     ATTRIBUTE Location OF LED_CAN(0) : LABEL IS "P0[0]";
-    ATTRIBUTE lib_model OF LED_Error(0) : LABEL IS "iocell19";
+    ATTRIBUTE lib_model OF LED_Error(0) : LABEL IS "iocell18";
     ATTRIBUTE Location OF LED_Error(0) : LABEL IS "P0[3]";
-    ATTRIBUTE lib_model OF Array_LED(0) : LABEL IS "iocell20";
+    ATTRIBUTE lib_model OF Array_LED(0) : LABEL IS "iocell19";
     ATTRIBUTE Location OF Array_LED(0) : LABEL IS "P0[7]";
-    ATTRIBUTE lib_model OF Motor1Fault(0) : LABEL IS "iocell21";
+    ATTRIBUTE lib_model OF Motor1Fault(0) : LABEL IS "iocell20";
     ATTRIBUTE Location OF Motor1Fault(0) : LABEL IS "P0[4]";
-    ATTRIBUTE lib_model OF Motor2Fault(0) : LABEL IS "iocell22";
+    ATTRIBUTE lib_model OF Motor2Fault(0) : LABEL IS "iocell21";
     ATTRIBUTE Location OF Motor2Fault(0) : LABEL IS "P0[5]";
-    ATTRIBUTE lib_model OF Motor1Direction(0) : LABEL IS "iocell23";
+    ATTRIBUTE lib_model OF Motor1Direction(0) : LABEL IS "iocell22";
     ATTRIBUTE Location OF Motor1Direction(0) : LABEL IS "P5[3]";
-    ATTRIBUTE lib_model OF Motor2PWM(0) : LABEL IS "iocell24";
+    ATTRIBUTE lib_model OF Motor2PWM(0) : LABEL IS "iocell23";
     ATTRIBUTE Location OF Motor2PWM(0) : LABEL IS "P5[0]";
-    ATTRIBUTE lib_model OF Motor2Direction(0) : LABEL IS "iocell25";
+    ATTRIBUTE lib_model OF Motor2Direction(0) : LABEL IS "iocell24";
     ATTRIBUTE Location OF Motor2Direction(0) : LABEL IS "P5[1]";
-    ATTRIBUTE lib_model OF Motor1CurrentSense(0) : LABEL IS "iocell26";
+    ATTRIBUTE lib_model OF Motor1CurrentSense(0) : LABEL IS "iocell25";
     ATTRIBUTE Location OF Motor1CurrentSense(0) : LABEL IS "P2[0]";
-    ATTRIBUTE lib_model OF Motor2CurrentSense(0) : LABEL IS "iocell27";
+    ATTRIBUTE lib_model OF Motor2CurrentSense(0) : LABEL IS "iocell26";
     ATTRIBUTE Location OF Motor2CurrentSense(0) : LABEL IS "P2[1]";
     ATTRIBUTE lib_model OF \Timer_1:TimerUDB:status_tc\ : LABEL IS "macrocell1";
     ATTRIBUTE Location OF \Timer_1:TimerUDB:status_tc\ : LABEL IS "U(1,0)";
@@ -343,8 +340,6 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE Location OF isr_Limit_1 : LABEL IS "[IntrContainer=(0)][IntrId=(2)]";
     ATTRIBUTE lib_model OF \Status_Reg_Switches:sts_intr:sts_reg\ : LABEL IS "statusicell1";
     ATTRIBUTE Location OF \Status_Reg_Switches:sts_intr:sts_reg\ : LABEL IS "U(1,1)";
-    ATTRIBUTE Location OF \ADC_SAR_Seq_1:IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(17)]";
-    ATTRIBUTE Location OF \ADC_SAR_Seq_1:cy_psoc4_sar\ : LABEL IS "F(SARADC,0)";
     ATTRIBUTE Location OF \CAN:isr\ : LABEL IS "[IntrContainer=(0)][IntrId=(28)]";
     ATTRIBUTE Location OF \CAN:CanIP\ : LABEL IS "F(CAN,0)";
     ATTRIBUTE Location OF \UART:SCB_IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(10)]";
@@ -377,6 +372,8 @@ ARCHITECTURE __DEFAULT__ OF SwerveMotorFirmware IS
     ATTRIBUTE Location OF \PWM_Motor2:cy_m0s8_tcpwm_1\ : LABEL IS "F(TCPWM,4)";
     ATTRIBUTE Location OF isr_encB : LABEL IS "[IntrContainer=(0)][IntrId=(4)]";
     ATTRIBUTE Location OF isr_encA : LABEL IS "[IntrContainer=(0)][IntrId=(3)]";
+    ATTRIBUTE Location OF \ADC_Pot:IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(17)]";
+    ATTRIBUTE Location OF \ADC_Pot:cy_psoc4_sar\ : LABEL IS "F(SARADC,0)";
     ATTRIBUTE lib_model OF Net_966_0 : LABEL IS "macrocell9";
     ATTRIBUTE Location OF Net_966_0 : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF Net_966_1 : LABEL IS "macrocell10";
@@ -876,7 +873,7 @@ BEGIN
             udb_div_0 => open,
             ff_div_11 => open,
             ff_div_12 => open,
-            ff_div_10 => \ADC_SAR_Seq_1:Net_1845_ff10\,
+            ff_div_10 => \ADC_Pot:Net_1845_ff10\,
             ff_div_2 => open,
             udb_div_1 => dclk_to_genclk,
             ff_div_3 => \UART:Net_847_ff2\,
@@ -1158,7 +1155,7 @@ BEGIN
             out_clock_en => '1',
             out_reset => '0');
 
-    Potentiometer:logicalport
+    Pin_Pot:logicalport
         GENERIC MAP(
             drive_mode => "000",
             ibuf_enabled => "0",
@@ -1229,16 +1226,16 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
-    Potentiometer(0):iocell
+    Pin_Pot(0):iocell
         GENERIC MAP(
             in_sync_mode => 0,
             out_sync_mode => 0,
             oe_sync_mode => 0,
-            logicalport => "Potentiometer",
+            logicalport => "Pin_Pot",
             logicalport_pin_id => 0,
             io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
         PORT MAP(
-            pa_out => Potentiometer(0)__PA,
+            pa_out => Pin_Pot(0)__PA,
             oe => open,
             in_clock => open,
             in_clock_en => '1',
@@ -1422,95 +1419,6 @@ BEGIN
             pa_out => Pin_Encoder_B(0)__PA,
             oe => open,
             pad_in => Pin_Encoder_B(0)_PAD,
-            in_clock => open,
-            in_clock_en => '1',
-            in_reset => '0',
-            out_clock => open,
-            out_clock_en => '1',
-            out_reset => '0');
-
-    \ADC_SAR_Seq_1:Bypass\:logicalport
-        GENERIC MAP(
-            drive_mode => "000",
-            ibuf_enabled => "0",
-            id => "ffc0bb23-7edf-4fb4-b366-37cbfaf613db/16a808f6-2e13-45b9-bce0-b001c8655113",
-            init_dr_st => "0",
-            input_buffer_sel => "00",
-            input_clk_en => 0,
-            input_sync => "1",
-            input_sync_mode => "0",
-            intr_mode => "00",
-            invert_in_clock => 0,
-            invert_in_clock_en => 0,
-            invert_in_reset => 0,
-            invert_out_clock => 0,
-            invert_out_clock_en => 0,
-            invert_out_reset => 0,
-            io_voltage => "",
-            layout_mode => "CONTIGUOUS",
-            oe_conn => "0",
-            oe_reset => 0,
-            oe_sync => "0",
-            output_clk_en => 0,
-            output_clock_mode => "0",
-            output_conn => "0",
-            output_mode => "0",
-            output_reset => 0,
-            output_sync => "0",
-            ovt_hyst_trim => "0",
-            ovt_needed => "0",
-            ovt_slew_control => "00",
-            pa_in_clock => -1,
-            pa_in_clock_en => -1,
-            pa_in_reset => -1,
-            pa_out_clock => -1,
-            pa_out_clock_en => -1,
-            pa_out_reset => -1,
-            pin_aliases => "",
-            pin_mode => "A",
-            por_state => 4,
-            port_alias_group => "",
-            port_alias_required => 0,
-            sio_group_cnt => 0,
-            sio_hifreq => "00000000",
-            sio_hyst => "1",
-            sio_ibuf => "00000000",
-            sio_info => "00",
-            sio_obuf => "00000000",
-            sio_refsel => "00000000",
-            sio_vohsel => "00000000",
-            sio_vtrip => "00000000",
-            slew_rate => "0",
-            spanning => 0,
-            sw_only => 0,
-            use_annotation => "0",
-            vtrip => "10",
-            width => 1,
-            in_clk_inv => 0,
-            in_clken_inv => 0,
-            in_clken_mode => 1,
-            in_rst_inv => 0,
-            out_clk_inv => 0,
-            out_clken_inv => 0,
-            out_clken_mode => 1,
-            out_rst_inv => 0)
-        PORT MAP(
-            in_clock_en => open,
-            in_reset => open,
-            out_clock_en => open,
-            out_reset => open);
-
-    \ADC_SAR_Seq_1:Bypass(0)\:iocell
-        GENERIC MAP(
-            in_sync_mode => 0,
-            out_sync_mode => 0,
-            oe_sync_mode => 0,
-            logicalport => "\ADC_SAR_Seq_1:Bypass\",
-            logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000000")
-        PORT MAP(
-            pa_out => \\\ADC_SAR_Seq_1:Bypass(0)\\__PA\,
-            oe => open,
             in_clock => open,
             in_clock_en => '1',
             in_reset => '0',
@@ -3455,49 +3363,6 @@ BEGIN
             status_0 => Net_966_0,
             interrupt => Net_12);
 
-    \ADC_SAR_Seq_1:IRQ\:interrupt
-        GENERIC MAP(
-            int_type => "10",
-            is_nmi => 0)
-        PORT MAP(
-            interrupt => \ADC_SAR_Seq_1:Net_3112\,
-            clock => ClockBlock_HFClk);
-
-    \ADC_SAR_Seq_1:cy_psoc4_sar\:p4sarcell
-        GENERIC MAP(
-            cy_registers => "")
-        PORT MAP(
-            clock => \ADC_SAR_Seq_1:Net_1845_ff10\,
-            sample_done => Net_259,
-            chan_id_valid => \ADC_SAR_Seq_1:Net_3108\,
-            chan_id_3 => \ADC_SAR_Seq_1:Net_3109_3\,
-            chan_id_2 => \ADC_SAR_Seq_1:Net_3109_2\,
-            chan_id_1 => \ADC_SAR_Seq_1:Net_3109_1\,
-            chan_id_0 => \ADC_SAR_Seq_1:Net_3109_0\,
-            data_valid => \ADC_SAR_Seq_1:Net_3110\,
-            data_11 => \ADC_SAR_Seq_1:Net_3111_11\,
-            data_10 => \ADC_SAR_Seq_1:Net_3111_10\,
-            data_9 => \ADC_SAR_Seq_1:Net_3111_9\,
-            data_8 => \ADC_SAR_Seq_1:Net_3111_8\,
-            data_7 => \ADC_SAR_Seq_1:Net_3111_7\,
-            data_6 => \ADC_SAR_Seq_1:Net_3111_6\,
-            data_5 => \ADC_SAR_Seq_1:Net_3111_5\,
-            data_4 => \ADC_SAR_Seq_1:Net_3111_4\,
-            data_3 => \ADC_SAR_Seq_1:Net_3111_3\,
-            data_2 => \ADC_SAR_Seq_1:Net_3111_2\,
-            data_1 => \ADC_SAR_Seq_1:Net_3111_1\,
-            data_0 => \ADC_SAR_Seq_1:Net_3111_0\,
-            tr_sar_out => Net_258,
-            irq => \ADC_SAR_Seq_1:Net_3112\,
-            sw_negvref => open,
-            cfg_st_sel_1 => open,
-            cfg_st_sel_0 => open,
-            cfg_average => open,
-            cfg_resolution => open,
-            cfg_differential => open,
-            tr_sar_in => open,
-            data_hilo_sel => open);
-
     \CAN:isr\:interrupt
         GENERIC MAP(
             int_type => "10",
@@ -3939,6 +3804,49 @@ BEGIN
         PORT MAP(
             interrupt => Net_436,
             clock => ClockBlock_HFClk);
+
+    \ADC_Pot:IRQ\:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => \ADC_Pot:Net_3112\,
+            clock => ClockBlock_HFClk);
+
+    \ADC_Pot:cy_psoc4_sar\:p4sarcell
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => \ADC_Pot:Net_1845_ff10\,
+            sample_done => Net_533,
+            chan_id_valid => \ADC_Pot:Net_3108\,
+            chan_id_3 => \ADC_Pot:Net_3109_3\,
+            chan_id_2 => \ADC_Pot:Net_3109_2\,
+            chan_id_1 => \ADC_Pot:Net_3109_1\,
+            chan_id_0 => \ADC_Pot:Net_3109_0\,
+            data_valid => \ADC_Pot:Net_3110\,
+            data_11 => \ADC_Pot:Net_3111_11\,
+            data_10 => \ADC_Pot:Net_3111_10\,
+            data_9 => \ADC_Pot:Net_3111_9\,
+            data_8 => \ADC_Pot:Net_3111_8\,
+            data_7 => \ADC_Pot:Net_3111_7\,
+            data_6 => \ADC_Pot:Net_3111_6\,
+            data_5 => \ADC_Pot:Net_3111_5\,
+            data_4 => \ADC_Pot:Net_3111_4\,
+            data_3 => \ADC_Pot:Net_3111_3\,
+            data_2 => \ADC_Pot:Net_3111_2\,
+            data_1 => \ADC_Pot:Net_3111_1\,
+            data_0 => \ADC_Pot:Net_3111_0\,
+            tr_sar_out => Net_532,
+            irq => \ADC_Pot:Net_3112\,
+            sw_negvref => open,
+            cfg_st_sel_1 => open,
+            cfg_st_sel_0 => open,
+            cfg_average => open,
+            cfg_resolution => open,
+            cfg_differential => open,
+            tr_sar_in => open,
+            data_hilo_sel => open);
 
     Net_966_0:macrocell
         GENERIC MAP(

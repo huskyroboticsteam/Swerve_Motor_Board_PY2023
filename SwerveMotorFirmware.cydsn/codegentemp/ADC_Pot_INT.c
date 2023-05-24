@@ -1,6 +1,6 @@
 /*******************************************************************************
-* File Name: ADC_SAR_Seq_1_INT.c
-* Version 2.60
+* File Name: ADC_Pot_INT.c
+* Version 2.50
 *
 *  Description:
 *    This file contains the code that operates during the ADC_SAR interrupt
@@ -15,7 +15,7 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "ADC_SAR_Seq_1.h"
+#include "ADC_Pot.h"
 #include "cyapicallbacks.h"
 
 
@@ -28,11 +28,11 @@
 
 /* `#END`  */
 
-#if(ADC_SAR_Seq_1_IRQ_REMOVE == 0u)
+#if(ADC_Pot_IRQ_REMOVE == 0u)
 
 
     /******************************************************************************
-    * Function Name: ADC_SAR_Seq_1_ISR
+    * Function Name: ADC_Pot_ISR
     *******************************************************************************
     *
     * Summary:
@@ -48,16 +48,16 @@
     *  No.
     *
     ******************************************************************************/
-    CY_ISR( ADC_SAR_Seq_1_ISR )
+    CY_ISR( ADC_Pot_ISR )
     {
         uint32 intr_status;
 
         /* Read interrupt status register */
-        intr_status = ADC_SAR_Seq_1_SAR_INTR_REG;
+        intr_status = ADC_Pot_SAR_INTR_REG;
 
-        #ifdef ADC_SAR_Seq_1_ISR_INTERRUPT_CALLBACK
-            ADC_SAR_Seq_1_ISR_InterruptCallback();
-        #endif /* ADC_SAR_Seq_1_ISR_INTERRUPT_CALLBACK */
+        #ifdef ADC_Pot_ISR_INTERRUPT_CALLBACK
+            ADC_Pot_ISR_InterruptCallback();
+        #endif /* ADC_Pot_ISR_INTERRUPT_CALLBACK */
 
 
         /************************************************************************
@@ -69,10 +69,10 @@
         /* `#END`  */
         
         /* Clear handled interrupt */
-        ADC_SAR_Seq_1_SAR_INTR_REG = intr_status;
+        ADC_Pot_SAR_INTR_REG = intr_status;
     }
 
-#endif   /* End ADC_SAR_Seq_1_IRQ_REMOVE */
+#endif   /* End ADC_Pot_IRQ_REMOVE */
 
 
 /* [] END OF FILE */

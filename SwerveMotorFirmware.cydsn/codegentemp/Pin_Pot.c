@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Potentiometer.c  
+* File Name: Pin_Pot.c  
 * Version 2.20
 *
 * Description:
@@ -13,35 +13,35 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "Potentiometer.h"
+#include "Pin_Pot.h"
 
 
-#if defined(Potentiometer__PC)
-    #define Potentiometer_SetP4PinDriveMode(shift, mode)  \
+#if defined(Pin_Pot__PC)
+    #define Pin_Pot_SetP4PinDriveMode(shift, mode)  \
     do { \
-        Potentiometer_PC =   (Potentiometer_PC & \
-                                (uint32)(~(uint32)(Potentiometer_DRIVE_MODE_IND_MASK << \
-                                (Potentiometer_DRIVE_MODE_BITS * (shift))))) | \
+        Pin_Pot_PC =   (Pin_Pot_PC & \
+                                (uint32)(~(uint32)(Pin_Pot_DRIVE_MODE_IND_MASK << \
+                                (Pin_Pot_DRIVE_MODE_BITS * (shift))))) | \
                                 (uint32)((uint32)(mode) << \
-                                (Potentiometer_DRIVE_MODE_BITS * (shift))); \
+                                (Pin_Pot_DRIVE_MODE_BITS * (shift))); \
     } while (0)
 #else
     #if (CY_PSOC4_4200L)
-        #define Potentiometer_SetP4PinDriveMode(shift, mode)  \
+        #define Pin_Pot_SetP4PinDriveMode(shift, mode)  \
         do { \
-            Potentiometer_USBIO_CTRL_REG = (Potentiometer_USBIO_CTRL_REG & \
-                                    (uint32)(~(uint32)(Potentiometer_DRIVE_MODE_IND_MASK << \
-                                    (Potentiometer_DRIVE_MODE_BITS * (shift))))) | \
+            Pin_Pot_USBIO_CTRL_REG = (Pin_Pot_USBIO_CTRL_REG & \
+                                    (uint32)(~(uint32)(Pin_Pot_DRIVE_MODE_IND_MASK << \
+                                    (Pin_Pot_DRIVE_MODE_BITS * (shift))))) | \
                                     (uint32)((uint32)(mode) << \
-                                    (Potentiometer_DRIVE_MODE_BITS * (shift))); \
+                                    (Pin_Pot_DRIVE_MODE_BITS * (shift))); \
         } while (0)
     #endif
 #endif
   
 
-#if defined(Potentiometer__PC) || (CY_PSOC4_4200L) 
+#if defined(Pin_Pot__PC) || (CY_PSOC4_4200L) 
     /*******************************************************************************
-    * Function Name: Potentiometer_SetDriveMode
+    * Function Name: Pin_Pot_SetDriveMode
     ****************************************************************************//**
     *
     * \brief Sets the drive mode for each of the Pins component's pins.
@@ -67,17 +67,17 @@
     *  APIs (primary method) or disable interrupts around this function.
     *
     * \funcusage
-    *  \snippet Potentiometer_SUT.c usage_Potentiometer_SetDriveMode
+    *  \snippet Pin_Pot_SUT.c usage_Pin_Pot_SetDriveMode
     *******************************************************************************/
-    void Potentiometer_SetDriveMode(uint8 mode)
+    void Pin_Pot_SetDriveMode(uint8 mode)
     {
-		Potentiometer_SetP4PinDriveMode(Potentiometer__0__SHIFT, mode);
+		Pin_Pot_SetP4PinDriveMode(Pin_Pot__0__SHIFT, mode);
     }
 #endif
 
 
 /*******************************************************************************
-* Function Name: Potentiometer_Write
+* Function Name: Pin_Pot_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -106,18 +106,18 @@
 *  this function.
 *
 * \funcusage
-*  \snippet Potentiometer_SUT.c usage_Potentiometer_Write
+*  \snippet Pin_Pot_SUT.c usage_Pin_Pot_Write
 *******************************************************************************/
-void Potentiometer_Write(uint8 value)
+void Pin_Pot_Write(uint8 value)
 {
-    uint8 drVal = (uint8)(Potentiometer_DR & (uint8)(~Potentiometer_MASK));
-    drVal = (drVal | ((uint8)(value << Potentiometer_SHIFT) & Potentiometer_MASK));
-    Potentiometer_DR = (uint32)drVal;
+    uint8 drVal = (uint8)(Pin_Pot_DR & (uint8)(~Pin_Pot_MASK));
+    drVal = (drVal | ((uint8)(value << Pin_Pot_SHIFT) & Pin_Pot_MASK));
+    Pin_Pot_DR = (uint32)drVal;
 }
 
 
 /*******************************************************************************
-* Function Name: Potentiometer_Read
+* Function Name: Pin_Pot_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -131,16 +131,16 @@ void Potentiometer_Write(uint8 value)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet Potentiometer_SUT.c usage_Potentiometer_Read  
+*  \snippet Pin_Pot_SUT.c usage_Pin_Pot_Read  
 *******************************************************************************/
-uint8 Potentiometer_Read(void)
+uint8 Pin_Pot_Read(void)
 {
-    return (uint8)((Potentiometer_PS & Potentiometer_MASK) >> Potentiometer_SHIFT);
+    return (uint8)((Pin_Pot_PS & Pin_Pot_MASK) >> Pin_Pot_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: Potentiometer_ReadDataReg
+* Function Name: Pin_Pot_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -149,8 +149,8 @@ uint8 Potentiometer_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred Potentiometer_Read() API because the 
-* Potentiometer_ReadDataReg() reads the data register instead of the status 
+* preferred Pin_Pot_Read() API because the 
+* Pin_Pot_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -159,16 +159,16 @@ uint8 Potentiometer_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet Potentiometer_SUT.c usage_Potentiometer_ReadDataReg 
+*  \snippet Pin_Pot_SUT.c usage_Pin_Pot_ReadDataReg 
 *******************************************************************************/
-uint8 Potentiometer_ReadDataReg(void)
+uint8 Pin_Pot_ReadDataReg(void)
 {
-    return (uint8)((Potentiometer_DR & Potentiometer_MASK) >> Potentiometer_SHIFT);
+    return (uint8)((Pin_Pot_DR & Pin_Pot_MASK) >> Pin_Pot_SHIFT);
 }
 
 
 /*******************************************************************************
-* Function Name: Potentiometer_SetInterruptMode
+* Function Name: Pin_Pot_SetInterruptMode
 ****************************************************************************//**
 *
 * \brief Configures the interrupt mode for each of the Pins component's
@@ -181,12 +181,12 @@ uint8 Potentiometer_ReadDataReg(void)
 * \param position
 *  The pin position as listed in the Pins component. You may OR these to be 
 *  able to configure the interrupt mode of multiple pins within a Pins 
-*  component. Or you may use Potentiometer_INTR_ALL to configure the
+*  component. Or you may use Pin_Pot_INTR_ALL to configure the
 *  interrupt mode of all the pins in the Pins component.       
-*  - Potentiometer_0_INTR       (First pin in the list)
-*  - Potentiometer_1_INTR       (Second pin in the list)
+*  - Pin_Pot_0_INTR       (First pin in the list)
+*  - Pin_Pot_1_INTR       (Second pin in the list)
 *  - ...
-*  - Potentiometer_INTR_ALL     (All pins in Pins component)
+*  - Pin_Pot_INTR_ALL     (All pins in Pins component)
 *
 * \param mode
 *  Interrupt mode for the selected pins. Valid options are documented in
@@ -202,19 +202,19 @@ uint8 Potentiometer_ReadDataReg(void)
 *  port.
 *
 * \funcusage
-*  \snippet Potentiometer_SUT.c usage_Potentiometer_SetInterruptMode
+*  \snippet Pin_Pot_SUT.c usage_Pin_Pot_SetInterruptMode
 *******************************************************************************/
-void Potentiometer_SetInterruptMode(uint16 position, uint16 mode)
+void Pin_Pot_SetInterruptMode(uint16 position, uint16 mode)
 {
     uint32 intrCfg;
     
-    intrCfg =  Potentiometer_INTCFG & (uint32)(~(uint32)position);
-    Potentiometer_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
+    intrCfg =  Pin_Pot_INTCFG & (uint32)(~(uint32)position);
+    Pin_Pot_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
 }
 
 
 /*******************************************************************************
-* Function Name: Potentiometer_ClearInterrupt
+* Function Name: Pin_Pot_ClearInterrupt
 ****************************************************************************//**
 *
 * \brief Clears any active interrupts attached with the component and returns 
@@ -231,13 +231,13 @@ void Potentiometer_SetInterruptMode(uint16 position, uint16 mode)
 *  those associated with the Pins component.
 *
 * \funcusage
-*  \snippet Potentiometer_SUT.c usage_Potentiometer_ClearInterrupt
+*  \snippet Pin_Pot_SUT.c usage_Pin_Pot_ClearInterrupt
 *******************************************************************************/
-uint8 Potentiometer_ClearInterrupt(void)
+uint8 Pin_Pot_ClearInterrupt(void)
 {
-	uint8 maskedStatus = (uint8)(Potentiometer_INTSTAT & Potentiometer_MASK);
-	Potentiometer_INTSTAT = maskedStatus;
-    return maskedStatus >> Potentiometer_SHIFT;
+	uint8 maskedStatus = (uint8)(Pin_Pot_INTSTAT & Pin_Pot_MASK);
+	Pin_Pot_INTSTAT = maskedStatus;
+    return maskedStatus >> Pin_Pot_SHIFT;
 }
 
 

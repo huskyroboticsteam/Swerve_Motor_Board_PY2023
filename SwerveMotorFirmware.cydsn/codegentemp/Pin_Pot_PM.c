@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Potentiometer.c  
+* File Name: Pin_Pot.c  
 * Version 2.20
 *
 * Description:
@@ -15,13 +15,13 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "Potentiometer.h"
+#include "Pin_Pot.h"
 
-static Potentiometer_BACKUP_STRUCT  Potentiometer_backup = {0u, 0u, 0u};
+static Pin_Pot_BACKUP_STRUCT  Pin_Pot_backup = {0u, 0u, 0u};
 
 
 /*******************************************************************************
-* Function Name: Potentiometer_Sleep
+* Function Name: Pin_Pot_Sleep
 ****************************************************************************//**
 *
 * \brief Stores the pin configuration and prepares the pin for entering chip 
@@ -39,30 +39,30 @@ static Potentiometer_BACKUP_STRUCT  Potentiometer_backup = {0u, 0u, 0u};
 *  deep-sleep/hibernate modes.
 *
 * \funcusage
-*  \snippet Potentiometer_SUT.c usage_Potentiometer_Sleep_Wakeup
+*  \snippet Pin_Pot_SUT.c usage_Pin_Pot_Sleep_Wakeup
 *******************************************************************************/
-void Potentiometer_Sleep(void)
+void Pin_Pot_Sleep(void)
 {
-    #if defined(Potentiometer__PC)
-        Potentiometer_backup.pcState = Potentiometer_PC;
+    #if defined(Pin_Pot__PC)
+        Pin_Pot_backup.pcState = Pin_Pot_PC;
     #else
         #if (CY_PSOC4_4200L)
             /* Save the regulator state and put the PHY into suspend mode */
-            Potentiometer_backup.usbState = Potentiometer_CR1_REG;
-            Potentiometer_USB_POWER_REG |= Potentiometer_USBIO_ENTER_SLEEP;
-            Potentiometer_CR1_REG &= Potentiometer_USBIO_CR1_OFF;
+            Pin_Pot_backup.usbState = Pin_Pot_CR1_REG;
+            Pin_Pot_USB_POWER_REG |= Pin_Pot_USBIO_ENTER_SLEEP;
+            Pin_Pot_CR1_REG &= Pin_Pot_USBIO_CR1_OFF;
         #endif
     #endif
-    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Potentiometer__SIO)
-        Potentiometer_backup.sioState = Potentiometer_SIO_REG;
+    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Pin_Pot__SIO)
+        Pin_Pot_backup.sioState = Pin_Pot_SIO_REG;
         /* SIO requires unregulated output buffer and single ended input buffer */
-        Potentiometer_SIO_REG &= (uint32)(~Potentiometer_SIO_LPM_MASK);
+        Pin_Pot_SIO_REG &= (uint32)(~Pin_Pot_SIO_LPM_MASK);
     #endif  
 }
 
 
 /*******************************************************************************
-* Function Name: Potentiometer_Wakeup
+* Function Name: Pin_Pot_Wakeup
 ****************************************************************************//**
 *
 * \brief Restores the pin configuration that was saved during Pin_Sleep(). This 
@@ -77,22 +77,22 @@ void Potentiometer_Sleep(void)
 *  None
 *  
 * \funcusage
-*  Refer to Potentiometer_Sleep() for an example usage.
+*  Refer to Pin_Pot_Sleep() for an example usage.
 *******************************************************************************/
-void Potentiometer_Wakeup(void)
+void Pin_Pot_Wakeup(void)
 {
-    #if defined(Potentiometer__PC)
-        Potentiometer_PC = Potentiometer_backup.pcState;
+    #if defined(Pin_Pot__PC)
+        Pin_Pot_PC = Pin_Pot_backup.pcState;
     #else
         #if (CY_PSOC4_4200L)
             /* Restore the regulator state and come out of suspend mode */
-            Potentiometer_USB_POWER_REG &= Potentiometer_USBIO_EXIT_SLEEP_PH1;
-            Potentiometer_CR1_REG = Potentiometer_backup.usbState;
-            Potentiometer_USB_POWER_REG &= Potentiometer_USBIO_EXIT_SLEEP_PH2;
+            Pin_Pot_USB_POWER_REG &= Pin_Pot_USBIO_EXIT_SLEEP_PH1;
+            Pin_Pot_CR1_REG = Pin_Pot_backup.usbState;
+            Pin_Pot_USB_POWER_REG &= Pin_Pot_USBIO_EXIT_SLEEP_PH2;
         #endif
     #endif
-    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Potentiometer__SIO)
-        Potentiometer_SIO_REG = Potentiometer_backup.sioState;
+    #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(Pin_Pot__SIO)
+        Pin_Pot_SIO_REG = Pin_Pot_backup.sioState;
     #endif
 }
 

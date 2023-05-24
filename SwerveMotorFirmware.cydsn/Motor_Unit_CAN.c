@@ -41,7 +41,7 @@ extern int32_t millidegreeTarget_M2;
 
 void SendEncoderData (CANPacket *packetToSend){
     AssembleTelemetryReportPacket(packetToSend, DEVICE_GROUP_JETSON, DEVICE_SERIAL_JETSON, 
-        PACKET_TELEMETRY_ANG_POSITION, CurrentPositionMiliDegree());
+        PACKET_TELEMETRY_ANG_POSITION, GetPositionmDeg());
     SendCANPacket(packetToSend);
 }
 
@@ -110,11 +110,11 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     //QuadDec_SetCounter(0);
                     counter = 0;
                 }
-                if(GetEncoderDirectionFromPacket(receivedPacket)) {
-                    SetEncoderDirReverse();
-                } else {
-                    SetEncoderDirDefault();
-                }
+                // if(GetEncoderDirectionFromPacket(receivedPacket)) {
+                //     SetEncoderDirReverse();
+                // } else {
+                //     SetEncoderDirDefault();
+                // }
                 setUsingPot(0);
                 SetStateTo(CHECK_CAN);
                 break;
@@ -241,7 +241,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 //printf("pot init low: %0llX",(uint64_t) receivedPacket->data);
                 setTickMin(GetPotADCFromPacket(receivedPacket));
                 setmDegMin(GetPotmDegFromPacket(receivedPacket));
-                updateConversion();
+                UpdateConversion();
                 setUsingPot(1);
                 SetStateTo(CHECK_CAN);
                 break;
@@ -250,7 +250,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 //printf("pot init hi: %0llX",(uint64_t) receivedPacket->data);
                 setTickMax(GetPotADCFromPacket(receivedPacket));
                 setmDegMax(GetPotmDegFromPacket(receivedPacket));
-                updateConversion();
+                UpdateConversion();
                 setUsingPot(1);
                 SetStateTo(CHECK_CAN);
                 break;
@@ -263,11 +263,6 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 if(GetEncoderZeroFromPacket(receivedPacket)) {
                     counter = 0;
                     //QuadDec_SetCounter(0);                     
-                }
-                if(GetEncoderDirectionFromPacket(receivedPacket)) {
-                    SetEncoderDirReverse();
-                } else {
-                    SetEncoderDirDefault();
                 }
                 SetStateTo(CHECK_CAN);
                 break;

@@ -1,6 +1,6 @@
 /*******************************************************************************
-* File Name: ADC_SAR_Seq_1_PM.c
-* Version 2.60
+* File Name: ADC_Pot_PM.c
+* Version 2.50
 *
 * Description:
 *  This file provides Sleep/WakeUp APIs functionality.
@@ -14,22 +14,22 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "ADC_SAR_Seq_1.h"
+#include "ADC_Pot.h"
 
 
 /***************************************
 * Local data allocation
 ***************************************/
 
-static ADC_SAR_Seq_1_BACKUP_STRUCT  ADC_SAR_Seq_1_backup =
+static ADC_Pot_BACKUP_STRUCT  ADC_Pot_backup =
 {
-    ADC_SAR_Seq_1_DISABLED,
+    ADC_Pot_DISABLED,
     0u    
 };
 
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_SaveConfig
+* Function Name: ADC_Pot_SaveConfig
 ********************************************************************************
 *
 * Summary:
@@ -42,14 +42,14 @@ static ADC_SAR_Seq_1_BACKUP_STRUCT  ADC_SAR_Seq_1_backup =
 *  None.
 *
 *******************************************************************************/
-void ADC_SAR_Seq_1_SaveConfig(void)
+void ADC_Pot_SaveConfig(void)
 {
     /* All configuration registers are marked as [reset_all_retention] */
 }
 
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_RestoreConfig
+* Function Name: ADC_Pot_RestoreConfig
 ********************************************************************************
 *
 * Summary:
@@ -62,14 +62,14 @@ void ADC_SAR_Seq_1_SaveConfig(void)
 *  None.
 *
 *******************************************************************************/
-void ADC_SAR_Seq_1_RestoreConfig(void)
+void ADC_Pot_RestoreConfig(void)
 {
     /* All configuration registers are marked as [reset_all_retention] */
 }
 
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_Sleep
+* Function Name: ADC_Pot_Sleep
 ********************************************************************************
 *
 * Summary:
@@ -83,45 +83,45 @@ void ADC_SAR_Seq_1_RestoreConfig(void)
 *  None.
 *
 * Global Variables:
-*  ADC_SAR_Seq_1_backup - modified.
+*  ADC_Pot_backup - modified.
 *
 *******************************************************************************/
-void ADC_SAR_Seq_1_Sleep(void)
+void ADC_Pot_Sleep(void)
 {
     /* During deepsleep/ hibernate mode keep SARMUX active, i.e. do not open
     *   all switches (disconnect), to be used for ADFT
     */
-    ADC_SAR_Seq_1_backup.dftRegVal = ADC_SAR_Seq_1_SAR_DFT_CTRL_REG & (uint32)~ADC_SAR_Seq_1_ADFT_OVERRIDE;
-    ADC_SAR_Seq_1_SAR_DFT_CTRL_REG |= ADC_SAR_Seq_1_ADFT_OVERRIDE;
-    if((ADC_SAR_Seq_1_SAR_CTRL_REG  & ADC_SAR_Seq_1_ENABLE) != 0u)
+    ADC_Pot_backup.dftRegVal = ADC_Pot_SAR_DFT_CTRL_REG & (uint32)~ADC_Pot_ADFT_OVERRIDE;
+    ADC_Pot_SAR_DFT_CTRL_REG |= ADC_Pot_ADFT_OVERRIDE;
+    if((ADC_Pot_SAR_CTRL_REG  & ADC_Pot_ENABLE) != 0u)
     {
-        if((ADC_SAR_Seq_1_SAR_SAMPLE_CTRL_REG & ADC_SAR_Seq_1_CONTINUOUS_EN) != 0u)
+        if((ADC_Pot_SAR_SAMPLE_CTRL_REG & ADC_Pot_CONTINUOUS_EN) != 0u)
         {
-            ADC_SAR_Seq_1_backup.enableState = ADC_SAR_Seq_1_ENABLED | ADC_SAR_Seq_1_STARTED;
+            ADC_Pot_backup.enableState = ADC_Pot_ENABLED | ADC_Pot_STARTED;
         }
         else
         {
-            ADC_SAR_Seq_1_backup.enableState = ADC_SAR_Seq_1_ENABLED;
+            ADC_Pot_backup.enableState = ADC_Pot_ENABLED;
         }
-        ADC_SAR_Seq_1_StopConvert();
-        ADC_SAR_Seq_1_Stop();
+        ADC_Pot_StopConvert();
+        ADC_Pot_Stop();
         
         /* Disable the SAR internal pump before entering the chip low power mode */
-        if((ADC_SAR_Seq_1_SAR_CTRL_REG & ADC_SAR_Seq_1_BOOSTPUMP_EN) != 0u)
+        if((ADC_Pot_SAR_CTRL_REG & ADC_Pot_BOOSTPUMP_EN) != 0u)
         {
-            ADC_SAR_Seq_1_SAR_CTRL_REG &= (uint32)~ADC_SAR_Seq_1_BOOSTPUMP_EN;
-            ADC_SAR_Seq_1_backup.enableState |= ADC_SAR_Seq_1_BOOSTPUMP_ENABLED;
+            ADC_Pot_SAR_CTRL_REG &= (uint32)~ADC_Pot_BOOSTPUMP_EN;
+            ADC_Pot_backup.enableState |= ADC_Pot_BOOSTPUMP_ENABLED;
         }
     }
     else
     {
-        ADC_SAR_Seq_1_backup.enableState = ADC_SAR_Seq_1_DISABLED;
+        ADC_Pot_backup.enableState = ADC_Pot_DISABLED;
     }
 }
 
 
 /*******************************************************************************
-* Function Name: ADC_SAR_Seq_1_Wakeup
+* Function Name: ADC_Pot_Wakeup
 ********************************************************************************
 *
 * Summary:
@@ -135,23 +135,23 @@ void ADC_SAR_Seq_1_Sleep(void)
 *  None.
 *
 * Global Variables:
-*  ADC_SAR_Seq_1_backup - used.
+*  ADC_Pot_backup - used.
 *
 *******************************************************************************/
-void ADC_SAR_Seq_1_Wakeup(void)
+void ADC_Pot_Wakeup(void)
 {
-    ADC_SAR_Seq_1_SAR_DFT_CTRL_REG = ADC_SAR_Seq_1_backup.dftRegVal;
-    if(ADC_SAR_Seq_1_backup.enableState != ADC_SAR_Seq_1_DISABLED)
+    ADC_Pot_SAR_DFT_CTRL_REG = ADC_Pot_backup.dftRegVal;
+    if(ADC_Pot_backup.enableState != ADC_Pot_DISABLED)
     {
         /* Enable the SAR internal pump  */
-        if((ADC_SAR_Seq_1_backup.enableState & ADC_SAR_Seq_1_BOOSTPUMP_ENABLED) != 0u)
+        if((ADC_Pot_backup.enableState & ADC_Pot_BOOSTPUMP_ENABLED) != 0u)
         {
-            ADC_SAR_Seq_1_SAR_CTRL_REG |= ADC_SAR_Seq_1_BOOSTPUMP_EN;
+            ADC_Pot_SAR_CTRL_REG |= ADC_Pot_BOOSTPUMP_EN;
         }
-        ADC_SAR_Seq_1_Enable();
-        if((ADC_SAR_Seq_1_backup.enableState & ADC_SAR_Seq_1_STARTED) != 0u)
+        ADC_Pot_Enable();
+        if((ADC_Pot_backup.enableState & ADC_Pot_STARTED) != 0u)
         {
-            ADC_SAR_Seq_1_StartConvert();
+            ADC_Pot_StartConvert();
         }
     }
 }
