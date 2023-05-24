@@ -115,6 +115,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 } else {
                     SetEncoderDirDefault();
                 }
+                setUsingPot(0);
                 SetStateTo(CHECK_CAN);
                 break;
             
@@ -226,16 +227,33 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     DisplayErrorCode(MOTOR_ERROR_WRONG_MODE);
                 }
                 break;
-             
+            
             case(ID_MOTOR_UNIT_ENC_PPJR_SET):
-                SetkPPJR(GetEncoderPPJRFromPacket(receivedPacket));
-                PPJRConstIsSet();
+                SetConversion(360.0*1000/GetEncoderPPJRFromPacket(receivedPacket));
                 SetStateTo(CHECK_CAN);
                 break;
             /*
             case(ID_MOTOR_UNIT_MAX_JNT_REV_SET):
                 break;
             */
+
+            case (ID_MOTOR_UNIT_POT_INIT_LO):
+                //printf("pot init low: %0llX",(uint64_t) receivedPacket->data);
+                setTickMin(GetPotADCFromPacket(receivedPacket));
+                setmDegMin(GetPotmDegFromPacket(receivedPacket));
+                updateConversion();
+                setUsingPot(1);
+                SetStateTo(CHECK_CAN);
+                break;
+                
+            case (ID_MOTOR_UNIT_POT_INIT_HI):
+                //printf("pot init hi: %0llX",(uint64_t) receivedPacket->data);
+                setTickMax(GetPotADCFromPacket(receivedPacket));
+                setmDegMax(GetPotmDegFromPacket(receivedPacket));
+                updateConversion();
+                setUsingPot(1);
+                SetStateTo(CHECK_CAN);
+                break;
             case(ID_MOTOR_UNIT_ENC_INIT):
                 if(GetMode() == MOTOR_UNIT_MODE_PID){ //turn off and clear PID Loop if encoder is reinit while running
                     set_PWM_M2(0, 0, 0);
