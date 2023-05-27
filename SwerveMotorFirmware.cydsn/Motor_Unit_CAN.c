@@ -53,7 +53,9 @@ static uint8_t GetLimitSwNumFromPacket(const CANPacket *packet);
 void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
     uint16_t packageID = ReadCAN(receivedPacket);
     uint8_t motor_serial = GetDeviceSerialNumber(receivedPacket); //get which motor
-    
+    uint8_t sender_DG = GetSenderDeviceGroupCode(receivedPacket);
+    uint8_t sender_SN = GetSenderDeviceSerialNumber(receivedPacket);
+
     //Motor 1: Drive
     if (motor_serial == getSerialAddress()) {
         switch(packageID){
@@ -302,9 +304,6 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
             
             case(ID_TELEMETRY_PULL):
-                uint8_t sender_DG = GetSenderDeviceGroupCode(receivedPacket);
-                uint8_t sender_SN = GetSenderDeviceSerialNumber(receivedPacket);
-
                 switch (DecodeTelemetryType(receivedPacket)) {
                     case(PACKET_TELEMETRY_ADC_RAW):
                         AssembleTelemetryReportPacket(packetToSend, sender_DG, sender_SN, 
@@ -317,14 +316,11 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 SendCANPacket(packetToSend);
                 SetStateTo(CHECK_CAN);
                 break;
-                
-
-                
+               
                 /*
             case(ID_LED_COLOR):
                 break;
                 */
-                
                 
             default://for 0xFF/no packets or Non recognized Packets
                 
