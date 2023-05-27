@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Swerve Motor Controller\SwerveMotorFirmware\Source Files\PositionPID.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Swerve Motor Controller\SwerveMotorFirmware\Source Files\Motor_Unit_CAN.c">
 <ExpandedNodeIds>
 <v>Swerve Motor Controller</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
@@ -277,59 +277,6 @@
 <VisibleNodeIds>
 <v>Swerve Motor Controller</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot_INT.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot_intClock.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot_IRQ.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Array_LED.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Array_LED_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Can_addr.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_HFCLK.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_INT.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANCommon.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANGPIO.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANLocalization.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANMotorUnit.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANPacket.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANPower.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANRX.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANRX_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANScience.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANTX.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANTX_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM1.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM2.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip1.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip1_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip2.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip2_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip3.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip3_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip4.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Dip4_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_encA.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_encB.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -422,6 +369,7 @@
 <name v=".\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.h" />
 <name v=".\SwerveMotorFirmware.cydsn\main.h" />
 <name v=".\SwerveMotorFirmware.cydsn\MotorDrive.c" />
+<name v=".\SwerveMotorFirmware.cydsn\MotorDrive.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -429,7 +377,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="698, 603" SelectedTabbedMdiWindow="42e97a22-68f2-43f1-81c7-93e189de211b"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="f9102868-88ca-4853-ab28-0a28d99070b3" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="e046d301-0535-4d83-b57a-e8fc2813cab9" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="f78b1b61-e640-4d45-8ce6-5307f7e18f68" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" Guid="42e97a22-68f2-43f1-81c7-93e189de211b" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="d6b3755a-4547-4679-9acd-3c6ddcb911ac" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.h" Guid="12cc3a32-7c79-443c-aa73-f982f260b1fa" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="f422aede-9a9a-4c5c-9656-4fe167cbf939" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\CANLib\CANMotorUnit.c" Guid="471bdd55-d9ff-4321-9fdf-3fe776382680" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.h" Guid="8b99c81b-0e0a-4931-b864-d9f4d9f0b844" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.h" Guid="ca7e24dd-cb6e-4169-a712-34e27fd7aef9" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.c" Guid="576d1251-2cf0-4527-9e15-bf9f1b8605c2" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="698, 603" SelectedTabbedMdiWindow="42e97a22-68f2-43f1-81c7-93e189de211b"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="f9102868-88ca-4853-ab28-0a28d99070b3" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="e046d301-0535-4d83-b57a-e8fc2813cab9" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="f78b1b61-e640-4d45-8ce6-5307f7e18f68" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" Guid="42e97a22-68f2-43f1-81c7-93e189de211b" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="d6b3755a-4547-4679-9acd-3c6ddcb911ac" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.h" Guid="12cc3a32-7c79-443c-aa73-f982f260b1fa" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="f422aede-9a9a-4c5c-9656-4fe167cbf939" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\CANLib\CANMotorUnit.c" Guid="471bdd55-d9ff-4321-9fdf-3fe776382680" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.h" Guid="8b99c81b-0e0a-4931-b864-d9f4d9f0b844" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.h" Guid="ca7e24dd-cb6e-4169-a712-34e27fd7aef9" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.c" Guid="576d1251-2cf0-4527-9e15-bf9f1b8605c2" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\MotorDrive.h" Guid="eac668af-0d3c-4e7c-87ac-d908c1ecd092" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

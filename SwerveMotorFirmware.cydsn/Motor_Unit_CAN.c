@@ -307,7 +307,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 switch (DecodeTelemetryType(receivedPacket)) {
                     case(PACKET_TELEMETRY_ADC_RAW):
                         AssembleTelemetryReportPacket(packetToSend, sender_DG, sender_SN, 
-                                                      PACKET_TELEMETRY_ADC_RAW, getPotVal());
+                                                      PACKET_TELEMETRY_ADC_RAW, GetPotVal());
                     default:
                         AssembleChipTypeReportPacket(packetToSend, sender_DG, sender_SN);
                     break;
