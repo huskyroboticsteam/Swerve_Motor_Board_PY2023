@@ -74,7 +74,7 @@ int32_t GetPotVal() {
         ADC_Pot_StartConvert();
         ADC_Pot_IsEndConversion(ADC_Pot_WAIT_FOR_RESULT);
         sum += ADC_Pot_GetResult16(0);
-    }
+    }    
     return sum/n;
 }
 void SetConversion(double conv) {

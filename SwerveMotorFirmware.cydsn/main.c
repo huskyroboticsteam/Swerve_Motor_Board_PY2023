@@ -198,6 +198,10 @@ int main(void)
         sprintf(txData, "Encoder Value: %d  \r\n", QuadDec_GetCounter());
         UART_UartPutString(txData);
         #endif
+        #ifdef PRINT_POSITION_VALUE
+        sprintf(txData, "Position (mDeg): %d  \r\n", GetPositionmDeg());
+        UART_UartPutString(txData);
+        #endif
     }
 }
  

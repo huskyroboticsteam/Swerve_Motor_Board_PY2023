@@ -65,7 +65,8 @@
         void DisplayErrorCode(uint8_t code);
         #define MOTOR_ERROR_INVALID_PACKET  0x0
         #define MOTOR_ERROR_WRONG_MODE      0x1
-
+        
+        // #define PRINT_POSITION_VALUE
 #endif
     
 /* [] END OF FILE */

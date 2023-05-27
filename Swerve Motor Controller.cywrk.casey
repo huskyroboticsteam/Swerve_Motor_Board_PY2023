@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Swerve Motor Controller\SwerveMotorFirmware\Source Files\Motor_Unit_CAN.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Swerve Motor Controller\SwerveMotorFirmware\TopDesign">
 <ExpandedNodeIds>
 <v>Swerve Motor Controller</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
@@ -417,6 +417,10 @@
 <name v=".\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" />
 <name v=".\SwerveMotorFirmware.cydsn\PositionPID.c" />
 <name v=".\SwerveMotorFirmware.cydsn\PositionPID.h" />
+<name v=".\SwerveMotorFirmware.cydsn\main.c" />
+<name v=".\CANLib\CANMotorUnit.c" />
+<name v=".\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.h" />
+<name v=".\SwerveMotorFirmware.cydsn\main.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -424,7 +428,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="698, 603" SelectedTabbedMdiWindow="42e97a22-68f2-43f1-81c7-93e189de211b"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="f9102868-88ca-4853-ab28-0a28d99070b3" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="e046d301-0535-4d83-b57a-e8fc2813cab9" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="f78b1b61-e640-4d45-8ce6-5307f7e18f68" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" Guid="42e97a22-68f2-43f1-81c7-93e189de211b" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="d6b3755a-4547-4679-9acd-3c6ddcb911ac" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.h" Guid="12cc3a32-7c79-443c-aa73-f982f260b1fa" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="737, 603" SelectedTabbedMdiWindow="f78b1b61-e640-4d45-8ce6-5307f7e18f68"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="f9102868-88ca-4853-ab28-0a28d99070b3" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="e046d301-0535-4d83-b57a-e8fc2813cab9" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cydwr" Guid="f78b1b61-e640-4d45-8ce6-5307f7e18f68" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.c" Guid="42e97a22-68f2-43f1-81c7-93e189de211b" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="d6b3755a-4547-4679-9acd-3c6ddcb911ac" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.h" Guid="12cc3a32-7c79-443c-aa73-f982f260b1fa" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="f422aede-9a9a-4c5c-9656-4fe167cbf939" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\CANLib\CANMotorUnit.c" Guid="471bdd55-d9ff-4321-9fdf-3fe776382680" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\Motor_Unit_CAN.h" Guid="8b99c81b-0e0a-4931-b864-d9f4d9f0b844" /><DocumentWindow Key="C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.h" Guid="ca7e24dd-cb6e-4169-a712-34e27fd7aef9" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

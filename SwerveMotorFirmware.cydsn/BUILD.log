@@ -1,4 +1,4 @@
---------------- Build Started: 05/23/2023 19:06:46 Project: SwerveMotorFirmware, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 05/25/2023 19:18:46 Project: SwerveMotorFirmware, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
 arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM0\ARM_GCC_541\Debug\main.o
 main.c: In function 'Period_Reset_Handler':
@@ -7,6 +7,11 @@ main.c:77:9: warning: unused variable 'timer' [-Wunused-variable]
          ^
 arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/MotorDrive.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c MotorDrive.c -o .\CortexM0\ARM_GCC_541\Debug\MotorDrive.o
 arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/PositionPID.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c PositionPID.c -o .\CortexM0\ARM_GCC_541\Debug\PositionPID.o
+PositionPID.c: In function 'GetPotVal':
+PositionPID.c:79:21: warning: format '%i' expects argument of type 'int', but argument 3 has type 'int32_t {aka long int}' [-Wformat=]
+     sprintf(txData, "pot: %i\r\n", sum);
+                     ^
+PositionPID.c:79:21: warning: format '%i' expects argument of type 'int', but argument 3 has type 'int32_t {aka long int}' [-Wformat=]
 arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/Motor_Unit_CAN.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Motor_Unit_CAN.c -o .\CortexM0\ARM_GCC_541\Debug\Motor_Unit_CAN.o
 Motor_Unit_CAN.c: In function 'NextStateFromCAN':
 Motor_Unit_CAN.c:242:28: warning: implicit declaration of function 'GetPotADCFromPacket' [-Wimplicit-function-declaration]
@@ -23,6 +28,6 @@ No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S "C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\CortexM0\ARM_GCC_541\Debug\SwerveMotorFirmware.elf"
-Flash used: 23310 of 262144 bytes (8.9%).
+Flash used: 23350 of 262144 bytes (8.9%).
 SRAM used: 3208 of 32768 bytes (9.8%). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 05/23/2023 19:06:48 ---------------
+--------------- Build Succeeded: 05/25/2023 19:18:50 ---------------

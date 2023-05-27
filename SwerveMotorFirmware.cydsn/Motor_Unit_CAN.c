@@ -282,6 +282,14 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 }
                 break;
             
+            // case(ID_GPIO_BOARD_ADC_READ):
+            //     PackIntIntoDataMSBFirst()
+            //     AssembleTelemetryReportPacket(packetToSend, DEVICE_GROUP_JETSON, DEVICE_SERIAL_JETSON, 
+            //     PACKET_TELEMETRY_ANG_POSITION, GetPositionmDeg());
+            //     SendCANPacket(packetToSend);
+            //     SetStateTo(CHECK_CAN);
+            //     break;
+            
             // Common Packets 
             case(ID_ESTOP):
                 set_PWM_M2(0, 0, 0);
@@ -294,10 +302,22 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
             
             case(ID_TELEMETRY_PULL):
-                AssembleChipTypeReportPacket(packetToSend, GetSenderDeviceGroupCode(receivedPacket),
-                    GetSenderDeviceSerialNumber(receivedPacket));
+                uint8_t sender_DG = GetSenderDeviceGroupCode(receivedPacket);
+                uint8_t sender_SN = GetSenderDeviceSerialNumber(receivedPacket);
+
+                switch (DecodeTelemetryType(receivedPacket)) {
+                    case(PACKET_TELEMETRY_ADC_RAW):
+                        AssembleTelemetryReportPacket(packetToSend, sender_DG, sender_SN, 
+                                                      PACKET_TELEMETRY_ADC_RAW, getPotVal());
+                    default:
+                        AssembleChipTypeReportPacket(packetToSend, sender_DG, sender_SN);
+                    break;
+                }
+                
                 SendCANPacket(packetToSend);
+                SetStateTo(CHECK_CAN);
                 break;
+                
 
                 
                 /*
