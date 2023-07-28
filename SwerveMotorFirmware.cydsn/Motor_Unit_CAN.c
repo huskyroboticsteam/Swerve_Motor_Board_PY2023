@@ -136,6 +136,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 AssembleChipTypeReportPacket(packetToSend, GetSenderDeviceGroupCode(receivedPacket),
                     GetSenderDeviceSerialNumber(receivedPacket));
                 SendCANPacket(packetToSend);
+                SetStateTo(CHECK_CAN);
                 break;
 
                 
@@ -282,6 +283,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     bound_set2 = 1;
                     enc_Count_Lim2 = GetEncCountFromPacket(receivedPacket);
                 }
+                SetStateTo(CHECK_CAN);
                 break;
             
             // case(ID_GPIO_BOARD_ADC_READ):
