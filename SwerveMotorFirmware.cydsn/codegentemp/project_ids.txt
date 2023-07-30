@@ -1,8 +1,0 @@
-C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj|88079161-23ce-4a15-a31e-db34af5f7c5b
-C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\StripLightLib.cylib\StripLightLib.cyprj|88871a5f-1fda-40aa-8030-637cc6ddc3bd
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|7a7667fb-2796-4e81-b97f-19539c21e4b5
-C:\Users\casey\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|bad3a018-fb44-4bbb-b3c4-0f131a830458
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|d30fc80f-5a4b-4c87-804f-8468245fa3e5
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|8c38ed3c-f692-4beb-bad1-080f4cc32db6
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|93876b5f-8650-4e81-abeb-a5d29b86cb6f
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|479aa6a5-2861-42eb-9995-cda57bdf6760
