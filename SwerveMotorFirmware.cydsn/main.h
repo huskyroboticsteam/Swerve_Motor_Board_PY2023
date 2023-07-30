@@ -48,6 +48,8 @@
             };
             
             void Initialize(void);
+        
+        void DebugPrint(char input);
             
         //debug tool for that prints packet to UART
         void PrintCanPacket(CANPacket receivedPacket);

@@ -185,23 +185,9 @@ int main(void)
 
         }
         
-        #ifdef PRINT_FSM_STATE_MODE
-        sprintf(txData, "Mode: %x State:%x \r\n", GetMode(), GetState());
-        UART_UartPutString(txData);
-        #endif
-        #ifdef PRINT_SET_PID_CONST
-        sprintf(txData, "P: %d I: %d D: %d PPJ: %d Ready: %d \r\n", GetkPosition(), GetkIntegral() 
-        ,GetkDerivative(), GetkPPJR(), PIDconstsSet());
-        UART_UartPutString(txData);
-        #endif
-        #ifdef PRINT_ENCODER_VALUE
-        sprintf(txData, "Encoder Value: %d  \r\n", QuadDec_GetCounter());
-        UART_UartPutString(txData);
-        #endif
-        #ifdef PRINT_POSITION_VALUE
-        sprintf(txData, "Position (mDeg): %d  \r\n", GetPositionmDeg());
-        UART_UartPutString(txData);
-        #endif
+        if (UART_SpiUartGetRxBufferSize()) {
+            DebugPrint(UART_UartGetByte());
+        }  
     }
 }
  
@@ -249,6 +235,30 @@ void Initialize(void) {
     isr_Limit_1_StartEx(Pin_Limit_Handler);
     isr_period_StartEx(Period_Reset_Handler);
     
+}
+
+void DebugPrint(char input) {
+    switch(input) {
+        case 'f':
+            sprintf(txData, "Mode: %x State:%x \r\n", GetMode(), GetState());
+            break;
+        case 'd':
+            sprintf(txData, "P: %i I: %i D: %i Conv: %i Ready: %i \r\n", 
+            GetkPosition(), GetkIntegral(), GetkDerivative(), (int) GetConversion(), PIDconstsSet());
+            break;
+        case 'p':
+            sprintf(txData, "Position (mDeg): %i \r\n", GetPositionmDeg());
+            break;
+        case 'x':
+            sprintf(txData, "Value: %d  ADC range: %d-%d  mDeg range: %d-%d  usePot=%d\r\n", 
+                            GetPotVal(), GetTickMin(), GetTickMax(),
+                            GetmDegMin(), GetmDegMax(), GetUsingPot());
+            break;
+        default:
+            sprintf(txData, "what\r\n");
+            break;
+    }
+    UART_UartPutString(txData);
 }
 
 
@@ -361,14 +371,4 @@ void updateEncCount() {
     lastStatePinA = currStatePinA;
 }
 
-
-/*
-void ReadCan(CANPacket *receivedPacket){
-    uint8_t error = PollAndReceiveCANPacket(receivedPacket);
-    if(error){
-        return 1;
-    }
-    
-}
-*/
 /* [] END OF FILE */

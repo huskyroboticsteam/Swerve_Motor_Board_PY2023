@@ -98,16 +98,8 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     DisplayErrorCode(MOTOR_ERROR_WRONG_MODE);
                 }
                 break;
-            /*
-            case(ID_MOTOR_UNIT_MAX_JNT_REV_SET):
-                break;
-            */
+
             case(ID_MOTOR_UNIT_ENC_INIT):
-//                if(GetMode() == MOTOR_UNIT_MODE_PID){ //turn off and clear PID Loop if encoder is reinit while running
-//                    set_PWM_M1(0, 0, 0);
-//                    ClearPIDProgress();
-//                    DisablePID();
-//                }
                 if(GetEncoderZeroFromPacket(receivedPacket)) {
                     //QuadDec_SetCounter(0);
                     counter = 0;
@@ -138,23 +130,8 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 SendCANPacket(packetToSend);
                 SetStateTo(CHECK_CAN);
                 break;
-
                 
-                /*
-            case(ID_LED_COLOR):
-                break;
-                */
-                
-                
-            default://for 0xFF/no packets or Non recognized Packets
-                
-//                if(GetMode() == MOTOR_UNIT_MODE_PID){ //need to check if values set;
-//                    SetStateTo(CALC_PID);
-//                } else if(GetMode() == MOTOR_UNIT_MODE_PWM){ //skips PWM state to not reset saftey timer
-//                    SetStateTo(CHECK_CAN);
-//                } else {
-//                    SetStateTo(CHECK_CAN);
-//                }
+            default:
                 SetStateTo(CHECK_CAN);
                 
                 //recieved Packet with Non Valid ID
@@ -235,10 +212,6 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 SetConversion(360.0*1000/GetEncoderPPJRFromPacket(receivedPacket));
                 SetStateTo(CHECK_CAN);
                 break;
-            /*
-            case(ID_MOTOR_UNIT_MAX_JNT_REV_SET):
-                break;
-            */
 
             case (ID_MOTOR_UNIT_POT_INIT_LO):
                 //printf("pot init low: %0llX",(uint64_t) receivedPacket->data);
@@ -257,6 +230,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 setUsingPot(1);
                 SetStateTo(CHECK_CAN);
                 break;
+
             case(ID_MOTOR_UNIT_ENC_INIT):
                 if(GetMode() == MOTOR_UNIT_MODE_PID){ //turn off and clear PID Loop if encoder is reinit while running
                     set_PWM_M2(0, 0, 0);
@@ -269,6 +243,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 }
                 SetStateTo(CHECK_CAN);
                 break;
+
             case(ID_MOTOR_UNIT_MAX_PID_PWM):
                 SetMaxPIDPWM(GetMaxPIDPWMFromPacket(receivedPacket));
                 SetStateTo(CHECK_CAN);
@@ -286,14 +261,6 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 SetStateTo(CHECK_CAN);
                 break;
             
-            // case(ID_GPIO_BOARD_ADC_READ):
-            //     PackIntIntoDataMSBFirst()
-            //     AssembleTelemetryReportPacket(packetToSend, DEVICE_GROUP_JETSON, DEVICE_SERIAL_JETSON, 
-            //     PACKET_TELEMETRY_ANG_POSITION, GetPositionmDeg());
-            //     SendCANPacket(packetToSend);
-            //     SetStateTo(CHECK_CAN);
-            //     break;
-            
             // Common Packets 
             case(ID_ESTOP):
                 set_PWM_M2(0, 0, 0);
@@ -307,29 +274,27 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
             
             case(ID_TELEMETRY_PULL):
                 switch (DecodeTelemetryType(receivedPacket)) {
+                    case(PACKET_TELEMETRY_ANG_POSITION):
+                        AssembleTelemetryReportPacket(packetToSend, sender_DG, sender_SN, 
+                            PACKET_TELEMETRY_ANG_POSITION, GetPositionmDeg());
+                        break;
                     case(PACKET_TELEMETRY_ADC_RAW):
                         AssembleTelemetryReportPacket(packetToSend, sender_DG, sender_SN, 
-                                                      PACKET_TELEMETRY_ADC_RAW, GetPotVal());
+                            PACKET_TELEMETRY_ADC_RAW, GetPotVal());
+                        break;
                     default:
                         AssembleChipTypeReportPacket(packetToSend, sender_DG, sender_SN);
-                    break;
+                        break;
                 }
                 
                 SendCANPacket(packetToSend);
                 SetStateTo(CHECK_CAN);
                 break;
-               
-                /*
-            case(ID_LED_COLOR):
-                break;
-                */
                 
             default://for 0xFF/no packets or Non recognized Packets
                 
                 if(GetMode() == MOTOR_UNIT_MODE_PID){ //need to check if values set;
                     SetStateTo(CALC_PID);
-                } else if(GetMode() == MOTOR_UNIT_MODE_PWM){ //skips PWM state to not reset saftey timer
-                    SetStateTo(CHECK_CAN);
                 } else {
                     SetStateTo(CHECK_CAN);
                 }
@@ -350,5 +315,3 @@ static int32_t GetEncCountFromPacket(const CANPacket *packet) {
 static uint8_t GetLimitSwNumFromPacket(const CANPacket *packet) {
     return packet->data[1];
 }
-    
-    //} else if (motor_serial == (getSerialAddress() + 1)) {

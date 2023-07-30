@@ -46,4 +46,7 @@ int32_t GetkPosition();
 int32_t GetkIntegral();
 int32_t GetkDerivative();
 double GetConversion();
-int32_t GetEncoderValWithFlip();
+int32_t GetTickMax();
+int32_t GetTickMin();
+int32_t GetmDegMax();
+int32_t GetmDegMin();
