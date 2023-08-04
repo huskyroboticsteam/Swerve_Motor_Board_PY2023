@@ -49,7 +49,7 @@ void EnablePID() {
     enabledPID = 1;
 }
 uint8_t PIDIsEnabled() {
-    return(enabledPID);
+    return enabledPID;
 }
 void InitializePID() { //TODO: make work with both motors or ask if only swivel needed
     set_PWM_M2(0, 0, 0);
@@ -125,7 +125,7 @@ void SetPosition(int32_t mDegs) {
 
 int32_t Position_PID(int32 targetmDeg){
     if(!PIDIsEnabled()){
-        return(0);
+        return 0;
     }
     
     int32 current = GetPositionmDeg();
@@ -141,7 +141,7 @@ int32_t Position_PID(int32 targetmDeg){
     if (integral > integralClamp) {
         integral = integralClamp;   
     }
-    if (integral < -integralClamp) {
+    else if (integral < -integralClamp) {
         integral = -integralClamp;
     }
     
@@ -154,7 +154,7 @@ int32_t Position_PID(int32 targetmDeg){
         UART_UartPutString(txData);   
     #endif
  
-    return (PWMOut);
+    return PWMOut;
 }
 
 /* [] END OF FILE */

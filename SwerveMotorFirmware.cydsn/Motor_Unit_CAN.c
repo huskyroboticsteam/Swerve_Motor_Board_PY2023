@@ -71,32 +71,22 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     StripLights_Pixel(0, 0, get_color_packet(0,0,255));
                     StripLights_Trigger(1);
                     #endif
-                    SetModeTo(MOTOR_UNIT_MODE_PWM);
+                    // SetModeTo(MOTOR_UNIT_MODE_PWM);
                     SetStateTo(CHECK_CAN);
                 }
                 else if (GetModeFromPacket(receivedPacket) == MOTOR_UNIT_MODE_PID) {
-                    InitializePID();
-                    #ifdef RGB_LED_ARRAY
-                    StripLights_MemClear(StripLights_BLACK);
-                    StripLights_Pixel(1, 0, get_color_packet(0,0,255));
-                    StripLights_Trigger(1);
-                    #endif
-                    SetModeTo(MOTOR_UNIT_MODE_PID);
-                    SetStateTo(CHECK_CAN);
-                } else {
+                    SetStateTo(QUEUE_ERROR);
+                    DisplayErrorCode(MOTOR_ERROR_WRONG_MODE);
+                }
+                else {
                     GotoUninitState();
                 }
                 break;
                 
             case(ID_MOTOR_UNIT_PWM_DIR_SET):    //TODO: Verify modifications are valid
-                if(GetMode() == MOTOR_UNIT_MODE_PWM){
                     //SetStateTo(SET_PWM);        //NEED NEW FLAG
-                    SetStateTo(SET_PWM_M1);
-                    nextPWM_M1 = GetPWMFromPacket(receivedPacket);
-                } else {
-                    SetStateTo(QUEUE_ERROR);
-                    DisplayErrorCode(MOTOR_ERROR_WRONG_MODE);
-                }
+                SetStateTo(SET_PWM_M1);
+                nextPWM_M1 = GetPWMFromPacket(receivedPacket);
                 break;
 
             case(ID_MOTOR_UNIT_ENC_INIT):
