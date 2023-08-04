@@ -72,7 +72,8 @@ int32_t GetPotVal() {
 
 double UpdateConversion() {
     if (mDegMin == mDegMax) return 0;
-    mDegPerTick = (double) (tickMax-tickMin)/(mDegMax-mDegMin);
+    mDegPerTick = (double) (mDegMax-mDegMin)/(tickMax-tickMin);
+    if (mDegPerTick != 0.0) PPJRConstIsSet();
     return mDegPerTick;
 }
 
@@ -104,9 +105,9 @@ int32_t GetPositionmDeg() {
     
     if (usingPot) 
         return (GetPotVal()-tickMin) * mDegPerTick + mDegMin;
-
-    // return QuadDec_GetCounter() * mDegPerTick;
-    return 0 * mDegPerTick;
+    else
+        // return QuadDec_GetCounter() * mDegPerTick;
+        return 0 * mDegPerTick;
 }
 void SetPosition(int32_t mDegs) {
         //TODO: Make Potentiometer Compatible
@@ -131,9 +132,8 @@ int32_t Position_PID(int32 targetmDeg){
     int32 error = targetmDeg - current;
     
     //if within tolerance exit
-    if(error <= 5 && error >= -5) {
-      return(0);
-    }
+    if(abs(error) < mDegPerTick)
+      return 0;
     
     integral = integral + error;
     

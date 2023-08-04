@@ -235,7 +235,6 @@ void Initialize(void) {
     isr_encB_StartEx(EncB_Change_Handler);
     isr_Limit_1_StartEx(Pin_Limit_Handler);
     isr_period_StartEx(Period_Reset_Handler);
-    
 }
 
 void DebugPrint(char input) {
@@ -244,8 +243,8 @@ void DebugPrint(char input) {
             sprintf(txData, "Mode: %x State:%x \r\n", GetMode(), GetState());
             break;
         case 'd':
-            sprintf(txData, "P: %i I: %i D: %i Conv: %i Ready: %i \r\n", 
-            GetkPosition(), GetkIntegral(), GetkDerivative(), (int) GetConversion(), PIDconstsSet());
+            sprintf(txData, "P: %i I: %i D: %i mDegPerTick: %i MaxPWM: %i Ready: %i \r\n", 
+            GetkPosition(), GetkIntegral(), GetkDerivative(), (int) GetConversion(), GetMaxPIDPWM(), PIDconstsSet());
             break;
         case 'p':
             sprintf(txData, "Position (mDeg): %i \r\n", GetPositionmDeg());
