@@ -71,12 +71,8 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     StripLights_Pixel(0, 0, get_color_packet(0,0,255));
                     StripLights_Trigger(1);
                     #endif
-                    // SetModeTo(MOTOR_UNIT_MODE_PWM);
+                    SetModeTo(MOTOR_UNIT_MODE_PWM, 1);
                     SetStateTo(CHECK_CAN);
-                }
-                else if (GetModeFromPacket(receivedPacket) == MOTOR_UNIT_MODE_PID) {
-                    SetStateTo(QUEUE_ERROR);
-                    DisplayErrorCode(MOTOR_ERROR_WRONG_MODE);
                 }
                 else {
                     GotoUninitState();
@@ -141,7 +137,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     StripLights_Pixel(0, 0, get_color_packet(0,0,255));
                     StripLights_Trigger(1);
                     #endif
-                    SetModeTo(MOTOR_UNIT_MODE_PWM);
+                    SetModeTo(MOTOR_UNIT_MODE_PWM, 2);
                     SetStateTo(CHECK_CAN);
                 }
                 else if (GetModeFromPacket(receivedPacket) == MOTOR_UNIT_MODE_PID) {
@@ -151,7 +147,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                     StripLights_Pixel(1, 0, get_color_packet(0,0,255));
                     StripLights_Trigger(1);
                     #endif
-                    SetModeTo(MOTOR_UNIT_MODE_PID);
+                    SetModeTo(MOTOR_UNIT_MODE_PID, 2);
                     SetStateTo(CHECK_CAN);
                 } else {
                     GotoUninitState();
@@ -159,7 +155,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
                 
             case(ID_MOTOR_UNIT_PWM_DIR_SET):    //TODO: Verify modifications are valid
-                if(GetMode() == MOTOR_UNIT_MODE_PWM){
+                if(GetMode(2) == MOTOR_UNIT_MODE_PWM){
                     //SetStateTo(SET_PWM);        //NEED NEW FLAG
                     SetStateTo(SET_PWM_M2);
                     nextPWM_M2 = GetPWMFromPacket(receivedPacket);
@@ -188,10 +184,10 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
             
             case(ID_MOTOR_UNIT_PID_POS_TGT_SET):
-                if(GetMode() == MOTOR_UNIT_MODE_PID && PIDconstsSet()) {//&& PID values set
+                if(GetMode(2) == MOTOR_UNIT_MODE_PID && PIDconstsSet()) {//&& PID values set
                     EnablePID();
                     millidegreeTarget_M2 = GetPIDTargetFromPacket(receivedPacket);
-                    SetStateTo(CALC_PID);
+                    // SetStateTo(CALC_PID);
                 } else {
                     SetStateTo(QUEUE_ERROR);
                     DisplayErrorCode(MOTOR_ERROR_WRONG_MODE);
@@ -222,7 +218,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
 
             case(ID_MOTOR_UNIT_ENC_INIT):
-                if(GetMode() == MOTOR_UNIT_MODE_PID){ //turn off and clear PID Loop if encoder is reinit while running
+                if(GetMode(2) == MOTOR_UNIT_MODE_PID){ //turn off and clear PID Loop if encoder is reinit while running
                     set_PWM_M2(0, 0, 0);
                     ClearPIDProgress();
                     DisablePID();
@@ -282,12 +278,6 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
                 
             default://for 0xFF/no packets or Non recognized Packets
-                
-                if(GetMode() == MOTOR_UNIT_MODE_PID){ //need to check if values set;
-                    SetStateTo(CALC_PID);
-                } else {
-                    SetStateTo(CHECK_CAN);
-                }
                 
                 //recieved Packet with Non Valid ID
                 if(packageID != NO_NEW_CAN_PACKET) {

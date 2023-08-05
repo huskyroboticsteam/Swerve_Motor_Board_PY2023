@@ -25,9 +25,9 @@
     
     void GotoUninitState();
     void SetStateTo(uint8_t state);
-    void SetModeTo(uint8_t mode);
+    void SetModeTo(uint8_t mode, uint8_t motor);
     uint8_t GetState();
-    uint8_t GetMode();
+    uint8_t GetMode(uint8_t motor);
     
     void PositionConstIsSet();
     void IntegralConstIsSet();
@@ -36,5 +36,7 @@
     void MaxJointRevIsSet();
     uint8_t PIDconstsSet();
     void ClearPIDconst();
+    
+    
     
 #endif

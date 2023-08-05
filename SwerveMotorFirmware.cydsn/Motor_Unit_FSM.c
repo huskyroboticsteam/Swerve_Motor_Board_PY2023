@@ -20,9 +20,10 @@
 0xFF = un-init
 0x0 = pwm
 0x1 = PID*/
-uint8_t motorUnitMode   = 0xFF;
+uint8_t M1Mode   = 0xFF;
+uint8_t M2Mode   = 0xFF;
 uint8_t motorUnitState  = UNINIT;
-uint8_t PIDConstSetReg      = 0;
+uint8_t PIDConstSetReg  = 0;
 
 extern const uint32 StripLights_CLUT[ ];
 
@@ -32,20 +33,24 @@ void GotoUninitState() {
     StripLights_DisplayClear(StripLights_BLACK);
     #endif
     ClearPIDProgress();
-    motorUnitMode = 0xFF;
+    M1Mode = 0xFF;
+    M2Mode = 0xFF;
     motorUnitState = UNINIT;
 }
 void SetStateTo(uint8_t state) {
     motorUnitState = state;
 }
-void SetModeTo(uint8_t mode) {
-    motorUnitMode = mode;
+void SetModeTo(uint8_t mode, uint8_t motor) {
+    if (motor == 1) M1Mode = mode;
+    else if (motor == 2) M2Mode = mode;
 }
 uint8_t GetState(){
     return motorUnitState;
 }
-uint8_t GetMode(){
-    return motorUnitMode;
+uint8_t GetMode(uint8_t motor){
+    if (motor == 1) return M1Mode;
+    if (motor == 2) return M2Mode;
+    return 0xFF;
 }
 void PositionConstIsSet() {
     PIDConstSetReg |= 0b100;

@@ -16,7 +16,8 @@
 #include "main.h"
 #include "MotorDrive.h"
 
-uint8_t invalidate = 0;     // TODO: make sure this isn't a motor specific variable
+uint8_t invalidateM1 = 0;     // TODO: make sure this isn't a motor specific variable
+uint8_t invalidateM2 = 0;
 extern char txData[TX_DATA_SIZE];
 
 int32_t currPWM_Drive = 0;
@@ -31,7 +32,7 @@ void set_PWM_M1(int16_t compare, uint8_t disable_limit, uint8_t limitSW) {  //li
     UART_UartPutString(txData); 
     #endif
     
-    invalidate = 0;     
+    invalidateM1 = 0;     
     if (compare < 0 && (!(limitSW & 0b01) || disable_limit) ) {
         Motor1Direction_Write(0);
         currPWM_Drive = compare;
@@ -53,7 +54,7 @@ void set_PWM_M2(int16_t compare, uint8_t disable_limit, uint8_t limitSW) {
     UART_UartPutString(txData); 
     #endif
     
-    invalidate = 0;    
+    invalidateM2 = 0;    
 //    char out[32];
 //    UART_UartPutString("compare val m2: ");
 //    UART_UartPutString(itoa(compare, out, 10));

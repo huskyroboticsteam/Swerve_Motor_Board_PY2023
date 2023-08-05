@@ -124,6 +124,7 @@ void SetPosition(int32_t mDegs) {
 }
 
 int32_t Position_PID(int32 targetmDeg){
+    
     if(!PIDIsEnabled()){
         return 0;
     }
@@ -153,7 +154,7 @@ int32_t Position_PID(int32 targetmDeg){
         sprintf(txData,"c:%d, P:%d, I%d, D:%d, Out:%d", current, error, integral, derivative, PWMOut);
         UART_UartPutString(txData);   
     #endif
- 
+    
     return PWMOut;
 }
 

@@ -47,7 +47,8 @@ char txData[TX_DATA_SIZE];
 //drive varaible
 int16 nextPWM_M1 = 0;
 int16 nextPWM_M2 = 0;
-extern uint8 invalidate;
+extern uint8 invalidateM1;
+extern uint8 invalidateM2;
 uint8_t ignoreLimSw_M1 = 0; 
 uint8_t ignoreLimSw_M2 = 0;
 uint8_t encoderTimeOut = 0;
@@ -75,7 +76,8 @@ void updateEncCount();
 //stops motor every 20ms or so if no new packet was received. software might want this removed
 CY_ISR(Period_Reset_Handler) {
     int timer = Timer_1_ReadStatusRegister();
-    invalidate++;
+    invalidateM1++;
+    invalidateM2++;
     CAN_time_LED++;
     CAN_check_delay ++;
     ERRORTimeLED++;
@@ -84,10 +86,8 @@ CY_ISR(Period_Reset_Handler) {
         encoderTimeOut = 0;
         SendEncoderData(&can_send);
     }
-    if(invalidate >= 20){
-        set_PWM_M1(0, 0, 0);    
-        set_PWM_M2(0, 0, 0);   
-    }
+    if(invalidateM1 >= 20) set_PWM_M1(0, 0, 0);    
+    if(invalidateM2 >= 20) set_PWM_M2(0, 0, 0); 
     if(ERRORTimeLED >= 3) {
         #ifdef ERROR_LED
         LED_Error_Write(LED_OFF);
@@ -164,15 +164,14 @@ int main(void)
                 set_PWM_M2(nextPWM_M2, ignoreLimSw_M2, Status_Reg_Switches_Read());    //TODO: VERIFY
                 SetStateTo(CHECK_CAN);
                 break;
-            case(CALC_PID): //only applies to swivel
-                SetPosition(millidegreeTarget_M2);   
-                SetStateTo(CHECK_CAN);
-                break;
             case(QUEUE_ERROR):
                 SetStateTo(CHECK_CAN);
                 break;
             case(CHECK_CAN):
                 NextStateFromCAN(&can_recieve, &can_send);
+                if (GetMode(2) == MOTOR_UNIT_MODE_PID){ //need to check if values set;
+                    SetPosition(millidegreeTarget_M2);   
+                }
                 #ifdef PRINT_CAN_PACKET
                 PrintCanPacket(can_recieve);
                 #endif
@@ -240,7 +239,7 @@ void Initialize(void) {
 void DebugPrint(char input) {
     switch(input) {
         case 'f':
-            sprintf(txData, "Mode: %x State:%x \r\n", GetMode(), GetState());
+            sprintf(txData, "Mode1: %x Mode2: %x State:%x \r\n", GetMode(1), GetMode(2), GetState());
             break;
         case 'd':
             sprintf(txData, "P: %i I: %i D: %i mDegPerTick: %i MaxPWM: %i Ready: %i \r\n", 
