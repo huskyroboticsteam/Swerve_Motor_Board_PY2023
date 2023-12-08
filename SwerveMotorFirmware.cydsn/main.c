@@ -79,11 +79,7 @@ CY_ISR(Period_Reset_Handler) {
     CAN_time_LED++;
     CAN_check_delay ++;
     ERRORTimeLED++;
-    encoderTimeOut++;
-    if(encoderTimeOut >= 2){
-        encoderTimeOut = 0;
-        SendEncoderData(&can_send);
-    }
+
     if(invalidate >= 20){
         set_PWM_M1(0, 0, 0);    
         set_PWM_M2(0, 0, 0);   
