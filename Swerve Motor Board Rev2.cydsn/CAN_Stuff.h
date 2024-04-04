@@ -13,7 +13,8 @@
 #pragma once
 
 #include <project.h>
-#include "HindsightCAN/CANLibrary.h"
+#include <stdint.h>
+#include "../CANLib/CANLibrary.h"
 
 // CAN Errors (0x10-0x1F)
 #define ERROR_NO_NEW_PACKET 0xFFFF
@@ -22,9 +23,10 @@
 #define ERROR_INVALID_TTC     0x12
 #define ERROR_INVALID_PACKET  0x13
 
-int ReadCAN(CANPacket *receivedPacket);
+void StartCAN(uint8 new_address);
 int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend);
-void PrintCanPacket(CANPacket packet);
+int SendLimitAlert(uint8 status);
+uint8 GetAddress();
 
 /* [] END OF FILE */
     

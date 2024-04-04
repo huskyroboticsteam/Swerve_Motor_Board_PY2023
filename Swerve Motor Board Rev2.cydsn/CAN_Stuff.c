@@ -14,68 +14,138 @@
 #include "main.h"
 #include "CAN_Stuff.h"
 #include "FSM_Stuff.h"
-#include "HindsightCAN/CANLibrary.h"
+#include "PositionPID.h"
+#include "MotorDrive.h"
+#include "../CANLib/CANLibrary.h"
 
-extern char txData[TX_DATA_SIZE];
-extern uint8 address;
+uint8 address;
+
+void StartCAN(uint8 new_address) {
+    if (new_address == 0) {
+        address = DEVICE_SERIAL_TELEM_LOCALIZATION;
+    } else address = new_address;
+    
+    InitCAN(0x04, (int) address);
+}
 
 //Reads from CAN FIFO and changes the state and mode accordingly
-int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
-    uint16_t packageID = GetPacketID(receivedPacket);
-    uint8_t sender_DG = GetSenderDeviceGroupCode(receivedPacket);
-    uint8_t sender_SN = GetSenderDeviceSerialNumber(receivedPacket);
-    int32_t data = 0;
-    int err = 0;
+int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {  
+    PrintCanPacket(*receivedPacket);
+    uint16 packageID = GetPacketID(receivedPacket);
     
-    switch(packageID){
-        // Board-specific packets
+    if (packageID == ID_ESTOP) {
+        SetMode(MOTOR_BOTH, MODE_UNINIT);
+        return ESTOP_ERR_GENERAL;
+    }
+    
+    uint8  motor_address = GetDeviceSerialNumber(receivedPacket);
+    uint8  sender_DG = GetSenderDeviceGroupCode(receivedPacket);
+    uint8  sender_SN = GetSenderDeviceSerialNumber(receivedPacket);
+    
+    int32 data = 0;
+    int err = 0;
+    int motor = 0;
+    
+    if (motor_address == address) motor = MOTOR1;
+    else if (motor_address == address + 16) motor = MOTOR2;
+    else motor = MOTOR_BOTH; // assume broadcast
+    
+    switch(packageID) {
         case(ID_MOTOR_UNIT_MODE_SEL):
-        
             data = GetModeFromPacket(receivedPacket);
-            if(data == MOTOR_UNIT_MODE_PWM) {
-                // set_PWM_M1(0, 0, 0);
-                
-                SetModeTo(MODE_STEERING_SPEED);
-                
-            } else if (data == MOTOR_UNIT_MODE_PID) {
-                if () { // check PID constants are set
-                    // InitializePID();
-                    SetModeTo(MODE_STEERING_POS);
-                }
-            } else {
-                SetModeTo(MODE_UNINIT);
-                GotoUninitState();
-            }
+            if (data == MOTOR_UNIT_MODE_PWM)
+                err = SetMode(motor, MODE_PWM_CTRL);
+            else if (data == MOTOR_UNIT_MODE_PID)
+                err = SetMode(motor, MODE_PID_CTRL);
+            else err = ERROR_INVALID_PACKET;
+            break;
+           
+        case(ID_MOTOR_UNIT_PWM_DIR_SET):
+            data = GetPWMFromPacket(receivedPacket);
+            err = SetPWM(motor, data);
             break;
             
-        // Common Packets
-        case(ID_ESTOP):
-            Print("\r\n\r\nSTOP\r\n\r\n");
-            // stop all movement
-            GotoUninitState();
-            err = ESTOP_ERR_GENERAL;
+        case(ID_MOTOR_UNIT_PID_P_SET):
+            data = GetPFromPacket(receivedPacket);
+            SetkPosition(motor, data);
             break;
         
+        case(ID_MOTOR_UNIT_PID_I_SET):
+            data = GetIFromPacket(receivedPacket);
+            SetkIntegral(motor, data);
+            break;
+            
+        case(ID_MOTOR_UNIT_PID_D_SET):
+            data = GetDFromPacket(receivedPacket);
+            SetkDerivative(motor, data);
+            break;
+            
+        case(ID_MOTOR_UNIT_PID_POS_TGT_SET):
+            data = GetPIDTargetFromPacket(receivedPacket);
+            SetPIDTarget(motor, data);
+            if (GetMode(motor) != MODE_PID_CTRL) err = ERROR_WRONG_MODE;
+            break;
+            
+        case(ID_MOTOR_UNIT_ENC_PPJR_SET):
+            data = GetEncoderPPJRFromPacket(receivedPacket);
+            SetConvRatio(motor, 360.0*1000/data);
+            break;
+            
+        case (ID_MOTOR_UNIT_POT_INIT_LO):
+            SetConvMin(motor, 
+                GetPotADCFromPacket(receivedPacket), 
+                GetPotmDegFromPacket(receivedPacket));
+            break;
+            
+        case (ID_MOTOR_UNIT_POT_INIT_HI):
+            SetConvMax(motor, 
+                GetPotADCFromPacket(receivedPacket), 
+                GetPotmDegFromPacket(receivedPacket));
+            break;
+        
+        case(ID_MOTOR_UNIT_ENC_INIT):
+            // didn't bother checking the use_pot bit
+            if(GetEncoderZeroFromPacket(receivedPacket)) {
+                SetEncOffset(motor, 0);
+            }
+            SetEncDir(motor, GetEncoderDirectionFromPacket(receivedPacket));
+            break;
+            
+        case(ID_MOTOR_UNIT_MAX_PID_PWM):
+            SetMaxPIDPWM(GetMaxPIDPWMFromPacket(receivedPacket));
+            break;
+            
+        case(ID_MOTOR_UNIT_SET_ENCODER_BOUND):
+            SetEncBound(GetLimSwNumFromPacket(receivedPacket), GetEncoderValueFromPacket(receivedPacket));
+            break;
+            
         case(ID_TELEMETRY_PULL):            
             switch(DecodeTelemetryType(receivedPacket))
             {
-                // USE CONSTANTS FOR CASES
-                case(0):
-                    data = 105;
+                case(PACKET_TELEMETRY_ANG_POSITION):
+                    data = GetPosition(motor);
+                    break;
+                case(PACKET_TELEMETRY_ADC_RAW):
+                    data = GetPotValue();
+                    break;
+                case(PACKET_TELEMETRY_LIM_SW_STATE):
+                    data = GetLimitStatus();
+                    break;
+                case(PACKET_TELEMETRY_CHIP_TYPE):
+                    data = CHIP_TYPE_PSOC_CY8C4248AZI_L485;
                     break;
                 default:
                     err = ERROR_INVALID_TTC;
                     break;
             }
             
-            // Assemble and send packet
-            AssembleTelemetryReportPacket(packetToSend, sender_DG, sender_SN, receivedPacket->data[3], data);
-            
-            if (err == 0)
+            if (!err) {
+                // Assemble and send packet
+                AssembleTelemetryReportPacket(packetToSend, sender_DG, sender_SN, receivedPacket->data[3], data);
                 SendCANPacket(packetToSend);
-            
+            }
             break;
-            
+
         default: //recieved Packet with non-valid ID
             // could be due to corruption, don't uninit
             return ERROR_INVALID_PACKET;
@@ -84,15 +154,15 @@ int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
     return err;
 }
 
-void PrintCanPacket(CANPacket packet){
-    for(int i = 0; i < packet.dlc; i++ ) {
-        sprintf(txData,"Byte%d %x   ", i+1, packet.data[i]);
-        Print(txData);
-    }
+int SendLimitAlert(uint8 status) {
+    CANPacket can_send;
+    AssembleLimitSwitchAlertPacket(&can_send, DEVICE_GROUP_JETSON, 
+    DEVICE_SERIAL_JETSON, status);
+    return SendCANPacket(&can_send);
+}
 
-    sprintf(txData,"ID:%x %x %x\r\n",packet.id >> 10, 
-        (packet.id >> 6) & 0xF , packet.id & 0x3F);
-    Print(txData);
+uint8 GetAddress() {
+    return address;
 }
 
 

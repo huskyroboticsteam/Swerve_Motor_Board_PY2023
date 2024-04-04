@@ -1,7 +1,7 @@
 /* File:         CANMotorUnit.c
  * Authors:      Jaden Bottemiller, Benton Kwong, Dylan Tomberlin, Austin Chan.
  * Organization: Husky Robotics Team
- * 
+ *
  * This file includes function definitions for CAN Packet manipulation
  * using the Hindsight CAN Communication standard. Specific files
  * for the motor unit boards.
@@ -29,7 +29,7 @@ uint8_t GetModeFromPacket(CANPacket *packet)
 }
 
 
-void AssemblePWMDirSetPacket(CANPacket *packetToAssemble, 
+void AssemblePWMDirSetPacket(CANPacket *packetToAssemble,
     uint8_t targetDeviceGroup,
     uint8_t targetDeviceSerial,
     int16_t PWMSet)
@@ -138,7 +138,7 @@ void AssembleLimitSwitchAlertPacket(CANPacket *packetToAssemble,
     packetToAssemble->id = ConstructCANID(PRIO_MOTOR_UNIT_LIM_ALERT, targetDeviceGroup, targetDeviceSerial);
     packetToAssemble->dlc = DLC_MOTOR_UNIT_LIM_ALERT;
     int nextByte = WriteSenderSerialAndPacketID(packetToAssemble->data, ID_MOTOR_UNIT_LIM_ALERT);
-    packetToAssemble->data[nextByte] = switches; 
+    packetToAssemble->data[nextByte] = switches;
 }
 uint8_t GetLimStatusFromPacket(CANPacket *packet)
 {
@@ -170,7 +170,7 @@ void AssembleMaxJointRevolutionPacket(CANPacket *packetToAssemble,
     packetToAssemble->dlc = DLC_MOTOR_UNIT_MAX_JNT_REV_SET;
     int nextByte = WritePacketIDOnly(packetToAssemble->data, ID_MOTOR_UNIT_MAX_JNT_REV_SET);
     PackIntIntoDataMSBFirst(packetToAssemble->data, revolutions, nextByte);
-    
+
 }
 uint32_t GetMaxJointRevolutionsFromPacket(CANPacket *packet)
 {
@@ -255,7 +255,7 @@ uint8_t GetEncoderZeroFromPacket(CANPacket *packet)
     return(packet->data[1] & 0b001);
 }
 
-void AssembleMaxPIDPWMPacket(CANPacket *packetToAssemble, 
+void AssembleMaxPIDPWMPacket(CANPacket *packetToAssemble,
     uint8_t targetDeviceGroup,
     uint8_t targetDeviceSerial,
     uint16_t PWMSetMax)
@@ -266,6 +266,53 @@ void AssembleMaxPIDPWMPacket(CANPacket *packetToAssemble,
     PackShortIntoDataMSBFirst(packetToAssemble->data, PWMSetMax, nextByte);
 }
 
-uint16_t GetMaxPIDPWMFromPacket(CANPacket *packet){
+uint16_t GetMaxPIDPWMFromPacket(CANPacket *packet)
+{
     return DecodeBytesToIntMSBFirst(packet->data, 1, 2);
+}
+
+void AssemblePCAServoPacket(CANPacket *packetToAssemble,
+    uint8_t targetDeviceGroup,
+    uint8_t targetDeviceSerial,
+    uint8_t servoNum,
+    int32_t angle) 
+{
+    packetToAssemble->id = ConstructCANID(PRIO_MOTOR_UNIT_PCA_SERVO, targetDeviceGroup, targetDeviceSerial);
+    packetToAssemble->dlc = DLC_MOTOR_UNIT_PCA_SERVO;
+    int nextByte = WritePacketIDOnly(packetToAssemble->data, ID_MOTOR_UNIT_PCA_SERVO);
+    packetToAssemble->data[nextByte] = servoNum;
+    nextByte++;
+    PackIntIntoDataMSBFirst(packetToAssemble->data, angle, nextByte);
+}
+
+int32_t GetAngleValueFromPacket(const CANPacket *packet)
+{
+    return DecodeBytesToIntMSBFirst(packet->data, 2, 5);
+}
+
+uint8_t GetServoNumFromPacket(const CANPacket *packet)
+{
+    return packet->data[1];
+}
+
+void AssembleLimSwEncoderBoundPacket(CANPacket* packetToAssemble,
+    uint8_t targetDeviceGroup,
+    uint8_t targetDeviceSerial,
+    uint8_t limSwNum,
+    int32_t encoderBound)
+{
+    packetToAssemble->id = ConstructCANID(PRIO_MOTOR_UNIT_SET_ENCODER_BOUND, targetDeviceGroup, targetDeviceSerial);
+    packetToAssemble->dlc = DLC_MOTOR_UNIT_ENCODER_BOUND;
+    int nextByte = WritePacketIDOnly(packetToAssemble->data, ID_MOTOR_UNIT_SET_ENCODER_BOUND);
+    packetToAssemble->data[nextByte] = limSwNum;
+    nextByte++;
+    PackIntIntoDataMSBFirst(packetToAssemble->data, encoderBound, nextByte);
+}
+
+int32_t GetEncoderValueFromPacket(const CANPacket* packet) {
+    return DecodeBytesToIntMSBFirst(packet->data, 2, 5);
+}
+
+uint8_t GetLimSwNumFromPacket(const CANPacket* packet) {
+    return packet->data[1];
 }

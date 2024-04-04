@@ -57,7 +57,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
     uint8_t sender_SN = GetSenderDeviceSerialNumber(receivedPacket);
 
     //Motor 1: Drive
-    if (motor_serial == getSerialAddress()) {
+    if (motor_serial == address) {
         switch(packageID){
 //            char out[32];
 //            UART_UartPutString("package id : ");
@@ -164,7 +164,7 @@ void NextStateFromCAN(CANPacket *receivedPacket, CANPacket *packetToSend) {
                 break;
         }
         
-    } else if (motor_serial == (getSerialAddress() + 16)) {  //swivel
+    } else if (motor_serial == (address + 16)) {  //swivel
         switch(packageID){
             case(ID_MOTOR_UNIT_MODE_SEL):
                 if(GetModeFromPacket(receivedPacket) == MOTOR_UNIT_MODE_PWM) {

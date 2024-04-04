@@ -8,7 +8,7 @@
  */
 #if CHIP_TYPE == CHIP_TYPE_PSOC_CY8C4248AZI_L485
 
-#include "../Port_swerve.h"
+#include "../Port.h"
 #include "project.h"
     
 //Flag internal to this port, 0xFF if no message waiting, doubles as mailbox number
@@ -39,16 +39,15 @@ int deviceAddressB;
 int deviceGroup;
 CAN_RX_CFG rxMailbox;
 //Added two device addresses instead of 1 for simultaneous control of the two swerve motors
-void InitCAN_swerve(int deviceGroupInput, int deviceAddressInputA, int deviceAddressInputB)
+void InitCAN(int deviceGroupInput, int deviceAddress)
 {
-    CAN_Start();//must name CAN Top Design block as "CAN"
+    CAN_Start(); //must name CAN Top Design block as "CAN"
     
-    //TODO: I'm sure there's a better way of doing this part
-    deviceGroup = deviceGroupInput & 0xF; // 4bits of ID
-    deviceAddressA = deviceAddressInputA & (0x3f);//6bits of ID
-    deviceAddressB = deviceAddressInputB & (0x3f);//6bits of ID
+    deviceGroup = deviceGroupInput & 0xF; //4bits of ID
+    deviceAddressA = deviceAddress & (0x3F); //6bits of ID
+    deviceAddressB = (deviceAddress + 16) & (0x3F); //6bits of ID
     
-    //MOTOR 1 (DEVICE A) //////////////////////////////////////////////////////////////////////////////////////////////
+    //MOTOR 1 (DEVICE A)
     //sets up inidvidual recieve mailbox (3rd priority mailbox)
     rxMailbox.rxmailbox = 0;
     rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddressA)) << 21;  // first 11 bits are the CAN ID that is not extended
@@ -56,39 +55,25 @@ void InitCAN_swerve(int deviceGroupInput, int deviceAddressInputA, int deviceAdd
     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_0);//need to know what this is
     CAN_RxBufConfig(&rxMailbox);
     
-    //setup broadcast recieve mailbox (1st priority mailbox)
+    //MOTOR 2 (DEVICE B)
     rxMailbox.rxmailbox = 1;
-    rxMailbox.rxacr = ((0x0 << 6)|(0x0)) << 21; //0x20F<<21; // first 11 bits are the CAN ID that is not extended
+    rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddressB)) << 21;  // first 11 bits are the CAN ID that is not extended
     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_1);//need to know what this is
     CAN_RxBufConfig(&rxMailbox);
     
-    //setup group broadcast recieve mailbox (2nd priority mailbox)
+    //setup broadcast recieve mailbox (1st priority mailbox)
     rxMailbox.rxmailbox = 2;
-    rxMailbox.rxacr = ((deviceGroup << 6)|(0x3F)) << 21; //0x20F<<21; // first 11 bits are the CAN ID that is not extended
+    rxMailbox.rxacr = ((0x0 << 6)|(0x0)) << 21; //0x20F<<21; // first 11 bits are the CAN ID that is not extended
     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_2);//need to know what this is
     CAN_RxBufConfig(&rxMailbox);
     
-    //MOTOR 2 (DEVICE B) //////////////////////////////////////////////////////////////////////////////////////////////
-    rxMailbox.rxmailbox = 3;
-    rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddressB)) << 21;  // first 11 bits are the CAN ID that is not extended
-    rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
-    rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_3);//need to know what this is
-    CAN_RxBufConfig(&rxMailbox);
-    
-    //setup broadcast recieve mailbox (1st priority mailbox)
-    rxMailbox.rxmailbox = 4;
-    rxMailbox.rxacr = ((0x0 << 6)|(0x0)) << 21; //0x20F<<21; // first 11 bits are the CAN ID that is not extended
-    rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
-    rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_4);//need to know what this is
-    CAN_RxBufConfig(&rxMailbox);
-    
     //setup group broadcast recieve mailbox (2nd priority mailbox)
-    rxMailbox.rxmailbox = 5;
+    rxMailbox.rxmailbox = 3;
     rxMailbox.rxacr = ((deviceGroup << 6)|(0x3F)) << 21; //0x20F<<21; // first 11 bits are the CAN ID that is not extended
     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
-    rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_5);//need to know what this is
+    rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_3);//need to know what this is
     CAN_RxBufConfig(&rxMailbox);
     
     CAN_GlobalIntEnable();
@@ -210,7 +195,7 @@ CY_ISR(CAN_FLAG_ISR)
     } 
     else if(statusReg & 0b1000) { // mailbox3 is full currently recieves anything enable in top design 
         mailbox = CAN_RX_MAILBOX_3;
-    }
+    } else return; // added this to remove warning
     
     latestMessage[latestMessageTail].id = CAN_GET_RX_ID(mailbox);
     latestMessage[latestMessageTail].dlc = CAN_GET_DLC(mailbox);

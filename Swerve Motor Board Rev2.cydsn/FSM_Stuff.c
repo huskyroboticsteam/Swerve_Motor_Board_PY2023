@@ -11,26 +11,38 @@
 */
 
 #include "FSM_Stuff.h"
+#include "MotorDrive.h"
 #include "project.h"
+#include "PositionPID.h"
 
-uint8_t currentState  = UNINIT;
-uint8_t currentMode   = 0xFF;
+int mode1, mode2;
 
-void GotoUninitState() {
-    currentState = UNINIT;
-    // reset any parameters
+int SetMode(int motor, int new_mode) {
+    int err = 0;
+    
+    if (new_mode == MODE_UNINIT) {
+        StopPID(motor);
+        StopPWM(motor);
+    } else if (new_mode == MODE_PWM_CTRL) {
+        StopPID(motor);
+        err = StartPWM(motor);
+    } else if (new_mode == MODE_PID_CTRL) {
+        err = StartPID(motor);
+        if (!err)
+            err = StartPWM(motor);
+    }
+    
+    if (!err) {
+        if (motor & MOTOR1) mode1 = new_mode;
+        if (motor & MOTOR2) mode2 = new_mode;
+    }
+    return err;
 }
-void SetStateTo(uint8_t state) {
-    currentState = state;
-}
-void SetModeTo(uint8_t mode) {
-    currentMode = mode;
-}
-uint8_t GetState(){
-    return currentState;
-}
-uint8_t GetMode(){
-    return currentMode;
+
+int GetMode(int motor) {
+    if (motor == MOTOR1) return mode1;
+    if (motor == MOTOR2) return mode2;
+    return -1;
 }
 
 /* [] END OF FILE */

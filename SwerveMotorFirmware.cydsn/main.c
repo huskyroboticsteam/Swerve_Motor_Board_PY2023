@@ -234,7 +234,7 @@ void Initialize(void) {
     LED_CAN_Write(~address & 1);
     #endif
     
-    InitCAN_swerve(0x4, (int)address, (int)address + 16); //group, drive, swivel plus 16 becuz wiki
+    InitCAN(0x4, (int) address); //group, drive, swivel plus 16 becuz wiki
     Timer_1_Start();
     //QuadDec_Start();
     PWM_Motor1_Start();

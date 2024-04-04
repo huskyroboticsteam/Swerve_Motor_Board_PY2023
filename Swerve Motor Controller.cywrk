@@ -3,11 +3,12 @@
 <!--This file is machine generated and read. It is not intended to be edited by hand.-->
 <!--Due to this, there is no schema for this file.-->
 <CyGuid_2867d519-54d2-4c01-9830-c51cb08bc3dd type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWorkspaceSerialize" version="5" xml_contents_version="3" name="Swerve Motor Controller" persistent="Swerve Motor Controller.cywrk" platform="NOT_USED">
-<current_project name=".\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj" />
+<current_project name=".\Swerve Motor Board Rev2.cydsn\Swerve Motor Board Rev2.cyprj" />
 <wrkspc_folders />
 <files />
 <projects>
 <v>.\SwerveMotorFirmware.cydsn\SwerveMotorFirmware.cyprj</v>
+<v>.\Swerve Motor Board Rev2.cydsn\Swerve Motor Board Rev2.cyprj</v>
 </projects>
 <workspace_id v="a894a422-07fc-481e-bf5d-f4fb867a7407" />
 <WriteAppVersionLastSavedWith v="4.4.0.80" />
