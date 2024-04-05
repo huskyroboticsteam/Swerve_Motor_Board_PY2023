@@ -30,12 +30,11 @@ void StartCAN(uint8 new_address) {
 
 //Reads from CAN FIFO and changes the state and mode accordingly
 int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {  
-    PrintCanPacket(*receivedPacket);
     uint16 packageID = GetPacketID(receivedPacket);
     
     if (packageID == ID_ESTOP) {
         SetMode(MOTOR_BOTH, MODE_UNINIT);
-        return ESTOP_ERR_GENERAL;
+        return ERROR_ESTOP;
     }
     
     uint8  motor_address = GetDeviceSerialNumber(receivedPacket);
@@ -53,16 +52,20 @@ int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
     switch(packageID) {
         case(ID_MOTOR_UNIT_MODE_SEL):
             data = GetModeFromPacket(receivedPacket);
-            if (data == MOTOR_UNIT_MODE_PWM)
+            if (data == MOTOR_UNIT_MODE_PWM) {
                 err = SetMode(motor, MODE_PWM_CTRL);
-            else if (data == MOTOR_UNIT_MODE_PID)
+            } else if (data == MOTOR_UNIT_MODE_PID) {
                 err = SetMode(motor, MODE_PID_CTRL);
-            else err = ERROR_INVALID_PACKET;
+            } else err = ERROR_INVALID_PACKET;
             break;
            
         case(ID_MOTOR_UNIT_PWM_DIR_SET):
-            data = GetPWMFromPacket(receivedPacket);
-            err = SetPWM(motor, data);
+            if (GetMode(motor) != MODE_PWM_CTRL) {
+                err = ERROR_WRONG_MODE;
+            } else {
+                data = GetPWMFromPacket(receivedPacket);
+                err = SetPWM(motor, data);
+            }
             break;
             
         case(ID_MOTOR_UNIT_PID_P_SET):
@@ -112,7 +115,7 @@ int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
             break;
             
         case(ID_MOTOR_UNIT_MAX_PID_PWM):
-            SetMaxPIDPWM(GetMaxPIDPWMFromPacket(receivedPacket));
+            SetPIDMaxPWM(motor, GetMaxPIDPWMFromPacket(receivedPacket));
             break;
             
         case(ID_MOTOR_UNIT_SET_ENCODER_BOUND):

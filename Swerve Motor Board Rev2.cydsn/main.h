@@ -16,8 +16,8 @@
 #include <stdint.h>
 #include "../CANLib/CANPacket.h"
         
-#define ON  1
-#define OFF 0
+#define ON  0
+#define OFF 1
 
 #define TX_DATA_SIZE (100u)
 
@@ -29,9 +29,9 @@
 int main();
 void Initialize();
 void DebugPrint(char input);
-int ReadDIP();
-void PrintCanPacket(CANPacket packet);
+void PrintCanPacket(CANPacket* packet);
 void DisplayErrorCode(uint8 code);
+int ReadDIP();
 
 CY_ISR(LED_Handler);
 

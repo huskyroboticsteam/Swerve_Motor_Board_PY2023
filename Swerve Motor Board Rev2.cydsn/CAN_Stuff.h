@@ -17,11 +17,11 @@
 #include "../CANLib/CANLibrary.h"
 
 // CAN Errors (0x10-0x1F)
-#define ERROR_NO_NEW_PACKET 0xFFFF
-#define ERROR_WRONG_MODE      0x10
-#define ERROR_INVALID_MODE    0x11
-#define ERROR_INVALID_TTC     0x12
-#define ERROR_INVALID_PACKET  0x13
+#define ERROR_ESTOP           0x10
+#define ERROR_WRONG_MODE      0x11
+#define ERROR_INVALID_MODE    0x12
+#define ERROR_INVALID_TTC     0x13
+#define ERROR_INVALID_PACKET  0x14
 
 void StartCAN(uint8 new_address);
 int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend);

@@ -102,7 +102,7 @@ int SendCANPacket(CANPacket *packetToSend)
         return ERROR_GENERIC_ERROR;
     }
 }
-//
+
 int PollAndReceiveCANPacket(CANPacket *receivedPacket)
 {
     if(!receivedPacket) {

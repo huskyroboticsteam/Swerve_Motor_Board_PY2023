@@ -18,7 +18,7 @@
 #include "MotorDrive.h"
 #include "CAN_Stuff.h"
 
-int16 min_pwm = 1000;
+int16 min_pwm = 20;
 
 uint8  PWM1_enable = 0;
 uint8  PWM2_enable = 0;
@@ -143,10 +143,10 @@ int UpdateConversion(int motor) {
     return 0;
 }
 
-Conversion* GetConversion(int motor) {
-    if (motor == MOTOR1) return &conv1;
-    if (motor == MOTOR2) return &conv2;
-    return NULL;
+Conversion GetConversion(int motor) {
+    if (motor == MOTOR1) return conv1;
+    if (motor == MOTOR2) return conv2;
+    return (Conversion) {};
 }
 
 uint8 GetConversionReady(int motor) {
@@ -223,11 +223,18 @@ int UpdatePotValue() {
     return 0;
 }
 
+
+uint8 GetLimitStatus() { return limit_status; }
 int32 GetPotValue() { return pot_value; }
 int32 GetEncValue() { return enc_value; }
 int32 GetPosition(int motor) {
     if (motor == MOTOR1) return position1;
     if (motor == MOTOR2) return position2;
+    return 0;
+}
+int32 GetCurrentPWM(int motor) {
+    if (motor == MOTOR1) return PWM1_value;
+    if (motor == MOTOR2) return PWM2_value;
     return 0;
 }
 
@@ -240,10 +247,6 @@ void UpdatePosition(int motor) {
         if (conv2.ratio_set)
             position2 = (pot_value-conv2.tickMin) * conv2.ratio + conv2.mDegMin;
     }
-}
-
-uint8 GetLimitStatus() {
-    return limit_status;
 }
 
 void SetEncBound(uint8 lim_num, int32 value) {

@@ -35,7 +35,7 @@ typedef struct conversion {
 int StartPWM(int motor);
 void StopPWM(int motor);
 int SetPWM(int motor, int16 pwm);
-Conversion* GetConversion(int motor);
+Conversion GetConversion(int motor);
 uint8 GetConversionReady(int motor);
 void SetConvRatio(int motor, float ratio);
 int SetConvMin(int motor, int32 tickMin, int32 mDegMin);
@@ -46,6 +46,7 @@ int32 GetPotValue();
 int32 GetEncValue();
 int32 GetPosition(int motor);
 uint8 GetLimitStatus();
+int32 GetCurrentPWM(int motor);
 void SetEncBound(uint8 lim_num, int32 value);
 
 CY_ISR(Limit_Handler);

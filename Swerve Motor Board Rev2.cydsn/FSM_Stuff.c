@@ -32,11 +32,10 @@ int SetMode(int motor, int new_mode) {
             err = StartPWM(motor);
     }
     
-    if (!err) {
-        if (motor & MOTOR1) mode1 = new_mode;
-        if (motor & MOTOR2) mode2 = new_mode;
-    }
-    return err;
+    if (err) return ERROR_MODE_CHANGE;
+    if (motor & MOTOR1) mode1 = new_mode;
+    if (motor & MOTOR2) mode2 = new_mode;
+    return 0;
 }
 
 int GetMode(int motor) {

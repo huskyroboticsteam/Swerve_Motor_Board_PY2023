@@ -33,7 +33,6 @@
 extern const uint32 StripLights_CLUT[ ];
 #endif
 
-
 //LED
 uint8_t CAN_time_LED = 0;
 uint8_t ERRORTimeLED = 0;

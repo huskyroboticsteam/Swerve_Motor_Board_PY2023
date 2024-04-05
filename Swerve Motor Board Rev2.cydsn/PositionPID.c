@@ -16,41 +16,41 @@
 #include "MotorDrive.h"
 #include "FSM_Stuff.h"
 
-PID_Config PID1 = {};
-PID_Config PID2 = {};
+PID_Config PID1 = {.maxIntegral=500, .maxPWM=32767};
+PID_Config PID2 = {.maxIntegral=500, .maxPWM=32767};
 volatile PID_State PID1_state = {};
 volatile PID_State PID2_state = {};
 
 uint8 PID1_enable, PID2_enable;
 
-int32 integral_clamp = 500;
-int32 max_PWM = 32767;
-
 int StartPID(int motor) {
+    int err = 0;
     if (motor & MOTOR1) {
         if (PID1.kP_set && PID1.kI_set && PID1.kD_set && GetConversionReady(MOTOR1)) {
             PID1_state.integral = 0;
             PID1_state.last_error = 0;
             PID1_enable = 1;
-        } else return 1;
+        } else err = 1;
     }
     if (motor & MOTOR2) {
         if (PID2.kP_set && PID2.kI_set && PID2.kD_set && GetConversionReady(MOTOR2)) {
             PID2_state.integral = 0;
             PID2_state.last_error = 0;
             PID2_enable = 1;
-        } else return 1;
+        } else err = 1;
     }
-    return 0;
+    return err;
 }
 
 void StopPID(int motor) {
     if (motor & MOTOR1) {
         PID1_enable = 0;
         PID1_state.target_set = 0;
+        SetPWM(MOTOR1, 0);
     } if (motor & MOTOR2) {
         PID2_enable = 0;
         PID2_state.target_set = 0;
+        SetPWM(MOTOR2, 0);
     }
 }
 
@@ -85,14 +85,22 @@ void SetkDerivative(int motor, int32 kD) {
     }
 }
 
-PID_Config* GetPIDConfig(int motor) {
-    if (motor == MOTOR1) return &PID1;
-    if (motor == MOTOR2) return &PID2;
-    return NULL;
+void SetPIDMaxPWM(int motor, uint16 maxPWM) {
+    if (motor & MOTOR1) PID1.maxPWM = maxPWM;
+    if (motor & MOTOR2) PID2.maxPWM = maxPWM;
 }
 
-void SetMaxPIDPWM(uint16 set_value) { max_PWM = set_value; }
-int32 GetMaxPIDPWM() { return max_PWM; }
+PID_Config GetPIDConfig(int motor) {
+    if (motor == MOTOR1) return PID1;
+    if (motor == MOTOR2) return PID2;
+    return (PID_Config) {};
+}
+PID_State GetPIDState(int motor) {
+    if (motor == MOTOR1) return PID1_state;
+    if (motor == MOTOR2) return PID2_state;
+    return (PID_State) {};
+}
+
 
 void SetPIDTarget(int motor, int32 mDegs) {
     if (motor & MOTOR1) {
@@ -124,10 +132,8 @@ int PID_Update(int motor) {
     integral += error;
     
     //integral clamp
-    if (integral > integral_clamp)
-        integral = integral_clamp;
-    if (integral < -integral_clamp)
-        integral = -integral_clamp;
+    if (integral >  pid->maxIntegral) integral =  pid->maxIntegral;
+    if (integral < -pid->maxIntegral) integral = -pid->maxIntegral;
     
     int derivative = error - state->last_error;
     int32 new_pwm = error*pid->kP/10 + integral*pid->kI/10 + derivative*pid->kD/10;
@@ -135,10 +141,10 @@ int PID_Update(int motor) {
     state->integral = integral;
     
     //Max Power clamp
-    if(new_pwm > max_PWM){
-        new_pwm = max_PWM;
-    } else if(new_pwm < -max_PWM) {
-        new_pwm = -max_PWM;
+    if(new_pwm > pid->maxPWM){
+        new_pwm = pid->maxPWM;
+    } else if(new_pwm < -pid->maxPWM) {
+        new_pwm = -pid->maxPWM;
     }
     
     return SetPWM(motor, new_pwm);

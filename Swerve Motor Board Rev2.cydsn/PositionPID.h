@@ -15,8 +15,8 @@
 #include <stdint.h>
 
 typedef struct PID_config {
-    uint8 kP_set,kI_set,kD_set;
-    int32 kP, kI, kD;
+    uint8 kP_set, kI_set, kD_set;
+    int32 kP, kI, kD, maxPWM, maxIntegral;
 } PID_Config;
 
 typedef struct PID_state {
@@ -31,9 +31,9 @@ void StopPID(int motor);
 void SetkPosition(int motor, int32 kP);
 void SetkIntegral(int motor, int32 kI);
 void SetkDerivative(int motor, int32 kD);
-PID_Config* GetPIDConfig(int motor);
-void SetMaxPIDPWM(uint16 set_value);
-int32 GetMaxPIDPWM();
+void SetPIDMaxPWM(int motor, uint16 maxPWM);
 void SetPIDTarget(int motor, int32 mDegs);
+PID_State GetPIDState(int motor);
+PID_Config GetPIDConfig(int motor);
 
 CY_ISR(PID_Handler);

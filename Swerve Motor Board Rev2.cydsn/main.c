@@ -42,7 +42,7 @@ int main() {
         if (!PollAndReceiveCANPacket(&can_recieve)) {
             LED_CAN_Write(ON);
             CAN_time_LED = 0;
-            PrintCanPacket(can_recieve); // DEBUG
+            PrintCanPacket(&can_recieve); // DEBUG
             err = ProcessCAN(&can_recieve, &can_send);
         }
         
@@ -51,15 +51,14 @@ int main() {
         if (DBG_UART_SpiUartGetRxBufferSize()) {
             DebugPrint(DBG_UART_UartGetByte());
         }
-
+        
+        LED_DBG1_Write(!LED_DBG1_Read());
         CyDelay(1);
     }
 }
 
 void Initialize(void) {
     CyGlobalIntEnable;
-    
-    LED_DBG1_Write(0);
     
     StartCAN(ReadDIP());
     DBG_UART_Start();
@@ -78,70 +77,64 @@ void Initialize(void) {
     isr_LED_StartEx(LED_Handler);
     isr_Limit_StartEx(Limit_Handler);
     isr_Drive_StartEx(Drive_Handler);
-    
-    LED_DBG2_Write(0);
 }
 
 void DebugPrint(char input) {
     switch(input) {
         case 'm': // Mode
-            Print("Mode 1: ");
+            sprintf(txData, "Address:%i", GetAddress());
+            Print(txData);
+            Print(" Mode1: ");
             if (GetMode(MOTOR1) == MODE_UNINIT) Print("UNINIT");
             else if (GetMode(MOTOR1) == MODE_PWM_CTRL) Print("PWM");
             else if (GetMode(MOTOR1) == MODE_PID_CTRL) Print("PID");
-            Print(" Mode 2: ");
+            Print(" Mode2: ");
             if (GetMode(MOTOR2) == MODE_UNINIT) Print("UNINIT");
             else if (GetMode(MOTOR2) == MODE_PWM_CTRL) Print("PWM");
             else if (GetMode(MOTOR2) == MODE_PID_CTRL) Print("PID");
-            Print("\r\n");
             break;
         case 'p': // Position
-            sprintf(txData, "Pos1: %li Pos2: %li\r\n", GetPosition(MOTOR1), GetPosition(MOTOR2));
+            sprintf(txData, "Pos1:%li Pos2:%li PWM1:%li PWM2:%li", 
+                GetPosition(MOTOR1), GetPosition(MOTOR2), 
+                GetCurrentPWM(MOTOR1), GetCurrentPWM(MOTOR2));
             Print(txData);
             break;
-        case 'e': // Position
-            sprintf(txData, "Encoder: %li Potentiometer: %li\r\n", GetEncValue(), GetPotValue());
+        case 's': // Raw sensor
+            sprintf(txData, "Enc:%li Pot:%li Limits:", GetEncValue(), GetPotValue());
             Print(txData);
-            break;
-        case 'l': // Limit
-            Print("Limit switches: ");
             PrintIntBin(GetLimitStatus());
-            Print("\r\n");
             break;
         case 'i': // PID Config
-            sprintf(txData, "Motor 1: {P: %li I: %li D: %li}\r\n",
-                GetPIDConfig(MOTOR1)->kP, GetPIDConfig(MOTOR1)->kI, GetPIDConfig(MOTOR1)->kD);
-            Print(txData);
-            sprintf(txData, "Motor 2: {P: %li I: %li D: %li}\r\n",
-                GetPIDConfig(MOTOR2)->kP, GetPIDConfig(MOTOR2)->kI, GetPIDConfig(MOTOR2)->kD);
+            sprintf(txData, "Motor1 Target:%li P:%li I:%li D:%li  Motor2 Target:%li P:%li I:%li D:%li",
+                GetPIDState(MOTOR1).target, GetPIDConfig(MOTOR1).kP, GetPIDConfig(MOTOR1).kI, GetPIDConfig(MOTOR1).kD,
+                GetPIDState(MOTOR2).target, GetPIDConfig(MOTOR2).kP, GetPIDConfig(MOTOR2).kI, GetPIDConfig(MOTOR2).kD);
             Print(txData);
             break;
         case 'c': // Conversion
-            sprintf(txData, "Motor 1: {TickMin: %li TickMax: %li mDegMin: %li mDegMax: %li}\r\n",
-                GetConversion(MOTOR1)->tickMin, GetConversion(MOTOR1)->tickMax,
-                GetConversion(MOTOR1)->mDegMin, GetConversion(MOTOR1)->mDegMax);
+            sprintf(txData, "Motor1 TickMin:%li TickMax:%li mDegMin:%li mDegMax:%li",
+                GetConversion(MOTOR1).tickMin, GetConversion(MOTOR1).tickMax,
+                GetConversion(MOTOR1).mDegMin, GetConversion(MOTOR1).mDegMax);
             Print(txData);
-            sprintf(txData, "Motor 2: {TickMin: %li TickMax: %li mDegMin: %li mDegMax: %li}\r\n",
-                GetConversion(MOTOR2)->tickMin, GetConversion(MOTOR2)->tickMax,
-                GetConversion(MOTOR2)->mDegMin, GetConversion(MOTOR2)->mDegMax);
+            sprintf(txData, "Motor2 TickMin:%li TickMax:%li mDegMin:%li mDegMax:%li",
+                GetConversion(MOTOR2).tickMin, GetConversion(MOTOR2).tickMax,
+                GetConversion(MOTOR2).mDegMin, GetConversion(MOTOR2).mDegMax);
             Print(txData);
             break;
         default:
-            sprintf(txData, "what\r\n");
+            Print("what");
             break;
     }
-    
+    Print("\r\n");
 }
 
-void PrintCanPacket(CANPacket packet) {
-    for(int i = 0; i < packet.dlc; i++ ) {
-        sprintf(txData,"Byte%d %x   ", i+1, packet.data[i]);
+void PrintCanPacket(CANPacket* packet) {
+    sprintf(txData, "ID %X DLC %X DATA", packet->id, packet->dlc);
+    Print(txData);
+    for(int i = 0; i < packet->dlc; i++ ) {
+        sprintf(txData," %02X", packet->data[i]);
         Print(txData);
     }
-
-    sprintf(txData,"ID:%x %x %x\r\n",packet.id >> 10, 
-        (packet.id >> 6) & 0xF , packet.id & 0x3F);
-    Print(txData);
+    Print("\r\n");
 }
 
 int ReadDIP() {
@@ -177,11 +170,14 @@ void DisplayErrorCode(uint8 code) {
         case ERROR_WRONG_MODE:
             Print("Wrong mode\r\n");
             break;
+        case ERROR_MODE_CHANGE:
+            Print("Failed to change mode\r\n");
+            break;
         case ERROR_INVALID_TTC:
             Print("Cannot send that data type\r\n");
             break;
-        case ESTOP_ERR_GENERAL:
-            Print("                ESTOP\r\n");
+        case ERROR_ESTOP:
+            Print("ESTOP\r\n");
             break;
         default:
             Print(":(\r\n");
@@ -193,9 +189,9 @@ CY_ISR(LED_Handler) {
     CAN_time_LED++;
     ERROR_time_LED++;
     
-    if (ERROR_time_LED >= 3)
+    if (ERROR_time_LED >= 1)
         LED_ERR_Write(OFF);
-    if (CAN_time_LED >= 3)
+    if (CAN_time_LED >= 1)
         LED_CAN_Write(OFF);
 }
 

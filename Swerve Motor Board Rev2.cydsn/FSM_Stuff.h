@@ -18,6 +18,8 @@
 #define MODE_PWM_CTRL   0x1
 #define MODE_PID_CTRL   0x2
 
+#define ERROR_MODE_CHANGE 0x20
+
 int SetMode(int motor, int mode);
 int GetMode(int motor);
 
