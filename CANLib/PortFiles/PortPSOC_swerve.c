@@ -34,30 +34,29 @@ volatile uint8_t latestMessageFull = 0; //FIFO is full
 
 CY_ISR_PROTO(CAN_FLAG_ISR);
 
-int deviceAddressA;
-int deviceAddressB;
+int deviceAddress1;
+int deviceAddress2;
 int deviceGroup;
 CAN_RX_CFG rxMailbox;
 //Added two device addresses instead of 1 for simultaneous control of the two swerve motors
-void InitCAN(int deviceGroupInput, int deviceAddress)
-{
+void InitCAN(int deviceGroupInput, int deviceAddress1, int deviceAddress2) {
     CAN_Start(); //must name CAN Top Design block as "CAN"
     
     deviceGroup = deviceGroupInput & 0xF; //4bits of ID
-    deviceAddressA = deviceAddress & (0x3F); //6bits of ID
-    deviceAddressB = (deviceAddress + 16) & (0x3F); //6bits of ID
+    deviceAddress1 = deviceAddress1 & (0x3F); //6bits of ID
+    deviceAddress2 = deviceAddress2 & (0x3F); //6bits of ID
     
     //MOTOR 1 (DEVICE A)
     //sets up inidvidual recieve mailbox (3rd priority mailbox)
     rxMailbox.rxmailbox = 0;
-    rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddressA)) << 21;  // first 11 bits are the CAN ID that is not extended
+    rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddress1)) << 21;  // first 11 bits are the CAN ID that is not extended
     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_0);//need to know what this is
     CAN_RxBufConfig(&rxMailbox);
     
     //MOTOR 2 (DEVICE B)
     rxMailbox.rxmailbox = 1;
-    rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddressB)) << 21;  // first 11 bits are the CAN ID that is not extended
+    rxMailbox.rxacr = ((deviceGroup << 6)|(deviceAddress2)) << 21;  // first 11 bits are the CAN ID that is not extended
     rxMailbox.rxamr = 0x801FFFFF; // what bits to ignore
     rxMailbox.rxcmd = CAN_RX_CMD_REG(CAN_RX_MAILBOX_1);//need to know what this is
     CAN_RxBufConfig(&rxMailbox);
@@ -123,7 +122,7 @@ int PollAndReceiveCANPacket(CANPacket *receivedPacket)
 // You should be fine if you don't use WriteSenderSerialAndPacketID
 uint8_t getLocalDeviceSerial()
 {
-    return deviceAddressA;      //talk to abhay about this, only returns the first motor's address
+    return deviceAddress1;      //talk to abhay about this, only returns the first motor's address
 }
 uint8_t getLocalDeviceGroup()
 {

@@ -19,8 +19,8 @@
 #define MOTOR2 0b10
 #define MOTOR_BOTH 0b11
 
-#define FORWARD 0
-#define BACKWARD 1
+#define FORWARD 1
+#define BACKWARD 0
 
 #define ERROR_PWM_NOT_ENABLED 0x30
 #define ERROR_LIMIT 0x31

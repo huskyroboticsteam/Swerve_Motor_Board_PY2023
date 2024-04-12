@@ -18,14 +18,23 @@
 #include "MotorDrive.h"
 #include "../CANLib/CANLibrary.h"
 
-uint8 address;
+uint8 address1, address2;
 
-void StartCAN(uint8 new_address) {
-    if (new_address == 0) {
-        address = DEVICE_SERIAL_TELEM_LOCALIZATION;
-    } else address = new_address;
+void StartCAN(uint8 addy1, uint8 addy2) {
+    if (addy1 == 0) {
+        address1 = DEVICE_SERIAL_TELEM_LOCALIZATION;
+    } else address1 = addy1;
+    if (addy2 == 0) {
+        address2 = DEVICE_SERIAL_TELEM_LOCALIZATION;
+    } else address2 = addy2;
     
-    InitCAN(0x04, (int) address);
+    InitCAN(0x04, (int) address1, (int) address2);
+}
+
+uint8 GetAddress(int motor) {
+    if (motor == MOTOR1) return address1;
+    if (motor == MOTOR2) return address2;
+    return 0;
 }
 
 //Reads from CAN FIFO and changes the state and mode accordingly
@@ -45,8 +54,8 @@ int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
     int err = 0;
     int motor = 0;
     
-    if (motor_address == address) motor = MOTOR1;
-    else if (motor_address == address + 16) motor = MOTOR2;
+    if (motor_address == address1) motor = MOTOR1;
+    else if (motor_address == address2) motor = MOTOR2;
     else motor = MOTOR_BOTH; // assume broadcast
     
     switch(packageID) {
@@ -64,7 +73,7 @@ int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
                 err = ERROR_WRONG_MODE;
             } else {
                 data = GetPWMFromPacket(receivedPacket);
-                err = SetPWM(motor, data);
+                err = SetPWM(motor, data/32);
             }
             break;
             
@@ -162,10 +171,6 @@ int SendLimitAlert(uint8 status) {
     AssembleLimitSwitchAlertPacket(&can_send, DEVICE_GROUP_JETSON, 
     DEVICE_SERIAL_JETSON, status);
     return SendCANPacket(&can_send);
-}
-
-uint8 GetAddress() {
-    return address;
 }
 
 

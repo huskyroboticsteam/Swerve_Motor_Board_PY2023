@@ -16,8 +16,8 @@
 #include "MotorDrive.h"
 #include "FSM_Stuff.h"
 
-PID_Config PID1 = {.maxIntegral=500, .maxPWM=32767};
-PID_Config PID2 = {.maxIntegral=500, .maxPWM=32767};
+PID_Config PID1 = {.maxIntegral=500, .maxPWM=1023};
+PID_Config PID2 = {.maxIntegral=500, .maxPWM=1023};
 volatile PID_State PID1_state = {};
 volatile PID_State PID2_state = {};
 

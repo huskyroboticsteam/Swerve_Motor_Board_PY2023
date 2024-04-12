@@ -23,10 +23,10 @@
 #define ERROR_INVALID_TTC     0x13
 #define ERROR_INVALID_PACKET  0x14
 
-void StartCAN(uint8 new_address);
+void StartCAN(uint8 addy1, uint8 addy2);
 int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend);
 int SendLimitAlert(uint8 status);
-uint8 GetAddress();
+uint8 GetAddress(int motor);
 
 /* [] END OF FILE */
     

@@ -18,8 +18,6 @@
 #include "MotorDrive.h"
 #include "CAN_Stuff.h"
 
-int16 min_pwm = 20;
-
 uint8  PWM1_enable = 0;
 uint8  PWM2_enable = 0;
 
@@ -89,8 +87,6 @@ int SetPWM(int motor, int16 pwm) {
                 }
             }
             
-            if (abs(pwm) < min_pwm) pwm = 0;
-            
             PWM1_value = pwm;
             PWM_Motor1_WriteCompare(abs(pwm));
         } else err = ERROR_PWM_NOT_ENABLED;
@@ -112,8 +108,6 @@ int SetPWM(int motor, int16 pwm) {
                 //     pwm = 0;
                 // }
             }
-            
-            if (abs(pwm) < min_pwm) pwm = 0;
             
             PWM2_value = pwm;
             PWM_Motor2_WriteCompare(abs(pwm));
@@ -212,7 +206,7 @@ int UpdateEncValue() {
 }
 
 int UpdatePotValue() {
-    int32 n = 1000;
+    int32 n = 100;
     int32 sum = 0;
     for (int i = 0; i < n; i++) {
         ADC_StartConvert();
@@ -260,7 +254,7 @@ void SetEncBound(uint8 lim_num, int32 value) {
 }    
 
 CY_ISR(Limit_Handler) {
-    limit_status = StatusReg_Limit_Read();
+    limit_status = StatusReg_Limit_Read() & 0b11;
     
     if (limit_status & 0b01) {
         SetPWM(MOTOR1, 0);

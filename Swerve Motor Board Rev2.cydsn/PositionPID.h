@@ -10,7 +10,8 @@
  * ========================================
 */
 
-/* [] END OF FILE */
+#pragma once
+
 #include <project.h>
 #include <stdint.h>
 
@@ -37,3 +38,5 @@ PID_State GetPIDState(int motor);
 PID_Config GetPIDConfig(int motor);
 
 CY_ISR(PID_Handler);
+
+/* [] END OF FILE */

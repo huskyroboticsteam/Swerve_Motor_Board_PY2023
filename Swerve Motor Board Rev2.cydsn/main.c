@@ -52,7 +52,8 @@ int main() {
             DebugPrint(DBG_UART_UartGetByte());
         }
         
-        LED_DBG1_Write(!LED_DBG1_Read());
+        LED_DBG1_Write(!LED_DBG1_Read()); // visualize main loop rate
+        LED_DBG2_Write(GetMode(MOTOR1) == MODE_UNINIT); // turn on when initialized
         CyDelay(1);
     }
 }
@@ -60,7 +61,7 @@ int main() {
 void Initialize(void) {
     CyGlobalIntEnable;
     
-    StartCAN(ReadDIP());
+    StartCAN(ReadDIP(), ReadDIP()+16);
     DBG_UART_Start();
     Timer_Periodic_Start();
     Timer_PID_Start();
@@ -69,7 +70,7 @@ void Initialize(void) {
     // QuadDec_Enc_Start();
     ADC_Start();
     
-    sprintf(txData, "Dip Addr: %x \r\n", GetAddress());
+    sprintf(txData, "Address: %x & %x\r\n", GetAddress(MOTOR1), GetAddress(MOTOR2));
     Print(txData);
     
     StatusReg_Limit_InterruptEnable();
@@ -79,10 +80,14 @@ void Initialize(void) {
     isr_Drive_StartEx(Drive_Handler);
 }
 
+int ReadDIP() {
+    return Status_Reg_DIP_Read() & 0x0F;
+}
+
 void DebugPrint(char input) {
     switch(input) {
         case 'm': // Mode
-            sprintf(txData, "Address:%i", GetAddress());
+            sprintf(txData, "Address: %x & %x", GetAddress(MOTOR1), GetAddress(MOTOR2));
             Print(txData);
             Print(" Mode1: ");
             if (GetMode(MOTOR1) == MODE_UNINIT) Print("UNINIT");
@@ -93,13 +98,29 @@ void DebugPrint(char input) {
             else if (GetMode(MOTOR2) == MODE_PWM_CTRL) Print("PWM");
             else if (GetMode(MOTOR2) == MODE_PID_CTRL) Print("PID");
             break;
+        case 'a':
+            SetMode(MOTOR1, MODE_PWM_CTRL);
+            SetPWM(MOTOR1, 100);
+            break;
+        case 'd':
+            SetMode(MOTOR1, MODE_PWM_CTRL);
+            SetPWM(MOTOR1, -100);
+            break;
+        case 'w':
+            SetMode(MOTOR2, MODE_PWM_CTRL);
+            SetPWM(MOTOR2, 100);
+            break;
+        case 's':
+            SetMode(MOTOR2, MODE_PWM_CTRL);
+            SetPWM(MOTOR2, -100);
+            break;
         case 'p': // Position
             sprintf(txData, "Pos1:%li Pos2:%li PWM1:%li PWM2:%li", 
                 GetPosition(MOTOR1), GetPosition(MOTOR2), 
                 GetCurrentPWM(MOTOR1), GetCurrentPWM(MOTOR2));
             Print(txData);
             break;
-        case 's': // Raw sensor
+        case 'o': // Raw sensor
             sprintf(txData, "Enc:%li Pot:%li Limits:", GetEncValue(), GetPotValue());
             Print(txData);
             PrintIntBin(GetLimitStatus());
@@ -109,6 +130,15 @@ void DebugPrint(char input) {
                 GetPIDState(MOTOR1).target, GetPIDConfig(MOTOR1).kP, GetPIDConfig(MOTOR1).kI, GetPIDConfig(MOTOR1).kD,
                 GetPIDState(MOTOR2).target, GetPIDConfig(MOTOR2).kP, GetPIDConfig(MOTOR2).kI, GetPIDConfig(MOTOR2).kD);
             Print(txData);
+            break;
+        case 'k': 
+            ADC_StartConvert();
+            ADC_IsEndConversion(ADC_WAIT_FOR_RESULT);
+            PrintInt(ADC_GetResult16(0));
+            // Print(" ");
+            // PrintInt(ADC_GetResult16(1));
+            // Print(" ");
+            // PrintInt(ADC_GetResult16(2));
             break;
         case 'c': // Conversion
             sprintf(txData, "Motor1 TickMin:%li TickMax:%li mDegMin:%li mDegMax:%li",
@@ -135,19 +165,6 @@ void PrintCanPacket(CANPacket* packet) {
         Print(txData);
     }
     Print("\r\n");
-}
-
-int ReadDIP() {
-    int address = 0;
-    
-    // TODO use status reg (maybe also update on change?)
-    
-    if (DIP1_Read()==0) address += 1;
-    if (DIP2_Read()==0) address += 2;
-    if (DIP3_Read()==0) address += 4;
-    if (DIP4_Read()==0) address += 8;
-
-    return Status_Reg_DIP_Read();
 }
 
 void DisplayErrorCode(uint8 code) {    
@@ -189,9 +206,9 @@ CY_ISR(LED_Handler) {
     CAN_time_LED++;
     ERROR_time_LED++;
     
-    if (ERROR_time_LED >= 1)
+    if (ERROR_time_LED >= 10)
         LED_ERR_Write(OFF);
-    if (CAN_time_LED >= 1)
+    if (CAN_time_LED >= 2)
         LED_CAN_Write(OFF);
 }
 
