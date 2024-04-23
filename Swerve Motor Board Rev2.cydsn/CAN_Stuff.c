@@ -154,6 +154,7 @@ int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
             if (!err) {
                 // Assemble and send packet
                 AssembleTelemetryReportPacket(packetToSend, sender_DG, sender_SN, receivedPacket->data[3], data);
+                packetToSend->data[2] = motor_address; // gross
                 SendCANPacket(packetToSend);
             }
             break;

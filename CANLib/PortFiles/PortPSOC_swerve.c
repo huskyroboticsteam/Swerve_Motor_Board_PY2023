@@ -39,12 +39,12 @@ int deviceAddress2;
 int deviceGroup;
 CAN_RX_CFG rxMailbox;
 //Added two device addresses instead of 1 for simultaneous control of the two swerve motors
-void InitCAN(int deviceGroupInput, int deviceAddress1, int deviceAddress2) {
+void InitCAN(int deviceGroupInput, int address1, int address2) {
     CAN_Start(); //must name CAN Top Design block as "CAN"
     
     deviceGroup = deviceGroupInput & 0xF; //4bits of ID
-    deviceAddress1 = deviceAddress1 & (0x3F); //6bits of ID
-    deviceAddress2 = deviceAddress2 & (0x3F); //6bits of ID
+    deviceAddress1 = address1 & (0x3F); //6bits of ID
+    deviceAddress2 = address2 & (0x3F); //6bits of ID
     
     //MOTOR 1 (DEVICE A)
     //sets up inidvidual recieve mailbox (3rd priority mailbox)
@@ -122,7 +122,7 @@ int PollAndReceiveCANPacket(CANPacket *receivedPacket)
 // You should be fine if you don't use WriteSenderSerialAndPacketID
 uint8_t getLocalDeviceSerial()
 {
-    return deviceAddress1;      //talk to abhay about this, only returns the first motor's address
+    return deviceAddress2;      //talk to abhay about this, only returns the second motor's address
 }
 uint8_t getLocalDeviceGroup()
 {
