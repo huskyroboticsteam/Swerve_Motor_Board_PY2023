@@ -25,7 +25,7 @@
 #define ERROR_PWM_NOT_ENABLED 0x30
 #define ERROR_LIMIT 0x31
 
-typedef struct conversion {
+typedef struct {
     uint8 min_set, max_set, ratio_set;
     int32 tickMin, tickMax;
     int32 mDegMin, mDegMax;
@@ -36,7 +36,6 @@ int StartPWM(int motor);
 void StopPWM(int motor);
 int SetPWM(int motor, int16 pwm);
 Conversion GetConversion(int motor);
-uint8 GetConversionReady(int motor);
 void SetConvRatio(int motor, float ratio);
 int SetConvMin(int motor, int32 tickMin, int32 mDegMin);
 void SetConvMax(int motor, int32 tickMax, int32 mDegMax);

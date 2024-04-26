@@ -15,12 +15,12 @@
 #include <project.h>
 #include <stdint.h>
 
-typedef struct PID_config {
+typedef struct {
     uint8 kP_set, kI_set, kD_set;
     int32 kP, kI, kD, maxPWM, maxIntegral;
 } PID_Config;
 
-typedef struct PID_state {
+typedef struct {
     int8 target_set;
     int32 target;
     int32 integral;

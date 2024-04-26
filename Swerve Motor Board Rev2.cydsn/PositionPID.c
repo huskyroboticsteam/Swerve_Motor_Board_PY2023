@@ -26,14 +26,14 @@ uint8 PID1_enable, PID2_enable;
 int StartPID(int motor) {
     int err = 0;
     if (motor & MOTOR1) {
-        if (PID1.kP_set && PID1.kI_set && PID1.kD_set && GetConversionReady(MOTOR1)) {
+        if (PID1.kP_set && PID1.kI_set && PID1.kD_set && GetConversion(MOTOR1).ratio_set) {
             PID1_state.integral = 0;
             PID1_state.last_error = 0;
             PID1_enable = 1;
         } else err = 1;
     }
     if (motor & MOTOR2) {
-        if (PID2.kP_set && PID2.kI_set && PID2.kD_set && GetConversionReady(MOTOR2)) {
+        if (PID2.kP_set && PID2.kI_set && PID2.kD_set && GetConversion(MOTOR2).ratio_set) {
             PID2_state.integral = 0;
             PID2_state.last_error = 0;
             PID2_enable = 1;

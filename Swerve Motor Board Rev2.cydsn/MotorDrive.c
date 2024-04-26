@@ -143,12 +143,6 @@ Conversion GetConversion(int motor) {
     return (Conversion) {};
 }
 
-uint8 GetConversionReady(int motor) {
-    if (motor == MOTOR1) return conv1.ratio_set;
-    if (motor == MOTOR2) return conv2.ratio_set;
-    return 0;
-}
-
 void SetConvRatio(int motor, float ratio) {
     if (motor & MOTOR1) {
         conv1.ratio = ratio;
