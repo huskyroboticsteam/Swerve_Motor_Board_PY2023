@@ -155,8 +155,8 @@ void SetConvRatio(int motor, float ratio) {
         conv1.ratio_set = 1;
     }
     if (motor & MOTOR2) {
-        conv1.ratio = ratio;
-        conv1.ratio_set = 1;
+        conv2.ratio = ratio;
+        conv2.ratio_set = 1;
     }
 }
 
