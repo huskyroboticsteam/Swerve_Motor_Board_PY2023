@@ -171,6 +171,7 @@ int SendLimitAlert(uint8 status) {
     CANPacket can_send;
     AssembleLimitSwitchAlertPacket(&can_send, DEVICE_GROUP_JETSON, 
     DEVICE_SERIAL_JETSON, status);
+    
     return SendCANPacket(&can_send);
 }
 

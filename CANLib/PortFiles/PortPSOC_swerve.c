@@ -122,7 +122,7 @@ int PollAndReceiveCANPacket(CANPacket *receivedPacket)
 // You should be fine if you don't use WriteSenderSerialAndPacketID
 uint8_t getLocalDeviceSerial()
 {
-    return deviceAddress2;      //talk to abhay about this, only returns the second motor's address
+    return deviceAddress1;      //talk to abhay about this, only returns the second motor's address
 }
 uint8_t getLocalDeviceGroup()
 {

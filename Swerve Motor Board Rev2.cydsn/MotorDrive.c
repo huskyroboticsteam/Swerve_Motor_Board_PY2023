@@ -37,8 +37,8 @@ Conversion conv2 = {};
 
 uint8 enc_dir = FORWARD;
 
-volatile uint8 limit_status = 0;
-
+uint8 limit1 = 0;
+uint8 limit2 = 0;
 uint8 bound_set1;
 uint8 bound_set2;
 int32 enc_lim_1;
@@ -75,13 +75,13 @@ int SetPWM(int motor, int16 pwm) {
             
             if (pwm < 0) {
                 Pin_Motor1_Dir_Write(BACKWARD);
-                if (limit_status & 0b01) {
+                if (limit1) {
                     err = ERROR_LIMIT;
                     pwm = 0;
                 }
             } else if (pwm > 0) {
                 Pin_Motor1_Dir_Write(FORWARD);
-                if (limit_status & 0b10) {
+                if (limit2) {
                     err = ERROR_LIMIT;
                     pwm = 0;
                 }
@@ -211,8 +211,7 @@ int UpdatePotValue() {
     return 0;
 }
 
-
-uint8 GetLimitStatus() { return limit_status; }
+uint8 GetLimitStatus() { return limit1 | (limit2 << 1); }
 int32 GetPotValue() { return pot_value; }
 int32 GetEncValue() { return enc_value; }
 int32 GetPosition(int motor) {
@@ -245,24 +244,27 @@ void SetEncBound(uint8 lim_num, int32 value) {
         bound_set2 = 1;
         enc_lim_2 = value;
     }
-}    
-
-CY_ISR(Limit_Handler) {
-    limit_status = StatusReg_Limit_Read() & 0b11;
-    
-    if (limit_status & 0b01) {
-        SetPWM(MOTOR1, 0);
-        SendLimitAlert(limit_status);
-        if (bound_set1) SetEncOffset(MOTOR1, enc_lim_1);
-    }
-    if (limit_status & 0b10) {
-        SetPWM(MOTOR1, 0);
-        SendLimitAlert(limit_status);
-        if (bound_set2) SetEncOffset(MOTOR1, enc_lim_2);
-    }
 }
 
 CY_ISR(Drive_Handler) {
+    if (Pin_Limit1_Read() == 0) {
+        if (limit1 == 0) {
+            SetPWM(MOTOR1, 0);
+            SendLimitAlert(1);
+            if (bound_set1) SetEncOffset(MOTOR1, enc_lim_1);
+        }
+        limit1 = 1;
+    } else limit1 = 0;
+    
+    if (Pin_Limit2_Read() == 0) {
+        if (limit2 == 0) {
+            SetPWM(MOTOR1, 0);
+            SendLimitAlert(2);
+            if (bound_set2) SetEncOffset(MOTOR1, enc_lim_2);
+        }
+        limit2 = 1;
+    } else limit2 = 0;
+    
     if (PWM1_invalidate == 20) SetPWM(MOTOR1, 0);
     else PWM1_invalidate++;
     

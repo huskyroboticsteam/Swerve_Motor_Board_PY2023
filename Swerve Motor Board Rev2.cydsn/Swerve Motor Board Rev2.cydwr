@@ -25,6 +25,15 @@
       <Data key="b8f43579-87e8-423a-86c5-8d0964dd531f/5c71752a-e182-47ca-942c-9cb20adbdf2f" value="ADC_intClock" />
       <Data key="b561a610-e1ca-4f8c-9281-59a70030b09c/2dc2d7a8-ce2b-43c7-af4a-821c8cd73ccf" value="DBG_UART_SCBCLK" />
     </Group>
+    <Group key="Interrupt">
+      <Data key="2c366327-8ea9-4813-ab0d-a7ce473af76e/3a6c5259-9a34-42b7-9aeb-218a7f619daa" value="CAN_isr" />
+      <Data key="5bd5bfbf-c270-4496-ac51-c08dee6d28e8" value="isr_Limit1" />
+      <Data key="93f3a72b-4adb-440a-bcc8-3eb544452db3" value="isr_LED" />
+      <Data key="7880bae3-2118-4969-9798-31d6d141a3cb" value="isr_PID" />
+      <Data key="64922cbd-2462-4a31-9c8b-98e38cfe19d9" value="isr_Drive" />
+      <Data key="b8f43579-87e8-423a-86c5-8d0964dd531f/a1033dc5-f595-4313-8eee-ea9108ee36fd" value="ADC_IRQ" />
+      <Data key="b019f4c3-9b9a-44f7-bf61-aa901ada942d" value="isr_Limit2" />
+    </Group>
     <Group key="Pin">
       <Data key="1b9b3afc-3304-4abc-9b80-0ba4fbd3a8f4" value="Pin_Motor2_Current" />
       <Data key="1e8842ba-71ab-4752-acd5-c7b9575c6400" value="DIP4" />
@@ -3143,6 +3152,22 @@
       </Group>
       <Group key="1024">
         <Data key="LevelKey" value="0" />
+      </Group>
+    </Group>
+  </Group>
+  <Group key="Interrupt">
+    <Group key="5bd5bfbf-c270-4496-ac51-c08dee6d28e8">
+      <Group key="CortexM0">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="0" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="b019f4c3-9b9a-44f7-bf61-aa901ada942d">
+      <Group key="CortexM0">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="0" />
+        <Data key="Vector" value="-1" />
       </Group>
     </Group>
   </Group>

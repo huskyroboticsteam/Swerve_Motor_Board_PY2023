@@ -73,10 +73,8 @@ void Initialize(void) {
     sprintf(txData, "Address: %x & %x\r\n", GetAddress(MOTOR1), GetAddress(MOTOR2));
     Print(txData);
     
-    StatusReg_Limit_InterruptEnable();
     isr_PID_StartEx(PID_Handler);
     isr_LED_StartEx(LED_Handler);
-    isr_Limit_StartEx(Limit_Handler);
     isr_Drive_StartEx(Drive_Handler);
 }
 
