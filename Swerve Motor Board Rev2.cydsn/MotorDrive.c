@@ -120,7 +120,7 @@ int SetPWM(int motor, int16 pwm) {
 int UpdateConversion(int motor) {
     if (motor & MOTOR1) {
         if (conv1.min_set && conv1.max_set && conv1.mDegMax != conv1.mDegMin) {
-            conv1.ratio = (double) (conv1.tickMax-conv1.tickMin)/(conv1.mDegMax-conv1.mDegMin);
+            conv1.ratio = (double) (conv1.mDegMax-conv1.mDegMin)/(conv1.tickMax-conv1.tickMin);
             conv1.ratio_set = 1;
         } else {
             return 1;
@@ -128,7 +128,7 @@ int UpdateConversion(int motor) {
     }
     if (motor & MOTOR2) {
         if (conv2.min_set && conv2.max_set && conv2.mDegMax != conv2.mDegMin) {
-            conv2.ratio = (double) (conv2.tickMax-conv2.tickMin)/(conv2.mDegMax-conv2.mDegMin);
+            conv2.ratio = (double) (conv2.mDegMax-conv2.mDegMin)/(conv2.tickMax-conv2.tickMin);
             conv2.ratio_set = 1;
         } else {
             return 1;
