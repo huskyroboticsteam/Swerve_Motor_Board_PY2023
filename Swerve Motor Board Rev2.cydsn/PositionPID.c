@@ -122,7 +122,7 @@ int PID_Update(int motor) {
         state = &PID1_state;
         pid = &PID1;
     } else if (motor == MOTOR2) {        
-        error = PID1_state.target - GetPosition(MOTOR2);
+        error = PID2_state.target - GetPosition(MOTOR2);
 
         state = &PID2_state;
         pid = &PID2;

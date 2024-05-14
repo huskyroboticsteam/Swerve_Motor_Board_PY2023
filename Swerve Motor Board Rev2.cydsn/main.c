@@ -98,19 +98,19 @@ void DebugPrint(char input) {
             break;
         case 'a':
             SetMode(MOTOR1, MODE_PWM_CTRL);
-            SetPWM(MOTOR1, 100);
+            SetPWM(MOTOR1, 200);
             break;
         case 'd':
             SetMode(MOTOR1, MODE_PWM_CTRL);
-            SetPWM(MOTOR1, -100);
+            SetPWM(MOTOR1, -200);
             break;
         case 'w':
             SetMode(MOTOR2, MODE_PWM_CTRL);
-            SetPWM(MOTOR2, 100);
+            SetPWM(MOTOR2, 200);
             break;
         case 's':
             SetMode(MOTOR2, MODE_PWM_CTRL);
-            SetPWM(MOTOR2, -100);
+            SetPWM(MOTOR2, -200);
             break;
         case 'p': // Position
             sprintf(txData, "Pos1:%li Pos2:%li PWM1:%li PWM2:%li", 

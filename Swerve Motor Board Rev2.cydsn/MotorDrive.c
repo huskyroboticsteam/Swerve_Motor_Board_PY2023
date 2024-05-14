@@ -67,6 +67,7 @@ void StopPWM(int motor) {
 
 // Sends PWM and Direction to the motor driver
 // Also checks limits and sets PWM variables
+// Accepts values -1024 - 1024
 int SetPWM(int motor, int16 pwm) {
     int err = 0;
     if (motor & MOTOR1) {        
