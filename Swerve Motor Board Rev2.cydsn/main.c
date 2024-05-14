@@ -96,22 +96,22 @@ void DebugPrint(char input) {
             else if (GetMode(MOTOR2) == MODE_PWM_CTRL) Print("PWM");
             else if (GetMode(MOTOR2) == MODE_PID_CTRL) Print("PID");
             break;
-        case 'a':
-            SetMode(MOTOR1, MODE_PWM_CTRL);
-            SetPWM(MOTOR1, 200);
-            break;
-        case 'd':
-            SetMode(MOTOR1, MODE_PWM_CTRL);
-            SetPWM(MOTOR1, -200);
-            break;
-        case 'w':
-            SetMode(MOTOR2, MODE_PWM_CTRL);
-            SetPWM(MOTOR2, 200);
-            break;
-        case 's':
-            SetMode(MOTOR2, MODE_PWM_CTRL);
-            SetPWM(MOTOR2, -200);
-            break;
+        // case 'a':
+        //     SetMode(MOTOR1, MODE_PWM_CTRL);
+        //     SetPWM(MOTOR1, 200);
+        //     break;
+        // case 'd':
+        //     SetMode(MOTOR1, MODE_PWM_CTRL);
+        //     SetPWM(MOTOR1, -200);
+        //     break;
+        // case 'w':
+        //     SetMode(MOTOR2, MODE_PWM_CTRL);
+        //     SetPWM(MOTOR2, 200);
+        //     break;
+        // case 's':
+        //     SetMode(MOTOR2, MODE_PWM_CTRL);
+        //     SetPWM(MOTOR2, -200);
+        //     break;
         case 'p': // Position
             sprintf(txData, "Pos1:%li Pos2:%li PWM1:%li PWM2:%li", 
                 GetPosition(MOTOR1), GetPosition(MOTOR2), 
@@ -119,12 +119,13 @@ void DebugPrint(char input) {
             Print(txData);
             break;
         case 'o': // Raw sensor
-            sprintf(txData, "Enc:%li Pot:%li Limits:", GetEncValue(), GetPotValue());
+            sprintf(txData, "Enc(%li) Pot(%li) Limits(", GetEncValue(), GetPotValue());
             Print(txData);
             PrintIntBin(GetLimitStatus());
+            Print(")");
             break;
         case 'i': // PID Config
-            sprintf(txData, "Motor1 Target:%li P:%li I:%li D:%li  Motor2 Target:%li P:%li I:%li D:%li",
+            sprintf(txData, "Motor1 Target(%li) P(%li) I(%li) D(%li)\r\nMotor2 Target(%li) P(%li) I(%li) D(%li)",
                 GetPIDState(MOTOR1).target, GetPIDConfig(MOTOR1).kP, GetPIDConfig(MOTOR1).kI, GetPIDConfig(MOTOR1).kD,
                 GetPIDState(MOTOR2).target, GetPIDConfig(MOTOR2).kP, GetPIDConfig(MOTOR2).kI, GetPIDConfig(MOTOR2).kD);
             Print(txData);
@@ -139,15 +140,37 @@ void DebugPrint(char input) {
             // PrintInt(ADC_GetResult16(2));
             break;
         case 'c': // Conversion
-            sprintf(txData, "Motor1 TickMin:%li TickMax:%li mDegMin:%li mDegMax:%li",
+            sprintf(txData, "Motor1 TickMin(%li) TickMax(%li) mDegMin(%li) mDegMax(%li) ratio(%li)\r\n",
                 GetConversion(MOTOR1).tickMin, GetConversion(MOTOR1).tickMax,
-                GetConversion(MOTOR1).mDegMin, GetConversion(MOTOR1).mDegMax);
+                GetConversion(MOTOR1).mDegMin, GetConversion(MOTOR1).mDegMax, (long) GetConversion(MOTOR1).ratio);
             Print(txData);
-            sprintf(txData, "Motor2 TickMin:%li TickMax:%li mDegMin:%li mDegMax:%li",
+            sprintf(txData, "Motor2 TickMin(%li) TickMax(%li) mDegMin(%li) mDegMax(%li) ratio(%li)",
                 GetConversion(MOTOR2).tickMin, GetConversion(MOTOR2).tickMax,
-                GetConversion(MOTOR2).mDegMin, GetConversion(MOTOR2).mDegMax);
+                GetConversion(MOTOR2).mDegMin, GetConversion(MOTOR2).mDegMax, (long) GetConversion(MOTOR2).ratio);
             Print(txData);
             break;
+        // case '1': // PID init
+        //     SetConvMin(MOTOR2, 650, 180000);
+        //     SetConvMax(MOTOR2, 1350, -180000);
+        //     
+        //     SetkPosition(MOTOR2, 1);
+        //     SetkIntegral(MOTOR2, 0);
+        //     SetkDerivative(MOTOR2, 0);
+        //     SetMode(MOTOR2, MODE_PID_CTRL);
+        //     
+        //     SetPIDTarget(MOTOR2, 0);
+        //     Print("PID Initialized");
+        //     break;
+        // case '9': // PID dec
+        //     SetPIDTarget(MOTOR2, GetPIDState(MOTOR2).target-10000);
+        //     Print("PID target set to ");
+        //     PrintInt(GetPIDState(MOTOR2).target);
+        //     break;
+        // case '0': // PID inc
+        //     SetPIDTarget(MOTOR2, GetPIDState(MOTOR2).target+10000);
+        //     Print("PID target set to ");
+        //     PrintInt(GetPIDState(MOTOR2).target);
+        //     break;
         default:
             Print("what");
             break;
