@@ -138,7 +138,9 @@ int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
                     data = GetPosition(motor);
                     break;
                 case(PACKET_TELEMETRY_ADC_RAW):
-                    data = GetPotValue();
+                    ADC_StartConvert();
+                    ADC_IsEndConversion(ADC_WAIT_FOR_RESULT);
+                    data = ADC_GetResult16(0);
                     break;
                 case(PACKET_TELEMETRY_LIM_SW_STATE):
                     data = GetLimitStatus();

@@ -47,7 +47,8 @@ void StopPID(int motor) {
         PID1_enable = 0;
         PID1_state.target_set = 0;
         SetPWM(MOTOR1, 0);
-    } if (motor & MOTOR2) {
+    }
+    if (motor & MOTOR2) {
         PID2_enable = 0;
         PID2_state.target_set = 0;
         SetPWM(MOTOR2, 0);
