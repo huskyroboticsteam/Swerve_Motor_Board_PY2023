@@ -16,6 +16,11 @@
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Swerve Motor Controller\SwerveMotorFirmware\Source Files\PositionPID.c">
 <ExpandedNodeIds>
 <v>Swerve Motor Controller</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\TopDesign</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\Header Files</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\Source Files</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\Generated_Source</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\Generated_Source\PSoC4</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\TopDesign</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\SwerveMotorFirmware.cydwr</v>
@@ -46,7 +51,6 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANScience.c</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANScience.h</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANSerialNumbers.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\Port_swerve.h</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Header Files</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Header Files\cyapicallbacks.h</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Header Files\DebugMessages.h</v>
@@ -69,21 +73,7 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANGPIO.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANGPIO.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANLibrary.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANLocalization.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANLocalization.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANMotorUnit.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANMotorUnit.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANPacket.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANPacket.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANPower.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANPower.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANScience.c</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANScience.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\CANSerialNumbers.h</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\Port_swerve.h</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\CAN Library\Port.h</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Header Files</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Header Files\cyapicallbacks.h</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Header Files\DebugMessages.h</v>
@@ -114,6 +104,19 @@
 <v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\CAN_isr</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\CANRX</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\CANTX</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Clock_2</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Clock_PWM1</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Clock_PWM2</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\cy_boot</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\cy_dmac</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\cy_lfclk</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Dip1</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Dip2</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Dip3</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Dip4</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\Em_EEPROM_Dynamic</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\isr_encA</v>
+<v>Swerve Motor Controller\SwerveMotorFirmware\Generated_Source\PSoC4\isr_encB</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -125,6 +128,7 @@
 </ExpandedNodeIds>
 <VisibleNodeIds>
 <v>Swerve Motor Controller</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\TopDesign</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\TopDesign\TopDesign.cysch</v>
@@ -133,6 +137,116 @@
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>Swerve Motor Controller</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_INT.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_intClock.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_IRQ.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_HFCLK.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_INT.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_RX.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_RX_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_Stuff.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CANCommon.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CANGPIO.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CANLocalization.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CANMotorUnit.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CANPacket.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_BOOT.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_rx.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_rx_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_SCBCLK.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_SPI_UART.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_SPI_UART_INT.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_tx.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_tx_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_UART.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DBG_UART_UART_BOOT.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DIP1.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DIP1_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DIP2.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DIP2_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DIP3.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DIP3_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DIP4.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\DIP4_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\FSM_Stuff.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_Drive.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_LED.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\isr_PID.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_CAN.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_CAN_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_DBG1.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_DBG1_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_DBG2.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_DBG2_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_ERR.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_ERR_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\MotorDrive.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit1.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit1_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit2.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Limit2_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor1_Current.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor1_Current_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor1_Dir.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor1_Dir_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor1_Fault.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor1_Fault_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor1_PWM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor1_PWM_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor2_Current.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor2_Current_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor2_Dir.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor2_Dir_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor2_Fault.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor2_Fault_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor2_PWM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Motor2_PWM_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Pot.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Pot_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\PortPSOC_Swerve.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\PositionPID.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor1.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor1_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor2.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_Motor2_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Status_Reg_DIP.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Timer_Periodic.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Timer_Periodic_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Timer_PID.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Listing Files\Timer_PID_PM.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Swerve Motor Board Rev2.elf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Swerve Motor Board Rev2.hex</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CortexM0\ARM_GCC_541\Debug\Swerve Motor Board Rev2.map</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\Swerve Motor Board Rev2.gpdsc</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541</v>
@@ -266,50 +380,7 @@
 </ExpandedNodeIds>
 <VisibleNodeIds>
 <v>Swerve Motor Controller</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot_INT.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot_intClock.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot_IRQ.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\ADC_Pot_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Array_LED.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Array_LED_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Can_addr.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_HFCLK.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_INT.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_isr.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CAN_TX_RX_func.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANCommon.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANGPIO.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANLocalization.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANMotorUnit.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANPacket.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANPower.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANRX.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANRX_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANScience.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANTX.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CANTX_PM.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM1.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM2.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>Swerve Motor Controller\SwerveMotorFirmware\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -320,6 +391,29 @@
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>Swerve Motor Controller</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\PSoC 4 Architecture TRM</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\PSoC 4200L Family Datasheet</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\System Reference Guides</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\System Reference Guides\cy_boot_v6_0</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\System Reference Guides\cy_dmac_v1_10</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\System Reference Guides\cy_lfclk_v1_20</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\ADC_SAR_SEQ_P4_v2_50.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CAN_v3_0.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\cy_clock_v2_20</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\cy_constant_v1_0.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\cy_isr_v1_71</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\cy_isr_v1_71\cy_isr_v1_71.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\cy_pins_v2_20</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\CyStatusReg_v1_90.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\not_v1_0</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\not_v1_0\not_v1_0.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\SCB_P4_v4_0.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\TCPWM_P4_v2_10</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\TCPWM_P4_v2_10\TCPWM_P4_v2_10.pdf</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\Timer_v2_80</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2\Timer_v2_80\Timer_v2_80.pdf</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\PSoC 4 Architecture TRM</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\PSoC 4200L Family Datasheet</v>
@@ -353,6 +447,7 @@
 </ExpandedNodeIds>
 <VisibleNodeIds>
 <v>Swerve Motor Controller</v>
+<v>Swerve Motor Controller\Swerve Motor Board Rev2</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\PSoC 4 Architecture TRM</v>
 <v>Swerve Motor Controller\SwerveMotorFirmware\PSoC 4200L Family Datasheet</v>
@@ -388,13 +483,22 @@
 </TreeStatesV2>
 </CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
 </dataGuid>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
 </userData>
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\CANLib\PortFiles\PortPSOC_swerve.c" />
+<name v=".\Swerve Motor Board Rev2.cydsn\CAN_Stuff.c" />
+<name v=".\Swerve Motor Board Rev2.cydsn\main.c" />
+<name v=".\Swerve Motor Board Rev2.cydsn\PositionPID.c" />
+<name v=".\Swerve Motor Board Rev2.cydsn\MotorDrive.c" />
+<name v=".\Swerve Motor Board Rev2.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\SwerveMotorFirmware.cydsn\PositionPID.c" />
-<name v=".\SwerveMotorFirmware.cydsn\main.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -402,7 +506,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1579, 858" SelectedTabbedMdiWindow="fa3853d7-b3a8-4161-b05a-380b12241421"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="601d7438-0df5-4c65-973b-eaad6f0e5381" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\TopDesign\TopDesign.cysch" Guid="44c59401-828b-43ca-9b48-32b9b22c2822" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="c71b83d6-e586-4f6c-ac4a-a535c7bdd265" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\main.c" Guid="fa3853d7-b3a8-4161-b05a-380b12241421" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1577, 840" SelectedTabbedMdiWindow="70cc2a75-7187-495d-bd89-adfab1c0662d"><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\CANLib\PortFiles\PortPSOC_swerve.c" Guid="73b010f7-0c41-4a2b-a978-0ff124f36c8b" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\Swerve Motor Board Rev2.cydsn\CAN_Stuff.c" Guid="3cb75976-078a-4f43-815a-470640a6ae9c" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\Swerve Motor Board Rev2.cydsn\main.c" Guid="10062487-9c89-4b69-8324-95c21e017cda" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\Swerve Motor Board Rev2.cydsn\PositionPID.c" Guid="70cc2a75-7187-495d-bd89-adfab1c0662d" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\Swerve Motor Board Rev2.cydsn\MotorDrive.c" Guid="42a50244-6865-475b-b9d8-6c5b57a6d5ed" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\Swerve Motor Board Rev2.cydsn\TopDesign\TopDesign.cysch" Guid="8687ae88-1a07-4912-be2e-cdd25540ea3e" /><DocumentWindow Key="C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\SwerveMotorFirmware.cydsn\PositionPID.c" Guid="dbff4b7f-7e1d-48c9-a6df-4119bc7b3a94" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

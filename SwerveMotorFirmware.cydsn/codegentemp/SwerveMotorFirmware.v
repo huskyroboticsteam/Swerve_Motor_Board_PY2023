@@ -1,6 +1,6 @@
 // ======================================================================
 // SwerveMotorFirmware.v generated from TopDesign.cysch
-// 04/04/2024 at 01:38
+// 07/25/2024 at 14:51
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -746,11 +746,11 @@ endmodule
 `endif
 
 `ifdef WARP
-`define CY_BLK_DIR "C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3"
-`include "C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v"
+`define CY_BLK_DIR "C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3"
+`include "C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v"
 `else
-`define CY_BLK_DIR "C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3"
-`include "C:\Users\casey\Desktop\Robotics Stuff\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v"
+`define CY_BLK_DIR "C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3"
+`include "C:\Users\davis\Documents\PSoC Creator\Swerve_Motor_Board_PY2023\StripLightLib.cylib\B_WS2811_v1_3\B_WS2811_v1_3.v"
 `endif
 
 // StripLights_v2_2(Channels=1, ClockSpeedKhz=800, Display_Memory=0, LEDs_per_Strip=3, Speed=1, Transfer_Method=1, WS281x_Type=2, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=StripLights_v2_2, CY_CONFIG_TITLE=StripLights, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=StripLights, CY_INSTANCE_SHORT_NAME=StripLights, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=2, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=StripLights, )

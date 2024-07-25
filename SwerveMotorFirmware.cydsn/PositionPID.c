@@ -145,7 +145,7 @@ int32_t Position_PID(int32 targetmDeg){
     int32 error = targetmDeg - current;
     
     //if within tolerance exit
-    if(error <= 5 && error >= -5) {
+    if(error <= 50 && error >= -50) {
       return(0);
     }
     

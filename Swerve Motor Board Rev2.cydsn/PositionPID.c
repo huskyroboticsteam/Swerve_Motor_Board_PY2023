@@ -129,6 +129,12 @@ int PID_Update(int motor) {
         pid = &PID2;
     } else return 1;
     
+    //if within tolerance exit
+    // TODO: FIX MAGIC NUMBERS FOR ERROR TOLERANCE!!!!
+    if(error <= 50 && error >= -50) {
+        error = 0;
+    }
+    
     int integral = state->integral;
     integral += error;
     
@@ -146,6 +152,12 @@ int PID_Update(int motor) {
         new_pwm = pid->maxPWM;
     } else if(new_pwm < -pid->maxPWM) {
         new_pwm = -pid->maxPWM;
+    }
+    
+    //if within tolerance exit
+    // TODO: FIX MAGIC NUMBERS FOR ERROR TOLERANCE!!!!
+    if(new_pwm <= 1000 && new_pwm >= -1000) {
+        new_pwm = 0;
     }
     
     return SetPWM(motor, new_pwm);
