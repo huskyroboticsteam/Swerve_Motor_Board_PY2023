@@ -12,24 +12,25 @@
 #include "project.h"
 #include "stdio.h"
 
-uint16_t period = 0;
-uint16_t onTime = 0;
-uint16_t offTime = 0;
-
+volatile uint16_t period = 0;
+volatile uint16_t onTime = 0;
+volatile uint16_t compare = 0;
+uint8_t byte;
 float32 duty = 0;
 
 char txData[200];
 
-uint8_t isr_flag = 0;
+volatile uint8_t isr_flag = 0;
 uint8_t flag = 0;
 
-CY_ISR(PWM_Timer_Handler) {
-    onTime = Timer_PWM_Capture_ReadCapture();
+
+CY_ISR(PWM_Rise_Handler) {
+    period = Timer_PWM_Count_ReadCounter();
+    Timer_PWM_Count_WriteCounter((uint16_t)0);
     isr_flag = 1;
 }
-
-CY_ISR(Test_Handler) {
-    flag = 1;
+CY_ISR(PWM_Fall_Handler) {
+    onTime = Timer_PWM_Count_ReadCounter();
 }
 
 int main(void)
@@ -40,11 +41,13 @@ int main(void)
     DBG_UART_Start();
     DBG_UART_UartPutString("Initializing...\r\n");
     
-    isr_PWM_StartEx(PWM_Timer_Handler);
-    isr_Test_StartEx(Test_Handler);
-    Timer_PWM_Capture_Start();
+    isr_PWM_Rise_StartEx(PWM_Rise_Handler);
+    isr_PWM_Fall_StartEx(PWM_Fall_Handler);
     
-    period = Timer_PWM_Capture_ReadPeriod();
+    Timer_PWM_Count_Start();
+    PWM_Test_Init();
+    PWM_Test_Start();
+    
     
     DBG_UART_UartPutString("Initialized.\r\n");
     
@@ -56,19 +59,16 @@ int main(void)
         DBG_UART_UartPutString(txData);
         sprintf(txData, "Duty Cycle: %d\r\n", (uint8_t)(duty*100));
         DBG_UART_UartPutString(txData);
-        
-        if (isr_flag) {
-            CyDelay(10);
-            Timer_PWM_Capture_ClearFIFO();
-            Timer_PWM_Capture_ReadStatusRegister(); // Clear the interrupt flag
-            Timer_PWM_Capture_Stop();
-            Timer_PWM_Capture_WriteCounter(1049);
-            Timer_PWM_Capture_Start();
-            DBG_UART_UartPutString("Interrupted.\r\n");
-            isr_flag = 0;
+   
+        // Write digits 0-9 to UART to set duty cycle to ~ 0-90%
+        if (DBG_UART_SpiUartGetRxBufferSize()) {
+            byte  = DBG_UART_UartGetByte();
+            compare = (uint16_t)(100 * byte);
+            PWM_Test_WriteCompare(compare);
+            sprintf(txData, "Compare value updated: %d\r\n", compare);
+            DBG_UART_UartPutString(txData);
         }
-        
-        CyDelay(2000);
+        CyDelay(5000);
     }
 }
 
