@@ -286,7 +286,7 @@ CY_ISR(Drive_Handler) {
 CY_ISR(PWM_Rise_Handler) { 
     enc_period = Timer_PWM_Count_ReadCounter();
     Timer_PWM_Count_WriteCounter((uint16_t)0);
-    if(count++ == 1000) {
+    if(count++ == 10) {
         enc_duty = enc_period ? (float32)enc_onTime / (float32)enc_period : 0.0f;
         enc_value = (int32_t)(enc_duty*360);
         count = 0;
