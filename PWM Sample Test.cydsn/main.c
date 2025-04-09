@@ -30,7 +30,7 @@ CY_ISR(PWM_Rise_Handler) {
     Timer_PWM_Count_WriteCounter((uint16_t)0);
     if(count++ == 1000) {
         enc_duty = enc_period ? (float32)enc_onTime / (float32)enc_period : 0.0f;
-        enc_value = (int32_t)(enc_duty*360);
+        enc_value = (int32_t)(enc_duty*360000);
         sprintf(txData, "Period: %d Time on: %d, Duty: %lf Value: %ld \r\n", enc_period, enc_onTime, enc_duty, enc_value);
         DBG_UART_UartPutString(txData);
         count = 0;
