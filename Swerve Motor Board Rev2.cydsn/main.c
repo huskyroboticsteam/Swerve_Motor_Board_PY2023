@@ -69,6 +69,10 @@ void Initialize(void) {
     PWM_Motor2_Start();
     // QuadDec_Enc_Start();
     ADC_Start();
+    isr_PWM_Rise_StartEx(PWM_Rise_Handler);
+    isr_PWM_Fall_StartEx(PWM_Fall_Handler);
+    
+    Timer_PWM_Count_Start();
     
     sprintf(txData, "Address: %x & %x\r\n", GetAddress(MOTOR1), GetAddress(MOTOR2));
     Print(txData);

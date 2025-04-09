@@ -12,25 +12,32 @@
 #include "project.h"
 #include "stdio.h"
 
-volatile uint16_t period = 0;
-volatile uint16_t onTime = 0;
+volatile uint16_t enc_period = 0;
+volatile uint16_t enc_onTime = 0;
 volatile uint16_t compare = 0;
 uint8_t byte;
-float32 duty = 0;
-
+volatile float32 enc_duty = 0;
+volatile int32 enc_value;
 char txData[200];
 
 volatile uint8_t isr_flag = 0;
 uint8_t flag = 0;
-
+int count;
 
 CY_ISR(PWM_Rise_Handler) {
-    period = Timer_PWM_Count_ReadCounter();
+    
+    enc_period = Timer_PWM_Count_ReadCounter();
     Timer_PWM_Count_WriteCounter((uint16_t)0);
-    isr_flag = 1;
+    if(count++ == 1000) {
+        enc_duty = enc_period ? (float32)enc_onTime / (float32)enc_period : 0.0f;
+        enc_value = (int32_t)(enc_duty*360);
+        sprintf(txData, "Period: %d Time on: %d, Duty: %lf Value: %ld \r\n", enc_period, enc_onTime, enc_duty, enc_value);
+        DBG_UART_UartPutString(txData);
+        count = 0;
+    }
 }
 CY_ISR(PWM_Fall_Handler) {
-    onTime = Timer_PWM_Count_ReadCounter();
+    enc_onTime = Timer_PWM_Count_ReadCounter();
 }
 
 int main(void)
@@ -54,21 +61,21 @@ int main(void)
     for(;;)
     {
         /* Place your application code here. */
-        duty = (float32) onTime / period;
-        sprintf(txData, "On Time: %d\r\n", onTime);
-        DBG_UART_UartPutString(txData);
-        sprintf(txData, "Duty Cycle: %d\r\n", (uint8_t)(duty*100));
-        DBG_UART_UartPutString(txData);
+       // duty = (float32) onTime / period;
+        //sprintf(txData, "On Time: %d\r\n", onTime);
+        //DBG_UART_UartPutString(txData);
+        //sprintf(txData, "Duty Cycle: %d\r\n", (uint8_t)(duty*100));
+        //DBG_UART_UartPutString(txData);
    
         // Write digits 0-9 to UART to set duty cycle to ~ 0-90%
         if (DBG_UART_SpiUartGetRxBufferSize()) {
             byte  = DBG_UART_UartGetByte();
-            compare = (uint16_t)(100 * byte);
+            compare = (uint16_t)(100 * (byte-48));
             PWM_Test_WriteCompare(compare);
-            sprintf(txData, "Compare value updated: %d\r\n", compare);
+            sprintf(txData, "Compare value updated: %lu\r\n", PWM_Test_ReadCompare());
             DBG_UART_UartPutString(txData);
         }
-        CyDelay(5000);
+        //CyDelay(5000);
     }
 }
 

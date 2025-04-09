@@ -49,5 +49,8 @@ int32 GetCurrentPWM(int motor);
 void SetEncBound(uint8 lim_num, int32 value);
 
 CY_ISR(Drive_Handler);
+CY_ISR(PWM_Rise_Handler);
+CY_ISR(PWM_Fall_Handler);
+
 
 /* [] END OF FILE */

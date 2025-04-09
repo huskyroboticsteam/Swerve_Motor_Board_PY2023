@@ -15,6 +15,7 @@
       <Data key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba" value="PWM_In" />
       <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/23b8206d-1c77-4e61-be4a-b4037d5de5fc" value="DBG_UART_tx" />
       <Data key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4" value="DBG_UART_rx" />
+      <Data key="822264dc-b708-41e0-ab69-397ca91e8258" value="Pin_Encoder_PWM" />
       <Data key="d0b95654-0a21-4906-9c36-8ab05a2c0053" value="PWM_Out" />
       <Data key="d6b94d0e-81ac-40d6-8e85-ab82f92532db" value="LED_PWM" />
       <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="PWM_Out" />
@@ -3583,6 +3584,11 @@
     <Group key="43ec2fa1-bf22-4b71-9477-b6ca7b97f0b0/78e33e5d-45ea-4b75-88d5-73274e8a7ce4">
       <Group key="0">
         <Data key="Port Format" value="7,0" />
+      </Group>
+    </Group>
+    <Group key="822264dc-b708-41e0-ab69-397ca91e8258">
+      <Group key="0">
+        <Data key="Port Format" value="2,4" />
       </Group>
     </Group>
     <Group key="d0b95654-0a21-4906-9c36-8ab05a2c0053">

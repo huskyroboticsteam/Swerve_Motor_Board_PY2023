@@ -62,6 +62,7 @@
       <Data key="b8f43579-87e8-423a-86c5-8d0964dd531f/16a808f6-2e13-45b9-bce0-b001c8655113" value="ADC_Bypass" />
       <Data key="b45ad6d0-a495-4d75-8250-dcb7d7acab51" value="Pin_Enc_B" />
       <Data key="b84dbcf6-f26d-44a5-801d-09d588384840" value="IMU_RST" />
+      <Data key="b98b9f9f-a002-4eec-b120-521efb2b78ae" value="PWM_In" />
       <Data key="b561a610-e1ca-4f8c-9281-59a70030b09c/23b8206d-1c77-4e61-be4a-b4037d5de5fc" value="DBG_UART_tx" />
       <Data key="b561a610-e1ca-4f8c-9281-59a70030b09c/78e33e5d-45ea-4b75-88d5-73274e8a7ce4" value="DBG_UART_rx" />
       <Data key="c7ec105c-e205-4975-bb67-3a429e9556ce" value="Pin_Motor1_PWM" />
@@ -4116,6 +4117,11 @@
     <Group key="b84dbcf6-f26d-44a5-801d-09d588384840">
       <Group key="0">
         <Data key="Port Format" value="2,7" />
+      </Group>
+    </Group>
+    <Group key="b98b9f9f-a002-4eec-b120-521efb2b78ae">
+      <Group key="0">
+        <Data key="Port Format" value="6,2" />
       </Group>
     </Group>
     <Group key="b561a610-e1ca-4f8c-9281-59a70030b09c/23b8206d-1c77-4e61-be4a-b4037d5de5fc">

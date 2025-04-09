@@ -32,6 +32,10 @@ volatile int32 position2 = 0;
 volatile int32 enc_value = 0;
 volatile int32 pot_value = 0;
 
+volatile uint16_t enc_period = 0;
+volatile uint16_t enc_onTime = 0;
+volatile float32 enc_duty = 0;
+
 Conversion conv1 = {};
 Conversion conv2 = {};
 
@@ -43,6 +47,8 @@ uint8 bound_set1;
 uint8 bound_set2;
 int32 enc_lim_1;
 int32 enc_lim_2;
+int count;
+char txData[TX_DATA_SIZE];
 
 int StartPWM(int motor) {
     if (motor & MOTOR1) {
@@ -191,8 +197,9 @@ void SetEncDir(int motor, uint8 dir) {
 }
 
 int UpdateEncValue() {
-    uint32 val = 0; // QuadDec_Enc_ReadCounter();
-    enc_value = enc_dir ? val : -val;
+    // Currently handled in interrupt PWM_Rise_Handler
+    //uint32 val = 0; // QuadDec_Enc_ReadCounter();
+    //enc_value = enc_dir ? val : -val;
     return 0;
 }
 
@@ -271,6 +278,22 @@ CY_ISR(Drive_Handler) {
     UpdatePotValue();
     UpdateEncValue();
     UpdatePosition(MOTOR_BOTH);
+}
+
+
+
+
+CY_ISR(PWM_Rise_Handler) { 
+    enc_period = Timer_PWM_Count_ReadCounter();
+    Timer_PWM_Count_WriteCounter((uint16_t)0);
+    if(count++ == 1000) {
+        enc_duty = enc_period ? (float32)enc_onTime / (float32)enc_period : 0.0f;
+        enc_value = (int32_t)(enc_duty*360);
+        count = 0;
+    }
+}
+CY_ISR(PWM_Fall_Handler) {
+    enc_onTime = Timer_PWM_Count_ReadCounter();
 }
 
 /* [] END OF FILE */
