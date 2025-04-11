@@ -28,7 +28,7 @@ void StartCAN(uint8 addy1, uint8 addy2) {
         address2 = DEVICE_SERIAL_TELEM_LOCALIZATION;
     } else address2 = addy2;
     
-    InitCAN(0x04, (int) address1, (int) address2);
+    InitCAN(DEVICE_GROUP_SCIENCE, (int) address1, (int) address2);
 }
 
 uint8 GetAddress(int motor) {
@@ -135,7 +135,7 @@ int ProcessCAN(CANPacket* receivedPacket, CANPacket* packetToSend) {
             switch(DecodeTelemetryType(receivedPacket))
             {
                 case(PACKET_TELEMETRY_ANG_POSITION):
-                    data = GetPosition(motor);
+                    data = GetEncValue(); // Handle conversion better, rather than returning enc val directly
                     break;
                 case(PACKET_TELEMETRY_ADC_RAW):
                     ADC_StartConvert();
